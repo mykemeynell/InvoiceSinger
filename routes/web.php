@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+/** @var \Illuminate\Routing\Router $router */
+$router = app('router');
+
+$router->get('/', function(){ return view('dashboard'); });
