@@ -1,5 +1,6 @@
 @extends('layouts.app', [
     'show_header' => false,
+    'show_fab' => false,
 ])
 
 @section('body_classes', 'page-login full-height grey lighten-4')
