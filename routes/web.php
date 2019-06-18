@@ -15,3 +15,4 @@
 $router = app('router');
 
 $router->get('/', function(){ return view('dashboard'); });
+$router->get('/clients', function(){ return view('clients'); });

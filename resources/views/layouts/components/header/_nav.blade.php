@@ -22,6 +22,7 @@
                 <li class="tab disabled"><a href="#tasks">Tasks</a></li>
                 <li class="tab disabled"><a href="#reports">Reports</a></li>
             </ul>
+            @stack('nav-extra')
         </div>
     </div>
 </nav>
