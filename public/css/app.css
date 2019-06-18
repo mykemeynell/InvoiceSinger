@@ -1,5 +1,29 @@
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);@charset "UTF-8";
 
+.one-quarter-height {
+  height: 25vh;
+}
+
+.one-third-height {
+  height: 33.3333333333vh;
+}
+
+.half-height {
+  height: 55vh;
+}
+
+.two-thirds-height {
+  height: 66.6666666667vh;
+}
+
+.three-quarters-height {
+  height: 75vh;
+}
+
+.full-height {
+  height: 100vh;
+}
+
 .materialize-red {
   background-color: #e51c23 !important;
 }
@@ -9342,5 +9366,15 @@ input[type=range]::-ms-thumb {
     text-align: center;
     margin-top: 1.2rem;
   }
+}
+
+nav .nav-content .tabs .tab a {
+  border-bottom: 0px solid white;
+  transition: border-bottom-width 100ms linear;
+}
+
+nav .nav-content .tabs .tab a.active {
+  border-bottom-width: 4px;
+  transition: border-bottom-width 100ms linear;
 }
 

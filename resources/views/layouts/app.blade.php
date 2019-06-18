@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 @include('layouts.components._head')
-<body>
+<body class="@yield('body_classes')">
 @stack('beginning')
-@include('layouts.components.header._header')
+
+@if(!isset($show_header) || $show_header == true)
+    @include('layouts.components.header._header')
+@endif
 
 <section>
     @yield('content')

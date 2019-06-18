@@ -20,3 +20,8 @@ $router->get('/quotes', function(){ return view('quotes'); });
 $router->get('/invoices', function(){ return view('invoices'); });
 $router->get('/payments', function(){ return view('payments'); });
 $router->get('/products', function(){ return view('products'); });
+
+/*
+ * Authentication routes.
+ */
+$router->get('/login', function(){ return view('login'); });

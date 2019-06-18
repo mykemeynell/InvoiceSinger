@@ -1,4 +1,16 @@
 nav {
   @extend .blue;
   @extend .darken-1;
+
+  .nav-content .tabs {
+    .tab a {
+      border-bottom:0px solid white;
+      @include transition(border-bottom-width 100ms linear);
+
+      &.active {
+        border-bottom-width: 4px;
+        @include transition(border-bottom-width 100ms linear);
+      }
+    }
+  }
 }
