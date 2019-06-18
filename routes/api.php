@@ -13,6 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+$options = ['middleware' => ['api', 'auth:api']];
+
+/** @var \Illuminate\Routing\Router $router */
+$router = app('router');
+
+$router->get('/timestamp', 'Api\TestController@timestamp');
+$router->get('/', 'Api\TestController@index');
+
+$router->group($options, function() use ($router) {
+    $router->get('/user', function(Request $request) { return $request->user(); });
 });

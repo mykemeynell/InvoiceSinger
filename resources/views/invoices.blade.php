@@ -20,7 +20,7 @@
                     <tbody>
                     <tr>
                         <td>Yes</td>
-                        <td><a href="#">QUO-18-0032</a></td>
+                        <td><a href="#">INV-18-0032</a></td>
                         <td>22/06/2019</td>
                         <td>21/07/2019</td>
                         <td><a href="#">info@siliconlabs.example</a></td>
