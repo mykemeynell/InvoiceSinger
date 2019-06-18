@@ -17,3 +17,4 @@ $router = app('router');
 $router->get('/', function(){ return view('dashboard'); });
 $router->get('/clients', function(){ return view('clients'); });
 $router->get('/quotes', function(){ return view('quotes'); });
+$router->get('/invoices', function(){ return view('invoices'); });
