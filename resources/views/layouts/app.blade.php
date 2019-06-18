@@ -4,7 +4,7 @@
 <body class="@yield('body_classes')">
 @stack('beginning')
 
-@if(!isset($show_header) || $show_header == true)
+@if(! isset($show_header) || $show_header == true)
     @include('layouts.components.header._header')
 @endif
 
@@ -12,7 +12,10 @@
     @yield('content')
 </section>
 
-@include('layouts.components.misc._fab-button')
+@if(! isset($show_fab) || $show_fab == true)
+    @include('layouts.components.misc._fab-button')
+@endif
+
 @stack('before-scripts')
 <script src="{{ asset('js/app.js') }}"></script>
 @stack('end')
