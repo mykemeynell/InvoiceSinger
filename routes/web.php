@@ -14,14 +14,14 @@
 /** @var \Illuminate\Routing\Router $router */
 $router = app('router');
 
-$router->get('/', function(){ return view('dashboard'); });
-$router->get('/clients', function(){ return view('clients'); });
-$router->get('/quotes', function(){ return view('quotes'); });
-$router->get('/invoices', function(){ return view('invoices'); });
-$router->get('/payments', function(){ return view('payments'); });
-$router->get('/products', function(){ return view('products'); });
+$router->get('/', function(){ return view('dashboard'); })->name('dashboard');
+$router->get('/clients', function(){ return view('clients'); })->name('clients');
+$router->get('/quotes', function(){ return view('quotes'); })->name('quotes');
+$router->get('/invoices', function(){ return view('invoices'); })->name('invoices');
+$router->get('/payments', function(){ return view('payments'); })->name('payments');
+$router->get('/products', function(){ return view('products'); })->name('products');
 
 /*
  * Authentication routes.
  */
-$router->get('/login', function(){ return view('login'); });
+$router->get('/login', function(){ return view('login'); })->name('login');

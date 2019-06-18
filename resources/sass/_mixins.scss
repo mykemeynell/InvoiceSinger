@@ -5,3 +5,10 @@
   -o-transition: $args;
   transition: $args;
 }
+
+@mixin transition-delay($args...) {
+  -webkit-transition-delay: $args;
+  -moz-transition-delay: $args;
+  -o-transition-delay: $args;
+  transition: $args;
+}

@@ -9370,12 +9370,18 @@ input[type=range]::-ms-thumb {
 
 nav .nav-content .tabs .tab a {
   border-bottom: 0px solid white;
-  transition: border-bottom-width 100ms linear;
+  transition: border 100ms linear;
+}
+
+nav .nav-content .tabs .tab a:hover:not(.active) {
+  border-bottom-width: 4px;
+  border-bottom-color: rgba(255, 255, 255, 0.4);
+  transition: border 100ms linear;
 }
 
 nav .nav-content .tabs .tab a.active {
   border-bottom-width: 4px;
-  transition: border-bottom-width 100ms linear;
+  transition: border 100ms linear;
 }
 
 .page-login {
