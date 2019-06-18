@@ -9378,3 +9378,10 @@ nav .nav-content .tabs .tab a.active {
   transition: border-bottom-width 100ms linear;
 }
 
+.page-login {
+  background-image: url("/images/bg/login-screen.jpg");
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
