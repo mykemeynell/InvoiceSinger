@@ -3,19 +3,21 @@ nav {
   @extend .darken-1;
 
   .nav-content .tabs {
-    .tab a {
-      border-bottom:0px solid rgba(255, 255, 255, 1);
-      @include transition(border 100ms linear);
-
-      &:hover:not(.active) {
-        border-bottom-width: 4px;
-        border-bottom-color: rgba(255, 255, 255, 0.4);
+    .tab {
+      a {
+        border-bottom: 0px solid rgba(255, 255, 255, 1);
         @include transition(border 100ms linear);
-      }
 
-      &.active {
-        border-bottom-width: 4px;
-        @include transition(border 100ms linear);
+        &:hover:not(.active) {
+          border-bottom-width: 4px;
+          border-bottom-color: rgba(255, 255, 255, 0.4);
+          @include transition(border 100ms linear);
+        }
+
+        &.active {
+          border-bottom-width: 4px;
+          @include transition(border 100ms linear);
+        }
       }
     }
   }

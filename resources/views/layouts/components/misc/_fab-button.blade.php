@@ -3,16 +3,16 @@
         <i class="large material-icons">add</i>
     </a>
     <ul>
-        <li><a class="btn-floating green"><i class="material-icons">playlist_add</i></a></li>
-        <li><a class="btn-floating red"><i class="material-icons">library_add</i></a></li>
-        <li><a class="btn-floating yellow darken-2"><i class="material-icons">person_add</i></a></li>
+        @stack('fab_buttons')
     </ul>
 </div>
 
 @push('end')
 <script>
     $(document).ready(function(){
-        $('.fixed-action-btn').floatingActionButton();
+        $('.fixed-action-btn').floatingActionButton({
+            hoverEnabled: false
+        });
     });
 </script>
 @endpush
