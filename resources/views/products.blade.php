@@ -41,6 +41,3 @@
         <i class="material-icons">add</i>
     </a>
 @endpush
-
-@push('fab-buttons')
-@endpush

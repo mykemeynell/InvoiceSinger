@@ -12,7 +12,7 @@
     @yield('content')
 </section>
 
-@if(! isset($show_fab) || $show_fab == true)
+@if(isset($show_fab) && $show_fab == true)
     @include('layouts.components.misc._fab-button')
 @endif
 
