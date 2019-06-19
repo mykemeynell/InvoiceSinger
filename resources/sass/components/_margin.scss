@@ -1,0 +1,33 @@
+$spacing: (
+  5: 5px,
+  10: 10px,
+  15: 15px,
+  30: 30px,
+  auto: auto
+);
+
+$directions: (
+    -top,
+    -right,
+    -bottom,
+    -left,
+    '',
+);
+
+@each $option, $size in $spacing {
+  @each $direction in $directions {
+    .margin#{$direction}-#{$option} { margin#{$direction}: $size!important; }
+  }
+}
+
+@each $option, $size in $spacing {
+  .margin-x-#{$option} {
+    margin-left:$size!important;
+    margin-right:$size!important;
+  }
+
+  .margin-y-#{$option} {
+    margin-top:$size!important;
+    margin-bottom:$size!important;
+  }
+}

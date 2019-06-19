@@ -1,0 +1,9 @@
+$displays: (
+  block,
+  inline-block,
+  none
+);
+
+@each $display in $displays {
+  .display-#{$display} { display: #{$display}!important; }
+}

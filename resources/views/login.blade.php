@@ -13,7 +13,9 @@
 
                 <div class="card">
                     <div class="card-content">
-                        <span class="card-title">Login</span>
+                        <span class="card-title text-center">
+                            <img src="{{ asset('images/decoration/dummy-logo.png') }}" class="margin-x-auto margin-bottom-30 display-block" width="150" alt="Dummy Logo">
+                        </span>
 
                         <form id="login-form" name="login-form">
                             <div class="input-field">
@@ -26,7 +28,8 @@
                             </div>
                         </form>
                     </div>
-                    <div class="card-action">
+                    <div class="card-action right-align">
+                        <a href="#" class="waves-effect waves-light btn">Forgot Password</a>
                         <button class="waves-effect waves-light btn">Login</button>
                     </div>
                 </div>
