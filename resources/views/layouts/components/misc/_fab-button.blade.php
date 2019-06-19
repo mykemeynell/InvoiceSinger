@@ -3,7 +3,7 @@
         <i class="large material-icons">add</i>
     </a>
     <ul>
-        @stack('fab_buttons')
+        @stack('fab-buttons')
     </ul>
 </div>
 
