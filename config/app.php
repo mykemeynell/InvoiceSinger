@@ -175,6 +175,7 @@ return [
         InvoiceSinger\Providers\EventServiceProvider::class,
         InvoiceSinger\Providers\RouteServiceProvider::class,
 
+        \ArchLayerUser\Provider\ArchUserServiceProvider::class,
     ],
 
     /*
