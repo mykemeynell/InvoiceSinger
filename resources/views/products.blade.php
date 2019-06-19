@@ -3,6 +3,13 @@
 @section('content')
     <div class="container">
         <div class="row">
+            <div class="col s12 right-align">
+                <a href="#" class="waves-effect waves-dark grey lighten-3 black-text btn margin-right-15">Product Families</a>
+                <a href="#" class="waves-effect waves-dark grey lighten-3 black-text btn">Tax Rates</a>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col s12">
                 <table class="responsive-table">
                     <thead>
