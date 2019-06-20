@@ -26,7 +26,7 @@ $router->post('/clients/form/{client_id?}', 'Clients\ClientController@handlePost
 $router->get('/quotes', function(){ return view('quotes'); })->name('quotes');
 
 // Invoices
-$router->get('/invoices', function(){ return view('invoices'); })->name('invoices');
+$router->get('/invoices', 'Invoices\InvoiceController@index')->name('invoices');
 
 // Payments
 $router->get('/payments', function(){ return view('payments'); })->name('payments');
