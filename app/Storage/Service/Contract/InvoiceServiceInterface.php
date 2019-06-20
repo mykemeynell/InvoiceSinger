@@ -3,6 +3,7 @@
 namespace InvoiceSinger\Storage\Service\Contract;
 
 use ArchLayer\Service\Contract\ServiceInterface;
+use Illuminate\Database\Eloquent\Collection;
 use InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
@@ -13,6 +14,23 @@ use Symfony\Component\HttpFoundation\ParameterBag;
  */
 interface InvoiceServiceInterface extends ServiceInterface
 {
+    /**
+     * Find a client using a given field. ID by default.
+     *
+     * @param string $value
+     * @param string $match
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function find(string $value, $match = 'id'): ?InvoiceEntityInterface;
+
+    /**
+     * Fetch all invoices.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function fetch(): Collection;
+
     /**
      * Create a new invoice item.
      *

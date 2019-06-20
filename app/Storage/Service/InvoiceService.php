@@ -3,7 +3,9 @@
 namespace InvoiceSinger\Storage\Service;
 
 use ArchLayer\Service\Service;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
+use InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface;
 use InvoiceSinger\Storage\Repository\Contract\InvoiceRepositoryInterface;
 use InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface;
@@ -16,6 +18,29 @@ use Symfony\Component\HttpFoundation\ParameterBag;
  */
 class InvoiceService extends Service implements InvoiceServiceInterface
 {
+    /**
+     * Find a client using a given field. ID by default.
+     *
+     * @param string $value
+     * @param string $match
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function find(string $value, $match = 'id'): ?InvoiceEntityInterface
+    {
+        return $this->getRepository()->builder()->where($match, $value)->first();
+    }
+
+    /**
+     * Fetch all invoices.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function fetch(): Collection
+    {
+        return $this->getRepository()->builder()->get();
+    }
+
     /**
      * InvoiceService constructor.
      *
