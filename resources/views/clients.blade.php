@@ -33,7 +33,7 @@
 @endsection
 
 @push('nav-extra')
-    <a class="btn-floating btn-large halfway-fab waves-effect waves-light">
+    <a class="btn-floating btn-large halfway-fab waves-effect waves-light" href="{{ route('clients.form') }}">
         <i class="material-icons">add</i>
     </a>
 @endpush

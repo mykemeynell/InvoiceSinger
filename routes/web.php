@@ -14,11 +14,23 @@
 /** @var \Illuminate\Routing\Router $router */
 $router = app('router');
 
+// Dashbaord
 $router->get('/', function(){ return view('dashboard'); })->name('dashboard');
-$router->get('/clients', function(){ return view('clients'); })->name('clients');
+
+// Clients
+$router->get('/clients', 'Clients\ClientController@index')->name('clients');
+$router->get('/clients/form', 'Clients\ClientController@form')->name('clients.form');
+
+// Quotes
 $router->get('/quotes', function(){ return view('quotes'); })->name('quotes');
+
+// Invoices
 $router->get('/invoices', function(){ return view('invoices'); })->name('invoices');
+
+// Payments
 $router->get('/payments', function(){ return view('payments'); })->name('payments');
+
+// Products
 $router->get('/products', function(){ return view('products'); })->name('products');
 
 /*
