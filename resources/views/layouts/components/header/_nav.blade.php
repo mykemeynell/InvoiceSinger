@@ -10,8 +10,8 @@
         </div>
         <div class="nav-content">
             <ul class="tabs tabs-transparent">
-                <li class="tab"><a class="active" href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="tab"><a href="{{ route('clients') }}">Clients</a></li>
+                <li class="tab"><a @if($request->route()->getName() == 'dashboard') class="active" @endif href="{{ route('dashboard') }}">Dashboard</a></li>
+                <li class="tab"><a @if($request->route()->getName() == 'clients') class="active" @endif href="{{ route('clients') }}">Clients</a></li>
                 <li class="tab"><a href="{{ route('quotes') }}">Quotes</a></li>
                 <li class="tab"><a href="{{ route('invoices') }}">Invoices</a></li>
                 <li class="tab"><a href="{{ route('payments') }}">Payments</a></li>
