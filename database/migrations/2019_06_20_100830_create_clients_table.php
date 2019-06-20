@@ -38,6 +38,10 @@ class CreateClientsTable extends Migration
             $table->string('email_address')->nullable();
             $table->string('web')->nullable();
 
+            $table->string('vat_number')->nullable();
+
+            $table->tinyInteger('is_active')->default(1);
+
             $table->timestamps();
 
             /*
