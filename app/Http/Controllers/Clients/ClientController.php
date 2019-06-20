@@ -8,6 +8,8 @@ use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Client\ClientRequest;
 use InvoiceSinger\Storage\Service\Contract\ClientServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
+use Alcohol\ISO3166\ISO3166;
+
 
 /**
  * Class ClientController.
@@ -49,11 +51,13 @@ class ClientController extends Controller
      * @param \InvoiceSinger\Http\Requests\Client\ClientRequest $request
      *
      * @return \Illuminate\View\View
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function form(ClientRequest $request): View
     {
         return view('clients.form')
-            ->with('client', $request->client());
+            ->with('client', $request->client())
+            ->with('countries', app()->make(ISO3166::class)->getAll());
     }
 
     /**

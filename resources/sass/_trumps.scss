@@ -27,6 +27,10 @@ nav {
   label {left:0!important;}
 }
 
+.select-dropdown.dropdown-content {
+  max-height: 300px!important;
+}
+
 .page-login {
   background-image: url('/images/bg/login-screen.jpg');
   background-position: right center;

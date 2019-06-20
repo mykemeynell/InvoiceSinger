@@ -32170,7 +32170,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         var dropdownBounds = {
           left: idealXPos,
           top: idealYPos,
-          // height: idealHeight,
+          height: idealHeight,
           width: idealWidth
         };
 
