@@ -18,8 +18,9 @@
                     </thead>
 
                     <tbody>
+                    @foreach($invoices as $invoice)
                     <tr>
-                        <td>Yes</td>
+                        <td>{{ $invoice->getStatus() }}</td>
                         <td><a href="#">INV-18-0032</a></td>
                         <td>22/06/2019</td>
                         <td>21/07/2019</td>
@@ -27,6 +28,7 @@
                         <td class="right-align">&pound;0.00</td>
                         <td class="right-align"><a class="waves-effect waves-light btn">View</a></td>
                     </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
