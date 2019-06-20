@@ -23,6 +23,10 @@ nav {
   }
 }
 
+.col.input-field.padding-left-0 {
+  label {left:0!important;}
+}
+
 .page-login {
   background-image: url('/images/bg/login-screen.jpg');
   background-position: right center;

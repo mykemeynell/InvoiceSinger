@@ -7,6 +7,8 @@
 require('./bootstrap');
 require('materialize-css/dist/js/materialize');
 
+$('select').formSelect();
+
 window.Vue = require('vue');
 
 /**
