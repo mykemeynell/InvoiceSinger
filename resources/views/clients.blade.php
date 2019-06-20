@@ -24,7 +24,7 @@
                             <td><a href="mailto:{{ $client->getEmailAddress() }}">{{ $client->getEmailAddress() }}</a></td>
                             <td><a href="tel:{{ $client->getTelephone() }}">{{ $client->getTelephone() }}</a></td>
                             <td class="right-align">&pound;0.00</td>
-                            <td class="right-align"><a class="waves-effect waves-light btn">View</a></td>
+                            <td class="right-align"><a class="waves-effect waves-light btn" href="{{ route('clients.form', ['client_id' => $client->getKey()]) }}">View</a></td>
                         </tr>
                     @empty
                         <tr>
