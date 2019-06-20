@@ -17,6 +17,12 @@ class ClientRequest extends FormRequest
 {
     use RequestIsAuthorized, RequestHasNoRules, RequestHasParameterBag;
 
+    /**
+     * If a client ID is contained within the request, this method will attempt to find and
+     * return the associated client entity.
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface|null
+     */
     public function client(): ?ClientEntityInterface
     {
         // TODO: Implement client() method.
