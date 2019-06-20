@@ -48,10 +48,10 @@ class ClientService extends Service implements ClientServiceInterface
      */
     public function create(ParameterBag $payload): ?ClientEntityInterface
     {
-        $attributes = Arr::only($payload->all(), $this->getRepository()->getModel()->getFillable());
-
         /** @var \InvoiceSinger\Storage\Entity\ClientEntity $user */
-        $client = $this->getRepository()->create($attributes);
+        $client = $this->getRepository()->create(
+            Arr::only($payload->all(), $this->getRepository()->getModel()->getFillable())
+        );
         $client->save();
 
         return $client;
