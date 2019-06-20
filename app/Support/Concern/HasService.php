@@ -3,6 +3,7 @@
 namespace InvoiceSinger\Support\Concern;
 
 use ArchLayer\Service\Contract\ServiceInterface;
+use Exception;
 use Illuminate\Support\Collection;
 
 /**
@@ -43,10 +44,17 @@ trait HasService
      * @param string|null $name
      *
      * @return \ArchLayer\Service\Contract\ServiceInterface
+     * @throws \Exception
      */
     protected function getService(?string $name = null): ServiceInterface
     {
-        return $this->services->get(self::normalizeName($name));
+        $name = self::normalizeName($name);
+
+        if($service = $this->services->get($name)) {
+            return $service;
+        }
+
+        throw new Exception("Service at {$name} hasn't been set");
     }
 
     /**
