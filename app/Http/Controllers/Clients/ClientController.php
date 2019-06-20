@@ -46,11 +46,14 @@ class ClientController extends Controller
     /**
      * Show the clients form view.
      *
+     * @param \InvoiceSinger\Http\Requests\Client\ClientRequest $request
+     *
      * @return \Illuminate\View\View
      */
-    public function form(): View
+    public function form(ClientRequest $request): View
     {
-        return view('clients.form');
+        return view('clients.form')
+            ->with('client', $request->client());
     }
 
     /**
