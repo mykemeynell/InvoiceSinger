@@ -2,6 +2,7 @@
 
 namespace InvoiceSinger\Storage\Entity;
 
+use ArchLayer\Entity\Concern\EntityHasTimestamps;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface;
@@ -14,7 +15,55 @@ use UuidColumn\Concern\HasUuidObserver;
  */
 class InvoiceEntity extends Model implements InvoiceEntityInterface
 {
-    use HasUuidObserver;
+    use HasUuidObserver, EntityHasTimestamps;
+
+    /**
+     * The table name.
+     *
+     * @var string
+     */
+    public $table = 'invoices';
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * The "type" of the primary key ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'raised_at',
+        'due_at',
+        'sent_at',
+    ];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'client',
+        'key',
+        'raised_at',
+        'due_at',
+        'sent_at',
+        'status',
+        'payment_method',
+        'terms',
+    ];
 
     /**
      * Get the client ID.
