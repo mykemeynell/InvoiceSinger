@@ -3,6 +3,7 @@
 namespace InvoiceSinger\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use InvoiceSinger\View\ViewComposer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('*', ViewComposer::class);
     }
 }
