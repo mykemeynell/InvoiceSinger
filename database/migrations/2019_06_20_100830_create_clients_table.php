@@ -23,7 +23,7 @@ class CreateClientsTable extends Migration
             $this->createUuidColumn($table, 'id');
 
             $table->string('first_name');
-            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('business_name')->nullable();
 
             $table->string('address_1')->nullable();
