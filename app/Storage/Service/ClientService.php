@@ -3,6 +3,7 @@
 namespace InvoiceSinger\Storage\Service;
 
 use ArchLayer\Service\Service;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface;
 use InvoiceSinger\Storage\Repository\Contract\ClientRepositoryInterface;
@@ -37,6 +38,16 @@ class ClientService extends Service implements ClientServiceInterface
     public function find(string $value, $match = 'id'): ?ClientEntityInterface
     {
         return $this->getRepository()->builder()->where($match, $value)->first();
+    }
+
+    /**
+     * Fetch all clients.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function fetch(): Collection
+    {
+        return $this->getRepository()->builder()->get();
     }
 
     /**
