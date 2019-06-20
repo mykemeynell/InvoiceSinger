@@ -13,10 +13,21 @@ use Illuminate\View\View as ViewFactory;
 class ViewComposer
 {
     /**
-     * ViewComposer constructor.
+     * The request object.
+     *
+     * @var \Illuminate\Http\Request
      */
-    function __construct()
-    {}
+    protected $request;
+
+    /**
+     * ViewComposer constructor.
+     *
+     * @param \Illuminate\Http\Request $request
+     */
+    function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
 
     /**
      * Compose the view.
@@ -27,6 +38,6 @@ class ViewComposer
      */
     public function compose(ViewFactory $view)
     {
-        return $view;
+        return $view->with('request', $this->request);
     }
 }
