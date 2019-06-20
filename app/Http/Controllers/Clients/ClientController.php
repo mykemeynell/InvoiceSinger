@@ -34,10 +34,13 @@ class ClientController extends Controller
      * Return clients view.
      *
      * @return \Illuminate\View\View
+     * @throws \Exception
      */
     public function index(): View
     {
-        return view('clients');
+        $clients = $this->getService()->fetch();
+
+        return view('clients', compact('clients'));
     }
 
     /**

@@ -17,14 +17,24 @@
                     </thead>
 
                     <tbody>
-                    <tr>
-                        <td>Yes</td>
-                        <td><a href="#">Silicon Labs</a></td>
-                        <td><a href="#">info@siliconlabs.example</a></td>
-                        <td>+44 1234 567890</td>
-                        <td class="right-align">&pound;0.00</td>
-                        <td class="right-align"><a class="waves-effect waves-light btn">View</a></td>
-                    </tr>
+                    @forelse($clients as $client)
+                        <tr>
+                            <td>{{ $client->isActive() ? 'Yes' : 'No' }}</td>
+                            <td><a href="#">{{ $client->getDisplayName() }}</a></td>
+                            <td><a href="mailto:{{ $client->getEmailAddress() }}">{{ $client->getEmailAddress() }}</a></td>
+                            <td><a href="tel:{{ $client->getTelephone() }}">{{ $client->getTelephone() }}</a></td>
+                            <td class="right-align">&pound;0.00</td>
+                            <td class="right-align"><a class="waves-effect waves-light btn">View</a></td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="center-align">
+                                No Clients
+                            </td>
+                        </tr>
+                    @endforelse
+
+
                     </tbody>
                 </table>
             </div>
