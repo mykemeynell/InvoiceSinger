@@ -20,7 +20,7 @@
                     @forelse($clients as $client)
                         <tr>
                             <td>{{ $client->isActive() ? 'Yes' : 'No' }}</td>
-                            <td><a href="#">{{ $client->getDisplayName() }}</a></td>
+                            <td>{{ $client->getDisplayName() }}</td>
                             <td><a href="mailto:{{ $client->getEmailAddress() }}">{{ $client->getEmailAddress() }}</a></td>
                             <td><a href="tel:{{ $client->getTelephone() }}">{{ $client->getTelephone() }}</a></td>
                             <td class="right-align">&pound;0.00</td>
