@@ -99,25 +99,25 @@
                             <div class="card-title"><span>Contact Information</span></div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[street_address]" id="telephone">
+                                    <input type="text" class="validate" name="client[telephone]" id="telephone">
                                     <label for="telephone">Telephone</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[street_address_2]" id="fax">
+                                    <input type="text" class="validate" name="client[fax]" id="fax">
                                     <label for="fax">Fax</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[city]" id="mobile">
+                                    <input type="text" class="validate" name="client[mobile]" id="mobile">
                                     <label for="mobile">Mobile</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[post_code]" id="email-address">
+                                    <input type="text" class="validate" name="client[email_address]" id="email-address">
                                     <label for="email-address">Email Address</label>
                                 </div>
                             </div>
