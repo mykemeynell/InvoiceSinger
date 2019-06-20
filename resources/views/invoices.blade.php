@@ -8,8 +8,8 @@
                     <thead>
                         <tr>
                             <th>Status</th>
-                            <th>Quote</th>
-                            <th>Created</th>
+                            <th>Invoice</th>
+                            <th>Raised</th>
                             <th>Due</th>
                             <th>Client</th>
                             <th class="right-align">Amount</th>
@@ -18,17 +18,21 @@
                     </thead>
 
                     <tbody>
-                    @foreach($invoices as $invoice)
+                    @forelse($invoices as $invoice)
                     <tr>
                         <td>{{ $invoice->getStatus() }}</td>
-                        <td><a href="#">INV-18-0032</a></td>
-                        <td>22/06/2019</td>
-                        <td>21/07/2019</td>
-                        <td><a href="#">info@siliconlabs.example</a></td>
+                        <td><a href="#">{{ $invoice->getInvoiceKey() }}</a></td>
+                        <td>{{ $invoice->getRaisedAt() }}</td>
+                        <td>{{ $invoice->getDueAt() }}</td>
+                        <td><a href="#">{{ $invoice->getClientId() }}</a></td>
                         <td class="right-align">&pound;0.00</td>
                         <td class="right-align"><a class="waves-effect waves-light btn">View</a></td>
                     </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="7" class="center-align">No Invoices</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
             </div>
