@@ -13,7 +13,7 @@
                 <li class="tab"><a @if($request->route()->getName() == 'dashboard') class="active" @endif href="{{ route('dashboard') }}">Dashboard</a></li>
                 <li class="tab"><a @if($request->route()->getName() == 'clients') class="active" @endif href="{{ route('clients') }}">Clients</a></li>
                 <li class="tab"><a href="{{ route('quotes') }}">Quotes</a></li>
-                <li class="tab"><a href="{{ route('invoices') }}">Invoices</a></li>
+                <li class="tab"><a @if($request->route()->getName() == 'invoices') class="active" @endif href="{{ route('invoices') }}">Invoices</a></li>
                 <li class="tab"><a href="{{ route('payments') }}">Payments</a></li>
                 <li class="tab"><a href="{{ route('products') }}">Products</a></li>
                 <li class="tab disabled"><a href="#tasks">Tasks</a></li>
