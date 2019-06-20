@@ -2,9 +2,11 @@
 
 namespace InvoiceSinger\Http\Controllers\Clients;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
+use InvoiceSinger\Http\Requests\Client\ClientRequest;
 
 /**
  * Class ClientController.
@@ -33,5 +35,15 @@ class ClientController extends Controller
         return view('clients.form');
     }
 
-//    public function handlePost()
+    /**
+     * Handle a post request for a client.
+     *
+     * @param \InvoiceSinger\Http\Requests\Client\ClientRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function handlePost(ClientRequest $request): RedirectResponse
+    {
+
+    }
 }
