@@ -2,9 +2,7 @@
 
 namespace InvoiceSinger\Http\Controllers\Clients;
 
-use ArchLayer\Service\Contract\ServiceInterface;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Client\ClientRequest;
@@ -64,13 +62,15 @@ class ClientController extends Controller
     {
         try {
             if ($client = $request->client()) {
-                $this->getService()->update($request->getParameterBag());
+                $this->getService()->update($client, $request->getParameterBag());
+
                 return RedirectResponse::create(route('clients'), 200);
             }
 
             $this->getService()->create($request->getParameterBag());
+
             return RedirectResponse::create(route('clients'), 201);
-        } catch(\Exception $exception) {
+        } catch (\Exception $exception) {
 
             dd($exception);
 

@@ -60,16 +60,14 @@ class ClientService extends Service implements ClientServiceInterface
     /**
      * Update a client. The $match parameter is used to match an existing entry.
      *
-     * @param \Symfony\Component\HttpFoundation\ParameterBag $payload
-     * @param string                                         $match
+     * @param \InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface|\Illuminate\Database\Eloquent\Model $entity
+     * @param \Symfony\Component\HttpFoundation\ParameterBag                                                   $payload
      *
      * @return bool
      */
-    public function update(ParameterBag $payload, $match = 'id'): bool
+    public function update(ClientEntityInterface $entity, ParameterBag $payload): bool
     {
-        return $this->getRepository()->builder()->where($match, $payload->get($match))->update(
-            Arr::only($payload->all(), $this->getRepository()->getModel()->getFillable())
-        );
+        return $entity->update(Arr::only($payload->all(), $this->getRepository()->getModel()->getFillable()));
     }
 
     /**
