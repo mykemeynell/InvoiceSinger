@@ -26,7 +26,7 @@
                             </div>
                             <div class="row">
                                 <div class="col s12 m6 input-field">
-                                    <input type="text" class="validate" name="client[first_name]" id="first-name">
+                                    <input type="text" class="validate" name="client[first_name]" id="first-name" required autofocus>
                                     <label for="first-name">First name</label>
                                 </div>
                                 <div class="col s12 m6 input-field">
@@ -56,25 +56,25 @@
                             <div class="row">
                                 <div class="col s12 input-field">
                                     <input type="text" class="validate" name="client[address_1]" id="street-address">
-                                    <label for="street-address">Street Address</label>
+                                    <label for="street-address">Street Address (Optional)</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
                                     <input type="text" class="validate" name="client[address_2]" id="street-address-2">
-                                    <label for="street-address-2">Street Address</label>
+                                    <label for="street-address-2">Street Address (Optional)</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
                                     <input type="text" class="validate" name="client[town_city]" id="city">
-                                    <label for="city">City</label>
+                                    <label for="city">City (Optional)</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
                                     <input type="text" class="validate" name="client[postcode]" id="postcode">
-                                    <label for="postcode">Postcode</label>
+                                    <label for="postcode">Postcode (Optional)</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -85,7 +85,7 @@
                                         <option value="2">Option 2</option>
                                         <option value="3">Option 3</option>
                                     </select>
-                                    <label for="country">Country</label>
+                                    <label for="country">Country (Optional)</label>
                                 </div>
                             </div>
                         </div>
@@ -101,31 +101,31 @@
                             <div class="row">
                                 <div class="col s12 input-field">
                                     <input type="text" class="validate" name="client[telephone]" id="telephone">
-                                    <label for="telephone">Telephone</label>
+                                    <label for="telephone">Telephone (Optional)</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
                                     <input type="text" class="validate" name="client[fax]" id="fax">
-                                    <label for="fax">Fax</label>
+                                    <label for="fax">Fax (Optional)</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
                                     <input type="text" class="validate" name="client[mobile]" id="mobile">
-                                    <label for="mobile">Mobile</label>
+                                    <label for="mobile">Mobile (Optional)</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
                                     <input type="text" class="validate" name="client[email_address]" id="email-address">
-                                    <label for="email-address">Email Address</label>
+                                    <label for="email-address">Email Address (Optional)</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
                                     <input type="text" class="validate" name="client[web]" id="client-web">
-                                    <label for="client-web">Website</label>
+                                    <label for="client-web">Website (Optional)</label>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
                             <div class="row">
                                 <div class="col s12 input-field">
                                     <input type="text" class="validate" name="client[vat_number]" id="vat">
-                                    <label for="vat">VAT Number</label>
+                                    <label for="vat">VAT Number (Optional)</label>
                                 </div>
                             </div>
 
