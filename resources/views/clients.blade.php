@@ -33,7 +33,7 @@
 @endsection
 
 @push('nav-extra')
-    <a class="btn-floating btn-large halfway-fab waves-effect waves-light">
+    <a class="btn-floating btn-large halfway-fab waves-effect waves-light modal-trigger">
         <i class="material-icons">add</i>
     </a>
 @endpush
