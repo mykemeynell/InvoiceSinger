@@ -21,9 +21,9 @@ class CreateInvoicesTable extends Migration
 
             $table->string('client');
             $table->string('key');
-            $table->string('raised_date');
-            $table->string('due_date');
-            $table->string('sent_date')->nullable();
+            $table->date('raised_at');
+            $table->date('due_at');
+            $table->dateTime('sent_at')->nullable();
             $table->string('status')->default('draft');
             $table->string('payment_method')->default('cash');
             $table->text('terms')->nullable();
