@@ -27,10 +27,11 @@ class ClientRequest extends FormRequest
     public function client(): ?ClientEntityInterface
     {
         if($id = $this->getParameterBag()->get('id')) {
-            /** @var \InvoiceSinger\Storage\Service\ClientService $service */
-            $service = app('client.service');
+            return app('client.service')->find($id);
+        }
 
-            return $service->find($id);
+        if($id = $this->route('client_id')) {
+            return app('client.service')->find($id);
         }
 
         return null;
