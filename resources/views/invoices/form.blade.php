@@ -13,7 +13,7 @@
                 <div class="col s12 m6">
                     <h4 class="margin-0">Create/Edit Client</h4>
                 </div>
-                <div class="col s12 m6 right-align">
+                <div class="col s12 right-align">
                     <button form="client-form" formmethod="POST" formaction="{{ route('clients.handleForm') }}" class="waves-light waves-effect btn margin-right-15">Save</button>
                     <a href="{{ route('clients') }}" class="waves-light waves-effect btn red darken-1">Discard</a>
                 </div>
