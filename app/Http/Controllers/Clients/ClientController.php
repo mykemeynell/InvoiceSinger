@@ -1,6 +1,6 @@
 <?php
 
-namespace InvoiceSinger\Http\Controllers\CLients;
+namespace InvoiceSinger\Http\Controllers\Clients;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
