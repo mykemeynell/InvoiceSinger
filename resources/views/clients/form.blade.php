@@ -72,8 +72,8 @@
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[postcode]" id="post-code">
-                                    <label for="post-code">Postcode</label>
+                                    <input type="text" class="validate" name="client[postcode]" id="postcode">
+                                    <label for="postcode">Postcode</label>
                                 </div>
                             </div>
                             <div class="row">
