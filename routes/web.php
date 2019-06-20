@@ -20,6 +20,7 @@ $router->get('/', function(){ return view('dashboard'); })->name('dashboard');
 // Clients
 $router->get('/clients', 'Clients\ClientController@index')->name('clients');
 $router->get('/clients/form', 'Clients\ClientController@form')->name('clients.form');
+$router->post('/clients/form', 'Clients\ClientController@handlePost')->name('clients.handleForm');
 
 // Quotes
 $router->get('/quotes', function(){ return view('quotes'); })->name('quotes');

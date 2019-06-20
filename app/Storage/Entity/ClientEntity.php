@@ -46,6 +46,29 @@ class ClientEntity extends Model implements Contract\ClientEntityInterface
     ];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'business_name',
+        'address_1',
+        'address_2',
+        'town_city',
+        'postcode',
+        'country',
+        'telephone',
+        'fax',
+        'mobile',
+        'email_address',
+        'web',
+        'vat_number',
+        'is_active',
+    ];
+
+    /**
      * Get the display name.
      *
      * @return string
@@ -210,5 +233,17 @@ class ClientEntity extends Model implements Contract\ClientEntityInterface
     public function isActive(): bool
     {
         return $this->is_active;
+    }
+
+    /**
+     * Set the is_active field.
+     *
+     * @param $value
+     *
+     * @return int
+     */
+    public function setIsActiveAttribute($value): int
+    {
+        return $this->attributes['is_active'] = ($value == 'on') ? 1 : 0;
     }
 }

@@ -7,10 +7,11 @@
     {{-- End form action buttons --}}
 
     <form id="client-form" name="client-form">
+        {!! csrf_field() !!}
         <div class="container">
             <div class="row">
                 <div class="col s12 margin-top-15 margin-bottom-30 right-align">
-                    <button form="client-form" class="waves-light waves-effect btn margin-right-15">Save</button>
+                    <button form="client-form" formmethod="POST" formaction="{{ route('clients.handleForm') }}" class="waves-light waves-effect btn margin-right-15">Save</button>
                     <a href="{{ route('clients') }}" class="waves-light waves-effect btn red darken-1">Discard</a>
                 </div>
             </div>

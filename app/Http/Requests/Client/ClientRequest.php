@@ -7,6 +7,7 @@ use InvoiceSinger\Requests\Concern\RequestHasNoRules;
 use InvoiceSinger\Requests\Concern\RequestHasParameterBag;
 use InvoiceSinger\Requests\Concern\RequestIsAuthorized;
 use InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface;
+use InvoiceSinger\Support\Concern\HasService;
 
 /**
  * Class ClientRequest.
@@ -15,7 +16,7 @@ use InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface;
  */
 class ClientRequest extends FormRequest
 {
-    use RequestIsAuthorized, RequestHasNoRules, RequestHasParameterBag;
+    use RequestIsAuthorized, RequestHasNoRules, RequestHasParameterBag, HasService;
 
     /**
      * If a client ID is contained within the request, this method will attempt to find and
@@ -25,8 +26,14 @@ class ClientRequest extends FormRequest
      */
     public function client(): ?ClientEntityInterface
     {
-        // TODO: Implement client() method.
-        // If a client ID is passed then client() should return a ClientEntityInterface of that object.
+        if($id = $this->getParameterBag()->get('id')) {
+            /** @var \InvoiceSinger\Storage\Service\ClientService $service */
+            $service = app('client.service');
+
+            return $service->find($id);
+        }
+
+        return null;
     }
 
     /**
