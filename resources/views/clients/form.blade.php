@@ -33,6 +33,13 @@
                                     <label for="last-name">Last name (Optional)</label>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col s12 input-field">
+                                    <input type="text" class="validate" name="client[business_name]" id="business-name">
+                                    <label for="business-name">Business name (Optional)</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,25 +54,25 @@
                             <div class="card-title"><span>Address</span></div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[street_address]" id="street-address">
+                                    <input type="text" class="validate" name="client[address_1]" id="street-address">
                                     <label for="street-address">Street Address</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[street_address_2]" id="street-address-2">
+                                    <input type="text" class="validate" name="client[address_2]" id="street-address-2">
                                     <label for="street-address-2">Street Address</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[city]" id="city">
+                                    <input type="text" class="validate" name="client[town_city]" id="city">
                                     <label for="city">City</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[post_code]" id="post-code">
+                                    <input type="text" class="validate" name="client[postcode]" id="post-code">
                                     <label for="post-code">Postcode</label>
                                 </div>
                             </div>
