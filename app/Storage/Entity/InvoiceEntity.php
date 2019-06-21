@@ -6,6 +6,7 @@ use ArchLayer\Entity\Concern\EntityHasTimestamps;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface;
+use InvoiceSinger\Support\Observer\CreateInvoiceObserver;
 use UuidColumn\Concern\HasUuidObserver;
 
 /**
@@ -64,6 +65,17 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
         'payment_method',
         'terms',
     ];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+        static::observe(CreateInvoiceObserver::class);
+    }
 
     /**
      * Get the client ID.

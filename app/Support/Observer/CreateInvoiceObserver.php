@@ -4,7 +4,6 @@ namespace InvoiceSinger\Support\Observer;
 
 use Illuminate\Database\Eloquent\Model;
 use InvoiceSinger\Support\Generators\Invoices\InvoiceKeyGenerator;
-use Ramsey\Uuid\Uuid;
 
 /**
  * Trait CreateInvoiceObserver
@@ -23,7 +22,5 @@ trait CreateInvoiceObserver
     public function creating(Model $model): void
     {
         $model->setAttribute('key', app(InvoiceKeyGenerator::class));
-
-        // TODO: Increment invoice.key setting.
     }
 }
