@@ -23,6 +23,7 @@ class InvoiceController extends Controller
      * InvoiceController constructor.
      *
      * @param \InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface $invoiceService
+     * @param \InvoiceSinger\Storage\Service\Contract\ClientServiceInterface  $clientService
      */
     function __construct(InvoiceServiceInterface $invoiceService, ClientServiceInterface $clientService)
     {
