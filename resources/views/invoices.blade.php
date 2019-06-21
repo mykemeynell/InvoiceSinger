@@ -52,10 +52,17 @@
             <h4>Create New Invoice</h4>
             <form name="new-invoice-form" id="new-invoice-form">
                 <div class="row">
+{{--                    <div class="input-field col s12">--}}
+{{--                        <i class="material-icons prefix">search</i>--}}
+{{--                        <input type="text" id="autocomplete-input" class="autocomplete" data-source="{{ route('api.clients.fetch') }}">--}}
+{{--                        <label for="autocomplete-input">Search for a client</label>--}}
+{{--                    </div>--}}
                     <div class="input-field col s12">
-                        <i class="material-icons prefix">search</i>
-                        <input type="text" id="autocomplete-input" class="autocomplete" data-source="{{ route('api.clients.fetch') }}">
-                        <label for="autocomplete-input">Search for a client</label>
+                        <select name="client[id]" id="client-name">
+                            <option disabled selected>Select a client</option>
+
+                        </select>
+                        <label for="client-name">Client</label>
                     </div>
                 </div>
             </form>

@@ -6,9 +6,10 @@
 
 require('./bootstrap');
 require('materialize-css/dist/js/materialize');
-require('./autocomplete-select');
 
-$('select').formSelect();
+$(document).ready(function() {
+    $('select').formSelect();
+});
 
 window.Vue = require('vue');
 
