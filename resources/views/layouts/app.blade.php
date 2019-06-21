@@ -16,6 +16,10 @@
     @include('layouts.components.misc._fab-button')
 @endif
 
+<div id="app-progress" class="progress margin-y-0" style="display:none;">
+    <div class="indeterminate"></div>
+</div>
+
 @stack('before-scripts')
 <script src="{{ asset('js/app.js') }}"></script>
 @stack('end')

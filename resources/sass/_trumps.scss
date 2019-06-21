@@ -1,3 +1,15 @@
+#app-progress {
+  @extend .blue;
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+
+  .indeterminate {
+    @extend .white;
+  }
+}
+
 nav {
   @extend .blue;
   @extend .darken-1;

@@ -77,7 +77,7 @@
         <div class="modal-footer">
             <div class="row">
                 <div class="col s12">
-                    <button form="new-invoice-form" formaction="" formmethod="POST" class="modal-close waves-effect waves-green btn-flat">Create</button>
+                    <button form="new-invoice-form" formaction="{{ route('invoices.handleForm')  }}" formmethod="POST" class="modal-close waves-effect waves-green btn-flat">Create</button>
                 </div>
             </div>
         </div>
@@ -86,6 +86,20 @@
     <script>
         $(document).ready(function(){
             $('.modal').modal();
+
+            $('button[form="new-invoice-form"]').on('click', function(event) {
+                event.preventDefault();
+
+                axios.interceptors.request.use((config) => {
+                    $('#app-progress').css('display', 'block');
+                    return config;
+                });
+                axios.post($(this).attr('formaction'), {
+                    data: $('#new-invoice-form').serialize()
+                }).then((response) => {
+                    console.log(response);
+                });
+            });
         });
     </script>
 @endpush

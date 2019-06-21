@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
+use InvoiceSinger\Http\Requests\Invoice\InvoiceRequest;
 use InvoiceSinger\Storage\Service\Contract\ClientServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
@@ -60,8 +61,8 @@ class InvoiceController extends Controller
     /**
      * Handle the submission of data to invoices.
      *
-     * @return \Illuminate\View\View
+     * @param \InvoiceSinger\Http\Requests\Invoice\InvoiceRequest $request
      */
-    public function handlePost(): View
+    public function handlePost(InvoiceRequest $request)
     {}
 }

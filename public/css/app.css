@@ -648,7 +648,8 @@ nav.indigo {
 }
 
 .blue,
-nav {
+nav,
+#app-progress {
   background-color: #2196F3 !important;
 }
 
@@ -657,7 +658,8 @@ nav {
 }
 
 .blue.lighten-5,
-nav.lighten-5 {
+nav.lighten-5,
+.lighten-5#app-progress {
   background-color: #E3F2FD !important;
 }
 
@@ -666,7 +668,8 @@ nav.lighten-5 {
 }
 
 .blue.lighten-4,
-nav.lighten-4 {
+nav.lighten-4,
+.lighten-4#app-progress {
   background-color: #BBDEFB !important;
 }
 
@@ -675,7 +678,8 @@ nav.lighten-4 {
 }
 
 .blue.lighten-3,
-nav.lighten-3 {
+nav.lighten-3,
+.lighten-3#app-progress {
   background-color: #90CAF9 !important;
 }
 
@@ -684,7 +688,8 @@ nav.lighten-3 {
 }
 
 .blue.lighten-2,
-nav.lighten-2 {
+nav.lighten-2,
+.lighten-2#app-progress {
   background-color: #64B5F6 !important;
 }
 
@@ -693,7 +698,8 @@ nav.lighten-2 {
 }
 
 .blue.lighten-1,
-nav.lighten-1 {
+nav.lighten-1,
+.lighten-1#app-progress {
   background-color: #42A5F5 !important;
 }
 
@@ -702,7 +708,9 @@ nav.lighten-1 {
 }
 
 .blue.darken-1,
-nav {
+nav,
+.darken-1#app-progress,
+nav#app-progress {
   background-color: #1E88E5 !important;
 }
 
@@ -711,7 +719,8 @@ nav {
 }
 
 .blue.darken-2,
-nav.darken-2 {
+nav.darken-2,
+.darken-2#app-progress {
   background-color: #1976D2 !important;
 }
 
@@ -720,7 +729,8 @@ nav.darken-2 {
 }
 
 .blue.darken-3,
-nav.darken-3 {
+nav.darken-3,
+.darken-3#app-progress {
   background-color: #1565C0 !important;
 }
 
@@ -729,7 +739,8 @@ nav.darken-3 {
 }
 
 .blue.darken-4,
-nav.darken-4 {
+nav.darken-4,
+.darken-4#app-progress {
   background-color: #0D47A1 !important;
 }
 
@@ -738,7 +749,8 @@ nav.darken-4 {
 }
 
 .blue.accent-1,
-nav.accent-1 {
+nav.accent-1,
+.accent-1#app-progress {
   background-color: #82B1FF !important;
 }
 
@@ -747,7 +759,8 @@ nav.accent-1 {
 }
 
 .blue.accent-2,
-nav.accent-2 {
+nav.accent-2,
+.accent-2#app-progress {
   background-color: #448AFF !important;
 }
 
@@ -756,7 +769,8 @@ nav.accent-2 {
 }
 
 .blue.accent-3,
-nav.accent-3 {
+nav.accent-3,
+.accent-3#app-progress {
   background-color: #2979FF !important;
 }
 
@@ -765,7 +779,8 @@ nav.accent-3 {
 }
 
 .blue.accent-4,
-nav.accent-4 {
+nav.accent-4,
+.accent-4#app-progress {
   background-color: #2962FF !important;
 }
 
@@ -2154,7 +2169,8 @@ nav.grey {
   color: #000000 !important;
 }
 
-.white {
+.white,
+#app-progress .indeterminate {
   background-color: #FFFFFF !important;
 }
 
@@ -9740,6 +9756,13 @@ input[type=range]::-ms-thumb {
 .display-none,
 .autocomplete-content li img {
   display: none !important;
+}
+
+#app-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 nav .nav-content .tabs .tab a {
