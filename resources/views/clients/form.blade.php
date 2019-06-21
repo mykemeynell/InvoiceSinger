@@ -95,11 +95,19 @@
                                     <select id="country" name="client[country]">
                                         <option value="" disabled selected>Select your country</option>
                                         @foreach($countries as $country)
-                                            <option @if($client->getCountry() === $country['alpha3']) selected="selected"
+                                            <option @if(! is_null($client) && $client->getCountry() === $country['alpha3']) selected="selected"
                                                     @endif value="{{ $country['alpha3'] }}">{{ $country['name'] }}</option>
                                         @endforeach
                                     </select>
                                     <label for="country">Country (Optional)</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">search</i>
+                                    <input type="text" id="autocomplete-input" class="autocomplete">
+                                    <label for="autocomplete-input">search the best</label>
                                 </div>
                             </div>
                         </div>

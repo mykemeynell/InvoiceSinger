@@ -32170,7 +32170,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         var dropdownBounds = {
           left: idealXPos,
           top: idealYPos,
-          height: idealHeight,
+          // height: idealHeight,
           width: idealWidth
         };
 
@@ -57071,6 +57071,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! materialize-css/dist/js/materialize */ "./node_modules/materialize-css/dist/js/materialize.js");
 
+__webpack_require__(/*! ./autocomplete-select */ "./resources/js/autocomplete-select.js");
+
 $('select').formSelect();
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
@@ -57092,6 +57094,36 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const app = new Vue({
 //     el: '#app',
 // });
+
+/***/ }),
+
+/***/ "./resources/js/autocomplete-select.js":
+/*!*********************************************!*\
+  !*** ./resources/js/autocomplete-select.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $('input.autocomplete').each(function (index, element) {
+    var source = $(element).data('source');
+    var options = {
+      data: new Array(),
+      limit: 7,
+      onAutocomplete: function onAutocomplete(val) {},
+      minLength: 1
+    };
+    axios.get(source).then(function (response) {
+      response.data.map(function (item) {
+        var business_name = item.business_name;
+        var id = item.id;
+        return options.data[business_name] = null;
+      });
+    }).then(function () {
+      $(element).autocomplete(options);
+    });
+  });
+});
 
 /***/ }),
 

@@ -6,6 +6,7 @@
 
 require('./bootstrap');
 require('materialize-css/dist/js/materialize');
+require('./autocomplete-select');
 
 $('select').formSelect();
 

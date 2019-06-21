@@ -52,14 +52,10 @@
             <h4>Create New Invoice</h4>
             <form name="new-invoice-form" id="new-invoice-form">
                 <div class="row">
-                    <div class="col s12 input-field">
-                        <select name="invoice[client_id]">
-                            <option value="" disabled selected>Choose your option</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
-                        </select>
-                        <label>Materialize Select</label>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">search</i>
+                        <input type="text" id="autocomplete-input" class="autocomplete" data-source="{{ route('api.clients.fetch') }}">
+                        <label for="autocomplete-input">Search for a client</label>
                     </div>
                 </div>
             </form>

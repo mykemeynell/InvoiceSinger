@@ -37,3 +37,13 @@ nav {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.modal {
+  overflow-y: initial!important;
+}
+
+.autocomplete-content {
+  li {
+    img {@extend .display-none;}
+  }
+}

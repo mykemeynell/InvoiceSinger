@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
+@import "~selectize/dist/css/selectize.css";
+
 @import "_mixins";
 
 @import "components/_height";
@@ -8,5 +10,6 @@
 @import "components/_decoration";
 
 @import "~materialize-css/sass/materialize";
+
 
 @import "_trumps";
