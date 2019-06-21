@@ -3,6 +3,7 @@
 namespace InvoiceSinger\Http\Controllers\Invoices;
 
 use ArchLayer\Service\Contract\ServiceInterface;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
@@ -40,6 +41,8 @@ class InvoiceController extends Controller
     public function index(): View
     {
         return view('invoices')
+            ->with('today', Carbon::today()->format('d F Y'))
+            ->with('due', Carbon::today()->add(settings('invoice.term'))->format('d F Y'))
             ->with('clients', $this->getService('clients')->fetch())
             ->with('invoices', $this->getService('invoices')->fetch());
     }

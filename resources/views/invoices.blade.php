@@ -64,11 +64,11 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="raised-date" type="text" class="datepicker validate" required>
+                        <input id="raised-date" type="text" class="datepicker validate" value="{{ $today }}" required>
                         <label for="raised-date">Raised on</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="raised-date" type="text" class="datepicker validate" required>
+                        <input id="raised-date" type="text" class="datepicker validate" value="{{ $due }}" required>
                         <label for="raised-date">Due by</label>
                     </div>
                 </div>

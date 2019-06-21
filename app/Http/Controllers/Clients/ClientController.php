@@ -8,7 +8,7 @@ use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Client\ClientRequest;
 use InvoiceSinger\Storage\Service\Contract\ClientServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
-use Alcohol\ISO3166\ISO3166;
+use League\ISO3166\ISO3166;
 
 
 /**
@@ -57,7 +57,7 @@ class ClientController extends Controller
     {
         return view('clients.form')
             ->with('client', $request->client())
-            ->with('countries', app()->make(ISO3166::class)->getAll());
+            ->with('countries', app()->make(ISO3166::class)->all());
     }
 
     /**
