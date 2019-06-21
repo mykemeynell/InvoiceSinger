@@ -52,17 +52,24 @@
             <h4>Create New Invoice</h4>
             <form name="new-invoice-form" id="new-invoice-form">
                 <div class="row">
-{{--                    <div class="input-field col s12">--}}
-{{--                        <i class="material-icons prefix">search</i>--}}
-{{--                        <input type="text" id="autocomplete-input" class="autocomplete" data-source="{{ route('api.clients.fetch') }}">--}}
-{{--                        <label for="autocomplete-input">Search for a client</label>--}}
-{{--                    </div>--}}
                     <div class="input-field col s12">
-                        <select name="client[id]" id="client-name">
+                        <select name="client[id]" id="client-name" class="validate" required>
                             <option disabled selected>Select a client</option>
-
+                            @foreach($clients as $client)
+                                <option value="{{ $client->getKey() }}">{{ $client->getDisplayName() }}</option>
+                            @endforeach
                         </select>
                         <label for="client-name">Client</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="raised-date" type="text" class="datepicker validate" required>
+                        <label for="raised-date">Raised on</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="raised-date" type="text" class="datepicker validate" required>
+                        <label for="raised-date">Due by</label>
                     </div>
                 </div>
             </form>

@@ -6,13 +6,12 @@ use ArchLayer\Service\Contract\ServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
+use InvoiceSinger\Storage\Service\Contract\ClientServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
 
 /**
  * Class InvoiceController
- *
- * @method InvoiceServiceInterface getService(?string $name = null) : ServiceInterface
  *
  * @package InvoiceSinger\Http\Controllers\Invoices
  */
@@ -23,11 +22,12 @@ class InvoiceController extends Controller
     /**
      * InvoiceController constructor.
      *
-     * @param \InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface $service
+     * @param \InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface $invoiceService
      */
-    function __construct(InvoiceServiceInterface $service)
+    function __construct(InvoiceServiceInterface $invoiceService, ClientServiceInterface $clientService)
     {
-        $this->setService($service);
+        $this->setService($invoiceService, 'invoices');
+        $this->setService($clientService, 'clients');
     }
 
     /**
@@ -39,6 +39,7 @@ class InvoiceController extends Controller
     public function index(): View
     {
         return view('invoices')
-            ->with('invoices', $this->getService()->fetch());
+            ->with('clients', $this->getService('clients')->fetch())
+            ->with('invoices', $this->getService('invoices')->fetch());
     }
 }

@@ -9,6 +9,9 @@ require('materialize-css/dist/js/materialize');
 
 $(document).ready(function() {
     $('select').formSelect();
+    $('.datepicker').datepicker({
+        format: 'dd mmmm yyyy'
+    });
 });
 
 window.Vue = require('vue');

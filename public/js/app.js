@@ -57073,6 +57073,9 @@ __webpack_require__(/*! materialize-css/dist/js/materialize */ "./node_modules/m
 
 $(document).ready(function () {
   $('select').formSelect();
+  $('.datepicker').datepicker({
+    format: 'dd mmmm yyyy'
+  });
 });
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
