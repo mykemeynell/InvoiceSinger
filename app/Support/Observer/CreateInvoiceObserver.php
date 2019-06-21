@@ -23,5 +23,7 @@ trait CreateInvoiceObserver
     public function creating(Model $model): void
     {
         $model->setAttribute('key', app(InvoiceKeyGenerator::class));
+
+        // TODO: Increment invoice.key setting.
     }
 }

@@ -29,6 +29,7 @@ class PatternOptions implements ArrayAccess, IteratorAggregate
         $this->options = [
             "%year%" => date('Y'),
             "%month" => date('m'),
+            // TODO: Add option to specify specific option value - invoice.key wouldn't be used for quotes
             "%increment%" => str_pad(settings('invoice.key'), 6, 0, STR_PAD_LEFT),
         ];
     }
