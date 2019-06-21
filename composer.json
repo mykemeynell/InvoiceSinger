@@ -14,7 +14,8 @@
         "laravel/tinker": "^1.0",
         "league/iso3166": "^2.1",
         "mykemeynell/archuser": "^1.0",
-        "mykemeynell/laravel-database-settings": "^1.0"
+        "mykemeynell/laravel-database-settings": "^1.0",
+        "ext-json": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

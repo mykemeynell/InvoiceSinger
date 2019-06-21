@@ -11,6 +11,8 @@ use InvoiceSinger\Http\Requests\Invoice\InvoiceRequest;
 use InvoiceSinger\Storage\Service\Contract\ClientServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
+use InvoiceSinger\Support\Generators\Invoices\InvoiceKeyGenerator;
+use InvoiceSinger\Support\Generators\PatternOptions;
 
 /**
  * Class InvoiceController
