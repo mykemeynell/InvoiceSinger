@@ -177,6 +177,7 @@ return [
 
         \ArchLayerUser\Provider\ArchUserServiceProvider::class,
         \InvoiceSinger\Providers\StorageServiceProvider::class,
+        \LaravelDatabaseSettings\Provider\LaravelDatabaseSettingsProvider::class,
     ],
 
     /*
