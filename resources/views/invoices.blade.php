@@ -75,7 +75,11 @@
             </form>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+            <div class="row">
+                <div class="col s12">
+                    <button form="new-invoice-form" formaction="" formmethod="POST" class="modal-close waves-effect waves-green btn-flat">Create</button>
+                </div>
+            </div>
         </div>
     </div>
 

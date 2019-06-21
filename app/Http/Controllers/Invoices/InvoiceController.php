@@ -46,4 +46,22 @@ class InvoiceController extends Controller
             ->with('clients', $this->getService('clients')->fetch())
             ->with('invoices', $this->getService('invoices')->fetch());
     }
+
+    /**
+     * Display the invoice form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function form(): View
+    {
+        return view('invoices.form');
+    }
+
+    /**
+     * Handle the submission of data to invoices.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function handlePost(): View
+    {}
 }

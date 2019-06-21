@@ -27,6 +27,8 @@ $router->get('/quotes', function(){ return view('quotes'); })->name('quotes');
 
 // Invoices
 $router->get('/invoices', 'Invoices\InvoiceController@index')->name('invoices');
+$router->get('/invoices/form/{invoice_id?}', 'Invoices\InvoiceController@form')->name('invoices.form');
+$router->post('/invoices/form/{invoice_id?}', 'Invoices\InvoiceController@handlePost')->name('invoices.handleForm');
 
 // Payments
 $router->get('/payments', function(){ return view('payments'); })->name('payments');
