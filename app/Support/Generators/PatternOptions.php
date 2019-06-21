@@ -49,6 +49,26 @@ class PatternOptions implements ArrayAccess, IteratorAggregate
     }
 
     /**
+     * Set the value of the month option.
+     *
+     * @param $value
+     */
+    public function setMonthValue($value): void
+    {
+        $this->options[self::MONTH] = $value;
+    }
+
+    /**
+     * Set the value of the year option.
+     *
+     * @param $value
+     */
+    public function setYearValue($value): void
+    {
+        $this->options[self::YEAR] = $value;
+    }
+
+    /**
      * Transform this object to a string.
      *
      * @return string
