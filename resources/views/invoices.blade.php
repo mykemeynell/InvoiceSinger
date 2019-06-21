@@ -53,7 +53,7 @@
             <form name="new-invoice-form" id="new-invoice-form">
                 <div class="row">
                     <div class="input-field col s12">
-                        <select name="client[id]" id="client-name" class="validate" required>
+                        <select name="invoice[client]" id="client-name" class="validate" required>
                             <option disabled selected>Select a client</option>
                             @foreach($clients as $client)
                                 <option value="{{ $client->getKey() }}">{{ $client->getDisplayName() }}</option>
@@ -64,11 +64,11 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="raised-date" type="text" class="datepicker validate" value="{{ $today }}" required>
+                        <input id="raised-date" type="text" name="invoice[raised_at]" class="datepicker validate" value="{{ $today }}" required>
                         <label for="raised-date">Raised on</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="raised-date" type="text" class="datepicker validate" value="{{ $due }}" required>
+                        <input id="raised-date" type="text" name="invoice[due_at]" class="datepicker validate" value="{{ $due }}" required>
                         <label for="raised-date">Due by</label>
                     </div>
                 </div>
@@ -89,14 +89,13 @@
 
             $('button[form="new-invoice-form"]').on('click', function(event) {
                 event.preventDefault();
+                let formData = $('#new-invoice-form').serialize();
 
                 axios.interceptors.request.use((config) => {
                     $('#app-progress').css('display', 'block');
                     return config;
                 });
-                axios.post($(this).attr('formaction'), {
-                    data: $('#new-invoice-form').serialize()
-                }).then((response) => {
+                axios.post($(this).attr('formaction'), formData).then((response) => {
                     console.log(response);
                 });
             });

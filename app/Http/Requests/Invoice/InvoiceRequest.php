@@ -24,7 +24,7 @@ class InvoiceRequest extends FormRequest
      *
      * @return \InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface|null
      */
-    public function client(): ?InvoiceEntityInterface
+    public function invoice(): ?InvoiceEntityInterface
     {
         if($id = $this->getParameterBag()->get('id')) {
             return app('invoice.service')->find($id);

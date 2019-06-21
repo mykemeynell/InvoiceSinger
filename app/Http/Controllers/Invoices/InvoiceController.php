@@ -2,17 +2,14 @@
 
 namespace InvoiceSinger\Http\Controllers\Invoices;
 
-use ArchLayer\Service\Contract\ServiceInterface;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Invoice\InvoiceRequest;
 use InvoiceSinger\Storage\Service\Contract\ClientServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
-use InvoiceSinger\Support\Generators\Invoices\InvoiceKeyGenerator;
-use InvoiceSinger\Support\Generators\PatternOptions;
 
 /**
  * Class InvoiceController
@@ -64,7 +61,35 @@ class InvoiceController extends Controller
      * Handle the submission of data to invoices.
      *
      * @param \InvoiceSinger\Http\Requests\Invoice\InvoiceRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function handlePost(InvoiceRequest $request)
-    {}
+    public function handlePost(InvoiceRequest $request): JsonResponse
+    {
+        try {
+            if ($invoice = $request->invoice()) {
+                /** @var \InvoiceSinger\Storage\Entity\InvoiceEntity $invoice */
+                $invoice = $this->getService('invoices')->update($invoice, $request->getParameterBag());
+
+                return JsonResponse::create([
+                    'success' => true,
+                    'message' => '',
+                    'data' => $invoice,
+                ], 200);
+            }
+
+            /** @var \InvoiceSinger\Storage\Entity\InvoiceEntity $invoice */
+            $invoice = $this->getService('invoices')->create($request->getParameterBag());
+
+            return JsonResponse::create([
+                'success' => true,
+                'message' => '',
+                'data' => $invoice,
+            ], 200);
+        } catch (\Exception $exception) {
+
+            dd($exception);
+
+        }
+    }
 }

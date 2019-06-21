@@ -1,16 +1,16 @@
 <?php
 
-namespace InvoiceSinger\Support\Observer;
+namespace InvoiceSinger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
 use InvoiceSinger\Support\Generators\Invoices\InvoiceKeyGenerator;
 
 /**
- * Trait CreateInvoiceObserver
+ * Class CreateInvoiceObserver
  *
- * @package InvoiceSinger\Support\Observer
+ * @package InvoiceSinger\Observers
  */
-trait CreateInvoiceObserver
+class CreateInvoiceObserver
 {
     /**
      * Set the model invoice key on create.

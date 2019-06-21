@@ -5,9 +5,10 @@ namespace InvoiceSinger\Storage\Entity;
 use ArchLayer\Entity\Concern\EntityHasTimestamps;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use InvoiceSinger\Observers\CreateInvoiceObserver;
 use InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface;
-use InvoiceSinger\Support\Observer\CreateInvoiceObserver;
 use UuidColumn\Concern\HasUuidObserver;
+use UuidColumn\Observer\UuidObserver;
 
 /**
  * Class InvoiceEntity.
@@ -74,7 +75,8 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
     public static function boot()
     {
         parent::boot();
-        static::observe(CreateInvoiceObserver::class);
+        self::observe(CreateInvoiceObserver::class);
+        self::observe(UuidObserver::class);
     }
 
     /**
@@ -155,5 +157,29 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
     public function getTerms(): ?string
     {
         return $this->terms;
+    }
+
+    /**
+     * Set the raised_at column.
+     *
+     * @param $value
+     *
+     * @return void
+     */
+    public function setRaisedAtAttribute($value): void
+    {
+        $this->attributes['raised_at'] = Carbon::createFromFormat('d F Y', $value)->format('Y-m-d');
+    }
+
+    /**
+     * Set the due_at attribute.
+     *
+     * @param $value
+     *
+     * @return void
+     */
+    public function setDueAtAttribute($value): void
+    {
+        $this->attributes['due_at'] = Carbon::createFromFormat('d F Y', $value)->format('Y-m-d');
     }
 }

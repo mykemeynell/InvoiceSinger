@@ -26,15 +26,39 @@ class PatternOptions implements ArrayAccess, IteratorAggregate
     protected $options = [];
 
     /**
+     * The date option value.
+     *
+     * @var string
+     */
+    protected $year;
+
+    /**
+     * The month option value.
+     *
+     * @var string
+     */
+    protected $month;
+
+    /**
+     * The increment option value.
+     *
+     * @var string
+     */
+    protected $increment;
+
+    /**
      * PatternOptions constructor.
      */
     function __construct()
     {
+        $this->setYearValue(date('Y'));
+        $this->setMonthValue(date('m'));
+        $this->setIncrementValue(1);
+
         $this->options = [
             self::YEAR => date('Y'),
             self::MONTH => date('m'),
-            // TODO: Add option to specify specific option value - invoice.key wouldn't be used for quotes
-            self::INCREMENT => str_pad($this->options[self::INCREMENT], 6, 0, STR_PAD_LEFT),
+            self::INCREMENT => str_pad($this->increment, 6, 0, STR_PAD_LEFT),
         ];
     }
 
@@ -45,7 +69,7 @@ class PatternOptions implements ArrayAccess, IteratorAggregate
      */
     public function setIncrementValue($value): void
     {
-        $this->options[self::INCREMENT] = $value;
+        $this->increment = $value;
     }
 
     /**
@@ -55,7 +79,7 @@ class PatternOptions implements ArrayAccess, IteratorAggregate
      */
     public function setMonthValue($value): void
     {
-        $this->options[self::MONTH] = $value;
+        $this->month = $value;
     }
 
     /**
@@ -65,7 +89,7 @@ class PatternOptions implements ArrayAccess, IteratorAggregate
      */
     public function setYearValue($value): void
     {
-        $this->options[self::YEAR] = $value;
+        $this->year = $value;
     }
 
     /**
