@@ -22,8 +22,8 @@
                     <tr>
                         <td>@include('layouts.components.misc._status-badge', ['item' => $invoice])</td>
                         <td><a href="#">{{ $invoice->getInvoiceKey() }}</a></td>
-                        <td>{{ $invoice->getRaisedAt() }}</td>
-                        <td>{{ $invoice->getDueAt() }}</td>
+                        <td>{{ $invoice->getRaisedAt()->format('d F Y') }}</td>
+                        <td>{{ $invoice->getDueAt()->format('d F Y') }}</td>
                         <td><a href="#">{{ $invoice->client()->getDisplayName() }}</a></td>
                         <td class="right-align">&pound;0.00</td>
                         <td class="right-align"><a class="waves-effect waves-light btn">View</a></td>
