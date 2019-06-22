@@ -14,8 +14,12 @@ use Traversable;
  */
 class PatternOptions implements ArrayAccess, IteratorAggregate
 {
-    const YEAR = "%year%";
-    const MONTH = "%month%";
+    const YEAR_4 = "%Y%";
+    const YEAR_2 = "%y%";
+    const MONTH_2 = "%m%";
+    const MONTH_1 = "%n%";
+    const MONTH_FULL = "%F%";
+    const WEEK = "%W%";
     const INCREMENT = "%increment%";
 
     /**
@@ -26,18 +30,46 @@ class PatternOptions implements ArrayAccess, IteratorAggregate
     protected $options = [];
 
     /**
-     * The date option value.
+     * The four digit year option value.
      *
      * @var string
      */
-    protected $year;
+    protected $year_4;
 
     /**
-     * The month option value.
+     * The two digit year option value.
      *
      * @var string
      */
-    protected $month;
+    protected $year_2;
+
+    /**
+     * The single digit month value.
+     *
+     * @var string
+     */
+    protected $month_1;
+
+    /**
+     * The two digit month value.
+     *
+     * @var string
+     */
+    protected $month_2;
+
+    /**
+     * The full month option value.
+     *
+     * @var string
+     */
+    protected $month_full;
+
+    /**
+     * The week option value.
+     *
+     * @var string
+     */
+    protected $week;
 
     /**
      * The increment option value.
@@ -51,45 +83,123 @@ class PatternOptions implements ArrayAccess, IteratorAggregate
      */
     function __construct()
     {
-        $this->setYearValue(date('Y'));
-        $this->setMonthValue(date('m'));
-        $this->setIncrementValue(1);
+        $this->setYear4(date('Y'));
+        $this->setYear2(date('y'));
+        $this->setMonthFull(date('F'));
+        $this->setMonth2(date('m'));
+        $this->setMonth1(date('n'));
+        $this->setWeek(date('W'));
 
+        $this->buildOptions();
+    }
+
+    /**
+     * Build the options array.
+     *
+     * @return void
+     */
+    protected function buildOptions(): void
+    {
         $this->options = [
-            self::YEAR => date('Y'),
-            self::MONTH => date('m'),
+            self::YEAR_4 => $this->year_4,
+            self::YEAR_2 => $this->year_2,
+            self::MONTH_1 => $this->month_1,
+            self::MONTH_2 => $this->month_2,
+            self::MONTH_FULL => $this->month_full,
+            self::WEEK => $this->week,
             self::INCREMENT => str_pad($this->increment, 6, 0, STR_PAD_LEFT),
         ];
     }
 
     /**
-     * Set the value of the increment option.
+     * Set the four digit year option value.
      *
      * @param $value
+     *
+     * @return void
      */
-    public function setIncrementValue($value): void
+    public function setYear4($value): void
+    {
+        $this->year_4 = $value;
+        $this->buildOptions();
+    }
+
+    /**
+     * Set the two digit year option value.
+     *
+     * @param $value
+     *
+     * @return void
+     */
+    public function setYear2($value): void
+    {
+        $this->year_2 = $value;
+        $this->buildOptions();
+    }
+
+    /**
+     * Set the two digit month option value.
+     *
+     * @param $value
+     *
+     * @return void
+     */
+    public function setMonth2($value): void
+    {
+        $this->month_2 = $value;
+        $this->buildOptions();
+    }
+
+    /**
+     * Set the single digit month option value.
+     *
+     * @param $value
+     *
+     * @return void
+     */
+    public function setMonth1($value): void
+    {
+        $this->month_1 = $value;
+        $this->buildOptions();
+    }
+
+    /**
+     * Set the full month name option value.
+     *
+     * @param $value
+     *
+     * @return void
+     */
+    public function setMonthFull($value): void
+    {
+        $this->month_full = $value;
+        $this->buildOptions();
+    }
+
+    /**
+     * Set the week option value.
+     *
+     * @param $value
+     *
+     * @return void
+     */
+    public function setWeek($value): void
+    {
+        $this->week = $value;
+        $this->buildOptions();
+    }
+
+    /**
+     * Set the increment option value.
+     *
+     * @param $value
+     *
+     * @return void
+     */
+    public function setIncrement($value): void
     {
         $this->increment = $value;
-    }
-
-    /**
-     * Set the value of the month option.
-     *
-     * @param $value
-     */
-    public function setMonthValue($value): void
-    {
-        $this->month = $value;
-    }
-
-    /**
-     * Set the value of the year option.
-     *
-     * @param $value
-     */
-    public function setYearValue($value): void
-    {
-        $this->year = $value;
+        $this->buildOptions();
     }
 
     /**

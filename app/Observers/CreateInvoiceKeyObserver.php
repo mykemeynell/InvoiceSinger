@@ -17,10 +17,12 @@ class CreateInvoiceKeyObserver
      *
      * @param Model $model
      *
+     * @return void
      * @throws \Exception
      */
     public function creating(Model $model): void
     {
-        $model->setAttribute('key', app(InvoiceKeyGenerator::class));
+        $model->setAttribute('key', app()->make(InvoiceKeyGenerator::class));
+        settings()->set('invoice.key', settings('invoice.key') + 1);
     }
 }

@@ -29,7 +29,7 @@ class InvoiceKeyGenerator
      */
     function __construct(SettingServiceInterface $service, PatternOptions $options)
     {
-        $options->setIncrementValue(settings('invoice.key'));
+        $options->setIncrement(settings('invoice.key'));
         $this->key = $service->get('invoice.pattern');
 
         foreach($options as $placeholder => $value) {
@@ -40,8 +40,8 @@ class InvoiceKeyGenerator
     /**
      * Get the invoice key generator as a string.
      */
-    function __toString(): string
+    public function __toString(): string
     {
-        return $this->key;
+        return "{$this->key}";
     }
 }
