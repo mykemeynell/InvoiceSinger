@@ -140,7 +140,7 @@
         <div class="row">
             <div class="col s9">
                 <a href="#" class="waves-effect waves-dark btn-flat margin-right-15">Add Item</a>
-                <a href="#" class="waves-effect waves-dark btn-flat margin-right-15">Add Product</a>
+                <a href="#add-product-modal" class="waves-effect waves-dark btn-flat modal-trigger">Add Product</a>
             </div>
 
             <div class="col s3">
@@ -176,3 +176,48 @@
     </form>
 
 @endsection
+
+@push('end')
+    <div id="add-product-modal" class="modal">
+        <div class="modal-content">
+            <h4>Add Product</h4>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">search</i>
+                    <input type="text" id="autocomplete-input" class="autocomplete">
+                    <label for="autocomplete-input">Search</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <table class="responsive-table">
+                        <thead>
+                        <tr>
+                            <th width="20">
+                                <label>
+                                    <input type="checkbox" class="filled-in" checked="checked" />
+                                    <span></span>
+                                </label>
+                            </th>
+                            <th>SKU</th>
+                            <th>Family</th>
+                            <th>Name</th>
+                            <th>Unit Price</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Done</a>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('.modal').modal();
+        });
+    </script>
+@endpush
