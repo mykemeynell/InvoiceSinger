@@ -51,6 +51,7 @@
         <div class="modal-content">
             <h4>Create New Invoice</h4>
             <form name="new-invoice-form" id="new-invoice-form">
+                {!! csrf_field() !!}
                 <div class="row">
                     <div class="input-field col s12">
                         <select name="invoice[client]" id="client-name" class="validate" required>
@@ -86,19 +87,6 @@
     <script>
         $(document).ready(function(){
             $('.modal').modal();
-
-            $('button[form="new-invoice-form"]').on('click', function(event) {
-                event.preventDefault();
-                let formData = $('#new-invoice-form').serialize();
-
-                axios.interceptors.request.use((config) => {
-                    $('#app-progress').css('display', 'block');
-                    return config;
-                });
-                axios.post($(this).attr('formaction'), formData).then((response) => {
-                    console.log(response);
-                });
-            });
         });
     </script>
 @endpush

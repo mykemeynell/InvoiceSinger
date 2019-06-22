@@ -4,6 +4,7 @@ namespace InvoiceSinger\Http\Controllers\Invoices;
 
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Invoice\InvoiceRequest;
@@ -65,30 +66,22 @@ class InvoiceController extends Controller
      *
      * @param \InvoiceSinger\Http\Requests\Invoice\InvoiceRequest $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function handlePost(InvoiceRequest $request): JsonResponse
+    public function handlePost(InvoiceRequest $request): RedirectResponse
     {
         try {
             if ($invoice = $request->invoice()) {
                 /** @var \InvoiceSinger\Storage\Entity\InvoiceEntity $invoice */
                 $invoice = $this->getService('invoices')->update($invoice, $request->getParameterBag());
 
-                return JsonResponse::create([
-                    'success' => true,
-                    'message' => '',
-                    'data' => $invoice,
-                ], 200);
+                return RedirectResponse::create(route('invoices.form', ['invoice_id' => $invoice->getKey()]));
             }
 
             /** @var \InvoiceSinger\Storage\Entity\InvoiceEntity $invoice */
             $invoice = $this->getService('invoices')->create($request->getParameterBag());
 
-            return JsonResponse::create([
-                'success' => true,
-                'message' => '',
-                'data' => $invoice,
-            ], 200);
+            return RedirectResponse::create(route('invoices.form', ['invoice_id' => $invoice->getKey()]));
         } catch (\Exception $exception) {
 
             dd($exception);
