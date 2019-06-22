@@ -20,7 +20,7 @@
                     <tbody>
                     @forelse($invoices as $invoice)
                     <tr>
-                        <td>{{ $invoice->getStatus() }}</td>
+                        <td>@include('layouts.components.misc._status-badge', ['item' => $invoice])</td>
                         <td><a href="#">{{ $invoice->getInvoiceKey() }}</a></td>
                         <td>{{ $invoice->getRaisedAt() }}</td>
                         <td>{{ $invoice->getDueAt() }}</td>
