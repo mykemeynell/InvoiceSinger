@@ -2,9 +2,12 @@
 
 namespace InvoiceSinger\Storage\Entity\Contract;
 
+use Illuminate\Support\Collection;
+
 /**
  * Interface ClientEntityInterface.
  *
+ * @property string|null      $title
  * @property string           $first_name
  * @property string|null      $last_name
  * @property string|null      $business_name
@@ -35,6 +38,13 @@ interface ClientEntityInterface
     public function getDisplayName(): string;
 
     /**
+     * Get the client title.
+     *
+     * @return string|null
+     */
+    public function getTitle(): ?string;
+
+    /**
      * Get the first name.
      *
      * @return string
@@ -54,6 +64,15 @@ interface ClientEntityInterface
      * @return string|null
      */
     public function getBusinessName(): ?string;
+
+    /**
+     * Get the address as an object.
+     *
+     * @param bool $include_business_name
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getAddressObject($include_business_name = false): Collection;
 
     /**
      * Get address line 1.
