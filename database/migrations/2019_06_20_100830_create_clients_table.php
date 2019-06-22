@@ -22,6 +22,7 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $this->createUuidColumn($table, 'id');
 
+            $table->string('title')->nullable();
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('business_name')->nullable();
