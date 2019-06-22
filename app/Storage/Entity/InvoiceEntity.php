@@ -6,6 +6,7 @@ use ArchLayer\Entity\Concern\EntityHasTimestamps;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use InvoiceSinger\Observers\CreateInvoiceKeyObserver;
+use InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface;
 use UuidColumn\Concern\HasUuidObserver;
 use UuidColumn\Observer\UuidObserver;
@@ -181,5 +182,15 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
     public function setDueAtAttribute($value): void
     {
         $this->attributes['due_at'] = Carbon::createFromFormat('d F Y', $value)->format('Y-m-d');
+    }
+
+    /**
+     * Get the associated client entity.
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function client(): ?ClientEntityInterface
+    {
+        return $this->hasOne(app('client.entity'), 'id', 'client')->first();
     }
 }

@@ -24,7 +24,7 @@
                         <td><a href="#">{{ $invoice->getInvoiceKey() }}</a></td>
                         <td>{{ $invoice->getRaisedAt() }}</td>
                         <td>{{ $invoice->getDueAt() }}</td>
-                        <td><a href="#">{{ $invoice->getClientId() }}</a></td>
+                        <td><a href="#">{{ $invoice->client()->getDisplayName() }}</a></td>
                         <td class="right-align">&pound;0.00</td>
                         <td class="right-align"><a class="waves-effect waves-light btn">View</a></td>
                     </tr>

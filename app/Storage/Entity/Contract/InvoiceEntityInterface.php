@@ -75,4 +75,11 @@ interface InvoiceEntityInterface
      * @return string|null
      */
     public function getTerms(): ?string;
+
+    /**
+     * Get the associated client entity.
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function client(): ?ClientEntityInterface;
 }
