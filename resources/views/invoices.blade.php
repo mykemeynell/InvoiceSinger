@@ -26,7 +26,7 @@
                         <td>{{ $invoice->getDueAt()->format('d F Y') }}</td>
                         <td><a href="#">{{ $invoice->client()->getDisplayName() }}</a></td>
                         <td class="right-align">&pound;0.00</td>
-                        <td class="right-align"><a class="waves-effect waves-light btn">View</a></td>
+                        <td class="right-align"><a href="{{ route('invoices.form', ['invoice_id' => $invoice->getKey()]) }}" class="waves-effect waves-light btn">View</a></td>
                     </tr>
                     @empty
                         <tr>
