@@ -9,13 +9,14 @@
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
+        "ext-json": "*",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "league/iso3166": "^2.1",
         "mykemeynell/archuser": "^1.0",
-        "mykemeynell/laravel-database-settings": "^1.0",
-        "ext-json": "*"
+        "mykemeynell/html-currency-entities": "^1.0",
+        "mykemeynell/laravel-database-settings": "^1.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

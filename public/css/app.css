@@ -9758,6 +9758,18 @@ input[type=range]::-ms-thumb {
   display: none !important;
 }
 
+.bold-text {
+  font-weight: bold !important;
+}
+
+.bolder-text {
+  font-weight: bolder !important;
+}
+
+.boldest-text {
+  font-weight: boldest !important;
+}
+
 #app-progress {
   position: absolute;
   top: 0;

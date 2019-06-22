@@ -50,11 +50,14 @@ class InvoiceController extends Controller
     /**
      * Display the invoice form.
      *
+     * @param \InvoiceSinger\Http\Requests\Invoice\InvoiceRequest $request
+     *
      * @return \Illuminate\View\View
      */
-    public function form(): View
+    public function form(InvoiceRequest $request): View
     {
-        return view('invoices.form');
+        return view('invoices.form')
+            ->with('invoice', $request->invoice());
     }
 
     /**

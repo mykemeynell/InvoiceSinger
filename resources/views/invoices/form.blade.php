@@ -8,164 +8,135 @@
 
     <form id="client-form" name="client-form">
         {!! csrf_field() !!}
-        <div class="container">
-            <div class="row margin-y-30">
-                <div class="col s12 m6">
-                    <h4 class="margin-0">Create/Edit Client</h4>
-                </div>
-                <div class="col s12 right-align">
-                    <button form="client-form" formmethod="POST" formaction="{{ route('clients.handleForm') }}" class="waves-light waves-effect btn margin-right-15">Save</button>
-                    <a href="{{ route('clients') }}" class="waves-light waves-effect btn red darken-1">Discard</a>
-                </div>
+        {{-- Invoice title & options --}}
+        <div class="row margin-y-30">
+            <div class="col s12 m6">
+                <h4 class="margin-0">Invoice #{{ $invoice->getInvoiceKey() }}</h4>
             </div>
-
-            {{-- Personal Information Card--}}
-            <div class="row">
-                <div class="col s12">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-title">
-                                <span>Personal Information</span>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 m6 input-field">
-                                    <input type="text" class="validate" name="client[first_name]" id="first-name" required autofocus>
-                                    <label for="first-name">First name</label>
-                                </div>
-                                <div class="col s12 m6 input-field">
-                                    <input type="text" class="validate" name="client[last_name]" id="last-name">
-                                    <label for="last-name">Last name (Optional)</label>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[business_name]" id="business-name">
-                                    <label for="business-name">Business name (Optional)</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col s12 m6 right-align">
+                <button form="client-form" formmethod="POST" formaction="{{ route('clients.handleForm') }}"
+                        class="waves-light waves-effect btn margin-right-15">Save
+                </button>
+                <a href="{{ route('clients') }}" class="waves-light waves-effect btn red darken-1">Discard</a>
             </div>
-            {{-- End personal information --}}
-
-            <div class="row">
-                {{-- Address --}}
-                <div class="col s12 m6">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-title"><span>Address</span></div>
-                            <div class="row">
-                                <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[address_1]" id="street-address">
-                                    <label for="street-address">Street Address (Optional)</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[address_2]" id="street-address-2">
-                                    <label for="street-address-2">Street Address (Optional)</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[town_city]" id="city">
-                                    <label for="city">City (Optional)</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[postcode]" id="postcode">
-                                    <label for="postcode">Postcode (Optional)</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 input-field">
-                                    <select id="country" name="client[country]">
-                                        <option value="" disabled selected>Select your country</option>
-                                        <option value="1">Option 1</option>
-                                        <option value="2">Option 2</option>
-                                        <option value="3">Option 3</option>
-                                    </select>
-                                    <label for="country">Country (Optional)</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{-- End Address --}}
-
-                {{-- Contact Information --}}
-                <div class="col s12 m6">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-title"><span>Contact Information</span></div>
-                            <div class="row">
-                                <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[telephone]" id="telephone">
-                                    <label for="telephone">Telephone (Optional)</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[fax]" id="fax">
-                                    <label for="fax">Fax (Optional)</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[mobile]" id="mobile">
-                                    <label for="mobile">Mobile (Optional)</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[email_address]" id="email-address">
-                                    <label for="email-address">Email Address (Optional)</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[web]" id="client-web">
-                                    <label for="client-web">Website (Optional)</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{-- End contact information --}}
-            </div>
-
-            <div class="row">
-                {{-- Additional Information --}}
-                <div class="col s12 m6">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-title"><span>Additional Information</span></div>
-
-                            <div class="row">
-                                <div class="col s12 input-field">
-                                    <input type="text" class="validate" name="client[vat_number]" id="vat">
-                                    <label for="vat">VAT Number (Optional)</label>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col s12">
-                                    <label>
-                                        <input type="checkbox" name="client[is_active]" class="filled-in" checked="checked">
-                                        <span>Active</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{-- End additional information --}}
-            </div>
-
         </div>
+        {{-- End invoice title and options --}}
+
+        {{-- Client info & invoice details --}}
+        <div class="row">
+            <div class="col s6">
+                <ul>
+                    <li><h5>{{ $invoice->client()->getDisplayName() }}</h5></li>
+                    @foreach($invoice->client()->getAddressObject() as $address_line)
+                        <li>{{ $address_line }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="col s6">
+                <div class="card">
+                    <div class="card-content">
+                        {{-- Invoice number & invoice status --}}
+                        <div class="row margin-bottom-0">
+                            <div class="col s6 input-field">
+                                <input type="text" name="invoice[key]" id="invoice-key"
+                                       value="{{ $invoice->getInvoiceKey() }}">
+                                <label for="invoice-key">Invoice number</label>
+                            </div>
+                            <div class="col s6 input-field">
+                                <select name="invoice[status]" id="invoice-status">
+                                    <option value="draft"
+                                            @if($invoice->getStatus() == 'draft') selected="selected" @endif>Draft
+                                    </option>
+                                    <option value="sent"
+                                            @if($invoice->getStatus() == 'sent') selected="selected" @endif>Sent
+                                    </option>
+                                    <option value="viewed"
+                                            @if($invoice->getStatus() == 'viewed') selected="selected" @endif>Viewed
+                                    </option>
+                                    <option value="paid"
+                                            @if($invoice->getStatus() == 'paid') selected="selected" @endif>Paid
+                                    </option>
+                                    <option value="overdue"
+                                            @if($invoice->getStatus() == 'overdue') selected="selected" @endif>Overdue
+                                    </option>
+                                    <option value="cancelled"
+                                            @if($invoice->getStatus() == 'cancelled') selected="selected" @endif>
+                                        Cancelled
+                                    </option>
+                                </select>
+                                <label for="invoice-status">Status</label>
+                            </div>
+                        </div>
+                        {{-- End invoice number & status --}}
+                        {{-- Invoice raised date & payment method --}}
+                        <div class="row margin-bottom-0">
+                            <div class="col s6 input-field">
+                                <input type="text" name="invoice[raised_at]" class="datepicker" id="invoice-raised-at"
+                                       value="{{ $invoice->getRaisedAt()->format('d F Y') }}">
+                                <label for="invoice-raised-at">Raised date</label>
+                            </div>
+                            <div class="col s6 input-field">
+                                <select name="invoice[status]" id="invoice-payment-method">
+                                    <option value="payment">Payment</option>
+                                </select>
+                                <label for="invoice-payment-method">Payment method</label>
+                            </div>
+                        </div>
+                        {{-- End invoce raised date & payment method --}}
+                        {{-- Invoice due date & sent at --}}
+                        <div class="row margin-bottom-0">
+                            <div class="col s6 input-field">
+                                <input type="text" name="invoice[due_at]" class="datepicker" id="invoice-due-at"
+                                       value="{{ $invoice->getDueAt()->format('d F Y') }}">
+                                <label for="invoice-due-at">Due date</label>
+                            </div>
+                            <div class="col s6 input-field">
+                                <input type="text" name="invoice[due_at]" class="datepicker" id="invoice-sent-at"
+                                       value="{{ ! empty($invoice->getSentAt()) ? $invoice->getSentAt()->format('d F Y') : '' }}">
+                                <label for="invoice-sent-at">Sent at</label>
+                            </div>
+                        </div>
+                        {{-- End invoce due date & sent at --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- End client info & invoice details --}}
+
+        <hr>
+
+        <div class="row">
+            <div class="col s12">
+                <table class="responsive-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th class="right-align">Price</th>
+                            <th class="right-align">Quantity</th>
+                            <th class="right-align">Subtotal</th>
+                            <th class="right-align">Discount</th>
+                            <th class="right-align">Tax Rate</th>
+                            <th class="right-align">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <span class="display-block bold-text">Example item</span>
+                            This is the example item
+                        </td>
+                        <td class="right-align">&pound;9.99</td>
+                        <td class="right-align">1 Unit</td>
+                        <td class="right-align">&pound;9.99</td>
+                        <td class="right-align">0%</td>
+                        <td class="right-align">20%</td>
+                        <td class="right-align">&pound;11.99</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </form>
 
 @endsection

@@ -1,0 +1,11 @@
+$weights: (
+  "bold",
+  "bolder",
+  "boldest",
+);
+
+@each $weight in $weights {
+  .#{$weight}-text {
+    font-weight: #{$weight}!important;
+  }
+}
