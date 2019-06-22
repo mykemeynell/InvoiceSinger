@@ -10,7 +10,7 @@ use InvoiceSinger\Support\Generators\Invoices\InvoiceKeyGenerator;
  *
  * @package InvoiceSinger\Observers
  */
-class CreateInvoiceObserver
+class CreateInvoiceKeyObserver
 {
     /**
      * Set the model invoice key on create.

@@ -5,7 +5,7 @@ namespace InvoiceSinger\Storage\Entity;
 use ArchLayer\Entity\Concern\EntityHasTimestamps;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use InvoiceSinger\Observers\CreateInvoiceObserver;
+use InvoiceSinger\Observers\CreateInvoiceKeyObserver;
 use InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface;
 use UuidColumn\Concern\HasUuidObserver;
 use UuidColumn\Observer\UuidObserver;
@@ -75,7 +75,7 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
     public static function boot()
     {
         parent::boot();
-        self::observe(CreateInvoiceObserver::class);
+        self::observe(CreateInvoiceKeyObserver::class);
         self::observe(UuidObserver::class);
     }
 
