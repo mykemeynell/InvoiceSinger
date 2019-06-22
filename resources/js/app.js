@@ -9,6 +9,7 @@ require('materialize-css/dist/js/materialize');
 
 $(document).ready(function() {
     $('select').formSelect();
+    $('.dropdown-trigger').dropdown();
     $('.datepicker').datepicker({
         format: 'dd mmmm yyyy'
     });

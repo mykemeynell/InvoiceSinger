@@ -57073,6 +57073,7 @@ __webpack_require__(/*! materialize-css/dist/js/materialize */ "./node_modules/m
 
 $(document).ready(function () {
   $('select').formSelect();
+  $('.dropdown-trigger').dropdown();
   $('.datepicker').datepicker({
     format: 'dd mmmm yyyy'
   });

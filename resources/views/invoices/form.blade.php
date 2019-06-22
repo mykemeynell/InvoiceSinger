@@ -13,11 +13,11 @@
             <div class="col s12 m6">
                 <h4 class="margin-0">Invoice #{{ $invoice->getInvoiceKey() }}</h4>
             </div>
-            <div class="col s12 m6 right-align">
+            <div class="col s12 m6 input-field right-align">
+                <a href="#" data-target="#options-dropdown" class="waves-light waves-effect btn margin-right-15">Options</a>
                 <button form="client-form" formmethod="POST" formaction="{{ route('clients.handleForm') }}"
-                        class="waves-light waves-effect btn margin-right-15">Save
+                        class="waves-light waves-effect btn">Save
                 </button>
-                <a href="{{ route('clients') }}" class="waves-light waves-effect btn red darken-1">Discard</a>
             </div>
         </div>
         {{-- End invoice title and options --}}
@@ -133,6 +133,42 @@
                         <td class="right-align">&pound;11.99</td>
                     </tr>
                     </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s9">
+                <a href="#" class="waves-effect waves-dark btn-flat margin-right-15">Add Item</a>
+                <a href="#" class="waves-effect waves-dark btn-flat margin-right-15">Add Product</a>
+            </div>
+
+            <div class="col s3">
+                <table class="responsive-table">
+                    <tr>
+                        <th>Subtotal</th>
+                        <td class="right-align">&pound;0.00</td>
+                    </tr>
+                    <tr>
+                        <th>Tax</th>
+                        <td class="right-align">20%</td>
+                    </tr>
+                    <tr>
+                        <th>Discount</th>
+                        <td class="right-align">&pound;0.00</td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <td class="right-align">&pound;0.00</td>
+                    </tr>
+                    <tr>
+                        <th>Paid</th>
+                        <td class="right-align">&pound;0.00</td>
+                    </tr>
+                    <tr>
+                        <th><span class="bold-text">Balance</span></th>
+                        <td class="right-align">&pound;0.00</td>
+                    </tr>
                 </table>
             </div>
         </div>
