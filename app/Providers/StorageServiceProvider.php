@@ -8,15 +8,21 @@ use InvoiceSinger\Providers\Concern\HasAliases;
 use InvoiceSinger\Storage\Entity\ClientEntity;
 use InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface;
+use InvoiceSinger\Storage\Entity\Contract\ProductFamilyEntityInterface;
 use InvoiceSinger\Storage\Entity\InvoiceEntity;
+use InvoiceSinger\Storage\Entity\ProductFamilyEntity;
 use InvoiceSinger\Storage\Repository\ClientRepository;
 use InvoiceSinger\Storage\Repository\Contract\ClientRepositoryInterface;
 use InvoiceSinger\Storage\Repository\Contract\InvoiceRepositoryInterface;
+use InvoiceSinger\Storage\Repository\Contract\ProductFamilyRepositoryInterface;
 use InvoiceSinger\Storage\Repository\InvoiceRepository;
+use InvoiceSinger\Storage\Repository\ProductFamilyRepository;
 use InvoiceSinger\Storage\Service\ClientService;
 use InvoiceSinger\Storage\Service\Contract\ClientServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface;
+use InvoiceSinger\Storage\Service\Contract\ProductFamilyServiceInterface;
 use InvoiceSinger\Storage\Service\InvoiceService;
+use InvoiceSinger\Storage\Service\ProductFamilyService;
 
 /**
  * Class StorageServiceProvider.
@@ -40,6 +46,10 @@ class StorageServiceProvider extends ServiceProvider
         'invoice.entity'     => [InvoiceEntityInterface::class],
         'invoice.repository' => [InvoiceRepositoryInterface::class],
         'invoice.service'    => [InvoiceServiceInterface::class],
+
+        'product.family.entity'     => [ProductFamilyEntityInterface::class],
+        'product.family.repository' => [ProductFamilyRepositoryInterface::class],
+        'product.family.service'    => [ProductFamilyServiceInterface::class],
     ];
 
     /**
@@ -64,6 +74,7 @@ class StorageServiceProvider extends ServiceProvider
     {
         $this->app->bind('client.entity', ClientEntity::class);
         $this->app->bind('invoice.entity', InvoiceEntity::class);
+        $this->app->bind('product.family.entity', ProductFamilyEntity::class);
     }
 
     /**
@@ -75,6 +86,7 @@ class StorageServiceProvider extends ServiceProvider
     {
         $this->app->singleton('client.repository', ClientRepository::class);
         $this->app->singleton('invoice.repository', InvoiceRepository::class);
+        $this->app->singleton('product.family.repository', ProductFamilyRepository::class);
     }
 
     /**
@@ -86,6 +98,7 @@ class StorageServiceProvider extends ServiceProvider
     {
         $this->app->singleton('client.service', ClientService::class);
         $this->app->singleton('invoice.service', InvoiceService::class);
+        $this->app->singleton('product.family.service', ProductFamilyService::class);
     }
 
     /**
