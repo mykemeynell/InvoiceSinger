@@ -203,7 +203,6 @@
                             <th>Family</th>
                             <th>Name</th>
                             <th>Unit Price</th>
-                            <th>&nbsp;</th>
                         </tr>
                         </thead>
                     </table>
