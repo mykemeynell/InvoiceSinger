@@ -21,6 +21,8 @@ class CreateTaxRatesTable extends Migration
     {
         Schema::create('tax_rates', function (Blueprint $table) {
             $this->createUuidColumn($table, 'id');
+            $table->string('name');
+            $table->float('amount', 4, 2);
             $table->timestamps();
         });
     }
