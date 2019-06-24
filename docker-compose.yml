@@ -36,13 +36,13 @@ services:
       - app-network
 
   #MySQL Service
-  db:
+  mysql:
     image: mysql:5.7.22
-    container_name: db
+    container_name: mysql
     restart: unless-stopped
     tty: true
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_DATABASE: invoice_singer
       MYSQL_ROOT_PASSWORD: secret
