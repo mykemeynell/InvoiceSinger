@@ -5,7 +5,6 @@ namespace InvoiceSinger\Storage\Service;
 use ArchLayer\Service\Service;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
-use InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface;
 use InvoiceSinger\Storage\Repository\Contract\InvoiceRepositoryInterface;
 use InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface;
@@ -90,6 +89,7 @@ class InvoiceService extends Service implements InvoiceServiceInterface
      * @param \InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface|\Illuminate\Database\Eloquent\Model $entity
      *
      * @return bool
+     *
      * @throws \Exception
      */
     public function delete(InvoiceEntityInterface $entity): bool

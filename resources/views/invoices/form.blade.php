@@ -1,3 +1,4 @@
+@inject('clientService', \InvoiceSinger\Storage\Service\ClientService)
 @extends('layouts.app')
 
 @section('content')
@@ -27,8 +28,10 @@
             <div class="col s6">
                 <ul>
                     <li><h5>{{ $invoice->client()->getDisplayName() }}</h5></li>
-                    @foreach($invoice->client()->getAddressObject() as $address_line)
+                    @foreach($clientService->getAddressObject($invoice->client()) as $address_line)
+                        @if(! empty($address_line))
                         <li>{{ $address_line }}</li>
+                        @endif
                     @endforeach
                 </ul>
             </div>

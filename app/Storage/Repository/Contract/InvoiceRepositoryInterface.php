@@ -11,5 +11,4 @@ use ArchLayer\Repository\RepositoryInterface;
  */
 interface InvoiceRepositoryInterface extends RepositoryInterface
 {
-    //
 }

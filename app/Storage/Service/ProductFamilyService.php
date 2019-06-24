@@ -76,6 +76,7 @@ class ProductFamilyService extends Service implements ProductFamilyServiceInterf
      * @param \InvoiceSinger\Storage\Entity\Contract\ProductFamilyEntityInterface|\Illuminate\Database\Eloquent\Model $entity
      *
      * @return bool
+     *
      * @throws \Exception
      */
     public function delete(ProductFamilyEntityInterface $entity): bool

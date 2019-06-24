@@ -4,10 +4,7 @@ namespace InvoiceSinger\Storage\Entity;
 
 use ArchLayer\Entity\Concern\EntityHasTimestamps;
 use Illuminate\Database\Eloquent\Model;
-use League\ISO3166\ISO3166;
-use function Sodium\add;
 use UuidColumn\Concern\HasUuidObserver;
-use Illuminate\Support\Collection;
 
 /**
  * Class ClientEntity.
@@ -79,13 +76,13 @@ class ClientEntity extends Model implements Contract\ClientEntityInterface
      */
     public function getDisplayName(): string
     {
-        if(! empty($this->getBusinessName())) {
-            return $this->getBusinessName();
+        if(! $this->business_name !== "" && $this->business_name !== null) {
+            return $this->business_name;
         }
 
         return ucwords(implode(" ", [
-            $this->getFirstName(),
-            $this->getLastName(),
+            $this->first_name,
+            $this->first_name,
         ]));
     }
 
@@ -127,59 +124,6 @@ class ClientEntity extends Model implements Contract\ClientEntityInterface
     public function getBusinessName(): ?string
     {
         return $this->business_name;
-    }
-
-    /**
-     * Get the address as an object.
-     *
-     * @param bool $include_business_name
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getAddressObject($include_business_name = false): Collection
-    {
-        $object = collect();
-
-        if($first_name = $this->getFirstName()) {
-            $object->put('name', $first_name);
-
-            if($title = $this->getTitle()) {
-                $object->put('name', "{$title} {$object->get('name')}");
-            }
-
-            if($last_name = $this->getLastName()) {
-                $object->put('name', "{$object->get('name')} {$last_name}");
-            }
-        }
-
-        if($business = $this->getBusinessName() && $include_business_name) {
-            $object->put('business_name', $business);
-        }
-
-        if($address_1 = $this->getAddress1()) {
-            $object->put('address_1', $address_1);
-        }
-
-        if($address_2 = $this->getAddress2()) {
-            $object->put('address_2', $address_2);
-        }
-
-        if($city = $this->getTownCity()) {
-            $object->put('city', $city);
-        }
-
-        if($postcode = $this->getPostcode()) {
-            $object->put('postcode', $postcode);
-        }
-
-        if($country = $this->getCountry()) {
-            /** @var ISO3166 $ISO3166 */
-            $ISO3166 = app()->make(ISO3166::class);
-
-            $object->put('country', $ISO3166->alpha3($country)['name']);
-        }
-
-        return $object;
     }
 
     /**
@@ -311,6 +255,6 @@ class ClientEntity extends Model implements Contract\ClientEntityInterface
      */
     public function setIsActiveAttribute($value): int
     {
-        return $this->attributes['is_active'] = ($value == 'on') ? 1 : 0;
+        return $this->attributes['is_active'] = $value === 'on' ? 1 : 0;
     }
 }

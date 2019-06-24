@@ -5,6 +5,11 @@ namespace InvoiceSinger\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class RedirectIfAuthenticated.
+ *
+ * @package InvoiceSinger\Http\Middleware
+ */
 class RedirectIfAuthenticated
 {
     /**
@@ -13,6 +18,7 @@ class RedirectIfAuthenticated
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @param  string|null  $guard
+     *
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)

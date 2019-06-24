@@ -3,7 +3,6 @@
 namespace InvoiceSinger\Http\Controllers\Invoices;
 
 use Carbon\Carbon;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
@@ -37,6 +36,7 @@ class InvoiceController extends Controller
      * Get the list of invoices.
      *
      * @return \Illuminate\View\View
+     *
      * @throws \Exception
      */
     public function index(): View
@@ -83,9 +83,7 @@ class InvoiceController extends Controller
 
             return RedirectResponse::create(route('invoices.form', ['invoice_id' => $invoice->getKey()]));
         } catch (\Exception $exception) {
-
-            dd($exception);
-
+            return abort(500, $exception->getMessage());
         }
     }
 }

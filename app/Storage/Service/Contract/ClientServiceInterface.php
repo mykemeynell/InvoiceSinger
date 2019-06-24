@@ -4,6 +4,7 @@ namespace InvoiceSinger\Storage\Service\Contract;
 
 use ArchLayer\Service\Contract\ServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as IlluminateCollection;
 use InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
@@ -58,4 +59,14 @@ interface ClientServiceInterface extends ServiceInterface
      * @return bool
      */
     public function delete(ClientEntityInterface $entity): bool;
+
+    /**
+     * Get the address as an object.
+     *
+     * @param \InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface $entity
+     * @param bool                                                         $include_business_name
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getAddressObject(ClientEntityInterface $entity, $include_business_name = false): IlluminateCollection;
 }

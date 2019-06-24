@@ -2,9 +2,7 @@
 
 namespace InvoiceSinger\Http\Controllers\Api;
 
-use ArchLayer\Service\Contract\ServiceInterface;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Storage\Service\Contract\ClientServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
@@ -34,6 +32,7 @@ class ClientController extends Controller
      * Fetch all clients.
      *
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \Exception
      */
     public function fetch(): JsonResponse

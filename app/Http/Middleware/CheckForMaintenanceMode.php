@@ -4,6 +4,11 @@ namespace InvoiceSinger\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode as Middleware;
 
+/**
+ * Class CheckForMaintenanceMode.
+ *
+ * @package InvoiceSinger\Http\Middleware
+ */
 class CheckForMaintenanceMode extends Middleware
 {
     /**
@@ -11,7 +16,5 @@ class CheckForMaintenanceMode extends Middleware
      *
      * @var array
      */
-    protected $except = [
-        //
-    ];
+    protected $except = [];
 }

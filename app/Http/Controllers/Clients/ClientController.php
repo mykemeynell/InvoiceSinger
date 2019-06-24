@@ -10,7 +10,6 @@ use InvoiceSinger\Storage\Service\Contract\ClientServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
 use League\ISO3166\ISO3166;
 
-
 /**
  * Class ClientController.
  *
@@ -36,6 +35,7 @@ class ClientController extends Controller
      * Return clients view.
      *
      * @return \Illuminate\View\View
+     *
      * @throws \Exception
      */
     public function index(): View
@@ -51,6 +51,7 @@ class ClientController extends Controller
      * @param \InvoiceSinger\Http\Requests\Client\ClientRequest $request
      *
      * @return \Illuminate\View\View
+     *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function form(ClientRequest $request): View
@@ -66,6 +67,7 @@ class ClientController extends Controller
      * @param \InvoiceSinger\Http\Requests\Client\ClientRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @throws \Exception
      */
     public function handlePost(ClientRequest $request): RedirectResponse
@@ -81,9 +83,7 @@ class ClientController extends Controller
 
             return RedirectResponse::create(route('clients'), 201);
         } catch (\Exception $exception) {
-
-            dd($exception);
-
+            return abort(500, $exception->getMessage());
         }
     }
 }

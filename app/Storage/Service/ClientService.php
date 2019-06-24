@@ -5,9 +5,11 @@ namespace InvoiceSinger\Storage\Service;
 use ArchLayer\Service\Service;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection as IlluminateCollection;
 use InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface;
 use InvoiceSinger\Storage\Repository\Contract\ClientRepositoryInterface;
 use InvoiceSinger\Storage\Service\Contract\ClientServiceInterface;
+use League\ISO3166\ISO3166;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
@@ -91,5 +93,34 @@ class ClientService extends Service implements ClientServiceInterface
     public function delete(ClientEntityInterface $entity): bool
     {
         return $this->getRepository()->delete($entity);
+    }
+
+    /**
+     * Get the address as an object.
+     *
+     * @param \InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface $entity
+     * @param bool                                                         $include_business_name
+     *
+     * @return \Illuminate\Support\Collection
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function getAddressObject(ClientEntityInterface $entity, $include_business_name = false): IlluminateCollection
+    {
+        return collect([
+            'name' => implode(" ", [
+                $entity->getTitle(),
+                $entity->getFirstName(),
+                $entity->getLastName(),
+            ]),
+            'business_name' => $include_business_name ? $entity->getBusinessName() : '',
+            'address_1' => $entity->getAddress1(),
+            'address_2' => $entity->getAddress2(),
+            'city' => $entity->getTownCity(),
+            'postcode' => $entity->getPostcode(),
+            'country' => app()->make(ISO3166::class)->alpha3(
+                $entity->getCountry()
+            )['name'],
+        ]);
     }
 }

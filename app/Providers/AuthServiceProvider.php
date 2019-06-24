@@ -2,19 +2,24 @@
 
 namespace InvoiceSinger\Providers;
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use InvoiceSinger\Support\Concern\Providers\BootOnly;
 
+/**
+ * Class AuthServiceProvider.
+ *
+ * @package InvoiceSinger\Providers
+ */
 class AuthServiceProvider extends ServiceProvider
 {
+    use BootOnly;
+
     /**
      * The policy mappings for the application.
      *
      * @var array
      */
-    protected $policies = [
-        // 'InvoiceSinger\Model' => 'InvoiceSinger\Policies\ModelPolicy',
-    ];
+    protected $policies = [];
 
     /**
      * Register any authentication / authorization services.
@@ -24,7 +29,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
     }
 }

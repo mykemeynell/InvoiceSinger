@@ -3,6 +3,7 @@
 namespace InvoiceSinger\Support\Concern\Seeders;
 
 use InvoiceSinger\Support\Concern\HasService;
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
  * Trait PopulatesSettings.
@@ -27,12 +28,13 @@ trait PopulatesSettings
      * Run the database seeds.
      *
      * @return void
+     *
      * @throws \Exception
      */
     public function run()
     {
         foreach($this->settings as $key => $attributes) {
-            $this->getService()->create(new \Symfony\Component\HttpFoundation\ParameterBag(
+            $this->getService()->create(new ParameterBag(
                 array_merge($attributes, compact('key'))
             ));
         }

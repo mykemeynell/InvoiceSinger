@@ -3,19 +3,17 @@
 namespace InvoiceSinger\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use InvoiceSinger\Support\Concern\Providers\BootOnly;
 use InvoiceSinger\View\ViewComposer;
 
+/**
+ * Class AppServiceProvider.
+ *
+ * @package InvoiceSinger\Providers
+ */
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
+    use BootOnly;
 
     /**
      * Bootstrap any application services.

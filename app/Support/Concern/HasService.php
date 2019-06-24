@@ -30,7 +30,7 @@ trait HasService
      */
     protected function setService(ServiceInterface $service, ?string $name = null): Collection
     {
-        if (!$this->services instanceof Collection) {
+        if (! $this->services instanceof Collection) {
             $this->services = collect([]);
         }
 
@@ -44,13 +44,14 @@ trait HasService
      * @param string|null $name
      *
      * @return \ArchLayer\Service\Contract\ServiceInterface
+     *
      * @throws \Exception
      */
     protected function getService(?string $name = null): ServiceInterface
     {
         $name = self::normalizeName($name);
 
-        if($service = $this->services->get($name)) {
+        if ($service = $this->services->get($name)) {
             return $service;
         }
 
@@ -68,7 +69,7 @@ trait HasService
      */
     private static function normalizeName(?string $name = null): string
     {
-        if (empty($name)) {
+        if (is_null($name)) {
             return 'default';
         }
 

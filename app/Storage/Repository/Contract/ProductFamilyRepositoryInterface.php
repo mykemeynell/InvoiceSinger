@@ -11,5 +11,4 @@ use ArchLayer\Repository\RepositoryInterface;
  */
 interface ProductFamilyRepositoryInterface extends RepositoryInterface
 {
-    //
 }

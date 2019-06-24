@@ -5,7 +5,6 @@ namespace InvoiceSinger\Support\Generators;
 use ArrayAccess;
 use ArrayIterator;
 use IteratorAggregate;
-use Traversable;
 
 /**
  * Class PatternOptions
@@ -14,13 +13,13 @@ use Traversable;
  */
 class PatternOptions implements ArrayAccess, IteratorAggregate
 {
-    const YEAR_4 = "%Y%";
-    const YEAR_2 = "%y%";
-    const MONTH_2 = "%m%";
-    const MONTH_1 = "%n%";
-    const MONTH_FULL = "%F%";
-    const WEEK = "%W%";
-    const INCREMENT = "%increment%";
+    private const YEAR_4 = "%Y%";
+    private const YEAR_2 = "%y%";
+    private const MONTH_2 = "%m%";
+    private const MONTH_1 = "%n%";
+    private const MONTH_FULL = "%F%";
+    private const WEEK = "%W%";
+    private const INCREMENT = "%increment%";
 
     /**
      * Options that can be used in keys.
@@ -213,19 +212,11 @@ class PatternOptions implements ArrayAccess, IteratorAggregate
     }
 
     /**
-     * Whether a offset exists
+     * Whether a offset exists.
      *
-     * @link  https://php.net/manual/en/arrayaccess.offsetexists.php
+     * @param mixed $offset An offset to check for. </p>
      *
-     * @param mixed $offset <p>
-     *                      An offset to check for.
-     *                      </p>
-     *
-     * @return boolean true on success or false on failure.
-     * </p>
-     * <p>
-     * The return value will be casted to boolean if non-boolean was returned.
-     * @since 5.0.0
+     * @return bool true on success or false on failure.
      */
     public function offsetExists($offset)
     {
@@ -233,16 +224,11 @@ class PatternOptions implements ArrayAccess, IteratorAggregate
     }
 
     /**
-     * Offset to retrieve
+     * Offset to retrieve.
      *
-     * @link  https://php.net/manual/en/arrayaccess.offsetget.php
-     *
-     * @param mixed $offset <p>
-     *                      The offset to retrieve.
-     *                      </p>
+     * @param mixed $offset The offset to retrieve.
      *
      * @return mixed Can return all value types.
-     * @since 5.0.0
      */
     public function offsetGet($offset)
     {
@@ -250,19 +236,12 @@ class PatternOptions implements ArrayAccess, IteratorAggregate
     }
 
     /**
-     * Offset to set
+     * Offset to set.
      *
-     * @link  https://php.net/manual/en/arrayaccess.offsetset.php
-     *
-     * @param mixed $offset <p>
-     *                      The offset to assign the value to.
-     *                      </p>
-     * @param mixed $value  <p>
-     *                      The value to set.
-     *                      </p>
+     * @param string|int $offset The offset to assign the value to.
+     * @param mixed      $value  The value to set.
      *
      * @return void
-     * @since 5.0.0
      */
     public function offsetSet($offset, $value)
     {
@@ -270,16 +249,11 @@ class PatternOptions implements ArrayAccess, IteratorAggregate
     }
 
     /**
-     * Offset to unset
+     * Offset to unset.
      *
-     * @link  https://php.net/manual/en/arrayaccess.offsetunset.php
-     *
-     * @param mixed $offset <p>
-     *                      The offset to unset.
-     *                      </p>
+     * @param mixed $offset The offset to unset.</p>
      *
      * @return void
-     * @since 5.0.0
      */
     public function offsetUnset($offset)
     {
@@ -289,10 +263,7 @@ class PatternOptions implements ArrayAccess, IteratorAggregate
     /**
      * Retrieve an external iterator
      *
-     * @link  https://php.net/manual/en/iteratoraggregate.getiterator.php
-     * @return Traversable An instance of an object implementing <b>Iterator</b> or
-     * <b>Traversable</b>
-     * @since 5.0.0
+     * @return \Traversable An instance of an object implementing Iterator or
      */
     public function getIterator()
     {

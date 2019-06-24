@@ -2,7 +2,6 @@
 
 namespace InvoiceSinger\Providers;
 
-use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use InvoiceSinger\Providers\Concern\HasAliases;
 use InvoiceSinger\Storage\Entity\ClientEntity;

@@ -2,8 +2,6 @@
 
 namespace InvoiceSinger\Storage\Entity\Contract;
 
-use Illuminate\Support\Collection;
-
 /**
  * Interface ClientEntityInterface.
  *
@@ -22,7 +20,7 @@ use Illuminate\Support\Collection;
  * @property string|null      $email_address
  * @property string|null      $web
  * @property string|null      $vat_number
- * @property integer          $is_active
+ * @property int              $is_active
  * @property \Carbon\Carbon   $created_at
  * @property \Carbon\Carbon   $updated_at
  *
@@ -64,15 +62,6 @@ interface ClientEntityInterface
      * @return string|null
      */
     public function getBusinessName(): ?string;
-
-    /**
-     * Get the address as an object.
-     *
-     * @param bool $include_business_name
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getAddressObject($include_business_name = false): Collection;
 
     /**
      * Get address line 1.
