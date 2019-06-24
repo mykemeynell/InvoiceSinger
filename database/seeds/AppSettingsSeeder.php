@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use InvoiceSinger\Support\Concern\Seeders\PopulatesSettings;
 
 /**
  * Class AppSettingsSeeder
  */
 class AppSettingsSeeder extends Seeder
 {
-    use \InvoiceSinger\Support\Concern\Seeders\PopulatesSettings;
+    use PopulatesSettings;
 
     /**
      * Settings.
