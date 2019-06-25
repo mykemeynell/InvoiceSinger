@@ -12,7 +12,7 @@ namespace InvoiceSinger\Storage\Entity\Contract;
  *
  * @package InvoiceSinger\Storage\Entity\Contract
  */
-interface TaxRatesEntityInterface
+interface TaxRateEntityInterface
 {
     /**
      * Get the display name of the tax rate.

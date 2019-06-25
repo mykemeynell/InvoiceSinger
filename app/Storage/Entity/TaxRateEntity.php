@@ -3,14 +3,14 @@
 namespace InvoiceSinger\Storage\Entity;
 
 use Illuminate\Database\Eloquent\Model;
-use InvoiceSinger\Storage\Entity\Contract\TaxRatesEntityInterface;
+use InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface;
 
 /**
  * Class TaxRateEntity
  *
  * @package InvoiceSinger\Storage\Entity
  */
-class TaxRateEntity extends Model implements TaxRatesEntityInterface
+class TaxRateEntity extends Model implements TaxRateEntityInterface
 {
     /**
      * The table associated with the model.
