@@ -113,14 +113,6 @@
                                     <label for="country">Country (Optional)</label>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <i class="material-icons prefix">search</i>
-                                    <input type="text" id="autocomplete-input" class="autocomplete">
-                                    <label for="autocomplete-input">search the best</label>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
