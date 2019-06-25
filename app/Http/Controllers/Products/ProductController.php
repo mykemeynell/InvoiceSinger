@@ -4,6 +4,8 @@ namespace InvoiceSinger\Http\Controllers\Products;
 
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
+use InvoiceSinger\Storage\Service\Contract\TaxRateServiceInterface;
+use InvoiceSinger\Support\Concern\HasService;
 
 /**
  * Class ProductController.
@@ -12,6 +14,18 @@ use InvoiceSinger\Http\Controllers\Controller;
  */
 class ProductController extends Controller
 {
+    use HasService;
+
+    /**
+     * ProductController constructor.
+     *
+     * @param \InvoiceSinger\Storage\Service\Contract\TaxRateServiceInterface $taxRateService
+     */
+    function __construct(TaxRateServiceInterface $taxRateService)
+    {
+        $this->setService($taxRateService, 'taxRates');
+    }
+
     /**
      * Return the default view.
      *
@@ -36,9 +50,12 @@ class ProductController extends Controller
      * Show the tax rates view.
      *
      * @return \Illuminate\View\View
+     *
+     * @throws \Exception
      */
     public function taxRates(): View
     {
-        return view('products.tax-rates.tax-rates');
+        return view('products.tax-rates.tax-rates')
+            ->with('taxRates', $this->getService('taxRates')->fetch());
     }
 }

@@ -13,10 +13,6 @@
                     </thead>
 
                     <tbody>
-                    <tr>
-                        <td>18/06/2019</td>
-                        <td class="right-align"><a class="waves-effect waves-light btn">View</a></td>
-                    </tr>
                     </tbody>
                 </table>
             </div>
