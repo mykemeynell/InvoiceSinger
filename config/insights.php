@@ -9,11 +9,22 @@ use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenPrivateMethods;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenTraits;
 use NunoMaduro\PhpInsights\Domain\Metrics\Architecture\Classes;
+use NunoMaduro\PhpInsights\Domain\Metrics\Style\Style;
 use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
 use ObjectCalisthenics\Sniffs\Classes\ForbiddenPublicPropertySniff;
 use ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff;
 use ObjectCalisthenics\Sniffs\Metrics\MethodPerClassLimitSniff;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\Arrays\DisallowLongArraySyntaxSniff;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineEndingsSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DisallowAlternativePHPTagsSniff;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DisallowShortOpenTagSniff;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\LowerCaseConstantSniff;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\LowerCaseKeywordSniff;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\LowerCaseTypeSniff;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\SyntaxSniff;
+use PHP_CodeSniffer\Standards\PSR2\Sniffs\Files\EndFileNewlineSniff;
+use PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\FunctionClosingBraceSniff;
 use SlevomatCodingStandard\Sniffs\Classes\SuperfluousInterfaceNamingSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\DocCommentSpacingSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\AssignmentInConditionSniff;
@@ -58,6 +69,17 @@ return [
     'add' => [
         Classes::class => [
             ForbiddenFinalClasses::class,
+        ],
+        Style::class => [
+            EndFileNewlineSniff::class,
+            LineEndingsSniff::class,
+            FunctionClosingBraceSniff::class,
+            DisallowLongArraySyntaxSniff::class,
+            DisallowAlternativePHPTagsSniff::class,
+            DisallowShortOpenTagSniff::class,
+            LowerCaseConstantSniff::class,
+            LowerCaseKeywordSniff::class,
+            SyntaxSniff::class,
         ],
     ],
 

@@ -40,9 +40,9 @@ $router->get('/payments', static function () {
 })->name('payments');
 
 // Products
-$router->get('/products', static function () {
-    return view('products');
-})->name('products');
+$router->get('/products', 'Products\ProductController@index')->name('products');
+$router->get('/products/families', 'Products\ProductController@families')->name('products.families');
+$router->get('/products/tax-rates', 'Products\ProductController@taxRates')->name('products.taxRates');
 
 /*
  * Authentication routes.
