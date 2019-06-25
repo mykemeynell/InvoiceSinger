@@ -4,6 +4,7 @@ namespace InvoiceSinger\Storage\Entity;
 
 use Illuminate\Database\Eloquent\Model;
 use InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface;
+use UuidColumn\Concern\HasUuidObserver;
 
 /**
  * Class TaxRateEntity
@@ -12,6 +13,8 @@ use InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface;
  */
 class TaxRateEntity extends Model implements TaxRateEntityInterface
 {
+    use HasUuidObserver;
+
     /**
      * The table associated with the model.
      *

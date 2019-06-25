@@ -14,5 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AppSettingsSeeder::class);
         $this->call(InvoiceSettingsSeeder::class);
         $this->call(QuoteSettingsSeeder::class);
+        $this->call(ProductFamilySeeder::class);
+        $this->call(DefaultTaxRatesSeeder::class);
     }
 }
