@@ -88,6 +88,7 @@ class TaxRateService extends Service implements TaxRateServiceInterface
      * @param \InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface|\Illuminate\Database\Eloquent\Model $entity
      *
      * @return bool
+     *
      * @throws \Exception
      */
     public function delete(TaxRateEntityInterface $entity): bool
