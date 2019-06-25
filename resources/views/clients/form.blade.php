@@ -30,13 +30,24 @@
                                 <span>Personal Information</span>
                             </div>
                             <div class="row">
-                                <div class="col s12 m6 input-field">
+                                <div class="col s12 m2 input-field">
+                                    <select name="client[title]" id="client-title">
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="Mr">Mr</option>
+                                        <option value="Mrs">Mrs</option>
+                                        <option value="Ms">Ms</option>
+                                        <option value="Sir">Sir</option>
+                                        <option value="Lady">Lady</option>
+                                        <option value="Ind">Ind</option>
+                                    </select>
+                                </div>
+                                <div class="col s12 m5 input-field">
                                     <input type="text" class="validate" name="client[first_name]" id="first-name"
                                            value="@if(! is_null($client)){{ $client->getFirstName() }}@endif" required
                                            autofocus>
                                     <label for="first-name">First name</label>
                                 </div>
-                                <div class="col s12 m6 input-field">
+                                <div class="col s12 m5 input-field">
                                     <input type="text" class="validate" name="client[last_name]" id="last-name"
                                            value="@if(! is_null($client)){{ $client->getLastName() }}@endif">
                                     <label for="last-name">Last name (Optional)</label>
