@@ -47,6 +47,16 @@ class ProductController extends Controller
     }
 
     /**
+     * Show the product family form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function familiesForm(): View
+    {
+        return view('products.families.form');
+    }
+
+    /**
      * Show the tax rates view.
      *
      * @return \Illuminate\View\View
