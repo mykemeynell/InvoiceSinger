@@ -22,7 +22,6 @@ class TaxRateController extends Controller
      * TaxRateController constructor.
      *
      * @param \InvoiceSinger\Storage\Service\Contract\TaxRateServiceInterface $service
-     *
      */
     function __construct(TaxRateServiceInterface $service)
     {

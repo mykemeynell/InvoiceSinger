@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use InvoiceSinger\Requests\Concern\RequestHasNoRules;
 use InvoiceSinger\Requests\Concern\RequestHasParameterBag;
 use InvoiceSinger\Requests\Concern\RequestIsAuthorized;
-use InvoiceSinger\Storage\Entity\Contract\ProductFamilyEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface;
 use InvoiceSinger\Support\Concern\HasService;
 
