@@ -13,7 +13,16 @@
                     </thead>
 
                     <tbody>
-
+                    @forelse($families as $family)
+                        <tr>
+                            <td>{{ $family->getDisplayName() }}</td>
+                            <td class="right-align"><a href="{{ route('products.families.form', ['family_id' => $family->getKey()]) }}" class="waves-light waves-effect btn">Edit</a></td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="2" class="center-align">No Product Families</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
             </div>
