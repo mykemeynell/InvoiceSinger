@@ -2,6 +2,7 @@
 
 namespace InvoiceSinger\Http\Controllers\Products;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Product\ProductFamilyRequest;
@@ -51,5 +52,29 @@ class FamilyController extends Controller
     {
         return view('products.families.form')
             ->with('family', $request->family());
+    }
+
+    /**
+     * Handle a post request for a product family.
+     *
+     * @param \InvoiceSinger\Http\Requests\Product\ProductFamilyRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function handlePost(ProductFamilyRequest $request): RedirectResponse
+    {
+        try {
+            if ($family = $request->family()) {
+                $this->getService()->update($family, $request->getParameterBag());
+
+                return RedirectResponse::create(route('product.families'), 200);
+            }
+
+            $this->getService()->create($request->getParameterBag());
+
+            return RedirectResponse::create(route('product.families'), 201);
+        } catch (\Exception $exception) {
+            return abort(500, $exception->getMessage());
+        }
     }
 }
