@@ -18,10 +18,6 @@
                     {!! csrf_field() !!}
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-title">
-                                <span>New Product Family</span>
-                            </div>
-
                             <div class="row">
                                 <div class="col s12 input-field">
                                     <input type="text" id="family-name" name="family[name]" value="@if(! is_null($family)){{ $family->getDisplayName() }}@endif">

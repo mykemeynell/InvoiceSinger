@@ -47,7 +47,7 @@ $router->post('/products/families/form/{family_id?}', 'Products\FamilyController
 
 $router->get('/products/tax-rates', 'Products\TaxRateController@index')->name('products.taxRates');
 $router->get('/products/tax-rates/form', 'Products\TaxRateController@form')->name('products.taxRates.form');
-$router->post('/products/tax-rates/form/{tax_rate_id}', 'Products\TaxRateController@handlePost')->name('products.taxRates.handleForm');
+$router->post('/products/tax-rates/form/{tax_rate_id?}', 'Products\TaxRateController@handlePost')->name('products.taxRates.handleForm');
 
 /*
  * Authentication routes.
