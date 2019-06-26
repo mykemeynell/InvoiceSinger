@@ -18,7 +18,9 @@
                         <tr>
                             <td>{{ $taxRate->getDisplayName() }}</td>
                             <td class="right-align">{{ $taxRate->getAmount() }}&percnt;</td>
-                            <td class="right-align"><a class="waves-effect waves-light btn">View</a></td>
+                            <td class="right-align"><a
+                                        href="{{ route('products.taxRates.form', ['tax_rate_id' => $taxRate->getKey()]) }}"
+                                        class="waves-effect waves-light btn">View</a></td>
                         </tr>
                     @empty
                         <tr>
