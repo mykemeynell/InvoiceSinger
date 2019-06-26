@@ -67,12 +67,12 @@ class FamilyController extends Controller
             if ($family = $request->family()) {
                 $this->getService()->update($family, $request->getParameterBag());
 
-                return RedirectResponse::create(route('product.families'), 200);
+                return RedirectResponse::create(route('products.families'), 200);
             }
 
             $this->getService()->create($request->getParameterBag());
 
-            return RedirectResponse::create(route('product.families'), 201);
+            return RedirectResponse::create(route('products.families'), 201);
         } catch (\Exception $exception) {
             return abort(500, $exception->getMessage());
         }
