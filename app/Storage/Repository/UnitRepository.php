@@ -1,15 +1,15 @@
 <?php
 
-namespace IssueSinger\Storage\Repository;
+namespace InvoiceSinger\Storage\Repository;
 
 use ArchLayer\Repository\Repository;
 use InvoiceSinger\Storage\Entity\Contract\UnitEntityInterface;
-use IssueSinger\Storage\Repository\Contract\UnitRepositoryInterface;
+use InvoiceSinger\Storage\Repository\Contract\UnitRepositoryInterface;
 
 /**
  * Class UnitRepository.
  *
- * @package IssueSinger\Storage\Repository
+ * @package InvoiceSinger\Storage\Repository
  */
 class UnitRepository extends Repository implements UnitRepositoryInterface
 {

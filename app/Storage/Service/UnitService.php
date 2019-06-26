@@ -6,16 +6,21 @@ use ArchLayer\Service\Service;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use InvoiceSinger\Storage\Entity\Contract\UnitEntityInterface;
+use InvoiceSinger\Storage\Repository\Contract\UnitRepositoryInterface;
 use InvoiceSinger\Storage\Service\Contract\UnitServiceInterface;
-use IssueSinger\Storage\Repository\Contract\UnitRepositoryInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
+/**
+ * Class UnitService
+ *
+ * @package InvoiceSinger\Storage\Service
+ */
 class UnitService extends Service implements UnitServiceInterface
 {
     /**
      * UnitService constructor.
      *
-     * @param \IssueSinger\Storage\Repository\Contract\UnitRepositoryInterface|\ArchLayer\Repository\Repository $repository
+     * @param \InvoiceSinger\Storage\Repository\Contract\UnitRepositoryInterface|\ArchLayer\Repository\Repository $repository
      */
     function __construct(UnitRepositoryInterface $repository)
     {

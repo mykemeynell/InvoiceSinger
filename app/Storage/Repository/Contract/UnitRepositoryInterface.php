@@ -1,13 +1,13 @@
 <?php
 
-namespace IssueSinger\Storage\Repository\Contract;
+namespace InvoiceSinger\Storage\Repository\Contract;
 
 use ArchLayer\Repository\RepositoryInterface;
 
 /**
  * Interface UnitRepositoryInterface.
  *
- * @package IssueSinger\Storage\Repository\Contract
+ * @package InvoiceSinger\Storage\Repository\Contract
  */
 interface UnitRepositoryInterface extends RepositoryInterface
 {

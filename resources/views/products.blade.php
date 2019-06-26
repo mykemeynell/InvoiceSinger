@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col s12 right-align margin-top-15 margin-bottom-30">
                 <a href="{{ route('products.families') }}" class="waves-effect waves-dark grey lighten-3 black-text btn margin-right-15">Product Families</a>
-                <a href="{{ route('products.families') }}" class="waves-effect waves-dark grey lighten-3 black-text btn margin-right-15">Units</a>
+                <a href="{{ route('products.units') }}" class="waves-effect waves-dark grey lighten-3 black-text btn margin-right-15">Units</a>
                 <a href="{{ route('products.taxRates') }}" class="waves-effect waves-dark grey lighten-3 black-text btn">Tax Rates</a>
             </div>
         </div>
@@ -49,3 +49,4 @@
         <i class="material-icons">add</i>
     </a>
 @endpush
+

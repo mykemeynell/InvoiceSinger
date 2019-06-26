@@ -37,8 +37,8 @@ use InvoiceSinger\Storage\Service\ProductFamilyService;
 use InvoiceSinger\Storage\Service\ProductService;
 use InvoiceSinger\Storage\Service\TaxRateService;
 use InvoiceSinger\Storage\Service\UnitService;
-use IssueSinger\Storage\Repository\Contract\UnitRepositoryInterface;
-use IssueSinger\Storage\Repository\UnitRepository;
+use InvoiceSinger\Storage\Repository\Contract\UnitRepositoryInterface;
+use InvoiceSinger\Storage\Repository\UnitRepository;
 
 /**
  * Class StorageServiceProvider.
@@ -105,7 +105,7 @@ class StorageServiceProvider extends ServiceProvider
         $this->app->bind('product.entity', ProductEntity::class);
         $this->app->bind('product.family.entity', ProductFamilyEntity::class);
         $this->app->bind('product.taxRate.entity', TaxRateEntity::class);
-        $this->app->bind('product.service.entity', UnitEntity::class);
+        $this->app->bind('product.unit.entity', UnitEntity::class);
     }
 
     /**
@@ -120,7 +120,7 @@ class StorageServiceProvider extends ServiceProvider
         $this->app->singleton('product.repository', ProductRepository::class);
         $this->app->singleton('product.family.repository', ProductFamilyRepository::class);
         $this->app->singleton('product.taxRate.repository', TaxRateRepository::class);
-        $this->app->singleton('product.service.repository', UnitRepository::class);
+        $this->app->singleton('product.unit.repository', UnitRepository::class);
     }
 
     /**
