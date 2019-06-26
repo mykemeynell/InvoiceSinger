@@ -17,7 +17,6 @@ class ProductRepositoryInterface extends Repository implements ProductyRepositor
      * ProductRepositoryInterface constructor.
      *
      * @param \InvoiceSinger\Storage\Entity\Contract\ProductEntityInterface|\Illuminate\Database\Eloquent\Model $entity
-     *
      */
     function __construct(ProductEntityInterface $entity)
     {
