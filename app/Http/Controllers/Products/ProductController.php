@@ -41,32 +41,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Return the product tax rates view.
-     *
-     * @return \Illuminate\View\View
-     *
-     * @throws \Exception
-     */
-    public function families(): View
-    {
-        return view('products.families.product-families')
-            ->with('families', $this->getService('productFamilies')->fetch());
-    }
-
-    /**
-     * Show the product family form.
-     *
-     * @param \InvoiceSinger\Http\Requests\Product\ProductFamilyRequest $request
-     *
-     * @return \Illuminate\View\View
-     */
-    public function familiesForm(ProductFamilyRequest $request): View
-    {
-        return view('products.families.form')
-            ->with('family', $request->family());
-    }
-
-    /**
      * Show the tax rates view.
      *
      * @return \Illuminate\View\View
