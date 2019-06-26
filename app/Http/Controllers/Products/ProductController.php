@@ -4,6 +4,7 @@ namespace InvoiceSinger\Http\Controllers\Products;
 
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
+use InvoiceSinger\Http\Requests\Product\ProductFamilyRequest;
 use InvoiceSinger\Storage\Service\Contract\ProductFamilyServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\TaxRateServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
@@ -55,11 +56,14 @@ class ProductController extends Controller
     /**
      * Show the product family form.
      *
+     * @param \InvoiceSinger\Http\Requests\Product\ProductFamilyRequest $request
+     *
      * @return \Illuminate\View\View
      */
-    public function familiesForm(): View
+    public function familiesForm(ProductFamilyRequest $request): View
     {
-        return view('products.families.form');
+        return view('products.families.form')
+            ->with('family', $request->family());
     }
 
     /**
