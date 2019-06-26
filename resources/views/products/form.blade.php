@@ -59,6 +59,14 @@
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
+                                    <select name="product[unit]" id="product-unit">
+                                        <option selected disabled>Select</option>
+                                    </select>
+                                    <label for="product-unit">Unit</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 input-field">
                                     <select name="product[tax_rate]" id="product-tax-rate">
                                         @foreach($tax_rate_service->fetch() as $tax_rate)
                                             <option value="{{ $tax_rate->getKey() }}">{{ $tax_rate->getDisplayName() }}</option>
