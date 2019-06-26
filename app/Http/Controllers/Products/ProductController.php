@@ -31,17 +31,4 @@ class ProductController extends Controller
     {
         return view('products');
     }
-
-    /**
-     * Show the tax rates view.
-     *
-     * @return \Illuminate\View\View
-     *
-     * @throws \Exception
-     */
-    public function taxRates(): View
-    {
-        return view('products.tax-rates.tax-rates')
-            ->with('taxRates', $this->getService('taxRates')->fetch());
-    }
 }
