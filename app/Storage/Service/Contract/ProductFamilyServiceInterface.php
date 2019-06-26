@@ -15,6 +15,15 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 interface ProductFamilyServiceInterface extends ServiceInterface
 {
     /**
+     * Find a product family using its ID.
+     *
+     * @param string $id
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\ProductFamilyEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function find(string $id): ?ProductFamilyEntityInterface;
+
+    /**
      * Return all product families from the database.
      *
      * @return \Illuminate\Database\Eloquent\Collection

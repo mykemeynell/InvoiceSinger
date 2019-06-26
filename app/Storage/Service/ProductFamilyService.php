@@ -28,6 +28,18 @@ class ProductFamilyService extends Service implements ProductFamilyServiceInterf
     }
 
     /**
+     * Find a product family using its ID.
+     *
+     * @param string $id
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\ProductFamilyEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function find(string $id): ?ProductFamilyEntityInterface
+    {
+        return $this->getRepository()->findUsingId($id);
+    }
+
+    /**
      * Return all product families from the database.
      *
      * @return \Illuminate\Database\Eloquent\Collection
