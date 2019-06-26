@@ -21,7 +21,6 @@ class ProductService extends Service implements ProductServiceInterface
      * ProductService constructor.
      *
      * @param \InvoiceSinger\Storage\Repository\ProductRepository|\ArchLayer\Repository\Repository $repository
-     *
      */
     function __construct(ProductRepository $repository)
     {
