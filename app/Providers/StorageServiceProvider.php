@@ -10,10 +10,12 @@ use InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\ProductEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\ProductFamilyEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface;
+use InvoiceSinger\Storage\Entity\Contract\UnitEntityInterface;
 use InvoiceSinger\Storage\Entity\InvoiceEntity;
 use InvoiceSinger\Storage\Entity\ProductEntity;
 use InvoiceSinger\Storage\Entity\ProductFamilyEntity;
 use InvoiceSinger\Storage\Entity\TaxRateEntity;
+use InvoiceSinger\Storage\Entity\UnitEntity;
 use InvoiceSinger\Storage\Repository\ClientRepository;
 use InvoiceSinger\Storage\Repository\Contract\ClientRepositoryInterface;
 use InvoiceSinger\Storage\Repository\Contract\InvoiceRepositoryInterface;
@@ -29,10 +31,14 @@ use InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\ProductFamilyServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\ProductServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\TaxRateServiceInterface;
+use InvoiceSinger\Storage\Service\Contract\UnitServiceInterface;
 use InvoiceSinger\Storage\Service\InvoiceService;
 use InvoiceSinger\Storage\Service\ProductFamilyService;
 use InvoiceSinger\Storage\Service\ProductService;
 use InvoiceSinger\Storage\Service\TaxRateService;
+use InvoiceSinger\Storage\Service\UnitService;
+use IssueSinger\Storage\Repository\Contract\UnitRepositoryInterface;
+use IssueSinger\Storage\Repository\UnitRepository;
 
 /**
  * Class StorageServiceProvider.
@@ -68,6 +74,10 @@ class StorageServiceProvider extends ServiceProvider
         'product.taxRate.entity'     => [TaxRateEntityInterface::class],
         'product.taxRate.repository' => [TaxRateRepositoryInterface::class],
         'product.taxRate.service'    => [TaxRateServiceInterface::class],
+
+        'product.unit.entity' => [UnitEntityInterface::class],
+        'product.unit.repository' => [UnitRepositoryInterface::class],
+        'product.unit.service' => [UnitServiceInterface::class],
     ];
 
     /**
@@ -95,6 +105,7 @@ class StorageServiceProvider extends ServiceProvider
         $this->app->bind('product.entity', ProductEntity::class);
         $this->app->bind('product.family.entity', ProductFamilyEntity::class);
         $this->app->bind('product.taxRate.entity', TaxRateEntity::class);
+        $this->app->bind('product.service.entity', UnitEntity::class);
     }
 
     /**
@@ -109,6 +120,7 @@ class StorageServiceProvider extends ServiceProvider
         $this->app->singleton('product.repository', ProductRepository::class);
         $this->app->singleton('product.family.repository', ProductFamilyRepository::class);
         $this->app->singleton('product.taxRate.repository', TaxRateRepository::class);
+        $this->app->singleton('product.service.repository', UnitRepository::class);
     }
 
     /**
@@ -123,6 +135,7 @@ class StorageServiceProvider extends ServiceProvider
         $this->app->singleton('product.service', ProductService::class);
         $this->app->singleton('product.family.service', ProductFamilyService::class);
         $this->app->singleton('product.taxRate.service', TaxRateService::class);
+        $this->app->singleton('product.unit.service', UnitService::class);
     }
 
     /**
