@@ -1,4 +1,5 @@
 @inject('family_service', \InvoiceSinger\Storage\Service\ProductFamilyService)
+@inject('tax_rate_service', \InvoiceSinger\Storage\Service\TaxRateService)
 @extends('layouts.app')
 
 @section('content')
@@ -51,9 +52,19 @@
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <i class="prefix">GBP</i>
+                                    <span class="prefix">{!! app()->make(\mykemeynell\Support\CurrencyHtmlEntities::class)->entity(settings('app.currency')) !!}</span>
                                     <input type="number" min="0" step="0.01" name="product[price]" id="product-price">
-                                    <label for="product-price">Description</label>
+                                    <label for="product-price">Price</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 input-field">
+                                    <select name="product[tax_rate]" id="product-tax-rate">
+                                        @foreach($tax_rate_service->fetch() as $tax_rate)
+                                            <option value="{{ $tax_rate->getKey() }}">{{ $tax_rate->getDisplayName() }}</option>
+                                        @endforeach
+                                    </select>
+                                    <label for="product-tax-rate">Tax Rate</label>
                                 </div>
                             </div>
                         </div>
