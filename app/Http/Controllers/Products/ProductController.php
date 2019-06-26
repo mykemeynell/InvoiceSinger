@@ -31,4 +31,15 @@ class ProductController extends Controller
     {
         return view('products');
     }
+
+    /**
+     * Show the product form view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function form(): View
+    {
+        return view('products.form')
+            ->with('product', null);
+    }
 }
