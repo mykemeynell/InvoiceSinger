@@ -8,7 +8,7 @@
             </div>
             <div class="col s12 m6 right-align">
                 <button form="new-product-family" formmethod="POST" formaction="{{ route('products.families.handleForm') }}" class="waves-effect waves-light btn margin-right-15">Save</button>
-                <a href="#" class="waves-effect waves-light btn red darken-1">Discard</a>
+                <a href="{{ route('products.families') }}" class="waves-effect waves-light btn red darken-1">Discard</a>
             </div>
         </div>
 
