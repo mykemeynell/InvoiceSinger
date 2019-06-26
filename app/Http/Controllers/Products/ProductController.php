@@ -4,9 +4,6 @@ namespace InvoiceSinger\Http\Controllers\Products;
 
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
-use InvoiceSinger\Http\Requests\Product\ProductFamilyRequest;
-use InvoiceSinger\Storage\Service\Contract\ProductFamilyServiceInterface;
-use InvoiceSinger\Storage\Service\Contract\TaxRateServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
 
 /**
@@ -20,14 +17,9 @@ class ProductController extends Controller
 
     /**
      * ProductController constructor.
-     *
-     * @param \InvoiceSinger\Storage\Service\Contract\TaxRateServiceInterface       $taxRateService
-     * @param \InvoiceSinger\Storage\Service\Contract\ProductFamilyServiceInterface $familyService
      */
-    function __construct(TaxRateServiceInterface $taxRateService, ProductFamilyServiceInterface $familyService)
+    function __construct()
     {
-        $this->setService($taxRateService, 'taxRates');
-        $this->setService($familyService, 'productFamilies');
     }
 
     /**

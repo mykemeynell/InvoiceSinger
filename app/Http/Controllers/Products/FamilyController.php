@@ -2,12 +2,10 @@
 
 namespace InvoiceSinger\Http\Controllers\Products;
 
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Product\ProductFamilyRequest;
 use InvoiceSinger\Storage\Service\Contract\ProductFamilyServiceInterface;
-use InvoiceSinger\Storage\Service\ProductFamilyService;
 use InvoiceSinger\Support\Concern\HasService;
 
 /**
@@ -23,7 +21,6 @@ class FamilyController extends Controller
      * FamilyController constructor.
      *
      * @param \InvoiceSinger\Storage\Service\Contract\ProductFamilyServiceInterface $service
-     *
      */
     function __construct(ProductFamilyServiceInterface $service)
     {
