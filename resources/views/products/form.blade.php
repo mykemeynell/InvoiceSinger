@@ -16,7 +16,7 @@
 
         <form name="product-form" id="product-form">
             <div class="row">
-                <div class="col s6">
+                <div class="col s12">
                     <div class="card">
                         <div class="card-content">
                             <div class="card-title">
