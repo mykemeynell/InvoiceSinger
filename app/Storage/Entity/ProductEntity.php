@@ -53,7 +53,7 @@ class ProductEntity extends Model implements ProductEntityInterface
      * @var array
      */
     protected $casts = [
-        'price' => 'float(10,2)',
+        'price' => 'float',
     ];
 
     /**
@@ -127,6 +127,6 @@ class ProductEntity extends Model implements ProductEntityInterface
      */
     public function getPrice(): float
     {
-        return $this->price;
+        return number_format($this->price, 2, '.', '');
     }
 }
