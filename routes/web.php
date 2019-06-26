@@ -41,8 +41,8 @@ $router->get('/payments', static function () {
 
 // Products
 $router->get('/products', 'Products\ProductController@index')->name('products');
-$router->get('/products/families', 'Products\ProductController@families')->name('products.families');
-$router->get('/products/families/form/{family_id?}', 'Products\ProductController@familiesForm')->name('products.families.form');
+$router->get('/products/families', 'Products\FamilyController@index')->name('products.families');
+$router->get('/products/families/form/{family_id?}', 'Products\FamilyController@form')->name('products.families.form');
 $router->get('/products/tax-rates', 'Products\ProductController@taxRates')->name('products.taxRates');
 
 /*
