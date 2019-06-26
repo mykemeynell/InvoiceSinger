@@ -46,7 +46,7 @@ class ProductFamilyService extends Service implements ProductFamilyServiceInterf
      */
     public function fetch(): Collection
     {
-        return $this->getRepository()->builder()->get();
+        return $this->getRepository()->builder()->orderBy('created_at', 'desc')->get();
     }
 
     /**
