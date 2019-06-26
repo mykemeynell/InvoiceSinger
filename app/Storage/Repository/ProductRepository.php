@@ -11,7 +11,7 @@ use InvoiceSinger\Storage\Repository\Contract\ProductyRepositoryInterface;
  *
  * @package InvoiceSinger\Storage\Repository
  */
-class ProductRepositoryInterface extends Repository implements ProductyRepositoryInterface
+class ProductRepository extends Repository implements ProductyRepositoryInterface
 {
     /**
      * ProductRepositoryInterface constructor.
