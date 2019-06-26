@@ -77,7 +77,7 @@ return [
             DisallowShortOpenTagSniff::class,
             LowerCaseConstantSniff::class,
             LowerCaseKeywordSniff::class,
-            SyntaxSniff::class,
+            SyntaxSniff::class
         ],
     ],
 

@@ -14,12 +14,12 @@
                     </thead>
 
                     <tbody>
-                    @forelse($taxRates as $taxRate)
+                    @forelse($tax_rates as $tax_rate)
                         <tr>
-                            <td>{{ $taxRate->getDisplayName() }}</td>
-                            <td class="right-align">{{ $taxRate->getAmount() }}&percnt;</td>
+                            <td>{{ $tax_rate->getDisplayName() }}</td>
+                            <td class="right-align">{{ $tax_rate->getAmount() }}&percnt;</td>
                             <td class="right-align"><a
-                                        href="{{ route('products.taxRates.form', ['tax_rate_id' => $taxRate->getKey()]) }}"
+                                        href="{{ route('products.taxRates.form', ['tax_rate_id' => $tax_rate->getKey()]) }}"
                                         class="waves-effect waves-light btn">View</a></td>
                         </tr>
                     @empty

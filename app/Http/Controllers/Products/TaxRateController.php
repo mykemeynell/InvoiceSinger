@@ -38,7 +38,7 @@ class TaxRateController extends Controller
     public function index(): View
     {
         return view('products.tax-rates.tax-rates')
-            ->with('taxRates', $this->getService()->fetch());
+            ->with('tax_rates', $this->getService()->fetch());
     }
 
     /**
@@ -51,7 +51,7 @@ class TaxRateController extends Controller
     public function form(TaxRateRequest $request): View
     {
         return view('products.tax-rates.form')
-            ->with('taxRate', $request->taxRate());
+            ->with('tax_rate', $request->taxRate());
     }
 
     /**
