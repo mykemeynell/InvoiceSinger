@@ -24,7 +24,7 @@
                             </div>
                             <div class="row margin-top-30">
                                 <div class="col s12 input-field">
-                                    <select name="product[family]" id="product-family">
+                                    <select name="product[family]" id="product-family" required>
                                         @foreach($family_service->fetch() as $family)
                                             <option value="{{ $family->getKey() }}">{{ $family->getDisplayName() }}</option>
                                         @endforeach
@@ -40,7 +40,7 @@
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <input type="text" id="product-name" name="product[name]">
+                                    <input type="text" id="product-name" name="product[name]" required>
                                     <label for="product-name">Name</label>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <select name="product[unit]" id="product-unit">
+                                    <select name="product[unit]" id="product-unit" required>
                                         <option selected disabled>Select</option>
                                     </select>
                                     <label for="product-unit">Unit</label>
@@ -67,7 +67,7 @@
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <select name="product[tax_rate]" id="product-tax-rate">
+                                    <select name="product[tax_rate]" id="product-tax-rate" required>
                                         @foreach($tax_rate_service->fetch() as $tax_rate)
                                             <option value="{{ $tax_rate->getKey() }}">{{ $tax_rate->getDisplayName() }}</option>
                                         @endforeach
