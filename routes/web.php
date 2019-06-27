@@ -50,11 +50,12 @@ $router->post('/products/families/form/{family_id?}', 'Products\FamilyController
 $router->get('/products/units', 'Products\UnitController@index')->name('products.units');
 $router->get('/products/units/form/{unit_id?}', 'Products\UnitController@form')->name('products.units.form');
 $router->post('/products/units/form/{unit_id?}', 'Products\UnitController@handlePost')->name('products.units.handleForm');
-$router->post('/products/units/form/{unit_id?}/delete', 'Products\UnitController@handleDelete')->name('products.units.handleDelete');
+$router->post('/products/units/delete/{unit_id?}', 'Products\UnitController@handleDelete')->name('products.units.handleDelete');
 
 $router->get('/products/tax-rates', 'Products\TaxRateController@index')->name('products.taxRates');
-$router->get('/products/tax-rates/form', 'Products\TaxRateController@form')->name('products.taxRates.form');
+$router->get('/products/tax-rates/form/{tax_rate_id?}', 'Products\TaxRateController@form')->name('products.taxRates.form');
 $router->post('/products/tax-rates/form/{tax_rate_id?}', 'Products\TaxRateController@handlePost')->name('products.taxRates.handleForm');
+$router->post('/products/tax-rates/delete/{tax_rate_id?}', 'Products\TaxRateController@handleDelete')->name('products.taxRates.handleDelete');
 
 /*
  * Authentication routes.
