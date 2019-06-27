@@ -67,12 +67,12 @@ class FamilyController extends Controller
             if ($family = $request->family()) {
                 $this->getService()->update($family, $request->getParameterBag());
 
-                return RedirectResponse::create(route('products.families'), 200);
+                return RedirectResponse::create(route('products.families'));
             }
 
             $this->getService()->create($request->getParameterBag());
 
-            return RedirectResponse::create(route('products.families'), 201);
+            return RedirectResponse::create(route('products.families'));
         } catch (\Exception $exception) {
             return abort(500, $exception->getMessage());
         }
@@ -90,10 +90,10 @@ class FamilyController extends Controller
         try {
             if($unit = $request->family()) {
                 $this->getService()->delete($unit);
-                return RedirectResponse::create(route('products.families'), 200);
+                return RedirectResponse::create(route('products.families'));
             }
 
-            return RedirectResponse::create(route('products.families'), 404);
+            return abort(404);
         } catch(\Exception $exception) {
             return abort(404, $exception->getMessage());
         }

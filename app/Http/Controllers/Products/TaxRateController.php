@@ -67,12 +67,12 @@ class TaxRateController extends Controller
             if ($tax_rate = $request->taxRate()) {
                 $this->getService()->update($tax_rate, $request->getParameterBag());
 
-                return RedirectResponse::create(route('products.taxRates'), 200);
+                return RedirectResponse::create(route('products.taxRates'));
             }
 
             $this->getService()->create($request->getParameterBag());
 
-            return RedirectResponse::create(route('products.taxRates'), 201);
+            return RedirectResponse::create(route('products.taxRates'));
         } catch (\Exception $exception) {
             return abort(500, $exception->getMessage());
         }
@@ -90,9 +90,10 @@ class TaxRateController extends Controller
         try {
             if($unit = $request->taxRate()) {
                 $this->getService()->delete($unit);
-                return RedirectResponse::create(route('products.taxRates'), 200);
+                return RedirectResponse::create(route('products.taxRates'));
             }
-            return RedirectResponse::create(route('products.taxRates'), 404);
+
+            return abort(404);
         } catch(\Exception $exception) {
             return abort(404, $exception->getMessage());
         }

@@ -67,12 +67,12 @@ class UnitController extends Controller
             if ($unit = $request->unit()) {
                 $this->getService()->update($unit, $request->getParameterBag());
 
-                return RedirectResponse::create(route('products.units'), 200);
+                return RedirectResponse::create(route('products.units'));
             }
 
             $this->getService()->create($request->getParameterBag());
 
-            return RedirectResponse::create(route('products.units'), 201);
+            return RedirectResponse::create(route('products.units'));
         } catch (\Exception $exception) {
             return abort(500, $exception->getMessage());
         }
@@ -90,9 +90,9 @@ class UnitController extends Controller
         try {
             if($unit = $request->unit()) {
                 $this->getService()->delete($unit);
-                return RedirectResponse::create(route('products.units'), 200);
+                return RedirectResponse::create(route('products.units'));
             }
-            return RedirectResponse::create(route('products.units'), 404);
+            return abort(404);
         } catch(\Exception $exception) {
             return abort(404, $exception->getMessage());
         }

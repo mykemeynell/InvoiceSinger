@@ -76,12 +76,12 @@ class ClientController extends Controller
             if ($client = $request->client()) {
                 $this->getService()->update($client, $request->getParameterBag());
 
-                return RedirectResponse::create(route('clients'), 200);
+                return RedirectResponse::create(route('clients'));
             }
 
             $this->getService()->create($request->getParameterBag());
 
-            return RedirectResponse::create(route('clients'), 201);
+            return RedirectResponse::create(route('clients'));
         } catch (\Exception $exception) {
             return abort(500, $exception->getMessage());
         }

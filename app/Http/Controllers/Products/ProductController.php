@@ -67,12 +67,12 @@ class ProductController extends Controller
             if ($product = $request->product()) {
                 $this->getService()->update($product, $request->getParameterBag());
 
-                return RedirectResponse::create(route('products'), 200);
+                return RedirectResponse::create(route('products'));
             }
 
             $this->getService()->create($request->getParameterBag());
 
-            return RedirectResponse::create(route('products'), 201);
+            return RedirectResponse::create(route('products'));
         } catch (\Exception $exception) {
             return abort(500, $exception->getMessage());
         }
@@ -89,8 +89,7 @@ class ProductController extends Controller
     {
         try {
             $this->getService()->delete($request->product());
-
-            return RedirectResponse::create(route('products'), 200);
+            return RedirectResponse::create(route('products'));
         } catch(\Exception $exception) {
             return abort(500, $exception->getMessage());
         }

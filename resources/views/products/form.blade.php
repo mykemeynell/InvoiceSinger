@@ -10,7 +10,7 @@
                 <h4 class="margin-y-0">{{ ! is_null($product) ? 'Edit' : 'Create' }} Product</h4>
             </div>
             <div class="col s6 right-align">
-                <button type="submit" form="product-form" formaction="{{ route('products.handleForm') }}" formmethod="POST" class="waves-effect waves-light btn-flat margin-right-15">Save</button>
+                <button type="submit" form="product-form" formaction="{{ route('products.handleForm', ['product_id' => ! is_null($product) ? $product->getKey() : null]) }}" formmethod="POST" class="waves-effect waves-light btn-flat margin-right-15">Save</button>
                 <a href="{{ route('products') }}" class="waves-effect waves-light btn-flat">Cancel</a>
                 @if(! is_null($product))
                     <form name="delete-product-form" id="delete-product-form" class="display-inline-block">
