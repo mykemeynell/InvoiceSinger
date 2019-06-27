@@ -7,6 +7,6 @@ namespace InvoiceSinger\Storage\Repository\Contract;
  *
  * @package InvoiceSinger\Storage\Repository\Contract
  */
-interface ProductyRepositoryInterface
+interface ProductRepositoryInterface
 {
 }
