@@ -10,7 +10,7 @@
                 <button form="new-product-family" formmethod="POST" formaction="{{ route('products.taxRates.handleForm') }}" class="waves-effect waves-light btn-flat margin-right-15">Save</button>
                 <a href="{{ route('products.taxRates') }}" class="waves-effect waves-light btn-flat">Cancel</a>
                 @if(! is_null($tax_rate))
-                    <form name="delete-tax-rate-form" id="delete-tax-rate-form">
+                    <form name="delete-tax-rate-form" id="delete-tax-rate-form" class="display-inline-block">
                         {!! csrf_field() !!}
                         <button type="submit" form="delete-tax-rate-form" formmethod="POST" formaction="{{ route('products.taxRates.handleDelete', ['tax_rate_id' => $tax_rate->getKey()]) }}" class="waves-effect waves-light btn red darken-1 margin-left-15">Delete</button>
                     </form>
