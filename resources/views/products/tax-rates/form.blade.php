@@ -7,7 +7,7 @@
                 <h4 class="margin-0">{{ ! is_null($tax_rate) ? 'Edit' : 'Create' }} Tax Rate</h4>
             </div>
             <div class="col s12 m6 right-align">
-                <button form="new-product-family" formmethod="POST" formaction="{{ route('products.taxRates.handleForm') }}" class="waves-effect waves-light btn-flat margin-right-15">Save</button>
+                <button form="new-product-family" formmethod="POST" formaction="{{ route('products.taxRates.handleForm', ['tax_rate_id' => ! is_null($tax_rate) ? $tax_rate->getKey() : null]) }}" class="waves-effect waves-light btn-flat margin-right-15">Save</button>
                 <a href="{{ route('products.taxRates') }}" class="waves-effect waves-light btn-flat">Cancel</a>
                 @if(! is_null($tax_rate))
                     <form name="delete-tax-rate-form" id="delete-tax-rate-form" class="display-inline-block">
