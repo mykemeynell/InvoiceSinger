@@ -42,7 +42,7 @@ class ProductController extends Controller
         /** @var \Illuminate\Database\Eloquent\Collection $products */
         $products = $this->getService()->fetch();
 
-        return JsonResponse::create($products->map(function (ProductEntityInterface $item) {
+        return JsonResponse::create($products->map(static function (ProductEntityInterface $item) {
             $item->family = collect([$item->family()]);
             $item->unit = collect([$item->unit()]);
             $item->tax_rate = collect([$item->taxRate()]);
