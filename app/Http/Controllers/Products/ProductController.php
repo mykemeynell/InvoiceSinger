@@ -77,4 +77,22 @@ class ProductController extends Controller
             return abort(500, $exception->getMessage());
         }
     }
+
+    /**
+     * Handle post request to delete product.
+     *
+     * @param \InvoiceSinger\Http\Requests\Product\ProductRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function handleDelete(ProductRequest $request): RedirectResponse
+    {
+        try {
+            $this->getService()->delete($request->product());
+
+            return RedirectResponse::create(route('products'), 200);
+        } catch(\Exception $exception) {
+            return abort(500, $exception->getMessage());
+        }
+    }
 }
