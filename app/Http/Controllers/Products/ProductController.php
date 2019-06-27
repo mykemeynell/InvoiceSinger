@@ -2,10 +2,12 @@
 
 namespace InvoiceSinger\Http\Controllers\Products;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Product\ProductRequest;
+use InvoiceSinger\Storage\Entity\Contract\ProductEntityInterface;
 use InvoiceSinger\Storage\Service\Contract\ProductServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
 
@@ -26,6 +28,26 @@ class ProductController extends Controller
     function __construct(ProductServiceInterface $service)
     {
         $this->setService($service);
+    }
+
+    /**
+     * Fetch and output products as a JSON object.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @throws \Exception
+     */
+    public function fetchAsJson(): JsonResponse
+    {
+        /** @var \Illuminate\Database\Eloquent\Collection $products */
+        $products = $this->getService()->fetch();
+
+        return JsonResponse::create($products->map(function (ProductEntityInterface $item) {
+            $item->family = collect([$item->family()]);
+            $item->unit = collect([$item->unit()]);
+            $item->tax_rate = collect([$item->taxRate()]);
+            return $item;
+        }));
     }
 
     /**
@@ -90,7 +112,7 @@ class ProductController extends Controller
         try {
             $this->getService()->delete($request->product());
             return RedirectResponse::create(route('products'));
-        } catch(\Exception $exception) {
+        } catch (\Exception $exception) {
             return abort(500, $exception->getMessage());
         }
     }
