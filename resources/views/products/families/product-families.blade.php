@@ -2,6 +2,12 @@
 
 @section('content')
     <div class="container margin-top-30">
+        <div class="row margin-y-30">
+            <div class="col s12">
+                <h4>Product Families</h4>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col s12">
                 <table class="responsive-table">
