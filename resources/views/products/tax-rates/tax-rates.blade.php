@@ -2,6 +2,12 @@
 
 @section('content')
     <div class="container">
+        <div class="row margin-y-30">
+            <div class="col s12">
+                <h4>Tax Rates</h4>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col s12">
                 <table class="responsive-table">
