@@ -8,7 +8,7 @@
             </div>
             <div class="col s12 m6 right-align">
                 <button form="new-product-family" formmethod="POST"
-                        formaction="{{ route('products.families.handleForm') }}"
+                        formaction="{{ route('products.families.handleForm', ['family_id' => ! is_null($family) ? $family->getKey() : null]) }}"
                         class="waves-effect waves-light btn-flat margin-right-15">Save
                 </button>
                 <a href="{{ route('products.families') }}" class="waves-effect waves-light btn-flat">Cancel</a>
