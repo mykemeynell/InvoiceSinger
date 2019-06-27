@@ -77,4 +77,24 @@ class UnitController extends Controller
             return abort(500, $exception->getMessage());
         }
     }
+
+    /**
+     * Handle a delete request on a unit entity.
+     *
+     * @param \InvoiceSinger\Http\Requests\Product\UnitRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function handleDelete(UnitRequest $request): RedirectResponse
+    {
+        try {
+            if($unit = $request->unit()) {
+                $this->getService()->delete($unit);
+                return RedirectResponse::create(route('products.units'), 200);
+            }
+            return RedirectResponse::create(route('products.units'), 404);
+        } catch(\Exception $exception) {
+            return abort(404, $exception->getMessage());
+        }
+    }
 }
