@@ -14,9 +14,9 @@
                 <button type="submit" form="product-form" formaction="{{ route('products.handleForm') }}" formmethod="POST" class="waves-effect waves-light btn-flat margin-right-15">Save</button>
                 <a href="#" class="waves-effect waves-light btn-flat">Cancel</a>
                 @if(! is_null($product))
-                    <form name="delete-product-form" id="delete-product-form">
+                    <form name="delete-product-form" id="delete-product-form" class="display-inline-block">
                         {!! csrf_field() !!}
-                        <button type="submit" form="delete-product-form" formaction="{{ route('products.handleDelete', ['product_id' => $product->getKey()]) }}" formmethod="POST" class="waves-effect waves-light btn red darken-1">Delete</button>
+                        <button type="submit" form="delete-product-form" formaction="{{ route('products.handleDelete', ['product_id' => $product->getKey()]) }}" formmethod="POST" class="margin-left-15 waves-effect waves-light btn red darken-1">Delete</button>
                     </form>
                 @endif
             </div>
