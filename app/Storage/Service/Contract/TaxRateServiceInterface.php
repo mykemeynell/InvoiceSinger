@@ -28,7 +28,7 @@ interface TaxRateServiceInterface extends ServiceInterface
      *
      * @return \InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface|\Illuminate\Database\Eloquent\Model|null
      */
-    public function findUsingId(string $id): ?TaxRateEntityInterface;
+    public function find(string $id): ?TaxRateEntityInterface;
 
     /**
      * Create a new tax rate entity and store it in the database.

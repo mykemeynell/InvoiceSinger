@@ -44,7 +44,7 @@ class TaxRateService extends Service implements TaxRateServiceInterface
      *
      * @return \InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface|\Illuminate\Database\Eloquent\Model|null
      */
-    public function findUsingId(string $id): ?TaxRateEntityInterface
+    public function find(string $id): ?TaxRateEntityInterface
     {
         return $this->getRepository()->findUsingId($id);
     }
