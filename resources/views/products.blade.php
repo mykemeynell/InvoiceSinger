@@ -34,12 +34,12 @@
                     @forelse($products as $product)
                     <tr>
                         <td>{{ $product->getSku() }}</td>
-                        <td>Family Name</td>
+                        <td>{{ $product->family()->getDisplayName() }}</td>
                         <td>{{ $product->getDisplayName() }}</td>
                         <td>{{ $product->getDescription() }}</td>
                         <td class="right-align">&pound;{{ $product->getPrice() }}</td>
-                        <td>Unit</td>
-                        <td>Default Tax (20%)</td>
+                        <td>{{ $product->unit()->getDisplayName() }}</td>
+                        <td>{{ ! is_null($product->taxRate()) ? $product->taxRate()->getInformativeName() : "No Tax" }}</td>
                         <td class="right-align"><a href="{{ route('products.form', ['product_id' => $product->getKey()]) }}" class="waves-effect waves-light btn">View</a></td>
                     </tr>
                     @empty

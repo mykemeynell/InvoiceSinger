@@ -75,4 +75,14 @@ class TaxRateEntity extends Model implements TaxRateEntityInterface
     {
         return (100 + $this->getAmount()) / 100;
     }
+
+    /**
+     * Get the tax rate as it would appear in a list.
+     *
+     * @return string
+     */
+    public function getInformativeName(): string
+    {
+        return "{$this->getDisplayName()} ({$this->getAmount()}%)";
+    }
 }

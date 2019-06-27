@@ -5,6 +5,9 @@ namespace InvoiceSinger\Storage\Entity;
 use ArchLayer\Entity\Concern\EntityHasTimestamps;
 use Illuminate\Database\Eloquent\Model;
 use InvoiceSinger\Storage\Entity\Contract\ProductEntityInterface;
+use InvoiceSinger\Storage\Entity\Contract\ProductFamilyEntityInterface;
+use InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface;
+use InvoiceSinger\Storage\Entity\Contract\UnitEntityInterface;
 use UuidColumn\Concern\HasUuidObserver;
 
 /**
@@ -139,5 +142,35 @@ class ProductEntity extends Model implements ProductEntityInterface
     public function getTaxRate(): ?string
     {
         return $this->tax_rate;
+    }
+
+    /**
+     * Get the unit associated with a product.
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\UnitEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function unit(): ?UnitEntityInterface
+    {
+        return $this->hasOne(app('product.unit.entity'), 'id', 'unit')->first();
+    }
+
+    /**
+     * Get the family associated with a product.
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\ProductFamilyEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function family(): ?ProductFamilyEntityInterface
+    {
+        return $this->hasOne(app('product.family.entity'), 'id', 'family')->first();
+    }
+
+    /**
+     * Get the tax rate associated with a product.
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function taxRate(): ?TaxRateEntityInterface
+    {
+        return $this->hasOne(app('product.taxRate.entity'), 'id', 'tax_rate')->first();
     }
 }

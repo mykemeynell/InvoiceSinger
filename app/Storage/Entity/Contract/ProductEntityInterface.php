@@ -68,4 +68,25 @@ interface ProductEntityInterface
      * @return string|null
      */
     public function getTaxRate(): ?string;
+
+    /**
+     * Get the unit associated with a product.
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\UnitEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function unit(): ?UnitEntityInterface;
+
+    /**
+     * Get the family associated with a product.
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\ProductFamilyEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function family(): ?ProductFamilyEntityInterface;
+
+    /**
+     * Get the tax rate associated with a product.
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function taxRate(): ?TaxRateEntityInterface;
 }

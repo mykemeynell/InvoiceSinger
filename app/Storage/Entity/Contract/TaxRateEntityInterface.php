@@ -22,6 +22,13 @@ interface TaxRateEntityInterface
     public function getDisplayName(): string;
 
     /**
+     * Get the tax rate as it would appear in a list.
+     *
+     * @return string
+     */
+    public function getInformativeName(): string;
+
+    /**
      * Get the amount of the tax rate.
      *
      * @return float
