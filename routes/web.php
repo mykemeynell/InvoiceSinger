@@ -42,6 +42,7 @@ $router->get('/payments', static function () {
 // Products
 $router->get('/products', 'Products\ProductController@index')->name('products');
 $router->get('/products/form/{product_id?}', 'Products\ProductController@form')->name('products.form');
+$router->post('/products/form/{product_id?}', 'Products\ProductController@handlePost')->name('products.handleForm');
 
 $router->get('/products/families', 'Products\FamilyController@index')->name('products.families');
 $router->get('/products/families/form/{family_id?}', 'Products\FamilyController@form')->name('products.families.form');

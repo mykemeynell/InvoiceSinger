@@ -2,6 +2,7 @@
 
 namespace InvoiceSinger\Http\Controllers\Products;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Product\ProductRequest;
@@ -51,5 +52,29 @@ class ProductController extends Controller
     {
         return view('products.form')
             ->with('product', $request->product());
+    }
+
+    /**
+     * Handle form post requests for product entities.
+     *
+     * @param \InvoiceSinger\Http\Requests\Product\ProductRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function handlePost(ProductRequest $request): RedirectResponse
+    {
+        try {
+            if ($product = $request->product()) {
+                $this->getService()->update($product, $request->getParameterBag());
+
+                return RedirectResponse::create(route('products'), 200);
+            }
+
+            $this->getService()->create($request->getParameterBag());
+
+            return RedirectResponse::create(route('products'), 201);
+        } catch (\Exception $exception) {
+            return abort(500, $exception->getMessage());
+        }
     }
 }
