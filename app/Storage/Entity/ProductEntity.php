@@ -68,6 +68,7 @@ class ProductEntity extends Model implements ProductEntityInterface
         'family',
         'unit',
         'price',
+        'tax_rate',
     ];
 
     /**
