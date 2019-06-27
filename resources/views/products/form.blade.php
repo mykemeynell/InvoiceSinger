@@ -1,5 +1,4 @@
 @inject('family_service', \InvoiceSinger\Storage\Service\ProductFamilyService)
-@inject('tax_rate_service', \InvoiceSinger\Storage\Service\TaxRateService)
 @inject('unit_service', \InvoiceSinger\Storage\Service\UnitService)
 
 @extends('layouts.app')
@@ -79,12 +78,11 @@
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <select name="product[tax_rate]" id="product-tax-rate" class="validate" required>
-                                        @foreach($tax_rate_service->fetch() as $tax_rate)
-                                            <option value="{{ $tax_rate->getKey() }}" @if(! is_null($product) && $product->getTaxRate() === $tax_rate->getKey()) selected @endif>{{ $tax_rate->getDisplayName() }}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="product-tax-rate">Tax Rate</label>
+                                    @include('layouts.components.misc._tax-rates-dropdown', [
+                                        'tax_rate_select_id' => 'product-tax-rate',
+                                        'tax_rate_select_name' => 'product[tax_rate]',
+                                        'object' => $product
+                                    ])
                                 </div>
                             </div>
                         </div>
