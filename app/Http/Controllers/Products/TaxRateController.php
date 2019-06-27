@@ -77,4 +77,24 @@ class TaxRateController extends Controller
             return abort(500, $exception->getMessage());
         }
     }
+
+    /**
+     * Handle a delete request on a tax rate entity.
+     *
+     * @param \InvoiceSinger\Http\Requests\Product\TaxRateRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function handleDelete(TaxRateRequest $request): RedirectResponse
+    {
+        try {
+            if($unit = $request->taxRate()) {
+                $this->getService()->delete($unit);
+                return RedirectResponse::create(route('products.taxRates'), 200);
+            }
+            return RedirectResponse::create(route('products.taxRates'), 404);
+        } catch(\Exception $exception) {
+            return abort(404, $exception->getMessage());
+        }
+    }
 }
