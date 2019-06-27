@@ -1,9 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col s12 right-align margin-top-15 margin-bottom-30">
+    <div class="container margin-top-30">
+        <div class="row margin-y-30">
+            <div class="col s6">
+                <h4>Products</h4>
+            </div>
+            <div class="col s6 right-align margin-top-15 margin-bottom-30">
                 <a href="{{ route('products.families') }}" class="waves-effect waves-dark grey lighten-3 black-text btn margin-right-15">Product Families</a>
                 <a href="{{ route('products.units') }}" class="waves-effect waves-dark grey lighten-3 black-text btn margin-right-15">Units</a>
                 <a href="{{ route('products.taxRates') }}" class="waves-effect waves-dark grey lighten-3 black-text btn">Tax Rates</a>
