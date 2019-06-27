@@ -7,8 +7,14 @@
                 <h4 class="margin-0">{{ ! is_null($unit) ? 'Edit' : 'Create' }} Unit</h4>
             </div>
             <div class="col s6 right-align">
-                <button form="unit-form" formmethod="POST" formaction="{{ route('products.units.handleForm') }}" class="waves-effect waves-light btn margin-right-15">Save</button>
-                <a href="{{ route('products.units') }}" class="waves-effect waves-light btn red darken-1">Discard</a>
+                <button form="unit-form" formmethod="POST" formaction="{{ route('products.units.handleForm') }}" class="waves-effect waves-light btn-flat margin-right-15">Save</button>
+                <a href="{{ route('products.units') }}" class="waves-effect waves-light btn-flat">Cancel</a>
+                @if(! is_null($unit))
+                <form class="display-inline-block" name="delete-unit-form" id="delete-unit-form">
+                    {!! csrf_field() !!}
+                    <button type="submit" form="delete-unit-form" formaction="{{ route('products.units.handleDelete', ['unit_id' => $unit->getKey()]) }}" formmethod="POST" class="waves-effect waves-light btn red darken-1 margin-left-15">Delete</button>
+                </form>
+                @endif
             </div>
         </div>
         <form name="unit-form" id="unit-form">
