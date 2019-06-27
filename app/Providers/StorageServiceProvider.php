@@ -20,6 +20,7 @@ use InvoiceSinger\Storage\Repository\ClientRepository;
 use InvoiceSinger\Storage\Repository\Contract\ClientRepositoryInterface;
 use InvoiceSinger\Storage\Repository\Contract\InvoiceRepositoryInterface;
 use InvoiceSinger\Storage\Repository\Contract\ProductFamilyRepositoryInterface;
+use InvoiceSinger\Storage\Repository\Contract\ProductRepositoryInterface;
 use InvoiceSinger\Storage\Repository\Contract\TaxRateRepositoryInterface;
 use InvoiceSinger\Storage\Repository\InvoiceRepository;
 use InvoiceSinger\Storage\Repository\ProductFamilyRepository;
@@ -64,7 +65,7 @@ class StorageServiceProvider extends ServiceProvider
         'invoice.service'    => [InvoiceServiceInterface::class],
 
         'product.entity'     => [ProductEntityInterface::class],
-        'product.repository' => [ProductRepository::class],
+        'product.repository' => [ProductRepositoryInterface::class],
         'product.service'    => [ProductServiceInterface::class],
 
         'product.family.entity'     => [ProductFamilyEntityInterface::class],
