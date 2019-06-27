@@ -15,9 +15,15 @@
                 </div>
                 <div class="col s12 m6 right-align">
                     <button form="client-form" formmethod="POST" formaction="{{ route('clients.handleForm') }}"
-                            class="waves-light waves-effect btn margin-right-15">Save
+                            class="waves-light waves-effect btn-flat margin-right-15">Save
                     </button>
-                    <a href="{{ route('clients') }}" class="waves-light waves-effect btn red darken-1">Discard</a>
+                    <a href="{{ route('clients') }}" class="waves-light waves-effect btn-flat">Cancel</a>
+                    @if(! is_null($client))
+                        <form name="delete-client-form" id="delete-client-form">
+                            {!! csrf_field() !!}
+                            <button form="delete-client-form" formaction="{{ route('clients.delete', ['client_id' => $client->getKey()]) }}" formmethod="POST" class="waves-light waves-effect btn red darken-1 margin-left-15">Delete</button>
+                        </form>
+                    @endif
                 </div>
             </div>
 
