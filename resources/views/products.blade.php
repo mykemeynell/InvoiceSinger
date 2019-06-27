@@ -22,7 +22,7 @@
                             <th>Family</th>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Price</th>
+                            <th class="right-align">Price</th>
                             <th>Unit</th>
                             <th>Tax Rate</th>
                             <th class="right-align">Options</th>
@@ -37,7 +37,7 @@
                         <td>Family Name</td>
                         <td>{{ $product->getDisplayName() }}</td>
                         <td>{{ $product->getDescription() }}</td>
-                        <td>&pound;{{ $product->getPrice() }}</td>
+                        <td class="right-align">&pound;{{ $product->getPrice() }}</td>
                         <td>Unit</td>
                         <td>Default Tax (20%)</td>
                         <td class="right-align"><a href="{{ route('products.form', ['product_id' => $product->getKey()]) }}" class="waves-effect waves-light btn">View</a></td>
