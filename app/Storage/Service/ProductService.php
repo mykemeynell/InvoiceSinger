@@ -6,7 +6,7 @@ use ArchLayer\Service\Service;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use InvoiceSinger\Storage\Entity\Contract\ProductEntityInterface;
-use InvoiceSinger\Storage\Repository\ProductRepository;
+use InvoiceSinger\Storage\Repository\Contract\ProductRepositoryInterface;
 use InvoiceSinger\Storage\Service\Contract\ProductServiceInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
@@ -20,9 +20,9 @@ class ProductService extends Service implements ProductServiceInterface
     /**
      * ProductService constructor.
      *
-     * @param \InvoiceSinger\Storage\Repository\ProductRepository|\ArchLayer\Repository\Repository $repository
+     * @param \InvoiceSinger\Storage\Repository\Contract\ProductRepositoryInterface|\ArchLayer\Repository\Repository $repository
      */
-    function __construct(ProductRepository $repository)
+    function __construct(ProductRepositoryInterface $repository)
     {
         $this->setRepository($repository);
     }
