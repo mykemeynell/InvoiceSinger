@@ -30,16 +30,23 @@
                     </thead>
 
                     <tbody>
+                    @php /** @var \InvoiceSinger\Storage\Entity\ProductEntity $product */ @endphp
+                    @forelse($products as $product)
                     <tr>
-                        <td>212-965-66D</td>
-                        <td>Default Product Family</td>
-                        <td>Example Product</td>
-                        <td>This is an example product, not intended to be sold.</td>
-                        <td>&pound;14.99</td>
+                        <td>{{ $product->getSku() }}</td>
+                        <td>Family Name</td>
+                        <td>{{ $product->getDisplayName() }}</td>
+                        <td>{{ $product->getDescription() }}</td>
+                        <td>&pound;{{ $product->getPrice() }}</td>
                         <td>Unit</td>
                         <td>Default Tax (20%)</td>
-                        <td class="right-align"><a class="waves-effect waves-light btn">View</a></td>
+                        <td class="right-align"><a href="{{ route('products.form', ['product_id' => $product->getKey()]) }}" class="waves-effect waves-light btn">View</a></td>
                     </tr>
+                    @empty
+                        <tr>
+                            <td colspan="8" class="center-align">No Products</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
             </div>
