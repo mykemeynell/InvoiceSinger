@@ -27,11 +27,11 @@ class ProductRequest extends FormRequest
     public function product(): ?ProductEntityInterface
     {
         if($id = $this->getParameterBag()->get('id')) {
-            return app('product.family.service')->find($id);
+            return app('product.service')->find($id);
         }
 
         if($id = $this->route('product_id')) {
-            return app('product.family.service')->find($id);
+            return app('product.service')->find($id);
         }
 
         return null;
