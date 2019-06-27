@@ -7,7 +7,7 @@
                 <h4 class="margin-0">{{ ! is_null($unit) ? 'Edit' : 'Create' }} Unit</h4>
             </div>
             <div class="col s6 right-align">
-                <button form="new-product-family" formmethod="POST" formaction="{{ route('products.units.handleForm') }}" class="waves-effect waves-light btn margin-right-15">Save</button>
+                <button form="unit-form" formmethod="POST" formaction="{{ route('products.units.handleForm') }}" class="waves-effect waves-light btn margin-right-15">Save</button>
                 <a href="{{ route('products.units') }}" class="waves-effect waves-light btn red darken-1">Discard</a>
             </div>
         </div>
