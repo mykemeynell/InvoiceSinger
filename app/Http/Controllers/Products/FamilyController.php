@@ -77,4 +77,25 @@ class FamilyController extends Controller
             return abort(500, $exception->getMessage());
         }
     }
+
+    /**
+     * Handle a delete request on a product family entity.
+     *
+     * @param \InvoiceSinger\Http\Requests\Product\ProductFamilyRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function handleDelete(ProductFamilyRequest $request): RedirectResponse
+    {
+        try {
+            if($unit = $request->family()) {
+                $this->getService()->delete($unit);
+                return RedirectResponse::create(route('products.families'), 200);
+            }
+
+            return RedirectResponse::create(route('products.families'), 404);
+        } catch(\Exception $exception) {
+            return abort(404, $exception->getMessage());
+        }
+    }
 }
