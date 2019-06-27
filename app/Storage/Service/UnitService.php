@@ -46,7 +46,7 @@ class UnitService extends Service implements UnitServiceInterface
      */
     public function fetch(): Collection
     {
-        return $this->getRepository()->builder()->get();
+        return $this->getRepository()->builder()->orderBy('created_at', 'desc')->get();
     }
 
     /**

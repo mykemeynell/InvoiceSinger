@@ -19,6 +19,7 @@ class DefaultTaxRatesSeeder extends Seeder
      */
     protected $taxRates = [
         20 => 'UK VAT',
+        0 => 'No Tax',
     ];
 
     /**
