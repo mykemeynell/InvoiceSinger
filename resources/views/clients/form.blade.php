@@ -21,7 +21,7 @@
                     @if(! is_null($client))
                         <form name="delete-client-form" id="delete-client-form">
                             {!! csrf_field() !!}
-                            <button form="delete-client-form" formaction="{{ route('clients.delete', ['client_id' => $client->getKey()]) }}" formmethod="POST" class="waves-light waves-effect btn red darken-1 margin-left-15">Delete</button>
+                            <button form="delete-client-form" formaction="{{ route('clients.handleDelete', ['client_id' => $client->getKey()]) }}" formmethod="POST" class="waves-light waves-effect btn red darken-1 margin-left-15">Delete</button>
                         </form>
                     @endif
                 </div>
