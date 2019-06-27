@@ -6,6 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Client\ClientRequest;
+use InvoiceSinger\Storage\Repository\ClientRepository;
 use InvoiceSinger\Storage\Service\Contract\ClientServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
 use League\ISO3166\ISO3166;
@@ -80,6 +81,24 @@ class ClientController extends Controller
             }
 
             $this->getService()->create($request->getParameterBag());
+
+            return RedirectResponse::create(route('clients'));
+        } catch (\Exception $exception) {
+            return abort(500, $exception->getMessage());
+        }
+    }
+
+    /**
+     * Handle delete request for a client.
+     *
+     * @param \InvoiceSinger\Http\Requests\Client\ClientRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function handleDelete(ClientRequest $request): RedirectResponse
+    {
+        try {
+            $this->getService()->delete($request->client());
 
             return RedirectResponse::create(route('clients'));
         } catch (\Exception $exception) {
