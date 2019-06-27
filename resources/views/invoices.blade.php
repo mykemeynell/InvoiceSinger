@@ -54,16 +54,20 @@
                 {!! csrf_field() !!}
                 <div class="row">
                     <div class="input-field col s12">
-                        <select name="invoice[client]" id="client-name" class="validate" required>
+                        @if($clients->count() > 0)
+                        <select name="invoice[client]" id="client-name" class="validate" required="required">
                             <option disabled selected>Select a client</option>
                             @foreach($clients as $client)
                                 <option value="{{ $client->getKey() }}">{{ $client->getDisplayName() }}</option>
                             @endforeach
                         </select>
                         <label for="client-name">Client</label>
+                        @else
+                            <span>No clients - <a href="{{ route('clients.form') }}">Create one</a></span>
+                        @endif
                     </div>
                 </div>
-                <div class="row">
+                <div class="row @if($clients->count() == 0) display-none @endif">
                     <div class="input-field col s6">
                         <input id="raised-date" type="text" name="invoice[raised_at]" class="datepicker validate" value="{{ $today }}" required>
                         <label for="raised-date">Raised on</label>
@@ -75,7 +79,7 @@
                 </div>
             </form>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer @if($clients->count() == 0) display-none @endif">
             <div class="row">
                 <div class="col s12">
                     <button form="new-invoice-form" formaction="{{ route('invoices.handleForm')  }}" formmethod="POST" class="modal-close waves-effect waves-green btn-flat">Create</button>
