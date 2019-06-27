@@ -23,6 +23,7 @@ $router->get('/', static function () {
 $router->get('/clients', 'Clients\ClientController@index')->name('clients');
 $router->get('/clients/form/{client_id?}', 'Clients\ClientController@form')->name('clients.form');
 $router->post('/clients/form/{client_id?}', 'Clients\ClientController@handlePost')->name('clients.handleForm');
+$router->post('/clients/delete/{client_id?}', 'Clients\ClientController@handleDelete')->name('clients.handleDelete');
 
 // Quotes
 $router->get('/quotes', static function () {
