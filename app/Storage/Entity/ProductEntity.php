@@ -129,4 +129,14 @@ class ProductEntity extends Model implements ProductEntityInterface
     {
         return number_format($this->price, 2, '.', '');
     }
+
+    /**
+     * Get the tax rate ID for a product.
+     *
+     * @return string|null
+     */
+    public function getTaxRate(): ?string
+    {
+        return $this->tax_rate;
+    }
 }

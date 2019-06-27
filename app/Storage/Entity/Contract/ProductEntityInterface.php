@@ -11,6 +11,8 @@ namespace InvoiceSinger\Storage\Entity\Contract;
  * @property string              $family
  * @property string              $unit
  * @property string              $price
+ * @property string|null         $tax_rate
+ *
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  *
@@ -59,4 +61,11 @@ interface ProductEntityInterface
      * @return float
      */
     public function getPrice(): float;
+
+    /**
+     * Get the tax rate ID for a product.
+     *
+     * @return string|null
+     */
+    public function getTaxRate(): ?string;
 }

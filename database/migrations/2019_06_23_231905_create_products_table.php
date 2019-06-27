@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->string('family');
             $table->string('unit');
             $table->float('price', 10,2);
+            $table->string('tax_rate')->nullable();
             $table->timestamps();
         });
     }

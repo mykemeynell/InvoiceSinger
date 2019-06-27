@@ -29,7 +29,7 @@
                                 <div class="col s12 input-field">
                                     <select name="product[family]" id="product-family" class="validate" required>
                                         @foreach($family_service->fetch() as $family)
-                                            <option value="{{ $family->getKey() }}">{{ $family->getDisplayName() }}</option>
+                                            <option value="{{ $family->getKey() }}" @if(! is_null($product) && $product->getFamily() === $family->getKey()) selected @endif>{{ $family->getDisplayName() }}</option>
                                         @endforeach
                                     </select>
                                     <label for="product-family">Family</label>
@@ -37,26 +37,26 @@
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <input type="text" id="product-sku" name="product[sku]">
+                                    <input type="text" id="product-sku" name="product[sku]" value="@if(!is_null($product)){{ $product->getSku() }}@endif">
                                     <label for="product-sku">SKU</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <input type="text" id="product-name" name="product[name]" class="validate" required>
+                                    <input type="text" id="product-name" name="product[name]" class="validate" value="@if(!is_null($product)){{ $product->getDisplayName() }}@endif" required>
                                     <label for="product-name">Name</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
-                                    <textarea name="product[description]" id="product-description" class="materialize-textarea"></textarea>
+                                    <textarea name="product[description]" id="product-description" class="materialize-textarea">@if(!is_null($product)){{ $product->getDescription() }}@endif</textarea>
                                     <label for="product-description">Description</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
                                     <span class="prefix">{!! app()->make(\mykemeynell\Support\CurrencyHtmlEntities::class)->entity(settings('app.currency')) !!}</span>
-                                    <input type="number" min="0" step="0.01" name="product[price]" id="product-price" class="validate" required>
+                                    <input type="number" min="0" step="0.01" name="product[price]" id="product-price" class="validate" value="@if(!is_null($product)){{ $product->getPrice() }}@endif" required>
                                     <label for="product-price">Price</label>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                                     <select name="product[unit]" id="product-unit" class="validate" required>
                                         <option selected disabled>Select</option>
                                         @foreach($unit_service->fetch() as $unit)
-                                            <option value="{{ $unit->getKey() }}">{{ $unit->getDisplayName() }}</option>
+                                            <option value="{{ $unit->getKey() }}" @if(! is_null($product) && $product->getUnit() === $unit->getKey()) selected @endif>{{ $unit->getDisplayName() }}</option>
                                         @endforeach
                                     </select>
                                     <label for="product-unit">Unit</label>
@@ -75,7 +75,7 @@
                                 <div class="col s12 input-field">
                                     <select name="product[tax_rate]" id="product-tax-rate" class="validate" required>
                                         @foreach($tax_rate_service->fetch() as $tax_rate)
-                                            <option value="{{ $tax_rate->getKey() }}">{{ $tax_rate->getDisplayName() }}</option>
+                                            <option value="{{ $tax_rate->getKey() }}" @if(! is_null($product) && $product->getTaxRate() === $tax_rate->getKey()) selected @endif>{{ $tax_rate->getDisplayName() }}</option>
                                         @endforeach
                                     </select>
                                     <label for="product-tax-rate">Tax Rate</label>
