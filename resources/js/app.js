@@ -46,7 +46,7 @@ $(document).ready(function() {
     }
 });
 
-import ProductRow from './components/product-row.vue';
+import ProductRow from './components/ProductRow.vue';
 Vue.component('product-row', ProductRow);
 
 /**
