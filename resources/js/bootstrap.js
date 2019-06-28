@@ -9,6 +9,7 @@ window._ = require('lodash');
 try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
+    window.dt = require('datatables.net-dt')(window.$);
 } catch (e) {}
 
 /**
@@ -27,10 +28,22 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * a simple convenience so we don't have to attach every token manually.
  */
 
-let token = document.head.querySelector('meta[name="csrf-token"]');
+let api_token = document.head.querySelector('meta[name="api-token"]');
 
-if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+if(api_token) {
+    window.$.ajaxSetup({
+        headers: {
+            'Auth-Token': api_token.content
+        }
+    });
+} else {
+    console.error('User token not found');
+}
+
+let csrf_token = document.head.querySelector('meta[name="csrf-token"]');
+if (csrf_token) {
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = csrf_token.content;
+
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }

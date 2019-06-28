@@ -5,6 +5,7 @@
     <title>{{ config('app.name') }}</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="api-token" content="{{ csrf_token() }}">
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">

@@ -187,33 +187,30 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">search</i>
-                    <input type="text" id="autocomplete-input" class="autocomplete">
-                    <label for="autocomplete-input">Search</label>
+                    <input type="text" class="autocomplete" id="product-search-field">
+                    <label for="product-search-field">Search</label>
                 </div>
             </div>
             <div class="row">
                 <div class="col s12">
-                    <table class="responsive-table">
+                    <table class="responsive-table" id="product-search-table">
                         <thead>
                         <tr>
-                            <th width="20">
-                                <label>
-                                    <input type="checkbox" class="filled-in" checked="checked" />
-                                    <span></span>
-                                </label>
-                            </th>
                             <th>SKU</th>
                             <th>Family</th>
                             <th>Name</th>
-                            <th>Unit Price</th>
+                            <th>Unit</th>
+                            <th>Price</th>
+                            <th class="right-align">&nbsp;</th>
                         </tr>
                         </thead>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Done</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
 

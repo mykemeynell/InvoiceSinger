@@ -47,6 +47,7 @@ class ProductController extends Controller
 
         return JsonResponse::create($products->map(static function (ProductEntityInterface $item) use ($request) {
             if(
+                $request->has('search') && strlen($request->get('search')) > 0 && // Check that the request has a search param.
                 strpos(strtolower($item->getDisplayName()), strtolower($request->get('search'))) === false &&
                 strpos(strtolower($item->getDescription()), strtolower($request->get('search'))) === false &&
                 strpos(strtolower($item->getSku()), strtolower($request->get('search'))) === false

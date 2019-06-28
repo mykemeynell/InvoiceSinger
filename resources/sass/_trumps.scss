@@ -59,3 +59,12 @@ nav {
     img {@extend .display-none;}
   }
 }
+
+
+.dataTables_wrapper {
+  .dataTables_length, .dataTables_filter {@extend .display-none;}
+
+  .dataTable {
+    width:100%!important;
+  }
+}
