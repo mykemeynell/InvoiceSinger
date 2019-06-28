@@ -4,6 +4,7 @@ namespace InvoiceSinger\Http\Controllers\Products;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Product\ProductRequest;
@@ -33,19 +34,29 @@ class ProductController extends Controller
     /**
      * Fetch and output products as a JSON object.
      *
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
      *
      * @throws \Exception
      */
-    public function fetchAsJson(): JsonResponse
+    public function fetchAsJson(Request $request): JsonResponse
     {
         /** @var \Illuminate\Database\Eloquent\Collection $products */
         $products = $this->getService()->fetch();
 
-        return JsonResponse::create($products->map(static function (ProductEntityInterface $item) {
-            $item->family = collect([$item->family()]);
-            $item->unit = collect([$item->unit()]);
-            $item->tax_rate = collect([$item->taxRate()]);
+        return JsonResponse::create($products->map(static function (ProductEntityInterface $item) use ($request) {
+            if(
+                strpos(strtolower($item->getDisplayName()), strtolower($request->get('search'))) === false &&
+                strpos(strtolower($item->getDescription()), strtolower($request->get('search'))) === false &&
+                strpos(strtolower($item->getSku()), strtolower($request->get('search'))) === false
+            ) {
+                return;
+            }
+
+            $item->family = $item->family();
+            $item->unit = $item->unit();
+            $item->tax_rate = $item->taxRate() ?: ['name' => 'No Tax', 'id' => null];
             return $item;
         }));
     }
