@@ -60262,9 +60262,10 @@ var table = results_table.DataTable({
     className: "right-align"
   }]
 });
-$('#product-search-table tbody').on('click', '.js-add-product', function () {
+$('#product-search-table tbody').on('click', '.js-add-product', function (event) {
+  event.preventDefault();
   var data = table.row($(this).parents('tr')).data();
-  console.log("Product ID: ", data.id);
+  console.log("Product: ", data);
 });
 search_field.on('keyup', function (event) {
   event.preventDefault();

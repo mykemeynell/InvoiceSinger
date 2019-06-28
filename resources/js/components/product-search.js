@@ -21,10 +21,11 @@ let table = results_table.DataTable({
     }]
 });
 
-$('#product-search-table tbody').on( 'click', '.js-add-product', function () {
-    var data = table.row($(this).parents('tr')).data();
+$('#product-search-table tbody').on( 'click', '.js-add-product', function (event) {
+    event.preventDefault();
 
-    console.log("Product ID: ", data.id);
+    var data = table.row($(this).parents('tr')).data();
+    console.log("Product: ", data);
 } );
 
 
