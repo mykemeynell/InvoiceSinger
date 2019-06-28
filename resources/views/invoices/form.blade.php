@@ -110,7 +110,7 @@
 
         <div class="row">
             <div class="col s12">
-                <table class="responsive-table">
+                <table class="responsive-table" id="invoice-table">
                     <thead>
                         <tr>
                             <th>Item</th>

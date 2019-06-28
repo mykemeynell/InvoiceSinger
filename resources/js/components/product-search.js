@@ -24,8 +24,23 @@ let table = results_table.DataTable({
 $('#product-search-table tbody').on( 'click', '.js-add-product', function (event) {
     event.preventDefault();
 
-    var data = table.row($(this).parents('tr')).data();
-    console.log("Product: ", data);
+    var item = table.row($(this).parents('tr')).data();
+    console.log("Product: ", item);
+
+    let html = '            <tr>\n' +
+        '                        <td>\n' +
+        '                            <span class="display-block bold-text">' + item.name + '</span>\n' +
+        '                            ' + item.description + '\n' +
+        '                        </td>\n' +
+        '                        <td class="right-align">&pound;' + item.price + '</td>\n' +
+        '                        <td class="right-align">1<br>' + item.unit.unit + '</td>\n' +
+        '                        <td class="right-align">&pound;' + item.price + '</td>\n' +
+        '                        <td class="right-align">0%</td>\n' +
+        '                        <td class="right-align">' + item.tax_rate.name + ' (' + item.tax_rate.amount + '%)</td>\n' +
+        '                        <td class="right-align">&pound;' + item.price + '</td>\n' +
+        '                    </tr>';
+
+    $('#invoice-table tbody').append(html);
 } );
 
 

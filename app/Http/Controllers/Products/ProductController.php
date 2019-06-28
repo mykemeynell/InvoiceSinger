@@ -57,7 +57,7 @@ class ProductController extends Controller
 
             $item->family = $item->family();
             $item->unit = $item->unit();
-            $item->tax_rate = $item->taxRate() ?: ['name' => 'No Tax', 'id' => null];
+            $item->tax_rate = $item->taxRate() ?: ['name' => 'No Tax', 'amount' => 0, 'id' => null];
             return $item;
         }));
     }
