@@ -134,7 +134,7 @@
 
         <div class="row">
             <div class="col s9">
-                <a class="waves-effect waves-dark btn-flat margin-right-15" @click="addProduct()">Add Item</a>
+                <a class="waves-effect waves-dark btn-flat margin-right-15" @click="addItem()">Add Item</a>
                 <a href="#add-product-modal" class="waves-effect waves-dark btn-flat modal-trigger">Add Product</a>
             </div>
 

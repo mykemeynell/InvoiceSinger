@@ -34,7 +34,17 @@
 
 <script>
     export default {
-        props: ['products', 'product'],
+        data() {
+            return {
+                products: []
+            };
+        },
+        methods: {
+            addItem(product) {
+                console.log('Products: ', this);
+                console.log('Product: ', product);
+            }
+        },
         mounted () {
             console.log('Mounted Product Row vue template');
         }

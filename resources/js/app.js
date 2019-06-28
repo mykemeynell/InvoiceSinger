@@ -19,12 +19,7 @@ Vue.component('product-row', ProductRow);
  */
 
 const app = new Vue({
-    el: '#app',
-    methods: {
-        addProduct() {
-            console.log('sdf');
-        }
-    }
+    el: '#app'
 });
 
 $(document).ready(function() {
@@ -57,10 +52,8 @@ $(document).ready(function() {
         });
 
         $('#product-search-table tbody').on('click', '.js-add-product', function () {
-            var product = table.row($(this).parents('tr')).data();
-            console.log("Product: ", product);
-
-            app.addProduct(product);
+            let product = table.row($(this).parents('tr')).data();
+            ProductRow.methods['addItem'](product);
         });
     }
 });
