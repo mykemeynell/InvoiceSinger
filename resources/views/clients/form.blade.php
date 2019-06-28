@@ -189,8 +189,7 @@
                                 <div class="col s12">
                                     <label>
                                         <input type="checkbox" name="client[is_active]" class="filled-in"
-                                               @if(! is_null($client)){{ $client->isActive() ? 'checked="checked"' : '' }}@else checked="checked" @endif
-                                        "">
+                                               @if(! is_null($client)){{ $client->isActive() ? 'checked="checked"' : '' }}@else checked="checked" @endif>
                                         <span>Active</span>
                                     </label>
                                 </div>
