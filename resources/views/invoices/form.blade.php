@@ -122,20 +122,7 @@
                             <th class="right-align">Total</th>
                         </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <span class="display-block bold-text">Example item</span>
-                            This is the example item
-                        </td>
-                        <td class="right-align">&pound;9.99</td>
-                        <td class="right-align">1 Unit</td>
-                        <td class="right-align">&pound;9.99</td>
-                        <td class="right-align">0%</td>
-                        <td class="right-align">20%</td>
-                        <td class="right-align">&pound;11.99</td>
-                    </tr>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
