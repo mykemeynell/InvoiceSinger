@@ -5,9 +5,27 @@
  */
 
 require('./bootstrap');
+require('materialize-css/dist/js/materialize');
+
 window.Vue = require('vue');
 
-require('materialize-css/dist/js/materialize');
+import ProductRow from './components/ProductRow.vue';
+Vue.component('product-row', ProductRow);
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+const app = new Vue({
+    el: '#app',
+    methods: {
+        addProduct() {
+            console.log('sdf');
+        }
+    }
+});
 
 $(document).ready(function() {
     $('select').formSelect();
@@ -33,38 +51,16 @@ $(document).ready(function() {
             columnDefs: [{
                 targets: 5,
                 data: null,
-                defaultContent: "<a href='#' v-on:click='addProduct()' class='waves-effect waves-light btn-flat grey lighten-4'>Add</a>",
+                defaultContent: "<a class=\"js-add-product waves-effect waves-dark btn-flat grey lighten-4\">Add</a>",
                 className: "right-align"
             }]
         });
 
         $('#product-search-table tbody').on('click', '.js-add-product', function () {
             var product = table.row($(this).parents('tr')).data();
-
             console.log("Product: ", product);
+
+            app.addProduct(product);
         });
-    }
-});
-
-import ProductRow from './components/ProductRow.vue';
-Vue.component('product-row', ProductRow);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-const app = new Vue({
-    el: '#app',
-    methods: {
-        addProduct() {
-            let ComponentClass = window.Vue.extent(ProductRow);
-            let instance = new ComponentClass({
-                propsData: {product: {}}
-            });
-            instance.$mount();
-            this.$refs.container.appendChild(instance.$el);
-        }
     }
 });

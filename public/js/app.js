@@ -47538,7 +47538,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         var dropdownBounds = {
           left: idealXPos,
           top: idealYPos,
-          // height: idealHeight,
+          height: idealHeight,
           width: idealWidth
         };
 
@@ -72629,10 +72629,25 @@ __webpack_require__.r(__webpack_exports__);
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-
 __webpack_require__(/*! materialize-css/dist/js/materialize */ "./node_modules/materialize-css/dist/js/materialize.js");
 
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
+Vue.component('product-row', _components_ProductRow_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+var app = new Vue({
+  el: '#app',
+  methods: {
+    addProduct: function addProduct() {
+      console.log('sdf');
+    }
+  }
+});
 $(document).ready(function () {
   $('select').formSelect();
   $('.dropdown-trigger').dropdown();
@@ -72661,37 +72676,15 @@ $(document).ready(function () {
       columnDefs: [{
         targets: 5,
         data: null,
-        defaultContent: "<a href='#' v-on:click='addProduct()' class='waves-effect waves-light btn-flat grey lighten-4'>Add</a>",
+        defaultContent: "<a class=\"js-add-product waves-effect waves-dark btn-flat grey lighten-4\">Add</a>",
         className: "right-align"
       }]
     });
     $('#product-search-table tbody').on('click', '.js-add-product', function () {
       var product = table.row($(this).parents('tr')).data();
       console.log("Product: ", product);
+      app.addProduct(product);
     });
-  }
-});
-
-Vue.component('product-row', _components_ProductRow_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-var app = new Vue({
-  el: '#app',
-  methods: {
-    addProduct: function addProduct() {
-      var ComponentClass = window.Vue.extent(_components_ProductRow_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
-      var instance = new ComponentClass({
-        propsData: {
-          product: {}
-        }
-      });
-      instance.$mount();
-      this.$refs.container.appendChild(instance.$el);
-    }
   }
 });
 
