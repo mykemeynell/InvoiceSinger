@@ -126,37 +126,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>
-                            <input type="text" value="" placeholder="Name" name="">
-                            <textarea class="materialize-textarea" placeholder="Description" name=""></textarea>
-                        </td>
-                        <td class="right-align">
-                            <div class="input-field">
-                                <input type="text" value="0.00" class="right-align" name="">
-                            </div>
-                        </td>
-                        <td class="right-align">
-                            <input type="text" value="1" class="right-align" name="">
-                            <select>
-                                <option value="">Unit</option>
-                            </select>
-                        </td>
-                        <td class="right-align">
-                            £<span class="invoice-product-subtotal">0.00</span>
-                        </td>
-                        <td class="right-align">
-                            <input type="text" value="0" class="right-align" name="">
-                        </td>
-                        <td class="right-align">
-                            <select>
-                                <option value="">Tax</option>
-                            </select>
-                        </td>
-                        <td class="right-align">
-                            £0.00
-                        </td>
-                    </tr>
+                        <tr is="product-row"></tr>
                     </tbody>
                 </table>
             </div>
@@ -251,38 +221,7 @@
         $(document).ready(function(){
             $('.modal').modal();
 
-            let makeId = function (length) {
-                var result           = '';
-                var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                var charactersLength = characters.length;
-                for ( var i = 0; i < length; i++ ) {
-                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-                }
-                return result;
-            };
-
             let search_field = $('#product-search-field');
-            let results_table = $('#product-search-table');
-
-            let table = results_table.DataTable({
-                ajax: {
-                    url: '/api/products',
-                    dataSrc: ''
-                },
-                columns: [
-                    {data: 'sku'},
-                    {data: 'family.name'},
-                    {data: 'name'},
-                    {data: 'unit.name'},
-                    {data: 'price'}
-                ],
-                columnDefs: [{
-                    targets: 5,
-                    data: null,
-                    defaultContent: "<a href='#' class='js-add-product waves-effect waves-light btn-flat grey lighten-4'>Add</a>",
-                    className: "right-align"
-                }]
-            });
 
             search_field.on('keyup', function(event) {
                 event.preventDefault();
