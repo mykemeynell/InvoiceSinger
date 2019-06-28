@@ -1873,17 +1873,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      products: []
-    };
-  },
-  methods: {
-    addItem: function addItem(product) {
-      console.log('Products: ', this);
-      console.log('Product: ', product);
-    }
-  },
   mounted: function mounted() {
     console.log('Mounted Product Row vue template');
   }
@@ -72651,7 +72640,17 @@ Vue.component('product-row', _components_ProductRow_vue__WEBPACK_IMPORTED_MODULE
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: function data() {
+    return {
+      products: []
+    };
+  },
+  methods: {
+    addItem: function addItem(product) {
+      this.products.push(product);
+    }
+  }
 });
 $(document).ready(function () {
   $('select').formSelect();
@@ -72687,7 +72686,7 @@ $(document).ready(function () {
     });
     $('#product-search-table tbody').on('click', '.js-add-product', function () {
       var product = table.row($(this).parents('tr')).data();
-      _components_ProductRow_vue__WEBPACK_IMPORTED_MODULE_0__["default"].methods['addItem'](product);
+      app.methods.addItem(product);
     });
   }
 });

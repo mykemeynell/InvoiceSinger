@@ -19,7 +19,17 @@ Vue.component('product-row', ProductRow);
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data() {
+        return {
+            products: []
+        }
+    },
+    methods: {
+        addItem(product) {
+            this.products.push(product);
+        }
+    }
 });
 
 $(document).ready(function() {
@@ -53,7 +63,7 @@ $(document).ready(function() {
 
         $('#product-search-table tbody').on('click', '.js-add-product', function () {
             let product = table.row($(this).parents('tr')).data();
-            ProductRow.methods['addItem'](product);
+            app.methods.addItem(product);
         });
     }
 });
