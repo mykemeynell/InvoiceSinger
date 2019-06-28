@@ -1,4 +1,7 @@
-@inject('clientService', \InvoiceSinger\Storage\Service\ClientService)
+@inject('client_service', \InvoiceSinger\Storage\Service\ClientService)
+@inject('unit_service', \InvoiceSinger\Storage\Service\UnitService)
+@inject('tax_rate_service', \InvoiceSinger\Storage\Service\TaxRateService)
+
 @extends('layouts.app')
 
 @section('content')
@@ -28,7 +31,7 @@
             <div class="col s6">
                 <ul>
                     <li><h5>{{ $invoice->client()->getDisplayName() }}</h5></li>
-                    @foreach($clientService->getAddressObject($invoice->client()) as $address_line)
+                    @foreach($client_service->getAddressObject($invoice->client()) as $address_line)
                         @if(! empty($address_line))
                         <li>{{ $address_line }}</li>
                         @endif
@@ -114,15 +117,16 @@
                     <thead>
                         <tr>
                             <th>Item</th>
-                            <th class="right-align">Price</th>
-                            <th class="right-align">Quantity</th>
-                            <th class="right-align">Subtotal</th>
-                            <th class="right-align">Discount</th>
-                            <th class="right-align">Tax Rate</th>
-                            <th class="right-align">Total</th>
+                            <th class="right-align" width="150">Price</th>
+                            <th class="right-align" width="250">Quantity</th>
+                            <th class="right-align" width="150">Subtotal</th>
+                            <th class="right-align" width="150">Discount</th>
+                            <th class="right-align" width="250">Tax Rate</th>
+                            <th class="right-align" width="150">Total</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -204,6 +208,144 @@
     <script>
         $(document).ready(function(){
             $('.modal').modal();
+
+            let makeId = function (length) {
+                var result           = '';
+                var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                var charactersLength = characters.length;
+                for ( var i = 0; i < length; i++ ) {
+                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                }
+                return result;
+            };
+
+            let search_field = $('#product-search-field');
+            let results_table = $('#product-search-table');
+
+            let table = results_table.DataTable({
+                ajax: {
+                    url: '/api/products',
+                    dataSrc: ''
+                },
+                columns: [
+                    {data: 'sku'},
+                    {data: 'family.name'},
+                    {data: 'name'},
+                    {data: 'unit.name'},
+                    {data: 'price'}
+                ],
+                columnDefs: [{
+                    targets: 5,
+                    data: null,
+                    defaultContent: "<a href='#' class='js-add-product waves-effect waves-light btn-flat grey lighten-4'>Add</a>",
+                    className: "right-align"
+                }]
+            });
+
+            $('#product-search-table tbody').on( 'click', '.js-add-product', function (event) {
+                event.preventDefault();
+
+                let item = table.row($(this).parents('tr')).data();
+                let id = makeId(64);
+
+                console.log("Product: ", item);
+
+                let html = '<tr>\n' +
+                    '                        <td>\n' +
+                    '                            <input type="text" value="' + item.name + '" placeholder="Name" name="invoice[products][' + id + '][name]">\n' +
+                    '                            <textarea class="materialize-textarea" placeholder="Description" name="invoice[products][' + id + '][description]">' + item.description + '</textarea>\n' +
+                    '                        </td>\n' +
+                    '                        <td class="right-align">\n' +
+                    '                            <div class="input-field">\n' +
+                    '                                <input type="text" value="' + item.price + '" class="right-align invoice-product-' + id + '-price" name="invoice[products][' + id + '][price]">\n' +
+                    '                            </div>\n' +
+                    '                        </td>\n' +
+                    '                        <td class="right-align">\n' +
+                    '                            <input type="text" value="1" class="right-align invoice-product-' + id + '-quantity" name="invoice[products][' + id + '][quantity]">\n' +
+                    '                            <select name="invoice[products][' + id + '][unit]" class="invoice-product-' + id + '-select">\n' +
+                    @foreach($unit_service->fetch() as $unit)
+                    '                                <option value="{{ $unit->getKey() }}">{{ $unit->getDisplayName() }}</option>\n' +
+                    @endforeach
+                    '                            </select>\n' +
+                    '                        </td>\n' +
+                    '                        <td class="right-align">\n' +
+                    '                            &pound;<span class="invoice-product-' + id + '-subtotal">' + item.price + '</span>\n' +
+                    '                        </td>\n' +
+                    '                        <td class="right-align">\n' +
+                    '                            <input type="text" value="0" class="right-align invoice-product-' + id + '-discount" name="invoice[products][' + id + '][discount]">\n' +
+                    '                        </td>\n' +
+                    '                        <td class="right-align">\n' +
+                    '                            <select name="invoice[products][' + id + '][tax_rate]" class="invoice-product-' + id + '-select invoice-product-' + id + '-tax">\n' +
+                    '                                <option value="">No Tax (0%)</option>\n' +
+                    @foreach($tax_rate_service->fetch() as $tax_rate)
+                    '                                <option value="{{ $tax_rate->getKey() }}">{{ $tax_rate->getDisplayName() }} ({{ $tax_rate->getAmount() }}%)</option>\n' +
+                    @endforeach
+                    '                            </select>\n' +
+                    @foreach($tax_rate_service->fetch() as $tax_rate)
+                    '                            <input type="hidden" class="invoice-hidden-tax-rate-" value="1">\n' +
+                    '                            <input type="hidden" class="invoice-hidden-tax-rate-{{ $tax_rate->getKey() }}" value="{{ $tax_rate->getMultiplier() }}">\n' +
+                    @endforeach
+                    '                        </td>\n' +
+                    '                        <td class="right-align">\n' +
+                    '                            &pound;<span class="invoice-product-' + id + '-total">' + item.price + '</span>\n' +
+                    '                        </td>\n' +
+                    '                    </tr>';
+
+                $('#invoice-table tbody').append(html);
+                $('.invoice-product-' + id + '-select').formSelect();
+
+                let product = {
+                    'price': $('.invoice-product-' + id + '-price'),
+                    'quantity': $('.invoice-product-' + id + '-quantity'),
+                    'subtotal': $('.invoice-product-' + id + '-subtotal'),
+                    'discount': $('.invoice-product-' + id + '-discount'),
+                    'tax': $('.invoice-product-' + id + '-tax'),
+                    'total': $('.invoice-product-' + id + '-total')
+                };
+
+                // Handle price change of product in invoice table.
+                $('body').on('keyup', product.price, function(event) {
+                    event.preventDefault();
+                    product.subtotal.html(calculateSubtotal(product.price.val(), product.quantity.val()))
+                });
+
+                // Handle quantity change of product in invoice table.
+                $('body').on('keyup', product.quantity, function(event) {
+                    event.preventDefault();
+                    product.subtotal.html(calculateSubtotal(product.price.val(), product.quantity.val()));
+
+                    let tax_id = $('.invoice-product-' + id + '-tax').val(),
+                        multiplier = $('.invoice-hidden-tax-rate-' + tax_id).val();
+                    product.total.text(calculateTotal(product.subtotal.text(), product.discount.val(), multiplier));
+                });
+
+                $('body').on('change', product.tax, function(event) {
+                    event.preventDefault();
+                    let tax_id = $('.invoice-product-' + id + '-tax').val(),
+                        multiplier = $('.invoice-hidden-tax-rate-' + tax_id).val();
+                    product.total.text(calculateTotal(product.subtotal.text(), product.discount.val(), multiplier));
+                });
+            } );
+
+            let calculateSubtotal = function(price, quantity) {
+                return parseFloat(price) * parseFloat(quantity);
+            };
+
+            let calculateTotal = function(subtotal, discount, multiplier) {
+                console.log('Subtotal: ', subtotal);
+                console.log('Discount: ', discount);
+                console.log('Multiplier: ', multiplier);
+
+                return ((subtotal * multiplier) - discount).toFixed(2);
+            };
+
+            search_field.on('keyup', function(event) {
+                event.preventDefault();
+                let table_search = $('#product-search-table_filter input[type="search"]');
+
+                table_search.val($(this).val());
+                table_search.trigger('keyup');
+            });
         });
     </script>
 @endpush
