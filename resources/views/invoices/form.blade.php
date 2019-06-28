@@ -126,6 +126,37 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" value="" placeholder="Name" name="">
+                            <textarea class="materialize-textarea" placeholder="Description" name=""></textarea>
+                        </td>
+                        <td class="right-align">
+                            <div class="input-field">
+                                <input type="text" value="0.00" class="right-align" name="">
+                            </div>
+                        </td>
+                        <td class="right-align">
+                            <input type="text" value="1" class="right-align" name="">
+                            <select>
+                                <option value="">Unit</option>
+                            </select>
+                        </td>
+                        <td class="right-align">
+                            £<span class="invoice-product-subtotal">0.00</span>
+                        </td>
+                        <td class="right-align">
+                            <input type="text" value="0" class="right-align" name="">
+                        </td>
+                        <td class="right-align">
+                            <select>
+                                <option value="">Tax</option>
+                            </select>
+                        </td>
+                        <td class="right-align">
+                            £0.00
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -141,7 +172,9 @@
                 <table class="responsive-table">
                     <tr>
                         <th>Subtotal</th>
-                        <td class="right-align">&pound;0.00</td>
+                        <td class="right-align">
+                            {!! app()->make(\mykemeynell\Support\CurrencyHtmlEntities::class)->entity(settings('app.currency')) !!}<span id="invoice-totals-subtotal">0.00</span>
+                        </td>
                     </tr>
                     <tr>
                         <th>Tax</th>
@@ -149,19 +182,27 @@
                     </tr>
                     <tr>
                         <th>Discount</th>
-                        <td class="right-align">&pound;0.00</td>
+                        <td class="right-align">
+                            {!! app()->make(\mykemeynell\Support\CurrencyHtmlEntities::class)->entity(settings('app.currency')) !!}<span id="invoice-totals-discount">0.00</span>
+                        </td>
                     </tr>
                     <tr>
                         <th>Total</th>
-                        <td class="right-align">&pound;0.00</td>
+                        <td class="right-align">
+                            {!! app()->make(\mykemeynell\Support\CurrencyHtmlEntities::class)->entity(settings('app.currency')) !!}<span id="invoice-totals-total">0.00</span>
+                        </td>
                     </tr>
                     <tr>
                         <th>Paid</th>
-                        <td class="right-align">&pound;0.00</td>
+                        <td class="right-align">
+                            {!! app()->make(\mykemeynell\Support\CurrencyHtmlEntities::class)->entity(settings('app.currency')) !!}<span id="invoice-totals-paid">0.00</span>
+                        </td>
                     </tr>
                     <tr>
                         <th><span class="bold-text">Balance</span></th>
-                        <td class="right-align">&pound;0.00</td>
+                        <td class="right-align">
+                            {!! app()->make(\mykemeynell\Support\CurrencyHtmlEntities::class)->entity(settings('app.currency')) !!}<span id="invoice-totals-balance">0.00</span>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -195,7 +236,8 @@
                             <th class="right-align">&nbsp;</th>
                         </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -241,103 +283,6 @@
                     className: "right-align"
                 }]
             });
-
-            $('#product-search-table tbody').on( 'click', '.js-add-product', function (event) {
-                event.preventDefault();
-
-                let item = table.row($(this).parents('tr')).data();
-                let id = makeId(64);
-
-                console.log("Product: ", item);
-
-                let html = '<tr>\n' +
-                    '                        <td>\n' +
-                    '                            <input type="text" value="' + item.name + '" placeholder="Name" name="invoice[products][' + id + '][name]">\n' +
-                    '                            <textarea class="materialize-textarea" placeholder="Description" name="invoice[products][' + id + '][description]">' + item.description + '</textarea>\n' +
-                    '                        </td>\n' +
-                    '                        <td class="right-align">\n' +
-                    '                            <div class="input-field">\n' +
-                    '                                <input type="text" value="' + item.price + '" class="right-align invoice-product-' + id + '-price" name="invoice[products][' + id + '][price]">\n' +
-                    '                            </div>\n' +
-                    '                        </td>\n' +
-                    '                        <td class="right-align">\n' +
-                    '                            <input type="text" value="1" class="right-align invoice-product-' + id + '-quantity" name="invoice[products][' + id + '][quantity]">\n' +
-                    '                            <select name="invoice[products][' + id + '][unit]" class="invoice-product-' + id + '-select">\n' +
-                    @foreach($unit_service->fetch() as $unit)
-                    '                                <option value="{{ $unit->getKey() }}">{{ $unit->getDisplayName() }}</option>\n' +
-                    @endforeach
-                    '                            </select>\n' +
-                    '                        </td>\n' +
-                    '                        <td class="right-align">\n' +
-                    '                            &pound;<span class="invoice-product-' + id + '-subtotal">' + item.price + '</span>\n' +
-                    '                        </td>\n' +
-                    '                        <td class="right-align">\n' +
-                    '                            <input type="text" value="0" class="right-align invoice-product-' + id + '-discount" name="invoice[products][' + id + '][discount]">\n' +
-                    '                        </td>\n' +
-                    '                        <td class="right-align">\n' +
-                    '                            <select name="invoice[products][' + id + '][tax_rate]" class="invoice-product-' + id + '-select invoice-product-' + id + '-tax">\n' +
-                    '                                <option value="">No Tax (0%)</option>\n' +
-                    @foreach($tax_rate_service->fetch() as $tax_rate)
-                    '                                <option value="{{ $tax_rate->getKey() }}">{{ $tax_rate->getDisplayName() }} ({{ $tax_rate->getAmount() }}%)</option>\n' +
-                    @endforeach
-                    '                            </select>\n' +
-                    @foreach($tax_rate_service->fetch() as $tax_rate)
-                    '                            <input type="hidden" class="invoice-hidden-tax-rate-" value="1">\n' +
-                    '                            <input type="hidden" class="invoice-hidden-tax-rate-{{ $tax_rate->getKey() }}" value="{{ $tax_rate->getMultiplier() }}">\n' +
-                    @endforeach
-                    '                        </td>\n' +
-                    '                        <td class="right-align">\n' +
-                    '                            &pound;<span class="invoice-product-' + id + '-total">' + item.price + '</span>\n' +
-                    '                        </td>\n' +
-                    '                    </tr>';
-
-                $('#invoice-table tbody').append(html);
-                $('.invoice-product-' + id + '-select').formSelect();
-
-                let product = {
-                    'price': $('.invoice-product-' + id + '-price'),
-                    'quantity': $('.invoice-product-' + id + '-quantity'),
-                    'subtotal': $('.invoice-product-' + id + '-subtotal'),
-                    'discount': $('.invoice-product-' + id + '-discount'),
-                    'tax': $('.invoice-product-' + id + '-tax'),
-                    'total': $('.invoice-product-' + id + '-total')
-                };
-
-                // Handle price change of product in invoice table.
-                $('body').on('keyup', product.price, function(event) {
-                    event.preventDefault();
-                    product.subtotal.html(calculateSubtotal(product.price.val(), product.quantity.val()))
-                });
-
-                // Handle quantity change of product in invoice table.
-                $('body').on('keyup', product.quantity, function(event) {
-                    event.preventDefault();
-                    product.subtotal.html(calculateSubtotal(product.price.val(), product.quantity.val()));
-
-                    let tax_id = $('.invoice-product-' + id + '-tax').val(),
-                        multiplier = $('.invoice-hidden-tax-rate-' + tax_id).val();
-                    product.total.text(calculateTotal(product.subtotal.text(), product.discount.val(), multiplier));
-                });
-
-                $('body').on('change', product.tax, function(event) {
-                    event.preventDefault();
-                    let tax_id = $('.invoice-product-' + id + '-tax').val(),
-                        multiplier = $('.invoice-hidden-tax-rate-' + tax_id).val();
-                    product.total.text(calculateTotal(product.subtotal.text(), product.discount.val(), multiplier));
-                });
-            } );
-
-            let calculateSubtotal = function(price, quantity) {
-                return parseFloat(price) * parseFloat(quantity);
-            };
-
-            let calculateTotal = function(subtotal, discount, multiplier) {
-                console.log('Subtotal: ', subtotal);
-                console.log('Discount: ', discount);
-                console.log('Multiplier: ', multiplier);
-
-                return ((subtotal * multiplier) - discount).toFixed(2);
-            };
 
             search_field.on('keyup', function(event) {
                 event.preventDefault();
