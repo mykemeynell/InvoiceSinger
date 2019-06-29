@@ -17,7 +17,7 @@
                     </thead>
                     <tbody>
                         <template v-for="(product, index) in products">
-                            <component is="product-row"></component>
+                            <component is="product-row" v-bind="product"></component>
                         </template>
                     </tbody>
                 </table>
@@ -81,15 +81,17 @@
         },
         data() {
             return {
-                products: []
+                products: [],
+                count: 0
             };
         },
         methods: {
             addItem(product) {
                 if(typeof product === 'undefined') {
-                    product = [];
+                    product = {count: this.count};
                 }
                 this.products.push(product);
+                this.count++;
             }
         }
     }

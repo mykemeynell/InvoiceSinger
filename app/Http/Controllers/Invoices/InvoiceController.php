@@ -70,6 +70,8 @@ class InvoiceController extends Controller
      */
     public function handlePost(InvoiceRequest $request): RedirectResponse
     {
+        dd($request->getParameterBag());
+
         try {
             if ($invoice = $request->invoice()) {
                 /** @var \InvoiceSinger\Storage\Entity\InvoiceEntity $invoice */

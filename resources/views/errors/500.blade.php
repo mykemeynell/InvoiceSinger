@@ -15,5 +15,9 @@
             </div>
         </div>
 
+        @if(in_array(config('app.env'), ['local', 'development']))
+            {!! $exception->getMessage() !!}
+        @endif
+
     </div>
 @endsection

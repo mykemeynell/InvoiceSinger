@@ -1872,19 +1872,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Mounted Product Row vue template');
+    $('select').formSelect();
   },
-  data: function data() {
-    return {
-      products: []
-    };
-  },
-  methods: {
-    addItem: function addItem(product) {
-      this.products.push(product);
-      console.log('Added item: ', product);
+  props: ['count', 'product'],
+  computed: {
+    nameFieldName: function nameFieldName() {
+      return 'invoice[products][' + this.count + '][name]';
+    },
+    descriptionFieldName: function descriptionFieldName() {
+      return 'invoice[products][' + this.count + '][description]';
+    },
+    priceFieldName: function priceFieldName() {
+      return 'invoice[products][' + this.count + '][price]';
+    },
+    quantityFieldName: function quantityFieldName() {
+      return 'invoice[products][' + this.count + '][quantity]';
+    },
+    unitFieldName: function unitFieldName() {
+      return 'invoice[products][' + this.count + '][unit]';
+    },
+    subtotalFieldName: function subtotalFieldName() {
+      return 'invoice[products][' + this.count + '][subtotal]';
+    },
+    discountFieldName: function discountFieldName() {
+      return 'invoice[products][' + this.count + '][discount]';
+    },
+    taxRateFieldName: function taxRateFieldName() {
+      return 'invoice[products][' + this.count + '][tax_rate]';
+    },
+    totalFieldName: function totalFieldName() {
+      return 'invoice[products][' + this.count + '][total]';
     }
   }
 });
@@ -1982,16 +2004,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      products: []
+      products: [],
+      count: 0
     };
   },
   methods: {
     addItem: function addItem(product) {
       if (typeof product === 'undefined') {
-        product = [];
+        product = {
+          count: this.count
+        };
       }
 
       this.products.push(product);
+      this.count++;
     }
   }
 });
@@ -60526,67 +60552,81 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", [
-        _c("input", {
-          attrs: { type: "text", value: "", placeholder: "Name", name: "" }
-        }),
-        _vm._v(" "),
-        _c("textarea", {
-          staticClass: "materialize-textarea",
-          attrs: { placeholder: "Description", name: "" }
-        })
-      ]),
+  return _c("tr", [
+    _c("td", [
+      _c("input", {
+        attrs: {
+          type: "text",
+          value: "",
+          placeholder: "Name",
+          name: _vm.nameFieldName
+        }
+      }),
       _vm._v(" "),
-      _c("td", { staticClass: "right-align" }, [
-        _c("div", { staticClass: "input-field" }, [
-          _c("input", {
-            staticClass: "right-align",
-            attrs: { type: "text", value: "0.00", name: "" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("td", { staticClass: "right-align" }, [
+      _c("textarea", {
+        staticClass: "materialize-textarea",
+        attrs: { placeholder: "Description", name: _vm.descriptionFieldName }
+      })
+    ]),
+    _vm._v(" "),
+    _c("td", { staticClass: "right-align" }, [
+      _c("div", { staticClass: "input-field" }, [
         _c("input", {
           staticClass: "right-align",
-          attrs: { type: "text", value: "1", name: "" }
-        }),
-        _vm._v(" "),
-        _c("select", [_c("option", { attrs: { value: "" } }, [_vm._v("Unit")])])
-      ]),
-      _vm._v(" "),
-      _c("td", { staticClass: "right-align" }, [
-        _vm._v("\n        £"),
-        _c("span", { staticClass: "invoice-product-subtotal" }, [
-          _vm._v("0.00")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("td", { staticClass: "right-align" }, [
-        _c("input", {
-          staticClass: "right-align",
-          attrs: { type: "text", value: "0", name: "" }
+          attrs: { type: "text", value: "0.00", name: _vm.priceFieldName }
         })
-      ]),
-      _vm._v(" "),
-      _c("td", { staticClass: "right-align" }, [
-        _c("select", [_c("option", { attrs: { value: "" } }, [_vm._v("Tax")])])
-      ]),
-      _vm._v(" "),
-      _c("td", { staticClass: "right-align" }, [
-        _vm._v("\n        £0.00\n    ")
       ])
+    ]),
+    _vm._v(" "),
+    _c("td", { staticClass: "right-align" }, [
+      _c("input", {
+        staticClass: "right-align",
+        attrs: { type: "text", value: "1", name: _vm.quantityFieldName }
+      }),
+      _vm._v(" "),
+      _c("select", { attrs: { name: _vm.unitFieldName } }, [
+        _c("option", { attrs: { value: "" } }, [_vm._v("Unit")])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("td", { staticClass: "right-align" }, [
+      _vm._v("\n        £"),
+      _c("span", { staticClass: "invoice-product-subtotal" }, [_vm._v("0.00")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: {
+          type: "hidden",
+          name: _vm.subtotalFieldName,
+          id: "subtotal-field",
+          value: "0.00"
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("td", { staticClass: "right-align" }, [
+      _c("input", {
+        staticClass: "right-align",
+        attrs: { type: "text", value: "0", name: _vm.discountFieldName }
+      })
+    ]),
+    _vm._v(" "),
+    _c("td", { staticClass: "right-align" }, [
+      _c("select", { attrs: { name: _vm.taxRateFieldName } }, [
+        _c("option", { attrs: { value: "" } }, [_vm._v("Tax")])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("td", { staticClass: "right-align" }, [
+      _vm._v("\n        £"),
+      _c("span", [_vm._v("0.00")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "hidden", name: _vm.totalFieldName, value: "0.00" }
+      })
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -60621,7 +60661,12 @@ var render = function() {
               "tbody",
               [
                 _vm._l(_vm.products, function(product, index) {
-                  return [_c("product-row", { tag: "component" })]
+                  return [
+                    _c(
+                      "product-row",
+                      _vm._b({ tag: "component" }, "component", product, false)
+                    )
+                  ]
                 })
               ],
               2
