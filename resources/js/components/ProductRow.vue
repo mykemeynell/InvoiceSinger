@@ -1,26 +1,26 @@
 <template>
     <tr>
         <td>
-            <input type="text" value="" placeholder="Name" :name="nameFieldName">
-            <textarea class="materialize-textarea" placeholder="Description" :name="descriptionFieldName"></textarea>
+            <input type="text" placeholder="Name" :name="nameFieldName" :value="product.name">
+            <textarea class="materialize-textarea" placeholder="Description" :name="descriptionFieldName">{{ product.description }}</textarea>
         </td>
         <td class="right-align">
             <div class="input-field">
-                <input type="text" value="0.00" class="right-align" :name="priceFieldName">
+                <input type="text" class="right-align" :name="priceFieldName" :value="product.price ? product.price : '0.00'">
             </div>
         </td>
         <td class="right-align">
-            <input type="text" value="1" class="right-align" :name="quantityFieldName">
+            <input type="text" class="right-align" :name="quantityFieldName" value="1">
             <select :name="unitFieldName">
                 <option value="">Unit</option>
             </select>
         </td>
         <td class="right-align">
-            {{ currency }}<span class="invoice-product-subtotal">0.00</span>
-            <input type="hidden" :name="subtotalFieldName" id="subtotal-field" value="0.00">
+            {{ currency }}<span class="invoice-product-subtotal">{{ product.price ? product.price : '0.00' }}</span>
+            <input type="hidden" :name="subtotalFieldName" id="subtotal-field" :value="product.price ? product.price : '0.00'">
         </td>
         <td class="right-align">
-            <input type="text" value="0" class="right-align" :name="discountFieldName">
+            <input type="text" class="right-align" :name="discountFieldName" value="0.00">
         </td>
         <td class="right-align">
             <select :name="taxRateFieldName">
@@ -28,8 +28,8 @@
             </select>
         </td>
         <td class="right-align">
-            {{ currency }}<span>0.00</span>
-            <input type="hidden" :name="totalFieldName" value="0.00">
+            {{ currency }}<span>{{ product.price ? product.price : '0.00' }}</span>
+            <input type="hidden" :name="totalFieldName" value="0.00" :value="product.price">
         </td>
     </tr>
 </template>

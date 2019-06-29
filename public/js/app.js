@@ -60564,25 +60564,26 @@ var render = function() {
   return _c("tr", [
     _c("td", [
       _c("input", {
-        attrs: {
-          type: "text",
-          value: "",
-          placeholder: "Name",
-          name: _vm.nameFieldName
-        }
+        attrs: { type: "text", placeholder: "Name", name: _vm.nameFieldName },
+        domProps: { value: _vm.product.name }
       }),
       _vm._v(" "),
-      _c("textarea", {
-        staticClass: "materialize-textarea",
-        attrs: { placeholder: "Description", name: _vm.descriptionFieldName }
-      })
+      _c(
+        "textarea",
+        {
+          staticClass: "materialize-textarea",
+          attrs: { placeholder: "Description", name: _vm.descriptionFieldName }
+        },
+        [_vm._v(_vm._s(_vm.product.description))]
+      )
     ]),
     _vm._v(" "),
     _c("td", { staticClass: "right-align" }, [
       _c("div", { staticClass: "input-field" }, [
         _c("input", {
           staticClass: "right-align",
-          attrs: { type: "text", value: "0.00", name: _vm.priceFieldName }
+          attrs: { type: "text", name: _vm.priceFieldName },
+          domProps: { value: _vm.product.price ? _vm.product.price : "0.00" }
         })
       ])
     ]),
@@ -60590,7 +60591,7 @@ var render = function() {
     _c("td", { staticClass: "right-align" }, [
       _c("input", {
         staticClass: "right-align",
-        attrs: { type: "text", value: "1", name: _vm.quantityFieldName }
+        attrs: { type: "text", name: _vm.quantityFieldName, value: "1" }
       }),
       _vm._v(" "),
       _c("select", { attrs: { name: _vm.unitFieldName } }, [
@@ -60600,22 +60601,24 @@ var render = function() {
     _vm._v(" "),
     _c("td", { staticClass: "right-align" }, [
       _vm._v("\n        " + _vm._s(_vm.currency)),
-      _c("span", { staticClass: "invoice-product-subtotal" }, [_vm._v("0.00")]),
+      _c("span", { staticClass: "invoice-product-subtotal" }, [
+        _vm._v(_vm._s(_vm.product.price ? _vm.product.price : "0.00"))
+      ]),
       _vm._v(" "),
       _c("input", {
         attrs: {
           type: "hidden",
           name: _vm.subtotalFieldName,
-          id: "subtotal-field",
-          value: "0.00"
-        }
+          id: "subtotal-field"
+        },
+        domProps: { value: _vm.product.price ? _vm.product.price : "0.00" }
       })
     ]),
     _vm._v(" "),
     _c("td", { staticClass: "right-align" }, [
       _c("input", {
         staticClass: "right-align",
-        attrs: { type: "text", value: "0", name: _vm.discountFieldName }
+        attrs: { type: "text", name: _vm.discountFieldName, value: "0.00" }
       })
     ]),
     _vm._v(" "),
@@ -60627,10 +60630,13 @@ var render = function() {
     _vm._v(" "),
     _c("td", { staticClass: "right-align" }, [
       _vm._v("\n        " + _vm._s(_vm.currency)),
-      _c("span", [_vm._v("0.00")]),
+      _c("span", [
+        _vm._v(_vm._s(_vm.product.price ? _vm.product.price : "0.00"))
+      ]),
       _vm._v(" "),
       _c("input", {
-        attrs: { type: "hidden", name: _vm.totalFieldName, value: "0.00" }
+        attrs: { type: "hidden", name: _vm.totalFieldName, value: "0.00" },
+        domProps: { value: _vm.product.price }
       })
     ])
   ])
