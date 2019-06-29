@@ -13,10 +13,11 @@
                         <th class="right-align" width="150">Discount</th>
                         <th class="right-align" width="250">Tax Rate</th>
                         <th class="right-align" width="150">Total</th>
+                        <th class="right-align" width="50">&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <template v-for="(product, index) in products">
+                        <template v-for="product in products">
                             <component is="product-row" :product="product" :currency="currency" :taxes="taxes" :units="units"></component>
                         </template>
                     </tbody>

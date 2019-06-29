@@ -1,5 +1,5 @@
 <template>
-    <tr>
+    <tr :id="rowId">
         <td>
             <input type="text" placeholder="Name" :name="nameFieldName" :value="product.name">
             <textarea class="materialize-textarea" placeholder="Description" :name="descriptionFieldName">{{ product.description }}</textarea>
@@ -32,17 +32,20 @@
             {{ currency }}<span>{{ product.price ? product.price : '0.00' }}</span>
             <input type="hidden" :name="totalFieldName" value="0.00" :value="product.price">
         </td>
+        <td class="right-align" width="50">
+            <i class="material-icons">remove_circle_outline</i>
+        </td>
     </tr>
 </template>
 
 <script>
     export default {
         mounted () {
-            console.log('Mounted Product Row vue template');
             $('select').formSelect();
         },
         props: ['count', 'product', 'currency', 'taxes', 'units'],
         computed: {
+            rowId: function () { return 'product-' + this.count; },
             nameFieldName: function () { return 'invoice[products][' + this.count + '][name]'; },
             descriptionFieldName: function () { return 'invoice[products][' + this.count + '][description]'; },
             priceFieldName: function () { return 'invoice[products][' + this.count + '][price]'; },

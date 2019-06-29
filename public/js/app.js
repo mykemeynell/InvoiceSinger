@@ -1875,13 +1875,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log('Mounted Product Row vue template');
     $('select').formSelect();
   },
   props: ['count', 'product', 'currency', 'taxes', 'units'],
   computed: {
+    rowId: function rowId() {
+      return 'product-' + this.count;
+    },
     nameFieldName: function nameFieldName() {
       return 'invoice[products][' + this.count + '][name]';
     },
@@ -1923,6 +1928,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -60564,7 +60570,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("tr", [
+  return _c("tr", { attrs: { id: _vm.rowId } }, [
     _c("td", [
       _c("input", {
         attrs: { type: "text", placeholder: "Name", name: _vm.nameFieldName },
@@ -60669,10 +60675,23 @@ var render = function() {
         attrs: { type: "hidden", name: _vm.totalFieldName, value: "0.00" },
         domProps: { value: _vm.product.price }
       })
-    ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "right-align", attrs: { width: "50" } }, [
+      _c("i", { staticClass: "material-icons" }, [
+        _vm._v("remove_circle_outline")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -60706,7 +60725,7 @@ var render = function() {
             _c(
               "tbody",
               [
-                _vm._l(_vm.products, function(product, index) {
+                _vm._l(_vm.products, function(product) {
                   return [
                     _c("product-row", {
                       tag: "component",
@@ -60846,6 +60865,10 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "right-align", attrs: { width: "150" } }, [
           _vm._v("Total")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "right-align", attrs: { width: "50" } }, [
+          _vm._v(" ")
         ])
       ])
     ])
