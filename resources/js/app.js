@@ -10,7 +10,9 @@ require('materialize-css/dist/js/materialize');
 window.Vue = require('vue');
 
 import ProductRow from './components/ProductRow.vue';
+import ProductTable from './components/ProductTable.vue';
 Vue.component('product-row', ProductRow);
+Vue.component('product-table', ProductTable);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
