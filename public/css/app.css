@@ -9772,6 +9772,41 @@ input[type=range]::-ms-thumb {
   font-weight: boldest !important;
 }
 
+.pointer-cursor {
+  cursor: pointer !important;
+}
+
+.help-cursor {
+  cursor: help !important;
+}
+
+.wait-cursor {
+  cursor: wait !important;
+}
+
+.crosshair-cursor {
+  cursor: crosshair !important;
+}
+
+.notallowed-cursor {
+  cursor: notallowed !important;
+}
+
+.zoom-in-cursor {
+  cursor: -webkit-zoom-in !important;
+  cursor: zoom-in !important;
+}
+
+.zoom-out-cursor {
+  cursor: -webkit-zoom-out !important;
+  cursor: zoom-out !important;
+}
+
+.grab-cursor {
+  cursor: -webkit-grab !important;
+  cursor: grab !important;
+}
+
 #app-progress {
   position: absolute;
   top: 0;

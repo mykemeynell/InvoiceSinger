@@ -60689,7 +60689,7 @@ var render = function() {
       _c(
         "i",
         {
-          staticClass: "material-icons",
+          staticClass: "material-icons pointer-cursor",
           on: {
             click: function($event) {
               return _vm.removeItem(_vm.product.count)

@@ -33,7 +33,7 @@
             <input type="hidden" :name="totalFieldName" value="0.00" :value="product.price">
         </td>
         <td class="right-align" width="50">
-            <i class="material-icons" @click="removeItem(product.count)">remove_circle_outline</i>
+            <i class="material-icons pointer-cursor" @click="removeItem(product.count)">remove_circle_outline</i>
         </td>
     </tr>
 </template>
