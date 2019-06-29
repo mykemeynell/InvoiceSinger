@@ -1976,6 +1976,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['currency'],
   mounted: function mounted() {
     console.log('Mounted Product Table vue template');
   },
@@ -60655,7 +60656,66 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _vm._m(1)
+      _c("div", { staticClass: "col s3" }, [
+        _c("table", { staticClass: "responsive-table" }, [
+          _c("tr", [
+            _c("th", [_vm._v("Subtotal")]),
+            _vm._v(" "),
+            _c("td", { staticClass: "right-align" }, [
+              _vm._v("\n                    " + _vm._s(_vm.currency)),
+              _c("span", { attrs: { id: "invoice-totals-subtotal" } }, [
+                _vm._v("0.00")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", [_vm._v("Discount")]),
+            _vm._v(" "),
+            _c("td", { staticClass: "right-align" }, [
+              _vm._v("\n                    " + _vm._s(_vm.currency)),
+              _c("span", { attrs: { id: "invoice-totals-discount" } }, [
+                _vm._v("0.00")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", [_vm._v("Total")]),
+            _vm._v(" "),
+            _c("td", { staticClass: "right-align" }, [
+              _vm._v("\n                    " + _vm._s(_vm.currency)),
+              _c("span", { attrs: { id: "invoice-totals-total" } }, [
+                _vm._v("0.00")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", [_vm._v("Paid")]),
+            _vm._v(" "),
+            _c("td", { staticClass: "right-align" }, [
+              _vm._v("\n                    " + _vm._s(_vm.currency)),
+              _c("span", { attrs: { id: "invoice-totals-paid" } }, [
+                _vm._v("0.00")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("td", { staticClass: "right-align" }, [
+              _vm._v("\n                    " + _vm._s(_vm.currency)),
+              _c("span", { attrs: { id: "invoice-totals-balance" } }, [
+                _vm._v("0.00")
+              ])
+            ])
+          ])
+        ])
+      ])
     ])
   ])
 }
@@ -60698,71 +60758,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col s3" }, [
-      _c("table", { staticClass: "responsive-table" }, [
-        _c("tr", [
-          _c("th", [_vm._v("Subtotal")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "right-align" }, [
-            _vm._v("\n                    £"),
-            _c("span", { attrs: { id: "invoice-totals-subtotal" } }, [
-              _vm._v("0.00")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("th", [_vm._v("Tax")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "right-align" }, [_vm._v("20%")])
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("th", [_vm._v("Discount")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "right-align" }, [
-            _vm._v("\n                    £"),
-            _c("span", { attrs: { id: "invoice-totals-discount" } }, [
-              _vm._v("0.00")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("th", [_vm._v("Total")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "right-align" }, [
-            _vm._v("\n                    £"),
-            _c("span", { attrs: { id: "invoice-totals-total" } }, [
-              _vm._v("0.00")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("th", [_vm._v("Paid")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "right-align" }, [
-            _vm._v("\n                    £"),
-            _c("span", { attrs: { id: "invoice-totals-paid" } }, [
-              _vm._v("0.00")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("th", [
-            _c("span", { staticClass: "bold-text" }, [_vm._v("Balance")])
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "right-align" }, [
-            _vm._v("\n                    £"),
-            _c("span", { attrs: { id: "invoice-totals-balance" } }, [
-              _vm._v("0.00")
-            ])
-          ])
-        ])
-      ])
+    return _c("tr", [
+      _c("th", [_vm._v("Tax")]),
+      _vm._v(" "),
+      _c("td", { staticClass: "right-align" }, [_vm._v("20%")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("th", [
+      _c("span", { staticClass: "bold-text" }, [_vm._v("Balance")])
     ])
   }
 ]

@@ -111,7 +111,7 @@
 
         <hr>
 
-        <product-table></product-table>
+        <product-table currency="{!! app()->make(\mykemeynell\Support\CurrencyHtmlEntities::class)->entity(settings('app.currency')) !!}"></product-table>
 
     </form>
 

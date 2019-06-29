@@ -36,7 +36,7 @@
                 <tr>
                     <th>Subtotal</th>
                     <td class="right-align">
-                        &pound;<span id="invoice-totals-subtotal">0.00</span>
+                        {{ currency }}<span id="invoice-totals-subtotal">0.00</span>
                     </td>
                 </tr>
                 <tr>
@@ -46,25 +46,25 @@
                 <tr>
                     <th>Discount</th>
                     <td class="right-align">
-                        &pound;<span id="invoice-totals-discount">0.00</span>
+                        {{ currency }}<span id="invoice-totals-discount">0.00</span>
                     </td>
                 </tr>
                 <tr>
                     <th>Total</th>
                     <td class="right-align">
-                        &pound;<span id="invoice-totals-total">0.00</span>
+                        {{ currency }}<span id="invoice-totals-total">0.00</span>
                     </td>
                 </tr>
                 <tr>
                     <th>Paid</th>
                     <td class="right-align">
-                        &pound;<span id="invoice-totals-paid">0.00</span>
+                        {{ currency }}<span id="invoice-totals-paid">0.00</span>
                     </td>
                 </tr>
                 <tr>
                     <th><span class="bold-text">Balance</span></th>
                     <td class="right-align">
-                        &pound;<span id="invoice-totals-balance">0.00</span>
+                        {{ currency }}<span id="invoice-totals-balance">0.00</span>
                     </td>
                 </tr>
             </table>
@@ -75,6 +75,7 @@
 
 <script>
     export default {
+        props: ['currency'],
         mounted () {
             console.log('Mounted Product Table vue template');
         },
