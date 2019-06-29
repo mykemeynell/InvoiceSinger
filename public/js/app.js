@@ -1882,37 +1882,42 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     $('select').formSelect();
   },
-  props: ['count', 'product', 'currency', 'taxes', 'units'],
+  props: ['product', 'currency', 'taxes', 'units'],
   computed: {
     rowId: function rowId() {
-      return 'product-' + this.count;
+      return 'product-' + this.product.count;
     },
     nameFieldName: function nameFieldName() {
-      return 'invoice[products][' + this.count + '][name]';
+      return 'invoice[products][' + this.product.count + '][name]';
     },
     descriptionFieldName: function descriptionFieldName() {
-      return 'invoice[products][' + this.count + '][description]';
+      return 'invoice[products][' + this.product.count + '][description]';
     },
     priceFieldName: function priceFieldName() {
-      return 'invoice[products][' + this.count + '][price]';
+      return 'invoice[products][' + this.product.count + '][price]';
     },
     quantityFieldName: function quantityFieldName() {
-      return 'invoice[products][' + this.count + '][quantity]';
+      return 'invoice[products][' + this.product.count + '][quantity]';
     },
     unitFieldName: function unitFieldName() {
-      return 'invoice[products][' + this.count + '][unit]';
+      return 'invoice[products][' + this.product.count + '][unit]';
     },
     subtotalFieldName: function subtotalFieldName() {
-      return 'invoice[products][' + this.count + '][subtotal]';
+      return 'invoice[products][' + this.product.count + '][subtotal]';
     },
     discountFieldName: function discountFieldName() {
-      return 'invoice[products][' + this.count + '][discount]';
+      return 'invoice[products][' + this.product.count + '][discount]';
     },
     taxRateFieldName: function taxRateFieldName() {
-      return 'invoice[products][' + this.count + '][tax_rate]';
+      return 'invoice[products][' + this.product.count + '][tax_rate]';
     },
     totalFieldName: function totalFieldName() {
-      return 'invoice[products][' + this.count + '][total]';
+      return 'invoice[products][' + this.product.count + '][total]';
+    }
+  },
+  methods: {
+    removeItem: function removeItem(index) {
+      this.$parent.removeItem(index);
     }
   }
 });
@@ -2029,6 +2034,9 @@ __webpack_require__.r(__webpack_exports__);
       this.products.push(product);
       console.log(this.products);
       this.count++;
+    },
+    removeItem: function removeItem(index) {
+      Vue["delete"](this.products, index);
     }
   },
   created: function created() {
@@ -60677,21 +60685,23 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
-    _vm._m(0)
+    _c("td", { staticClass: "right-align", attrs: { width: "50" } }, [
+      _c(
+        "i",
+        {
+          staticClass: "material-icons",
+          on: {
+            click: function($event) {
+              return _vm.removeItem(_vm.product.count)
+            }
+          }
+        },
+        [_vm._v("remove_circle_outline")]
+      )
+    ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "right-align", attrs: { width: "50" } }, [
-      _c("i", { staticClass: "material-icons" }, [
-        _vm._v("remove_circle_outline")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

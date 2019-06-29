@@ -33,7 +33,7 @@
             <input type="hidden" :name="totalFieldName" value="0.00" :value="product.price">
         </td>
         <td class="right-align" width="50">
-            <i class="material-icons">remove_circle_outline</i>
+            <i class="material-icons" @click="removeItem(product.count)">remove_circle_outline</i>
         </td>
     </tr>
 </template>
@@ -43,18 +43,23 @@
         mounted () {
             $('select').formSelect();
         },
-        props: ['count', 'product', 'currency', 'taxes', 'units'],
+        props: ['product', 'currency', 'taxes', 'units'],
         computed: {
-            rowId: function () { return 'product-' + this.count; },
-            nameFieldName: function () { return 'invoice[products][' + this.count + '][name]'; },
-            descriptionFieldName: function () { return 'invoice[products][' + this.count + '][description]'; },
-            priceFieldName: function () { return 'invoice[products][' + this.count + '][price]'; },
-            quantityFieldName: function () { return 'invoice[products][' + this.count + '][quantity]'; },
-            unitFieldName: function () { return 'invoice[products][' + this.count + '][unit]'; },
-            subtotalFieldName: function () { return 'invoice[products][' + this.count + '][subtotal]'; },
-            discountFieldName: function () { return 'invoice[products][' + this.count + '][discount]'; },
-            taxRateFieldName: function () { return 'invoice[products][' + this.count + '][tax_rate]'; },
-            totalFieldName: function () { return 'invoice[products][' + this.count + '][total]'; }
+            rowId: function () { return 'product-' + this.product.count; },
+            nameFieldName: function () { return 'invoice[products][' + this.product.count + '][name]'; },
+            descriptionFieldName: function () { return 'invoice[products][' + this.product.count + '][description]'; },
+            priceFieldName: function () { return 'invoice[products][' + this.product.count + '][price]'; },
+            quantityFieldName: function () { return 'invoice[products][' + this.product.count + '][quantity]'; },
+            unitFieldName: function () { return 'invoice[products][' + this.product.count + '][unit]'; },
+            subtotalFieldName: function () { return 'invoice[products][' + this.product.count + '][subtotal]'; },
+            discountFieldName: function () { return 'invoice[products][' + this.product.count + '][discount]'; },
+            taxRateFieldName: function () { return 'invoice[products][' + this.product.count + '][tax_rate]'; },
+            totalFieldName: function () { return 'invoice[products][' + this.product.count + '][total]'; }
+        },
+        methods: {
+            removeItem(index) {
+                this.$parent.removeItem(index);
+            }
         }
     }
 </script>

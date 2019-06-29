@@ -97,6 +97,9 @@
                 this.products.push(product);
                 console.log(this.products);
                 this.count++;
+            },
+            removeItem(index) {
+                Vue.delete(this.products, index);
             }
         },
         created() {
