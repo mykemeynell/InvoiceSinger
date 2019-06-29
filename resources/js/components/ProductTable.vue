@@ -88,9 +88,11 @@
         methods: {
             addItem(product) {
                 if(typeof product === 'undefined') {
-                    product = {count: this.count};
+                    product = {};
                 }
+                product = $.extend({count: this.count}, product);
                 this.products.push(product);
+                console.log(this.products);
                 this.count++;
             }
         },
