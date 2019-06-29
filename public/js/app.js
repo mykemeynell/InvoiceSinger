@@ -1879,7 +1879,7 @@ __webpack_require__.r(__webpack_exports__);
     console.log('Mounted Product Row vue template');
     $('select').formSelect();
   },
-  props: ['count', 'product'],
+  props: ['count', 'product', 'currency'],
   computed: {
     nameFieldName: function nameFieldName() {
       return 'invoice[products][' + this.count + '][name]';
@@ -60590,7 +60590,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("td", { staticClass: "right-align" }, [
-      _vm._v("\n        £"),
+      _vm._v("\n        " + _vm._s(_vm.currency)),
       _c("span", { staticClass: "invoice-product-subtotal" }, [_vm._v("0.00")]),
       _vm._v(" "),
       _c("input", {
@@ -60617,7 +60617,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("td", { staticClass: "right-align" }, [
-      _vm._v("\n        £"),
+      _vm._v("\n        " + _vm._s(_vm.currency)),
       _c("span", [_vm._v("0.00")]),
       _vm._v(" "),
       _c("input", {
@@ -60662,10 +60662,10 @@ var render = function() {
               [
                 _vm._l(_vm.products, function(product, index) {
                   return [
-                    _c(
-                      "product-row",
-                      _vm._b({ tag: "component" }, "component", product, false)
-                    )
+                    _c("product-row", {
+                      tag: "component",
+                      attrs: { product: product, currency: _vm.currency }
+                    })
                   ]
                 })
               ],

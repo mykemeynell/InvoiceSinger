@@ -17,7 +17,7 @@
                     </thead>
                     <tbody>
                         <template v-for="(product, index) in products">
-                            <component is="product-row" v-bind="product"></component>
+                            <component is="product-row" :product="product" :currency="currency"></component>
                         </template>
                     </tbody>
                 </table>

@@ -16,7 +16,7 @@
             </select>
         </td>
         <td class="right-align">
-            £<span class="invoice-product-subtotal">0.00</span>
+            {{ currency }}<span class="invoice-product-subtotal">0.00</span>
             <input type="hidden" :name="subtotalFieldName" id="subtotal-field" value="0.00">
         </td>
         <td class="right-align">
@@ -28,7 +28,7 @@
             </select>
         </td>
         <td class="right-align">
-            £<span>0.00</span>
+            {{ currency }}<span>0.00</span>
             <input type="hidden" :name="totalFieldName" value="0.00">
         </td>
     </tr>
@@ -40,7 +40,7 @@
             console.log('Mounted Product Row vue template');
             $('select').formSelect();
         },
-        props: ['count', 'product'],
+        props: ['count', 'product', 'currency'],
         computed: {
             nameFieldName: function () { return 'invoice[products][' + this.count + '][name]'; },
             descriptionFieldName: function () { return 'invoice[products][' + this.count + '][description]'; },
