@@ -17,7 +17,7 @@
                     </thead>
                     <tbody>
                         <template v-for="(product, index) in products">
-                            <component is="product-row" :product="product" :currency="currency"></component>
+                            <component is="product-row" :product="product" :currency="currency" :taxes="taxes" :units="units"></component>
                         </template>
                     </tbody>
                 </table>
@@ -75,9 +75,11 @@
 
 <script>
     export default {
-        props: ['currency'],
+        props: ['currency', 'taxes', 'units'],
         mounted () {
             console.log('Mounted Product Table vue template');
+            console.log('Taxes', this.taxes);
+            console.log('Units', this.units);
         },
         data() {
             return {

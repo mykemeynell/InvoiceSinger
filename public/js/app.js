@@ -1874,12 +1874,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Mounted Product Row vue template');
     $('select').formSelect();
   },
-  props: ['count', 'product', 'currency'],
+  props: ['count', 'product', 'currency', 'taxes', 'units'],
   computed: {
     nameFieldName: function nameFieldName() {
       return 'invoice[products][' + this.count + '][name]';
@@ -1998,9 +1999,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['currency'],
+  props: ['currency', 'taxes', 'units'],
   mounted: function mounted() {
     console.log('Mounted Product Table vue template');
+    console.log('Taxes', this.taxes);
+    console.log('Units', this.units);
   },
   data: function data() {
     return {
@@ -60594,9 +60597,16 @@ var render = function() {
         attrs: { type: "text", name: _vm.quantityFieldName, value: "1" }
       }),
       _vm._v(" "),
-      _c("select", { attrs: { name: _vm.unitFieldName } }, [
-        _c("option", { attrs: { value: "" } }, [_vm._v("Unit")])
-      ])
+      _c(
+        "select",
+        { attrs: { name: _vm.unitFieldName } },
+        _vm._l(_vm.units, function(unit) {
+          return _c("option", { domProps: { value: unit.id } }, [
+            _vm._v(_vm._s(unit.name))
+          ])
+        }),
+        0
+      )
     ]),
     _vm._v(" "),
     _c("td", { staticClass: "right-align" }, [
@@ -60623,9 +60633,30 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("td", { staticClass: "right-align" }, [
-      _c("select", { attrs: { name: _vm.taxRateFieldName } }, [
-        _c("option", { attrs: { value: "" } }, [_vm._v("Tax")])
-      ])
+      _c(
+        "select",
+        { attrs: { name: _vm.taxRateFieldName } },
+        [
+          _c("option", { attrs: { value: "" } }, [_vm._v("No VAT")]),
+          _vm._v(" "),
+          _vm._l(_vm.taxes, function(tax) {
+            return _c(
+              "option",
+              {
+                domProps: {
+                  value: tax.id,
+                  selected:
+                    _vm.product.tax_rate && _vm.product.tax_rate.id == tax.id
+                      ? true
+                      : false
+                }
+              },
+              [_vm._v(_vm._s(tax.name))]
+            )
+          })
+        ],
+        2
+      )
     ]),
     _vm._v(" "),
     _c("td", { staticClass: "right-align" }, [
@@ -60679,7 +60710,12 @@ var render = function() {
                   return [
                     _c("product-row", {
                       tag: "component",
-                      attrs: { product: product, currency: _vm.currency }
+                      attrs: {
+                        product: product,
+                        currency: _vm.currency,
+                        taxes: _vm.taxes,
+                        units: _vm.units
+                      }
                     })
                   ]
                 })

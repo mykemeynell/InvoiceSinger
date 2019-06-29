@@ -111,7 +111,10 @@
 
         <hr>
 
-        <product-table currency="{!! app()->make(\mykemeynell\Support\CurrencyHtmlEntities::class)->entity(settings('app.currency')) !!}"></product-table>
+        <product-table
+                currency="{!! app()->make(\mykemeynell\Support\CurrencyHtmlEntities::class)->entity(settings('app.currency')) !!}"
+                :taxes="{{ $tax_rate_service->fetch() }}"
+                :units="{{ $unit_service->fetch() }}"></product-table>
 
     </form>
 

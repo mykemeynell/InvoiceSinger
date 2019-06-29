@@ -12,7 +12,7 @@
         <td class="right-align">
             <input type="text" class="right-align" :name="quantityFieldName" value="1">
             <select :name="unitFieldName">
-                <option value="">Unit</option>
+                <option v-for="unit in units" :value="unit.id">{{ unit.name }}</option>
             </select>
         </td>
         <td class="right-align">
@@ -24,7 +24,8 @@
         </td>
         <td class="right-align">
             <select :name="taxRateFieldName">
-                <option value="">Tax</option>
+                <option value="">No VAT</option>
+                <option v-for="tax in taxes" :value="tax.id" :selected="product.tax_rate && product.tax_rate.id == tax.id ? true : false">{{ tax.name}}</option>
             </select>
         </td>
         <td class="right-align">
@@ -40,7 +41,7 @@
             console.log('Mounted Product Row vue template');
             $('select').formSelect();
         },
-        props: ['count', 'product', 'currency'],
+        props: ['count', 'product', 'currency', 'taxes', 'units'],
         computed: {
             nameFieldName: function () { return 'invoice[products][' + this.count + '][name]'; },
             descriptionFieldName: function () { return 'invoice[products][' + this.count + '][description]'; },
