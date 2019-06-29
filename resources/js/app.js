@@ -33,7 +33,7 @@ $(document).ready(function() {
 
     let results_table = $('#product-search-table');
     if(results_table.length > 0) {
-        let table = results_table.DataTable({
+        window.table = results_table.DataTable({
             ajax: {
                 url: '/api/products',
                 dataSrc: ''
@@ -51,11 +51,6 @@ $(document).ready(function() {
                 defaultContent: "<a class=\"js-add-product waves-effect waves-dark btn-flat grey lighten-4\">Add</a>",
                 className: "right-align"
             }]
-        });
-
-        $('#product-search-table tbody').on('click', '.js-add-product', function () {
-            let product = table.row($(this).parents('tr')).data();
-            console.log(app.methods);
         });
     }
 });

@@ -2019,6 +2019,13 @@ __webpack_require__.r(__webpack_exports__);
       this.products.push(product);
       this.count++;
     }
+  },
+  created: function created() {
+    var that = this;
+    $(document).on('click', '.js-add-product', function () {
+      var product = window.table.row($(this).parents('tr')).data();
+      that.addItem(product);
+    });
   }
 });
 
@@ -73003,7 +73010,7 @@ $(document).ready(function () {
   var results_table = $('#product-search-table');
 
   if (results_table.length > 0) {
-    var table = results_table.DataTable({
+    window.table = results_table.DataTable({
       ajax: {
         url: '/api/products',
         dataSrc: ''
@@ -73025,10 +73032,6 @@ $(document).ready(function () {
         defaultContent: "<a class=\"js-add-product waves-effect waves-dark btn-flat grey lighten-4\">Add</a>",
         className: "right-align"
       }]
-    });
-    $('#product-search-table tbody').on('click', '.js-add-product', function () {
-      var product = table.row($(this).parents('tr')).data();
-      console.log(app.methods);
     });
   }
 });

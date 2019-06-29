@@ -93,6 +93,13 @@
                 this.products.push(product);
                 this.count++;
             }
+        },
+        created() {
+            let that = this;
+            $(document).on('click', '.js-add-product', function () {
+                let product = window.table.row($(this).parents('tr')).data();
+                that.addItem(product);
+            });
         }
     }
 </script>
