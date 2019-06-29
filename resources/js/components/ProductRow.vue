@@ -36,6 +36,17 @@
     export default {
         mounted () {
             console.log('Mounted Product Row vue template');
+        },
+        data() {
+            return {
+                products: []
+            }
+        },
+        methods: {
+            addItem(product) {
+                this.products.push(product);
+                console.log('Added item: ', product);
+            }
         }
     }
 </script>
