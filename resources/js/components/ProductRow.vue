@@ -6,18 +6,18 @@
         </td>
         <td class="right-align">
             <div class="input-field">
-                <input type="text" class="right-align" :name="priceFieldName" :value="product.price ? product.price : '0.00'">
+                <input type="text" class="right-align" :name="priceFieldName" :value="price" v-on:change="updateTotals">
             </div>
         </td>
         <td class="right-align">
-            <input type="text" class="right-align" :name="quantityFieldName" value="1">
+            <input type="text" class="right-align" :name="quantityFieldName" value="1" v-on:change="updateTotals">
             <select :name="unitFieldName">
                 <option v-for="unit in units" :value="unit.id">{{ unit.name }}</option>
             </select>
         </td>
         <td class="right-align">
-            {{ currency }}<span class="invoice-product-subtotal">{{ product.price ? product.price : '0.00' }}</span>
-            <input type="hidden" :name="subtotalFieldName" :value="product.price ? product.price : '0.00'">
+            {{ currency }}<span class="invoice-product-subtotal">{{ subtotal }}</span>
+            <input type="hidden" :name="subtotalFieldName" :value="subtotal">
         </td>
         <td class="right-align">
             <input type="text" class="right-align" :name="discountFieldName" value="0.00">
@@ -45,7 +45,13 @@
         },
         props: ['product', 'currency', 'taxes', 'units'],
         data: function () {
-            return {}
+            let quantity = 1;
+            let price = this.product.price ? this.product.price.toFixed(2) : parseFloat(0).toFixed(2);
+
+            return {
+                price: price,
+                subtotal: (price * quantity).toFixed(2)
+            }
         },
         computed: {
             rowId: function () { return 'product-' + this.product.count; },
@@ -62,6 +68,15 @@
         methods: {
             removeItem(index) {
                 this.$parent.removeItem(index);
+            },
+            updateTotals() {
+                // Update price
+                let price = parseFloat($('[name="invoice[products][' + this.product.count + '][price]"]').val()).toFixed(2);
+                this.price = price;
+
+                // Update subtotal
+                let quantity = parseFloat($('[name="invoice[products][' + this.product.count + '][quantity]"]').val()).toFixed(2);
+                this.subtotal = (price * quantity).toFixed(2);
             }
         }
     }

@@ -1884,7 +1884,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: ['product', 'currency', 'taxes', 'units'],
   data: function data() {
-    return {};
+    var quantity = 1;
+    var price = this.product.price ? this.product.price.toFixed(2) : parseFloat(0).toFixed(2);
+    return {
+      price: price,
+      subtotal: (price * quantity).toFixed(2)
+    };
   },
   computed: {
     rowId: function rowId() {
@@ -1921,6 +1926,14 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     removeItem: function removeItem(index) {
       this.$parent.removeItem(index);
+    },
+    updateTotals: function updateTotals() {
+      // Update price
+      var price = parseFloat($('[name="invoice[products][' + this.product.count + '][price]"]').val()).toFixed(2);
+      this.price = price; // Update subtotal
+
+      var quantity = parseFloat($('[name="invoice[products][' + this.product.count + '][quantity]"]').val()).toFixed(2);
+      this.subtotal = (price * quantity).toFixed(2);
     }
   }
 });
@@ -60603,7 +60616,8 @@ var render = function() {
         _c("input", {
           staticClass: "right-align",
           attrs: { type: "text", name: _vm.priceFieldName },
-          domProps: { value: _vm.product.price ? _vm.product.price : "0.00" }
+          domProps: { value: _vm.price },
+          on: { change: _vm.updateTotals }
         })
       ])
     ]),
@@ -60611,7 +60625,8 @@ var render = function() {
     _c("td", { staticClass: "right-align" }, [
       _c("input", {
         staticClass: "right-align",
-        attrs: { type: "text", name: _vm.quantityFieldName, value: "1" }
+        attrs: { type: "text", name: _vm.quantityFieldName, value: "1" },
+        on: { change: _vm.updateTotals }
       }),
       _vm._v(" "),
       _c(
@@ -60629,12 +60644,12 @@ var render = function() {
     _c("td", { staticClass: "right-align" }, [
       _vm._v("\n        " + _vm._s(_vm.currency)),
       _c("span", { staticClass: "invoice-product-subtotal" }, [
-        _vm._v(_vm._s(_vm.product.price ? _vm.product.price : "0.00"))
+        _vm._v(_vm._s(_vm.subtotal))
       ]),
       _vm._v(" "),
       _c("input", {
         attrs: { type: "hidden", name: _vm.subtotalFieldName },
-        domProps: { value: _vm.product.price ? _vm.product.price : "0.00" }
+        domProps: { value: _vm.subtotal }
       })
     ]),
     _vm._v(" "),
