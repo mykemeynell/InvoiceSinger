@@ -20,7 +20,7 @@
             <input type="hidden" :name="subtotalFieldName" :value="subtotal">
         </td>
         <td class="right-align">
-            <select :name="taxRateFieldName" v-on:change="updateTotals">
+            <select :name="taxRateFieldName" v-on:change="updateTaxMultiplier">
                 <option value="none">No Tax</option>
                 <option v-for="tax in taxes" :value="tax.id" :selected="product.tax_rate && product.tax_rate.id == tax.id ? true : false">{{ tax.name}}</option>
             </select>
@@ -49,6 +49,8 @@
             let price = this.product.price ? this.product.price.toFixed(2) : parseFloat(0).toFixed(2);
             let subtotal = (price * quantity).toFixed(2);
             let discount = 0;
+            let multiplier = this.product.tax_rate && this.product.tax_rate.multiplier ? this.product.tax_rate.multiplier : 1;
+            let total = parseFloat((+subtotal * multiplier) - +discount).toFixed(2);
 
             return {
                 price: price,
@@ -56,9 +58,9 @@
                 discount: discount,
                 quantity: quantity,
                 tax: {
-                    multiplier: 1
+                    multiplier: multiplier
                 },
-                total: price
+                total: total
             }
         },
         computed: {
@@ -81,6 +83,22 @@
             removeItem(index) {
                 this.$parent.removeItem(index);
             },
+            updateTaxMultiplier() {
+                // Update total
+                axios.get('/api/products/tax-rates', {
+                    params: {id: $('[name="' + this.taxRateFieldName + '"]').val()}
+                })
+                    .then((response) => {
+                        let tax_rate = response.data;
+                        this.tax.multiplier = tax_rate.multiplier;
+                    })
+                    .then(() => {
+                        this.updateTotals();
+                    })
+                    .catch(() => {
+                        console.error('Failed to fetch tax rate from database.');
+                    });
+            },
             updateTotals() {
                 // Update price
                 this.price = parseFloat($('[name="' + this.priceFieldName + '"]').val()).toFixed(2);
@@ -93,22 +111,9 @@
                 this.discount = $('[name="' + this.discountFieldName + '"]').val();
 
                 // Update total
-                axios.get('/api/products/tax-rates', {
-                    params: {id: $('[name="' + this.taxRateFieldName + '"]').val()}
-                })
-                    .then((response) => {
-                        let tax_rate = response.data;
-                        this.tax.multiplier = tax_rate.multiplier;
-                    })
-                    .then(() => {
-                        this.total = parseFloat((this.subtotal * this.tax.multiplier) - this.discount).toFixed(2);
-                    })
-                    .then(() => {
-                        this.$parent.updateSummary()
-                    })
-                    .catch(() => {
-                        console.error('Failed to fetch tax rate from database.');
-                    });
+                this.total = parseFloat((+this.subtotal * +this.tax.multiplier) - +this.discount).toFixed(2);
+
+                this.$parent.updateSummary();
             }
         }
     }

@@ -1888,15 +1888,17 @@ __webpack_require__.r(__webpack_exports__);
     var price = this.product.price ? this.product.price.toFixed(2) : parseFloat(0).toFixed(2);
     var subtotal = (price * quantity).toFixed(2);
     var discount = 0;
+    var multiplier = this.product.tax_rate && this.product.tax_rate.multiplier ? this.product.tax_rate.multiplier : 1;
+    var total = parseFloat(+subtotal * multiplier - +discount).toFixed(2);
     return {
       price: price,
       subtotal: subtotal,
       discount: discount,
       quantity: quantity,
       tax: {
-        multiplier: 1
+        multiplier: multiplier
       },
-      total: price
+      total: total
     };
   },
   computed: {
@@ -1941,17 +1943,10 @@ __webpack_require__.r(__webpack_exports__);
     removeItem: function removeItem(index) {
       this.$parent.removeItem(index);
     },
-    updateTotals: function updateTotals() {
+    updateTaxMultiplier: function updateTaxMultiplier() {
       var _this = this;
 
-      // Update price
-      this.price = parseFloat($('[name="' + this.priceFieldName + '"]').val()).toFixed(2); // Update subtotal
-
-      this.quantity = parseFloat($('[name="' + this.quantityFieldName + '"]').val()).toFixed(2);
-      this.subtotal = (this.price * this.quantity).toFixed(2); // Update discount
-
-      this.discount = $('[name="' + this.discountFieldName + '"]').val(); // Update total
-
+      // Update total
       axios.get('/api/products/tax-rates', {
         params: {
           id: $('[name="' + this.taxRateFieldName + '"]').val()
@@ -1960,12 +1955,22 @@ __webpack_require__.r(__webpack_exports__);
         var tax_rate = response.data;
         _this.tax.multiplier = tax_rate.multiplier;
       }).then(function () {
-        _this.total = parseFloat(_this.subtotal * _this.tax.multiplier - _this.discount).toFixed(2);
-      }).then(function () {
-        _this.$parent.updateSummary();
+        _this.updateTotals();
       })["catch"](function () {
         console.error('Failed to fetch tax rate from database.');
       });
+    },
+    updateTotals: function updateTotals() {
+      // Update price
+      this.price = parseFloat($('[name="' + this.priceFieldName + '"]').val()).toFixed(2); // Update subtotal
+
+      this.quantity = parseFloat($('[name="' + this.quantityFieldName + '"]').val()).toFixed(2);
+      this.subtotal = (this.price * this.quantity).toFixed(2); // Update discount
+
+      this.discount = $('[name="' + this.discountFieldName + '"]').val(); // Update total
+
+      this.total = parseFloat(+this.subtotal * +this.tax.multiplier - +this.discount).toFixed(2);
+      this.$parent.updateSummary();
     }
   }
 });
@@ -2063,6 +2068,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addItem: function addItem(product) {
+      var _this = this;
+
       if (typeof product === 'undefined') {
         product = {};
       }
@@ -2072,6 +2079,9 @@ __webpack_require__.r(__webpack_exports__);
       }, product);
       this.products.push(product);
       this.count++;
+      setTimeout(function () {
+        _this.updateSummary();
+      }, 250);
     },
     removeItem: function removeItem(index) {
       Vue["delete"](this.products, index);
@@ -60702,7 +60712,7 @@ var render = function() {
         "select",
         {
           attrs: { name: _vm.taxRateFieldName },
-          on: { change: _vm.updateTotals }
+          on: { change: _vm.updateTaxMultiplier }
         },
         [
           _c("option", { attrs: { value: "none" } }, [_vm._v("No Tax")]),

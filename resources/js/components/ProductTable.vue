@@ -87,6 +87,9 @@
                 product = $.extend({count: this.count}, product);
                 this.products.push(product);
                 this.count++;
+                setTimeout(() => {
+                    this.updateSummary();
+                }, 250);
             },
             removeItem(index) {
                 Vue.delete(this.products, index);
