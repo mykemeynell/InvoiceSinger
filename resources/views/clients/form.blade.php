@@ -46,6 +46,7 @@
                                             <option value="Lady">Lady</option>
                                             <option value="Ind">Ind</option>
                                         </select>
+                                        <label for="client-title">Title</label>
                                     </div>
                                     <div class="col s12 m5 input-field">
                                         <input type="text" class="validate" name="client[first_name]" id="first-name"
