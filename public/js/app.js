@@ -1883,6 +1883,9 @@ __webpack_require__.r(__webpack_exports__);
     $('select').formSelect();
   },
   props: ['product', 'currency', 'taxes', 'units'],
+  data: function data() {
+    return {};
+  },
   computed: {
     rowId: function rowId() {
       return 'product-' + this.product.count;
@@ -60630,11 +60633,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("input", {
-        attrs: {
-          type: "hidden",
-          name: _vm.subtotalFieldName,
-          id: "subtotal-field"
-        },
+        attrs: { type: "hidden", name: _vm.subtotalFieldName },
         domProps: { value: _vm.product.price ? _vm.product.price : "0.00" }
       })
     ]),
@@ -60675,13 +60674,11 @@ var render = function() {
     _vm._v(" "),
     _c("td", { staticClass: "right-align" }, [
       _vm._v("\n        " + _vm._s(_vm.currency)),
-      _c("span", [
-        _vm._v(_vm._s(_vm.product.price ? _vm.product.price : "0.00"))
-      ]),
+      _c("span", [_vm._v("0")]),
       _vm._v(" "),
       _c("input", {
-        attrs: { type: "hidden", name: _vm.totalFieldName, value: "0.00" },
-        domProps: { value: _vm.product.price }
+        attrs: { type: "hidden", name: _vm.totalFieldName },
+        domProps: { value: 0 }
       })
     ]),
     _vm._v(" "),

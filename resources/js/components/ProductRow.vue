@@ -17,7 +17,7 @@
         </td>
         <td class="right-align">
             {{ currency }}<span class="invoice-product-subtotal">{{ product.price ? product.price : '0.00' }}</span>
-            <input type="hidden" :name="subtotalFieldName" id="subtotal-field" :value="product.price ? product.price : '0.00'">
+            <input type="hidden" :name="subtotalFieldName" :value="product.price ? product.price : '0.00'">
         </td>
         <td class="right-align">
             <input type="text" class="right-align" :name="discountFieldName" value="0.00">
@@ -29,8 +29,8 @@
             </select>
         </td>
         <td class="right-align">
-            {{ currency }}<span>{{ product.price ? product.price : '0.00' }}</span>
-            <input type="hidden" :name="totalFieldName" value="0.00" :value="product.price">
+            {{ currency }}<span>0</span>
+            <input type="hidden" :name="totalFieldName" :value="0">
         </td>
         <td class="right-align" width="50">
             <i class="material-icons pointer-cursor" @click="removeItem(product.count)">remove_circle_outline</i>
@@ -44,6 +44,9 @@
             $('select').formSelect();
         },
         props: ['product', 'currency', 'taxes', 'units'],
+        data: function () {
+            return {}
+        },
         computed: {
             rowId: function () { return 'product-' + this.product.count; },
             nameFieldName: function () { return 'invoice[products][' + this.product.count + '][name]'; },
