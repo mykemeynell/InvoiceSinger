@@ -20,17 +20,17 @@
             <input type="hidden" :name="subtotalFieldName" :value="subtotal">
         </td>
         <td class="right-align">
-            <input type="text" class="right-align" :name="discountFieldName" value="0.00">
-        </td>
-        <td class="right-align">
-            <select :name="taxRateFieldName">
-                <option value="">No VAT</option>
+            <select :name="taxRateFieldName" v-on:change="updateTotals">
+                <option value="none">No Tax</option>
                 <option v-for="tax in taxes" :value="tax.id" :selected="product.tax_rate && product.tax_rate.id == tax.id ? true : false">{{ tax.name}}</option>
             </select>
         </td>
         <td class="right-align">
-            {{ currency }}<span>0</span>
-            <input type="hidden" :name="totalFieldName" :value="0">
+            <input type="text" class="right-align" :name="discountFieldName" value="0.00" v-on:change="updateTotals">
+        </td>
+        <td class="right-align">
+            {{ currency }}<span :id="totalSpanId">{{ total }}</span>
+            <input type="hidden" :name="totalFieldName" :value="total">
         </td>
         <td class="right-align" width="50">
             <i class="material-icons pointer-cursor" @click="removeItem(product.count)">remove_circle_outline</i>
@@ -47,10 +47,18 @@
         data: function () {
             let quantity = 1;
             let price = this.product.price ? this.product.price.toFixed(2) : parseFloat(0).toFixed(2);
+            let subtotal = (price * quantity).toFixed(2);
+            let discount = 0;
 
             return {
                 price: price,
-                subtotal: (price * quantity).toFixed(2)
+                subtotal: subtotal,
+                discount: discount,
+                quantity: quantity,
+                tax: {
+                    multiplier: 1
+                },
+                total: price
             }
         },
         computed: {
@@ -63,20 +71,44 @@
             subtotalFieldName: function () { return 'invoice[products][' + this.product.count + '][subtotal]'; },
             discountFieldName: function () { return 'invoice[products][' + this.product.count + '][discount]'; },
             taxRateFieldName: function () { return 'invoice[products][' + this.product.count + '][tax_rate]'; },
-            totalFieldName: function () { return 'invoice[products][' + this.product.count + '][total]'; }
+            totalFieldName: function () { return 'invoice[products][' + this.product.count + '][total]'; },
+            totalSpanId: function () { return 'invoice-products-' + this.product.count + '-total'; }
         },
         methods: {
+            created() {
+                this.updateTotals();
+            },
             removeItem(index) {
                 this.$parent.removeItem(index);
             },
             updateTotals() {
                 // Update price
-                let price = parseFloat($('[name="invoice[products][' + this.product.count + '][price]"]').val()).toFixed(2);
-                this.price = price;
+                this.price = parseFloat($('[name="' + this.priceFieldName + '"]').val()).toFixed(2);
 
                 // Update subtotal
-                let quantity = parseFloat($('[name="invoice[products][' + this.product.count + '][quantity]"]').val()).toFixed(2);
-                this.subtotal = (price * quantity).toFixed(2);
+                this.quantity = parseFloat($('[name="' + this.quantityFieldName +'"]').val()).toFixed(2);
+                this.subtotal = (this.price * this.quantity).toFixed(2);
+
+                // Update discount
+                this.discount = $('[name="' + this.discountFieldName + '"]').val();
+
+                // Update total
+                axios.get('/api/products/tax-rates', {
+                    params: {id: $('[name="' + this.taxRateFieldName + '"]').val()}
+                })
+                    .then((response) => {
+                        let tax_rate = response.data;
+                        this.tax.multiplier = tax_rate.multiplier;
+                    })
+                    .then(() => {
+                        this.total = parseFloat((this.subtotal * this.tax.multiplier) - this.discount).toFixed(2);
+                    })
+                    .then(() => {
+                        this.$parent.updateSummary()
+                    })
+                    .catch(() => {
+                        console.error('Failed to fetch tax rate from database.');
+                    });
             }
         }
     }

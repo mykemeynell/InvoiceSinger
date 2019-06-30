@@ -22,4 +22,5 @@ $router->get('/', 'Api\TestController@index');
 
 $router->group($options, static function() use ($router) {
     $router->get('/products', 'Products\ProductController@fetchAsJson')->name('api.products.fetch');
+    $router->get('/products/tax-rates', 'Products\TaxRateController@fetchAsJson')->name('api.products.taxRates.fetch');
 });

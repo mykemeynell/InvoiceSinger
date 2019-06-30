@@ -1886,9 +1886,17 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     var quantity = 1;
     var price = this.product.price ? this.product.price.toFixed(2) : parseFloat(0).toFixed(2);
+    var subtotal = (price * quantity).toFixed(2);
+    var discount = 0;
     return {
       price: price,
-      subtotal: (price * quantity).toFixed(2)
+      subtotal: subtotal,
+      discount: discount,
+      quantity: quantity,
+      tax: {
+        multiplier: 1
+      },
+      total: price
     };
   },
   computed: {
@@ -1921,19 +1929,43 @@ __webpack_require__.r(__webpack_exports__);
     },
     totalFieldName: function totalFieldName() {
       return 'invoice[products][' + this.product.count + '][total]';
+    },
+    totalSpanId: function totalSpanId() {
+      return 'invoice-products-' + this.product.count + '-total';
     }
   },
   methods: {
+    created: function created() {
+      this.updateTotals();
+    },
     removeItem: function removeItem(index) {
       this.$parent.removeItem(index);
     },
     updateTotals: function updateTotals() {
-      // Update price
-      var price = parseFloat($('[name="invoice[products][' + this.product.count + '][price]"]').val()).toFixed(2);
-      this.price = price; // Update subtotal
+      var _this = this;
 
-      var quantity = parseFloat($('[name="invoice[products][' + this.product.count + '][quantity]"]').val()).toFixed(2);
-      this.subtotal = (price * quantity).toFixed(2);
+      // Update price
+      this.price = parseFloat($('[name="' + this.priceFieldName + '"]').val()).toFixed(2); // Update subtotal
+
+      this.quantity = parseFloat($('[name="' + this.quantityFieldName + '"]').val()).toFixed(2);
+      this.subtotal = (this.price * this.quantity).toFixed(2); // Update discount
+
+      this.discount = $('[name="' + this.discountFieldName + '"]').val(); // Update total
+
+      axios.get('/api/products/tax-rates', {
+        params: {
+          id: $('[name="' + this.taxRateFieldName + '"]').val()
+        }
+      }).then(function (response) {
+        var tax_rate = response.data;
+        _this.tax.multiplier = tax_rate.multiplier;
+      }).then(function () {
+        _this.total = parseFloat(_this.subtotal * _this.tax.multiplier - _this.discount).toFixed(2);
+      }).then(function () {
+        _this.$parent.updateSummary();
+      })["catch"](function () {
+        console.error('Failed to fetch tax rate from database.');
+      });
     }
   }
 });
@@ -2015,27 +2047,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['currency', 'taxes', 'units'],
-  mounted: function mounted() {
-    console.log('Mounted Product Table vue template');
-    console.log('Taxes', this.taxes);
-    console.log('Units', this.units);
-  },
   data: function data() {
     return {
       products: [],
-      count: 0
+      count: 0,
+      subtotal: parseFloat('0.00').toFixed(2),
+      tax: parseFloat('0.00').toFixed(2),
+      discount: parseFloat('0.00').toFixed(2),
+      total: parseFloat('0.00').toFixed(2),
+      paid: parseFloat('0.00').toFixed(2),
+      balance: parseFloat('0.00').toFixed(2)
     };
   },
   methods: {
@@ -2048,11 +2071,32 @@ __webpack_require__.r(__webpack_exports__);
         count: this.count
       }, product);
       this.products.push(product);
-      console.log(this.products);
       this.count++;
     },
     removeItem: function removeItem(index) {
       Vue["delete"](this.products, index);
+    },
+    updateSummary: function updateSummary() {
+      var items = this.$children;
+      this.subtotal = 0;
+      this.tax = 0;
+      this.discount = 0;
+      this.total = 0;
+
+      for (var current = 0; current < items.length; current++) {
+        // Subtotal
+        var subtotal = items[current].subtotal;
+        this.subtotal = (+this.subtotal + +subtotal).toFixed(2); // Tax
+
+        var multiplier = items[current].tax.multiplier;
+        this.tax = (+this.tax + (+subtotal * +multiplier - +subtotal)).toFixed(2); // Discount
+
+        var discount = items[current].discount;
+        this.discount = (+this.discount + +discount).toFixed(2); // Total
+
+        var total = items[current].total;
+        this.total = (+this.total + +total).toFixed(2);
+      }
     }
   },
   created: function created() {
@@ -60654,18 +60698,14 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("td", { staticClass: "right-align" }, [
-      _c("input", {
-        staticClass: "right-align",
-        attrs: { type: "text", name: _vm.discountFieldName, value: "0.00" }
-      })
-    ]),
-    _vm._v(" "),
-    _c("td", { staticClass: "right-align" }, [
       _c(
         "select",
-        { attrs: { name: _vm.taxRateFieldName } },
+        {
+          attrs: { name: _vm.taxRateFieldName },
+          on: { change: _vm.updateTotals }
+        },
         [
-          _c("option", { attrs: { value: "" } }, [_vm._v("No VAT")]),
+          _c("option", { attrs: { value: "none" } }, [_vm._v("No Tax")]),
           _vm._v(" "),
           _vm._l(_vm.taxes, function(tax) {
             return _c(
@@ -60688,12 +60728,22 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("td", { staticClass: "right-align" }, [
+      _c("input", {
+        staticClass: "right-align",
+        attrs: { type: "text", name: _vm.discountFieldName, value: "0.00" },
+        on: { change: _vm.updateTotals }
+      })
+    ]),
+    _vm._v(" "),
+    _c("td", { staticClass: "right-align" }, [
       _vm._v("\n        " + _vm._s(_vm.currency)),
-      _c("span", [_vm._v("0")]),
+      _c("span", { attrs: { id: _vm.totalSpanId } }, [
+        _vm._v(_vm._s(_vm.total))
+      ]),
       _vm._v(" "),
       _c("input", {
         attrs: { type: "hidden", name: _vm.totalFieldName },
-        domProps: { value: 0 }
+        domProps: { value: _vm.total }
       })
     ]),
     _vm._v(" "),
@@ -60799,23 +60849,23 @@ var render = function() {
             _c("th", [_vm._v("Subtotal")]),
             _vm._v(" "),
             _c("td", { staticClass: "right-align" }, [
-              _vm._v("\n                    " + _vm._s(_vm.currency)),
-              _c("span", { attrs: { id: "invoice-totals-subtotal" } }, [
-                _vm._v("0.00")
-              ])
+              _vm._v(_vm._s(_vm.currency) + _vm._s(_vm.subtotal))
             ])
           ]),
           _vm._v(" "),
-          _vm._m(1),
+          _c("tr", [
+            _c("th", [_vm._v("Tax")]),
+            _vm._v(" "),
+            _c("td", { staticClass: "right-align" }, [
+              _vm._v(_vm._s(_vm.currency) + _vm._s(_vm.tax))
+            ])
+          ]),
           _vm._v(" "),
           _c("tr", [
             _c("th", [_vm._v("Discount")]),
             _vm._v(" "),
             _c("td", { staticClass: "right-align" }, [
-              _vm._v("\n                    " + _vm._s(_vm.currency)),
-              _c("span", { attrs: { id: "invoice-totals-discount" } }, [
-                _vm._v("0.00")
-              ])
+              _vm._v(_vm._s(_vm.currency) + _vm._s(_vm.discount))
             ])
           ]),
           _vm._v(" "),
@@ -60823,10 +60873,7 @@ var render = function() {
             _c("th", [_vm._v("Total")]),
             _vm._v(" "),
             _c("td", { staticClass: "right-align" }, [
-              _vm._v("\n                    " + _vm._s(_vm.currency)),
-              _c("span", { attrs: { id: "invoice-totals-total" } }, [
-                _vm._v("0.00")
-              ])
+              _vm._v(_vm._s(_vm.currency) + _vm._s(_vm.total))
             ])
           ]),
           _vm._v(" "),
@@ -60834,21 +60881,15 @@ var render = function() {
             _c("th", [_vm._v("Paid")]),
             _vm._v(" "),
             _c("td", { staticClass: "right-align" }, [
-              _vm._v("\n                    " + _vm._s(_vm.currency)),
-              _c("span", { attrs: { id: "invoice-totals-paid" } }, [
-                _vm._v("0.00")
-              ])
+              _vm._v(_vm._s(_vm.currency) + "0.00")
             ])
           ]),
           _vm._v(" "),
           _c("tr", [
-            _vm._m(2),
+            _vm._m(1),
             _vm._v(" "),
             _c("td", { staticClass: "right-align" }, [
-              _vm._v("\n                    " + _vm._s(_vm.currency)),
-              _c("span", { attrs: { id: "invoice-totals-balance" } }, [
-                _vm._v("0.00")
-              ])
+              _vm._v(_vm._s(_vm.currency) + "0.00")
             ])
           ])
         ])
@@ -60877,12 +60918,12 @@ var staticRenderFns = [
           _vm._v("Subtotal")
         ]),
         _vm._v(" "),
-        _c("th", { staticClass: "right-align", attrs: { width: "150" } }, [
-          _vm._v("Discount")
-        ]),
-        _vm._v(" "),
         _c("th", { staticClass: "right-align", attrs: { width: "250" } }, [
           _vm._v("Tax Rate")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "right-align", attrs: { width: "150" } }, [
+          _vm._v("Discount")
         ]),
         _vm._v(" "),
         _c("th", { staticClass: "right-align", attrs: { width: "150" } }, [
@@ -60893,16 +60934,6 @@ var staticRenderFns = [
           _vm._v(" ")
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("Tax")]),
-      _vm._v(" "),
-      _c("td", { staticClass: "right-align" }, [_vm._v("20%")])
     ])
   },
   function() {

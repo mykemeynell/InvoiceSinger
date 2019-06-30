@@ -10,8 +10,8 @@
                         <th class="right-align" width="150">Price</th>
                         <th class="right-align" width="250">Quantity</th>
                         <th class="right-align" width="150">Subtotal</th>
-                        <th class="right-align" width="150">Discount</th>
                         <th class="right-align" width="250">Tax Rate</th>
+                        <th class="right-align" width="150">Discount</th>
                         <th class="right-align" width="150">Total</th>
                         <th class="right-align" width="50">&nbsp;</th>
                     </tr>
@@ -36,37 +36,27 @@
             <table class="responsive-table">
                 <tr>
                     <th>Subtotal</th>
-                    <td class="right-align">
-                        {{ currency }}<span id="invoice-totals-subtotal">0.00</span>
-                    </td>
+                    <td class="right-align">{{ currency }}{{ subtotal }}</td>
                 </tr>
                 <tr>
                     <th>Tax</th>
-                    <td class="right-align">20%</td>
+                    <td class="right-align">{{ currency }}{{ tax }}</td>
                 </tr>
                 <tr>
                     <th>Discount</th>
-                    <td class="right-align">
-                        {{ currency }}<span id="invoice-totals-discount">0.00</span>
-                    </td>
+                    <td class="right-align">{{ currency }}{{ discount }}</td>
                 </tr>
                 <tr>
                     <th>Total</th>
-                    <td class="right-align">
-                        {{ currency }}<span id="invoice-totals-total">0.00</span>
-                    </td>
+                    <td class="right-align">{{ currency }}{{ total }}</td>
                 </tr>
                 <tr>
                     <th>Paid</th>
-                    <td class="right-align">
-                        {{ currency }}<span id="invoice-totals-paid">0.00</span>
-                    </td>
+                    <td class="right-align">{{ currency }}0.00</td>
                 </tr>
                 <tr>
                     <th><span class="bold-text">Balance</span></th>
-                    <td class="right-align">
-                        {{ currency }}<span id="invoice-totals-balance">0.00</span>
-                    </td>
+                    <td class="right-align">{{ currency }}0.00</td>
                 </tr>
             </table>
         </div>
@@ -77,15 +67,16 @@
 <script>
     export default {
         props: ['currency', 'taxes', 'units'],
-        mounted () {
-            console.log('Mounted Product Table vue template');
-            console.log('Taxes', this.taxes);
-            console.log('Units', this.units);
-        },
         data() {
             return {
                 products: [],
-                count: 0
+                count: 0,
+                subtotal: parseFloat('0.00').toFixed(2),
+                tax: parseFloat('0.00').toFixed(2),
+                discount: parseFloat('0.00').toFixed(2),
+                total: parseFloat('0.00').toFixed(2),
+                paid: parseFloat('0.00').toFixed(2),
+                balance: parseFloat('0.00').toFixed(2)
             };
         },
         methods: {
@@ -95,11 +86,35 @@
                 }
                 product = $.extend({count: this.count}, product);
                 this.products.push(product);
-                console.log(this.products);
                 this.count++;
             },
             removeItem(index) {
                 Vue.delete(this.products, index);
+            },
+            updateSummary() {
+                let items = this.$children;
+                this.subtotal = 0;
+                this.tax = 0;
+                this.discount = 0;
+                this.total = 0;
+
+                for(let current = 0; current < items.length; current++) {
+                    // Subtotal
+                    let subtotal = items[current].subtotal;
+                    this.subtotal = (+this.subtotal + +subtotal).toFixed(2);
+
+                    // Tax
+                    let multiplier = items[current].tax.multiplier;
+                    this.tax = (+this.tax + ((+subtotal * +multiplier) - +subtotal)).toFixed(2);
+
+                    // Discount
+                    let discount = items[current].discount;
+                    this.discount = (+this.discount + +discount).toFixed(2);
+
+                    // Total
+                    let total = items[current].total;
+                    this.total = (+this.total + +total).toFixed(2);
+                }
             }
         },
         created() {

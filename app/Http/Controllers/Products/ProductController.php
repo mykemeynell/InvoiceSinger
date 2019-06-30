@@ -55,9 +55,20 @@ class ProductController extends Controller
                 return;
             }
 
+            if(! $item->taxRate()) {
+                $item->tax_rate = [
+                    'name' => 'No Tax',
+                    'amount' => 0,
+                    'multiplier' => 1,
+                    'id' => 'none',
+                ];
+            } else {
+                $item->tax_rate = $item->taxRate();
+                $item->tax_rate['multiplier'] = $item->taxRate()->getMultiplier();
+            }
+
             $item->family = $item->family();
             $item->unit = $item->unit();
-            $item->tax_rate = $item->taxRate() ?: ['name' => 'No Tax', 'amount' => 0, 'id' => null];
             return $item;
         }));
     }

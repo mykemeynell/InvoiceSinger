@@ -23,6 +23,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "animate.css": "^3.7.2",
         "datatables.net-dt": "^1.10.19",
         "materialize-css": "^1.0.0-rc.2",
         "select2": "^4.0.7"

@@ -2,10 +2,14 @@
 
 namespace InvoiceSinger\Http\Controllers\Products;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Product\TaxRateRequest;
+use InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface;
+use InvoiceSinger\Storage\Entity\TaxRateEntity;
 use InvoiceSinger\Storage\Service\Contract\TaxRateServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
 
@@ -26,6 +30,39 @@ class TaxRateController extends Controller
     function __construct(TaxRateServiceInterface $service)
     {
         $this->setService($service);
+    }
+
+    /**
+     * Fetch and output products as a JSON object.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @throws \Exception
+     */
+    public function fetchAsJson(Request $request): JsonResponse
+    {
+        /** @var \Illuminate\Database\Eloquent\Collection $tax_rates */
+        $tax_rates = $this->getService()->fetch();
+
+        $tax_rates->push(app('product.taxRate.entity')->forceFill([
+            'id' => 'none',
+            'name' => 'No Tax',
+            'multiplier' => 1,
+            'amount' => 0
+        ]));
+
+        $tax_rates->map(function(TaxRateEntityInterface $entity) {
+            $entity->multiplier = $entity->getMultiplier();
+            return $entity;
+        });
+
+        if($id = $request->get('id')) {
+            return JsonResponse::create($tax_rates->where('id', $id)->first());
+        }
+
+        return JsonResponse::create($tax_rates);
     }
 
     /**
