@@ -19,7 +19,7 @@
             </div>
             <div class="col s12 m6 input-field right-align">
                 <a href="#" data-target="#options-dropdown" class="waves-light waves-effect btn margin-right-15">Options</a>
-                <button form="client-form" formmethod="POST" formaction="{{ route('invoices.handleForm') }}"
+                <button form="client-form" formmethod="POST" formaction="{{ route('invoices.handleForm', ['invoice_id' => ! is_null($invoice) ? $invoice->getKey() : null]) }}"
                         class="waves-light waves-effect btn">Save
                 </button>
             </div>
