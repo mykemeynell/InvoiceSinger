@@ -87,7 +87,7 @@ class InvoiceController extends Controller
                 $this->getService(self::SERVICE_INVOICE)->update($invoice, $request->getParameterBag());
 
                 $this->getService(self::SERVICE_INVOICE_PRODUCT)->removeUsingInvoiceId($invoice->getKey());
-                foreach($request->getParameterBag()->get('products') as $product) {
+                foreach($request->getParameterBag()->get('products', []) as $product) {
                     $product['invoice'] = $invoice->getKey();
                     $this->getService(self::SERVICE_INVOICE_PRODUCT)->create(new ParameterBag($product));
                 }
