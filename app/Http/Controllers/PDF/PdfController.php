@@ -2,7 +2,9 @@
 
 namespace InvoiceSinger\Http\Controllers\PDF;
 
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Invoice\InvoiceRequest;
 use mykemeynell\Support\CurrencyHtmlEntities;
@@ -19,14 +21,19 @@ class PdfController extends Controller
         /** @var CurrencyHtmlEntities $che */
         $che = app()->make(CurrencyHtmlEntities::class);
 
-        return view('pdf.invoice')
-            ->with('invoice', $request->invoice())
-            ->with('currency', $che->entity(settings('app.currency')))
-            ->with('subtotal', 0)
-            ->with('tax', 0)
-            ->with('discount', 0)
-            ->with('total', 0)
-            ->with('paid', 0)
-            ->with('balance', 0);
+        $invoice = $request->invoice();
+        $currency = $che->entity(settings('app.currency'));
+        $subtotal = 0;
+        $tax = 0;
+        $discount = 0;
+        $total = 0;
+        $paid = 0;
+        $balance = 0;
+
+        /** @var \Barryvdh\DomPDF\PDF $pdf */
+        $pdf = app()->make(PDF::class);
+        $pdf->loadView('pdf.invoice', compact('invoice', 'currency', 'subtotal', 'tax', 'discount', 'total', 'paid', 'balance'));
+
+        return Response::create($pdf->output())->header('Content-type', 'application/pdf');
     }
 }

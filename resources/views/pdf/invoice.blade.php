@@ -9,8 +9,7 @@
 @section('body_classes', 'page-pdf')
 
 @section('content')
-
-    <div class="container">
+    <div class="wrapper">
 
         <div class="row padding-bottom-30">
             <div class="col s8">
