@@ -9863,3 +9863,8 @@ nav .nav-content .tabs .tab a.active {
   width: 100% !important;
 }
 
+.page-pdf hr {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+

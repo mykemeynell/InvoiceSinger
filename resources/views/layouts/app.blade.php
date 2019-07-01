@@ -18,9 +18,11 @@
     @endif
 </div>
 
+@if(! isset($show_progress) || $show_progress == false)
     <div id="app-progress" class="progress margin-y-0" style="display:none;">
         <div class="indeterminate"></div>
     </div>
+@endif
 
     @stack('before-scripts')
     <script src="{{ asset('js/app.js') }}"></script>

@@ -23,13 +23,13 @@
 
                 <!-- Dropdown Structure -->
                 <ul id='options-dropdown' class='dropdown-content'>
-                    <li><a href="#!">Download as PDF</a></li>
+                    <li><a href="{{ route('pdf.invoice', $invoice->getKey()) }}" target="_blank">Download as PDF</a></li>
                     <li><a href="#!">Send via Email</a></li>
                     <li class="divider" tabindex="-1"></li>
                     <li><a href="#!" class="red-text darken-1">Delete</a></li>
                 </ul>
 
-                <button form="client-form" formmethod="POST" formaction="{{ route('invoices.handleForm', ['invoice_id' => ! is_null($invoice) ? $invoice->getKey() : null]) }}"
+                <button form="client-form" id="save-form-button" formmethod="POST" formaction="{{ route('invoices.handleForm', ['invoice_id' => ! is_null($invoice) ? $invoice->getKey() : null]) }}"
                         class="waves-light waves-effect btn">Save
                 </button>
             </div>

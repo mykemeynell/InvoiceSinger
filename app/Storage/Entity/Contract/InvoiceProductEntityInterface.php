@@ -9,6 +9,8 @@ use InvoiceSinger\Storage\Entity\InvoiceEntity;
  *
  * @property string      $invoice
  * @property string      $name
+ * @property string      $description
+ * @property float       $price
  * @property float       $quantity
  * @property string      $unit
  * @property float       $subtotal
@@ -33,6 +35,13 @@ interface InvoiceProductEntityInterface
      * @return string
      */
     public function getDisplayName(): string;
+
+    /**
+     * Get the description.
+     *
+     * @return string|null
+     */
+    public function getDescription(): ?string;
 
     /**
      * Get the quantity.
@@ -75,6 +84,13 @@ interface InvoiceProductEntityInterface
      * @return float
      */
     public function getTotal(): float;
+
+    /**
+     * Get the item price.
+     *
+     * @return float
+     */
+    public function getPrice(): float;
 
     /**
      * Get the tax rate entity.

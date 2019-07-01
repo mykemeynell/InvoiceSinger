@@ -26,7 +26,7 @@
             </select>
         </td>
         <td class="right-align">
-            <input type="text" class="right-align" :name="discountFieldName" value="0.00" v-on:change="updateTotals">
+            <input type="text" class="right-align" :name="discountFieldName" :value="discount" v-on:change="updateTotals">
         </td>
         <td class="right-align">
             {{ currency }}<span :id="totalSpanId">{{ total }}</span>
@@ -48,7 +48,7 @@
             let quantity = 1;
             let price = this.product.price ? this.product.price.toFixed(2) : parseFloat(0).toFixed(2);
             let subtotal = (price * quantity).toFixed(2);
-            let discount = 0;
+            let discount = this.product.discount ? this.product.discount.toFixed(2) : parseFloat(0).toFixed(2);
             let multiplier = this.product.tax_rate && this.product.tax_rate.multiplier ? this.product.tax_rate.multiplier : 1;
             let total = parseFloat((+subtotal * multiplier) - +discount).toFixed(2);
 
@@ -84,6 +84,8 @@
                 this.$el.parentNode.removeChild(this.$el);
             },
             updateTaxMultiplier() {
+                $('#save-form-button').attr('disabled', 'disabled');
+
                 // Update total
                 axios.get('/api/products/tax-rates', {
                     params: {id: $('[name="' + this.taxRateFieldName + '"]').val()}
@@ -94,6 +96,9 @@
                     })
                     .then(() => {
                         this.updateTotals();
+                    })
+                    .then(() => {
+                        $('#save-form-button').removeAttr('disabled');
                     })
                     .catch(() => {
                         console.error('Failed to fetch tax rate from database.');

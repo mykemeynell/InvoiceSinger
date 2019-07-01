@@ -91,6 +91,16 @@ class InvoiceProductEntity extends Model implements InvoiceProductEntityInterfac
     }
 
     /**
+     * Get the description.
+     *
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
      * Get the quantity.
      *
      * @return float
@@ -151,6 +161,16 @@ class InvoiceProductEntity extends Model implements InvoiceProductEntityInterfac
     }
 
     /**
+     * Get the item price.
+     *
+     * @return float
+     */
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    /**
      * Get the tax rate entity.
      *
      * @return \InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface|\Illuminate\Database\Eloquent\Model
@@ -158,6 +178,7 @@ class InvoiceProductEntity extends Model implements InvoiceProductEntityInterfac
     public function taxRate(): TaxRateEntityInterface
     {
         if ($tax_rate = $this->hasOne(app('product.taxRate.entity'), 'id', 'tax_rate')->first()) {
+            $tax_rate->forceFill(['multiplier' => $tax_rate->getMultiplier()]);
             return $tax_rate;
         } else {
             return app('product.taxRate.entity')->forceFill([
@@ -197,5 +218,15 @@ class InvoiceProductEntity extends Model implements InvoiceProductEntityInterfac
     public function invoice(): InvoiceEntity
     {
         return $this->hasOne(app('invoice.entity'), 'id', 'invoice')->first();
+    }
+
+    /**
+     * Get the total amount of tax paid for an item.
+     *
+     * @return float
+     */
+    public function getTaxPaid(): float
+    {
+        return ($this->getTotal() + $this->getDiscount()) - $this->getSubtotal();
     }
 }

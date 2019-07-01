@@ -217,15 +217,16 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
         return $this->hasMany(app('invoice.product.entity'), 'invoice')->get()
             ->map(static function (InvoiceProductEntity $item) {
                 if ($tax_rate = $item->taxRate()) {
+                    /** @var \InvoiceSinger\Storage\Entity\TaxRateEntity $tax_rate */
+                    $tax_rate->forceFill(['multiplier' => $tax_rate->getMultiplier()]);
                     $item->tax_rate = $tax_rate;
-                    $item->tax_rate['multiplier'] = $tax_rate->getMultiplier();
                 } else {
-                    $item->tax_rate = [
+                    $item->tax_rate = app('product.taxRate.entity')->forceFill([
                         'name' => 'No Tax',
                         'amount' => 0,
                         'multiplier' => 1,
                         'id' => 'none',
-                    ];
+                    ]);
                 }
 
                 $item->unit = $item->unit();

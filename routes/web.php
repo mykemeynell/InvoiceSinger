@@ -61,6 +61,9 @@ $router->get('/products/tax-rates/form/{tax_rate_id?}', 'Products\TaxRateControl
 $router->post('/products/tax-rates/form/{tax_rate_id?}', 'Products\TaxRateController@handlePost')->name('products.taxRates.handleForm');
 $router->post('/products/tax-rates/delete/{tax_rate_id?}', 'Products\TaxRateController@handleDelete')->name('products.taxRates.handleDelete');
 
+// PDFs
+$router->get('/pdf/invoice/{invoice_id}', 'PDF\PdfController@invoice')->name('pdf.invoice');
+
 /*
  * Authentication routes.
  */

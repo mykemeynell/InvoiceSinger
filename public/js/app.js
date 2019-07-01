@@ -1887,7 +1887,7 @@ __webpack_require__.r(__webpack_exports__);
     var quantity = 1;
     var price = this.product.price ? this.product.price.toFixed(2) : parseFloat(0).toFixed(2);
     var subtotal = (price * quantity).toFixed(2);
-    var discount = 0;
+    var discount = this.product.discount ? this.product.discount.toFixed(2) : parseFloat(0).toFixed(2);
     var multiplier = this.product.tax_rate && this.product.tax_rate.multiplier ? this.product.tax_rate.multiplier : 1;
     var total = parseFloat(+subtotal * multiplier - +discount).toFixed(2);
     return {
@@ -1946,7 +1946,8 @@ __webpack_require__.r(__webpack_exports__);
     updateTaxMultiplier: function updateTaxMultiplier() {
       var _this = this;
 
-      // Update total
+      $('#save-form-button').attr('disabled', 'disabled'); // Update total
+
       axios.get('/api/products/tax-rates', {
         params: {
           id: $('[name="' + this.taxRateFieldName + '"]').val()
@@ -1956,6 +1957,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.tax.multiplier = tax_rate.multiplier;
       }).then(function () {
         _this.updateTotals();
+      }).then(function () {
+        $('#save-form-button').removeAttr('disabled');
       })["catch"](function () {
         console.error('Failed to fetch tax rate from database.');
       });
@@ -60784,7 +60787,8 @@ var render = function() {
     _c("td", { staticClass: "right-align" }, [
       _c("input", {
         staticClass: "right-align",
-        attrs: { type: "text", name: _vm.discountFieldName, value: "0.00" },
+        attrs: { type: "text", name: _vm.discountFieldName },
+        domProps: { value: _vm.discount },
         on: { change: _vm.updateTotals }
       })
     ]),
