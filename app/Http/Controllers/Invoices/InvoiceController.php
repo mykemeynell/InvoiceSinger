@@ -8,8 +8,10 @@ use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Invoice\InvoiceRequest;
 use InvoiceSinger\Storage\Service\Contract\ClientServiceInterface;
+use InvoiceSinger\Storage\Service\Contract\InvoiceProductServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
  * Class InvoiceController
@@ -20,16 +22,25 @@ class InvoiceController extends Controller
 {
     use HasService;
 
+    const SERVICE_INVOICE = 'invoices';
+    const SERVICE_INVOICE_PRODUCT = 'invoiceProducts';
+    const SERVICE_CLIENT = 'clients';
+
     /**
      * InvoiceController constructor.
      *
      * @param \InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface $invoiceService
-     * @param \InvoiceSinger\Storage\Service\Contract\ClientServiceInterface  $clientService
+     * @param \InvoiceSinger\Storage\Service\Contract\ClientServiceInterface $clientService
+     * @param \InvoiceSinger\Storage\Service\Contract\InvoiceProductServiceInterface $invoiceProductService
      */
-    function __construct(InvoiceServiceInterface $invoiceService, ClientServiceInterface $clientService)
-    {
-        $this->setService($invoiceService, 'invoices');
-        $this->setService($clientService, 'clients');
+    function __construct(
+        InvoiceServiceInterface $invoiceService,
+        ClientServiceInterface $clientService,
+        InvoiceProductServiceInterface $invoiceProductService
+    ) {
+        $this->setService($invoiceService, self::SERVICE_INVOICE);
+        $this->setService($invoiceProductService, self::SERVICE_INVOICE_PRODUCT);
+        $this->setService($clientService, self::SERVICE_CLIENT);
     }
 
     /**
@@ -44,8 +55,8 @@ class InvoiceController extends Controller
         return view('invoices')
             ->with('today', Carbon::today()->format('d F Y'))
             ->with('due', Carbon::today()->add(settings('invoice.term'))->format('d F Y'))
-            ->with('clients', $this->getService('clients')->fetch())
-            ->with('invoices', $this->getService('invoices')->fetch());
+            ->with('clients', $this->getService(self::SERVICE_CLIENT)->fetch())
+            ->with('invoices', $this->getService(self::SERVICE_INVOICE)->fetch());
     }
 
     /**
@@ -71,19 +82,26 @@ class InvoiceController extends Controller
     public function handlePost(InvoiceRequest $request): RedirectResponse
     {
         try {
+            /** @var \InvoiceSinger\Storage\Entity\InvoiceEntity $invoice */
             if ($invoice = $request->invoice()) {
-                /** @var \InvoiceSinger\Storage\Entity\InvoiceEntity $invoice */
-                $invoice = $this->getService('invoices')->update($invoice, $request->getParameterBag());
+                $this->getService(self::SERVICE_INVOICE)->update($invoice, $request->getParameterBag());
+
+                $this->getService(self::SERVICE_INVOICE_PRODUCT)->removeUsingInvoiceId($invoice->getKey());
+                foreach($request->getParameterBag()->get('products') as $product) {
+                    $product['invoice'] = $invoice->getKey();
+                    $this->getService(self::SERVICE_INVOICE_PRODUCT)->create(new ParameterBag($product));
+                }
 
                 return RedirectResponse::create(route('invoices.form', ['invoice_id' => $invoice->getKey()]));
             }
 
             /** @var \InvoiceSinger\Storage\Entity\InvoiceEntity $invoice */
-            $invoice = $this->getService('invoices')->create($request->getParameterBag());
+            $invoice = $this->getService(self::SERVICE_INVOICE)->create($request->getParameterBag());
 
             return RedirectResponse::create(route('invoices.form', ['invoice_id' => $invoice->getKey()]));
         } catch (\Exception $exception) {
-            return abort(500, $exception->getMessage());
+            return abort(500,
+                sprintf("'%s' reported in '%s' on line %s", $exception->getMessage(), $exception->getFile(), $exception->getLine()));
         }
     }
 }

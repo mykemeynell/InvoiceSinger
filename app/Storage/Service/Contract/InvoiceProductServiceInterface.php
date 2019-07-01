@@ -15,6 +15,15 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 interface InvoiceProductServiceInterface extends ServiceInterface
 {
     /**
+     * Delete all invoice products that have a defined invoice ID.
+     *
+     * @param string $id
+     *
+     * @return bool
+     */
+    public function removeUsingInvoiceId(string $id): bool;
+
+    /**
      * Fetch all products for an invoice ID.
      *
      * @param string $id

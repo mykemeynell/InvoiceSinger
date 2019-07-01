@@ -1986,137 +1986,161 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['currency', 'taxes', 'units'],
-  data: function data() {
-    return {
-      products: [],
-      count: 0,
-      subtotal: parseFloat('0.00').toFixed(2),
-      tax: parseFloat('0.00').toFixed(2),
-      discount: parseFloat('0.00').toFixed(2),
-      total: parseFloat('0.00').toFixed(2),
-      paid: parseFloat('0.00').toFixed(2),
-      balance: parseFloat('0.00').toFixed(2)
-    };
-  },
-  methods: {
-    addItem: function addItem(product) {
-      var _this = this;
+var _props$props$data$met;
 
-      if (typeof product === 'undefined') {
-        product = {};
-      }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-      product = $.extend({
-        count: this.count
-      }, product);
-      this.products.push(product);
-      this.count++;
-      setTimeout(function () {
-        _this.updateSummary();
-      }, 250);
-    },
-    removeItem: function removeItem(index) {
-      Vue["delete"](this.products, index);
-    },
-    updateSummary: function updateSummary() {
-      var items = this.$children;
-      this.subtotal = 0;
-      this.tax = 0;
-      this.discount = 0;
-      this.total = 0;
-
-      for (var current = 0; current < items.length; current++) {
-        // Subtotal
-        var subtotal = items[current].subtotal;
-        this.subtotal = (+this.subtotal + +subtotal).toFixed(2); // Tax
-
-        var multiplier = items[current].tax.multiplier;
-        this.tax = (+this.tax + (+subtotal * +multiplier - +subtotal)).toFixed(2); // Discount
-
-        var discount = items[current].discount;
-        this.discount = (+this.discount + +discount).toFixed(2); // Total
-
-        var total = items[current].total;
-        this.total = (+this.total + +total).toFixed(2);
-      }
-    }
-  },
-  created: function created() {
-    var that = this;
-    $(document).on('click', '.js-add-product', function () {
-      var product = window.table.row($(this).parents('tr')).data();
-      that.addItem(product);
-    });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = (_props$props$data$met = {
+  props: ['currency', 'taxes', 'units']
+}, _defineProperty(_props$props$data$met, "props", {
+  currency: String,
+  taxes: Array,
+  units: Array,
+  products: {
+    type: Array,
+    "default": []
   }
-});
+}), _defineProperty(_props$props$data$met, "data", function data() {
+  return {
+    count: 0,
+    subtotal: parseFloat('0.00').toFixed(2),
+    tax: parseFloat('0.00').toFixed(2),
+    discount: parseFloat('0.00').toFixed(2),
+    total: parseFloat('0.00').toFixed(2),
+    paid: parseFloat('0.00').toFixed(2),
+    balance: parseFloat('0.00').toFixed(2)
+  };
+}), _defineProperty(_props$props$data$met, "methods", {
+  addItem: function addItem(product) {
+    var _this = this;
+
+    // If no product is defined, create an empty object.
+    if (typeof product === 'undefined') {
+      product = {};
+    } // Add the current count value into the product object, and
+    // add it to the current list of this.products, and increment
+    // the this.count value ready for the next item.
+
+
+    product = $.extend({
+      count: this.count
+    }, product);
+    this.products.push(product);
+    this.count++; // Wait for 250ms before updating the totals for that product.
+    // Something to do with a race condition. Nicer solution welcome.
+
+    setTimeout(function () {
+      _this.updateSummary();
+    }, 250);
+  },
+  removeItem: function removeItem(index) {
+    Vue["delete"](this.products, index);
+  },
+  updateSummary: function updateSummary() {
+    // Can use this.$children as we dont use any other Vue components to construct the table.
+    var items = this.$children; // Zero all values, ready for new totals.
+
+    this.subtotal = 0;
+    this.tax = 0;
+    this.discount = 0;
+    this.total = 0; // Loop over all products that have been added to the component.
+
+    for (var current = 0; current < items.length; current++) {
+      // Subtotal
+      var subtotal = items[current].subtotal;
+      this.subtotal = (+this.subtotal + +subtotal).toFixed(2); // Tax
+
+      var multiplier = items[current].tax.multiplier;
+      this.tax = (+this.tax + (+subtotal * +multiplier - +subtotal)).toFixed(2); // Discount
+
+      var discount = items[current].discount;
+      this.discount = (+this.discount + +discount).toFixed(2); // Total
+
+      var total = items[current].total;
+      this.total = (+this.total + +total).toFixed(2);
+    }
+  }
+}), _defineProperty(_props$props$data$met, "created", function created() {
+  // Add the count item to the list of products that have been passed into the component.
+  for (var current = 0; current < this.products.length; current++) {
+    this.products[current]['count'] = current;
+  } // Update the count value to continue from the end of the products list.
+
+
+  this.count = this.products.length; // Bind the 'add' button in the product modal to the addItem method.
+
+  var that = this;
+  $(document).on('click', '.js-add-product', function () {
+    var product = window.table.row($(this).parents('tr')).data();
+    that.addItem(product);
+  });
+}), _props$props$data$met);
 
 /***/ }),
 
@@ -47777,7 +47801,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         var dropdownBounds = {
           left: idealXPos,
           top: idealYPos,
-          height: idealHeight,
+          // height: idealHeight,
           width: idealWidth
         };
 
@@ -60651,7 +60675,13 @@ var render = function() {
   return _c("tr", { attrs: { id: _vm.rowId } }, [
     _c("td", [
       _c("input", {
-        attrs: { type: "text", placeholder: "Name", name: _vm.nameFieldName },
+        staticClass: "validate",
+        attrs: {
+          type: "text",
+          placeholder: "Name",
+          name: _vm.nameFieldName,
+          required: "required"
+        },
         domProps: { value: _vm.product.name }
       }),
       _vm._v(" "),
@@ -60668,8 +60698,12 @@ var render = function() {
     _c("td", { staticClass: "right-align" }, [
       _c("div", { staticClass: "input-field" }, [
         _c("input", {
-          staticClass: "right-align",
-          attrs: { type: "text", name: _vm.priceFieldName },
+          staticClass: "right-align validate",
+          attrs: {
+            type: "text",
+            name: _vm.priceFieldName,
+            required: "required"
+          },
           domProps: { value: _vm.price },
           on: { change: _vm.updateTotals }
         })
@@ -60678,14 +60712,22 @@ var render = function() {
     _vm._v(" "),
     _c("td", { staticClass: "right-align" }, [
       _c("input", {
-        staticClass: "right-align",
-        attrs: { type: "text", name: _vm.quantityFieldName, value: "1" },
+        staticClass: "right-align validate",
+        attrs: {
+          type: "text",
+          name: _vm.quantityFieldName,
+          value: "1",
+          required: "required"
+        },
         on: { change: _vm.updateTotals }
       }),
       _vm._v(" "),
       _c(
         "select",
-        { attrs: { name: _vm.unitFieldName } },
+        {
+          staticClass: "validate",
+          attrs: { name: _vm.unitFieldName, required: "required" }
+        },
         _vm._l(_vm.units, function(unit) {
           return _c("option", { domProps: { value: unit.id } }, [
             _vm._v(_vm._s(unit.name))

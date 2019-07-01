@@ -24,6 +24,8 @@ class CreateInvoiceProductsTable extends Migration
 
             $table->string('invoice');
             $table->string('name');
+            $table->text('description')->nullable();
+            $table->float('price', 10, 2);
             $table->float('quantity', 10, 2)->default(1);
             $table->string('unit');
             $table->float('subtotal', 10, 2);

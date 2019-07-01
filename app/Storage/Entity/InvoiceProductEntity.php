@@ -2,10 +2,12 @@
 
 namespace InvoiceSinger\Storage\Entity;
 
+use ArchLayer\Entity\Concern\EntityHasTimestamps;
 use Illuminate\Database\Eloquent\Model;
 use InvoiceSinger\Storage\Entity\Contract\InvoiceProductEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\UnitEntityInterface;
+use UuidColumn\Concern\HasUuidObserver;
 
 /**
  * Class InvoiceProduct.
@@ -13,11 +15,14 @@ use InvoiceSinger\Storage\Entity\Contract\UnitEntityInterface;
  * @package InvoiceSinger\Storage\Entity
  */
 class InvoiceProductEntity extends Model implements InvoiceProductEntityInterface
-{/**
- * The table name.
- *
- * @var string
- */
+{
+    use HasUuidObserver, EntityHasTimestamps;
+
+    /**
+     * The table name.
+     *
+     * @var string
+     */
     public $table = 'invoice_products';
 
     /**
@@ -50,6 +55,7 @@ class InvoiceProductEntity extends Model implements InvoiceProductEntityInterfac
      * @var array
      */
     protected $casts = [
+        'price' => 'float',
         'quantity' => 'float',
         'subtotal' => 'float',
         'discount' => 'float',
@@ -64,6 +70,8 @@ class InvoiceProductEntity extends Model implements InvoiceProductEntityInterfac
     protected $fillable = [
         'invoice',
         'name',
+        'description',
+        'price',
         'quantity',
         'unit',
         'subtotal',
@@ -149,14 +157,14 @@ class InvoiceProductEntity extends Model implements InvoiceProductEntityInterfac
      */
     public function taxRate(): TaxRateEntityInterface
     {
-        if($tax_rate = $this->hasOne(app('product.taxRate.entity'), 'id', 'tax_rate')->first()) {
+        if ($tax_rate = $this->hasOne(app('product.taxRate.entity'), 'id', 'tax_rate')->first()) {
             return $tax_rate;
         } else {
             return app('product.taxRate.entity')->forceFill([
                 'id' => 'none',
                 'name' => 'No Tax',
                 'multiplier' => 1,
-                'amount' => 0
+                'amount' => 0,
             ]);
         }
     }

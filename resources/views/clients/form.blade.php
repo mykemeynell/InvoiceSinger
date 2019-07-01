@@ -12,7 +12,7 @@
                     <h4 class="margin-0">{{ $client ? 'Edit' : 'Create' }} Client</h4>
                 </div>
                 <div class="col s12 m6 right-align">
-                    <button form="client-form" formmethod="POST" formaction="{{ route('clients.handleForm') }}"
+                    <button form="client-form" formmethod="POST" formaction="{{ route('clients.handleForm', ['client_id' => $client ? $client->getKey() : null]) }}"
                             class="waves-light waves-effect btn-flat margin-right-15">Save
                     </button>
                     <a href="{{ route('clients') }}" class="waves-light waves-effect btn-flat">Cancel</a>
@@ -39,12 +39,12 @@
                                     <div class="col s12 m2 input-field">
                                         <select name="client[title]" id="client-title">
                                             <option value="" disabled selected>Select</option>
-                                            <option value="Mr">Mr</option>
-                                            <option value="Mrs">Mrs</option>
-                                            <option value="Ms">Ms</option>
-                                            <option value="Sir">Sir</option>
-                                            <option value="Lady">Lady</option>
-                                            <option value="Ind">Ind</option>
+                                            <option value="Mr" @if($client && $client->getTitle() == 'Mr') selected @endif>Mr</option>
+                                            <option value="Mrs" @if($client && $client->getTitle() == 'Mrs') selected @endif>Mrs</option>
+                                            <option value="Ms" @if($client && $client->getTitle() == 'Ms') selected @endif>Ms</option>
+                                            <option value="Sir" @if($client && $client->getTitle() == 'Sir') selected @endif>Sir</option>
+                                            <option value="Lady" @if($client && $client->getTitle() == 'Lady') selected @endif>Lady</option>
+                                            <option value="Ind" @if($client && $client->getTitle() == 'Ind') selected @endif>Ind</option>
                                         </select>
                                         <label for="client-title">Title</label>
                                     </div>

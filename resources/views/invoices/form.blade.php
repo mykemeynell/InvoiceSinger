@@ -97,7 +97,7 @@
                                 <label for="invoice-due-at">Due date</label>
                             </div>
                             <div class="col s6 input-field">
-                                <input type="text" name="invoice[due_at]" class="datepicker" id="invoice-sent-at"
+                                <input type="text" name="invoice[sent_at]" class="datepicker" id="invoice-sent-at"
                                        value="{{ ! empty($invoice->getSentAt()) ? $invoice->getSentAt()->format('d F Y') : '' }}">
                                 <label for="invoice-sent-at">Sent at</label>
                             </div>
@@ -114,7 +114,8 @@
         <product-table
                 currency="{!! app()->make(\mykemeynell\Support\CurrencyHtmlEntities::class)->entity(settings('app.currency')) !!}"
                 :taxes="{{ $tax_rate_service->fetch() }}"
-                :units="{{ $unit_service->fetch() }}"></product-table>
+                :units="{{ $unit_service->fetch() }}"
+                :products="{{ $invoice->items() }}"></product-table>
 
     </form>
 

@@ -18,6 +18,16 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 class InvoiceService extends Service implements InvoiceServiceInterface
 {
     /**
+     * InvoiceService constructor.
+     *
+     * @param \InvoiceSinger\Storage\Repository\Contract\InvoiceRepositoryInterface $repository
+     */
+    function __construct(InvoiceRepositoryInterface $repository)
+    {
+        $this->setRepository($repository);
+    }
+
+    /**
      * Find a client using a given field. ID by default.
      *
      * @param string $value
@@ -38,16 +48,6 @@ class InvoiceService extends Service implements InvoiceServiceInterface
     public function fetch(): Collection
     {
         return $this->getRepository()->builder()->orderBy('created_at', 'desc')->get();
-    }
-
-    /**
-     * InvoiceService constructor.
-     *
-     * @param \InvoiceSinger\Storage\Repository\Contract\InvoiceRepositoryInterface $repository
-     */
-    function __construct(InvoiceRepositoryInterface $repository)
-    {
-        $this->setRepository($repository);
     }
 
     /**
@@ -78,9 +78,7 @@ class InvoiceService extends Service implements InvoiceServiceInterface
      */
     public function update(InvoiceEntityInterface $entity, ParameterBag $payload): bool
     {
-        return $entity->update(
-            Arr::only($payload->all(), $this->getRepository()->getModel()->getFillable())
-        );
+        return $entity->update(Arr::only($payload->all(), $this->getRepository()->getModel()->getFillable()));
     }
 
     /**

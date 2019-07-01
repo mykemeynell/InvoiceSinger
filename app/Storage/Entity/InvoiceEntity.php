@@ -4,6 +4,7 @@ namespace InvoiceSinger\Storage\Entity;
 
 use ArchLayer\Entity\Concern\EntityHasTimestamps;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use InvoiceSinger\Observers\CreateInvoiceKeyObserver;
 use InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface;
@@ -185,6 +186,18 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
     }
 
     /**
+     * Set the sent_at attribute.
+     *
+     * @param $value
+     */
+    public function setSentAtAttribute($value): void
+    {
+        if (!empty($value)) {
+            $this->attributes['sent_at'] = Carbon::createFromFormat('d F Y', $value)->format('Y-m-d');
+        }
+    }
+
+    /**
      * Get the associated client entity.
      *
      * @return \InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface|\Illuminate\Database\Eloquent\Model|null
@@ -192,5 +205,32 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
     public function client(): ?ClientEntityInterface
     {
         return $this->hasOne(app('client.entity'), 'id', 'client')->first();
+    }
+
+    /**
+     * Get items that have been added to this invoice.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function items(): Collection
+    {
+        return $this->hasMany(app('invoice.product.entity'), 'invoice')->get()
+            ->map(static function (InvoiceProductEntity $item) {
+                if ($tax_rate = $item->taxRate()) {
+                    $item->tax_rate = $tax_rate;
+                    $item->tax_rate['multiplier'] = $tax_rate->getMultiplier();
+                } else {
+                    $item->tax_rate = [
+                        'name' => 'No Tax',
+                        'amount' => 0,
+                        'multiplier' => 1,
+                        'id' => 'none',
+                    ];
+                }
+
+                $item->unit = $item->unit();
+
+                return $item;
+            });
     }
 }

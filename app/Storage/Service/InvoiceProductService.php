@@ -29,6 +29,18 @@ class InvoiceProductService extends Service implements InvoiceProductServiceInte
     }
 
     /**
+     * Delete all invoice products that have a defined invoice ID.
+     *
+     * @param string $id
+     *
+     * @return bool
+     */
+    public function removeUsingInvoiceId(string $id): bool
+    {
+        return $this->getRepository()->builder()->where('invoice', $id)->forceDelete();
+    }
+
+    /**
      * Fetch all products for an invoice ID.
      *
      * @param string $id

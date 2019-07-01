@@ -3,6 +3,7 @@
 namespace InvoiceSinger\Storage\Entity\Contract;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Interface InvoiceEntityInterface.
@@ -82,4 +83,11 @@ interface InvoiceEntityInterface
      * @return \InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface|\Illuminate\Database\Eloquent\Model|null
      */
     public function client(): ?ClientEntityInterface;
+
+    /**
+     * Get items that have been added to this invoice.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function items(): Collection;
 }

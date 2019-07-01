@@ -67,9 +67,17 @@
 <script>
     export default {
         props: ['currency', 'taxes', 'units'],
+        props: {
+            currency: String,
+            taxes: Array,
+            units: Array,
+            products: {
+                type: Array,
+                default: []
+            }
+        },
         data() {
             return {
-                products: [],
                 count: 0,
                 subtotal: parseFloat('0.00').toFixed(2),
                 tax: parseFloat('0.00').toFixed(2),
@@ -81,12 +89,20 @@
         },
         methods: {
             addItem(product) {
+                // If no product is defined, create an empty object.
                 if(typeof product === 'undefined') {
                     product = {};
                 }
+
+                // Add the current count value into the product object, and
+                // add it to the current list of this.products, and increment
+                // the this.count value ready for the next item.
                 product = $.extend({count: this.count}, product);
                 this.products.push(product);
                 this.count++;
+
+                // Wait for 250ms before updating the totals for that product.
+                // Something to do with a race condition. Nicer solution welcome.
                 setTimeout(() => {
                     this.updateSummary();
                 }, 250);
@@ -95,12 +111,16 @@
                 Vue.delete(this.products, index);
             },
             updateSummary() {
+                // Can use this.$children as we dont use any other Vue components to construct the table.
                 let items = this.$children;
+
+                // Zero all values, ready for new totals.
                 this.subtotal = 0;
                 this.tax = 0;
                 this.discount = 0;
                 this.total = 0;
 
+                // Loop over all products that have been added to the component.
                 for(let current = 0; current < items.length; current++) {
                     // Subtotal
                     let subtotal = items[current].subtotal;
@@ -121,6 +141,15 @@
             }
         },
         created() {
+            // Add the count item to the list of products that have been passed into the component.
+            for(let current = 0; current < this.products.length; current++) {
+                this.products[current]['count'] = current;
+            }
+
+            // Update the count value to continue from the end of the products list.
+            this.count = this.products.length;
+
+            // Bind the 'add' button in the product modal to the addItem method.
             let that = this;
             $(document).on('click', '.js-add-product', function () {
                 let product = window.table.row($(this).parents('tr')).data();

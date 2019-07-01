@@ -1,17 +1,17 @@
 <template>
     <tr :id="rowId">
         <td>
-            <input type="text" placeholder="Name" :name="nameFieldName" :value="product.name">
+            <input type="text" placeholder="Name" :name="nameFieldName" :value="product.name" required="required" class="validate">
             <textarea class="materialize-textarea" placeholder="Description" :name="descriptionFieldName">{{ product.description }}</textarea>
         </td>
         <td class="right-align">
             <div class="input-field">
-                <input type="text" class="right-align" :name="priceFieldName" :value="price" v-on:change="updateTotals">
+                <input type="text" class="right-align validate" :name="priceFieldName" :value="price" v-on:change="updateTotals" required="required">
             </div>
         </td>
         <td class="right-align">
-            <input type="text" class="right-align" :name="quantityFieldName" value="1" v-on:change="updateTotals">
-            <select :name="unitFieldName">
+            <input type="text" class="right-align validate" :name="quantityFieldName" value="1" v-on:change="updateTotals" required="required">
+            <select :name="unitFieldName" required="required" class="validate">
                 <option v-for="unit in units" :value="unit.id">{{ unit.name }}</option>
             </select>
         </td>
