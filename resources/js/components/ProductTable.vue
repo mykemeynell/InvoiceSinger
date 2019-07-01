@@ -17,9 +17,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <template v-for="product in products">
-                            <component is="product-row" :product="product" :currency="currency" :taxes="taxes" :units="units"></component>
-                        </template>
+                    <template v-for="product in products">
+                        <component is="product-row" :product="product" :currency="currency" :taxes="taxes"
+                                   :units="units"></component>
+                    </template>
                     </tbody>
                 </table>
             </div>
@@ -33,47 +34,48 @@
             </div>
 
             <div class="col s3">
-            <table class="responsive-table">
-                <tr>
-                    <th>Subtotal</th>
-                    <td class="right-align">{{ currency }}{{ subtotal }}</td>
-                </tr>
-                <tr>
-                    <th>Tax</th>
-                    <td class="right-align">{{ currency }}{{ tax }}</td>
-                </tr>
-                <tr>
-                    <th>Discount</th>
-                    <td class="right-align">{{ currency }}{{ discount }}</td>
-                </tr>
-                <tr>
-                    <th>Total</th>
-                    <td class="right-align">{{ currency }}{{ total }}</td>
-                </tr>
-                <tr>
-                    <th>Paid</th>
-                    <td class="right-align">{{ currency }}0.00</td>
-                </tr>
-                <tr>
-                    <th><span class="bold-text">Balance</span></th>
-                    <td class="right-align">{{ currency }}0.00</td>
-                </tr>
-            </table>
-        </div>
+                <table class="responsive-table">
+                    <tr>
+                        <th>Subtotal</th>
+                        <td class="right-align">{{ currency }}{{ subtotal }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tax</th>
+                        <td class="right-align">{{ currency }}{{ tax }}</td>
+                    </tr>
+                    <tr>
+                        <th>Discount</th>
+                        <td class="right-align">{{ currency }}{{ discount }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <td class="right-align">{{ currency }}{{ total }}</td>
+                    </tr>
+                    <tr>
+                        <th>Paid</th>
+                        <td class="right-align">{{ currency }}0.00</td>
+                    </tr>
+                    <tr>
+                        <th><span class="bold-text">Balance</span></th>
+                        <td class="right-align">{{ currency }}0.00</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        props: ['currency', 'taxes', 'units'],
         props: {
             currency: String,
             taxes: Array,
             units: Array,
             products: {
                 type: Array,
-                default: []
+                default: function () {
+                    return [];
+                }
             }
         },
         data() {
@@ -90,7 +92,7 @@
         methods: {
             addItem(product) {
                 // If no product is defined, create an empty object.
-                if(typeof product === 'undefined') {
+                if (typeof product === 'undefined') {
                     product = {};
                 }
 
@@ -100,6 +102,7 @@
                 product = $.extend({count: this.count}, product);
                 this.products.push(product);
                 this.count++;
+                console.log(this.products);
 
                 // Wait for 250ms before updating the totals for that product.
                 // Something to do with a race condition. Nicer solution welcome.
@@ -118,7 +121,7 @@
                 this.total = 0;
 
                 // Loop over all products that have been added to the component.
-                for(let current = 0; current < items.length; current++) {
+                for (let current = 0; current < items.length; current++) {
                     // Subtotal
                     let subtotal = items[current].subtotal;
                     this.subtotal = (+this.subtotal + +subtotal).toFixed(2);
@@ -139,7 +142,7 @@
         },
         created() {
             // Add the count item to the list of products that have been passed into the component.
-            for(let current = 0; current < this.products.length; current++) {
+            for (let current = 0; current < this.products.length; current++) {
                 this.products[current]['count'] = current;
                 // Update the count value to continue from the end of the products list.
                 this.count = +current + 1;
