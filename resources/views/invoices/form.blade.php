@@ -18,7 +18,17 @@
                 <h4 class="margin-0">Invoice #{{ $invoice->getInvoiceKey() }}</h4>
             </div>
             <div class="col s12 m6 input-field right-align">
-                <a href="#" data-target="#options-dropdown" class="waves-light waves-effect btn margin-right-15">Options</a>
+                <!-- Dropdown Trigger -->
+                <a class="dropdown-trigger btn waves-effect waves-light margin-right-15" href="#" data-target="options-dropdown">Options</a>
+
+                <!-- Dropdown Structure -->
+                <ul id='options-dropdown' class='dropdown-content'>
+                    <li><a href="#!">Download as PDF</a></li>
+                    <li><a href="#!">Send via Email</a></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a href="#!" class="red-text darken-1">Delete</a></li>
+                </ul>
+
                 <button form="client-form" formmethod="POST" formaction="{{ route('invoices.handleForm', ['invoice_id' => ! is_null($invoice) ? $invoice->getKey() : null]) }}"
                         class="waves-light waves-effect btn">Save
                 </button>
@@ -159,6 +169,10 @@
     <script>
         $(document).ready(function(){
             $('.modal').modal();
+            $('.dropdown-trigger').dropdown({
+                constrainWidth: false,
+                alignment: 'right'
+            });
 
             let search_field = $('#product-search-field');
 

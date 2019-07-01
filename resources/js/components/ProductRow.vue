@@ -33,7 +33,7 @@
             <input type="hidden" :name="totalFieldName" :value="total">
         </td>
         <td class="right-align" width="50">
-            <i class="material-icons pointer-cursor" @click="removeItem(product.count)">remove_circle_outline</i>
+            <i class="material-icons pointer-cursor" @click="removeItem()">remove_circle_outline</i>
         </td>
     </tr>
 </template>
@@ -80,8 +80,8 @@
             created() {
                 this.updateTotals();
             },
-            removeItem(index) {
-                this.$parent.removeItem(index);
+            removeItem() {
+                this.$el.parentNode.removeChild(this.$el);
             },
             updateTaxMultiplier() {
                 // Update total

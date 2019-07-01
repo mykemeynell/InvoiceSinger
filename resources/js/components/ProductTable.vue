@@ -107,9 +107,6 @@
                     this.updateSummary();
                 }, 250);
             },
-            removeItem(index) {
-                Vue.delete(this.products, index);
-            },
             updateSummary() {
                 // Can use this.$children as we dont use any other Vue components to construct the table.
                 let items = this.$children;
@@ -144,10 +141,13 @@
             // Add the count item to the list of products that have been passed into the component.
             for(let current = 0; current < this.products.length; current++) {
                 this.products[current]['count'] = current;
+                // Update the count value to continue from the end of the products list.
+                this.count = +current + 1;
             }
 
-            // Update the count value to continue from the end of the products list.
-            this.count = this.products.length;
+            setTimeout(() => {
+                this.updateSummary();
+            }, 250);
 
             // Bind the 'add' button in the product modal to the addItem method.
             let that = this;

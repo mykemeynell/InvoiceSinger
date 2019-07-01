@@ -1940,8 +1940,8 @@ __webpack_require__.r(__webpack_exports__);
     created: function created() {
       this.updateTotals();
     },
-    removeItem: function removeItem(index) {
-      this.$parent.removeItem(index);
+    removeItem: function removeItem() {
+      this.$el.parentNode.removeChild(this.$el);
     },
     updateTaxMultiplier: function updateTaxMultiplier() {
       var _this = this;
@@ -2099,9 +2099,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       _this.updateSummary();
     }, 250);
   },
-  removeItem: function removeItem(index) {
-    Vue["delete"](this.products, index);
-  },
   updateSummary: function updateSummary() {
     // Can use this.$children as we dont use any other Vue components to construct the table.
     var items = this.$children; // Zero all values, ready for new totals.
@@ -2127,13 +2124,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }
 }), _defineProperty(_props$props$data$met, "created", function created() {
+  var _this2 = this;
+
   // Add the count item to the list of products that have been passed into the component.
   for (var current = 0; current < this.products.length; current++) {
-    this.products[current]['count'] = current;
-  } // Update the count value to continue from the end of the products list.
+    this.products[current]['count'] = current; // Update the count value to continue from the end of the products list.
 
+    this.count = +current + 1;
+  }
 
-  this.count = this.products.length; // Bind the 'add' button in the product modal to the addItem method.
+  setTimeout(function () {
+    _this2.updateSummary();
+  }, 250); // Bind the 'add' button in the product modal to the addItem method.
 
   var that = this;
   $(document).on('click', '.js-add-product', function () {
@@ -60806,7 +60808,7 @@ var render = function() {
           staticClass: "material-icons pointer-cursor",
           on: {
             click: function($event) {
-              return _vm.removeItem(_vm.product.count)
+              return _vm.removeItem()
             }
           }
         },
