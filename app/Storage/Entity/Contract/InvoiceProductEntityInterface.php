@@ -18,7 +18,7 @@ use InvoiceSinger\Storage\Entity\InvoiceEntity;
  *
  * @package InvoiceSinger\Storage\Entity\Contract
  */
-interface InvoiceProductInterface
+interface InvoiceProductEntityInterface
 {
     /**
      * Get the invoice ID.

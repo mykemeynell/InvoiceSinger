@@ -3,7 +3,7 @@
 namespace InvoiceSinger\Storage\Entity;
 
 use Illuminate\Database\Eloquent\Model;
-use InvoiceSinger\Storage\Entity\Contract\InvoiceProductInterface;
+use InvoiceSinger\Storage\Entity\Contract\InvoiceProductEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\UnitEntityInterface;
 
@@ -12,7 +12,7 @@ use InvoiceSinger\Storage\Entity\Contract\UnitEntityInterface;
  *
  * @package InvoiceSinger\Storage\Entity
  */
-class InvoiceProductEntity extends Model implements InvoiceProductInterface
+class InvoiceProductEntity extends Model implements InvoiceProductEntityInterface
 {/**
  * The table name.
  *
