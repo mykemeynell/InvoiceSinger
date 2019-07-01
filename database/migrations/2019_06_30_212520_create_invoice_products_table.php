@@ -21,7 +21,16 @@ class CreateInvoiceProductsTable extends Migration
     {
         Schema::create('invoice_products', function (Blueprint $table) {
             $this->createUuidColumn($table, 'id');
-            // TODO: Implement invoice_products table
+
+            $table->string('invoice');
+            $table->string('name');
+            $table->float('quantity', 10, 2)->default(1);
+            $table->string('unit');
+            $table->float('subtotal', 10, 2);
+            $table->string('tax_rate')->nullable();
+            $table->float('discount', 10, 2)->default(0);
+            $table->float('total', 10, 2);
+
             $table->timestamps();
         });
     }
