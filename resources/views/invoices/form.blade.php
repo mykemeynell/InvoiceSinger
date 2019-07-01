@@ -82,7 +82,7 @@
                                 <label for="invoice-raised-at">Raised date</label>
                             </div>
                             <div class="col s6 input-field">
-                                <select name="invoice[status]" id="invoice-payment-method">
+                                <select name="invoice[payment_method]" id="invoice-payment-method">
                                     <option value="payment">Payment</option>
                                 </select>
                                 <label for="invoice-payment-method">Payment method</label>
