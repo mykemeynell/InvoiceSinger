@@ -34,6 +34,7 @@ $router->get('/quotes', static function () {
 $router->get('/invoices', 'Invoices\InvoiceController@index')->name('invoices');
 $router->get('/invoices/form/{invoice_id?}', 'Invoices\InvoiceController@form')->name('invoices.form');
 $router->post('/invoices/form/{invoice_id?}', 'Invoices\InvoiceController@handlePost')->name('invoices.handleForm');
+$router->get('/invoices/public/{invoice_id?}', 'Invoices\InvoiceController@viewPublic')->name('invoices.showPublic');
 
 // Payments
 $router->get('/payments', static function () {

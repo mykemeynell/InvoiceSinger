@@ -11,6 +11,7 @@ use InvoiceSinger\Storage\Service\Contract\ClientServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\InvoiceProductServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
+use mykemeynell\Support\CurrencyHtmlEntities;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
@@ -103,5 +104,20 @@ class InvoiceController extends Controller
             return abort(500,
                 sprintf("'%s' reported in '%s' on line %s", $exception->getMessage(), $exception->getFile(), $exception->getLine()));
         }
+    }
+
+    public function viewPublic(InvoiceRequest $request): View
+    {
+        /** @var CurrencyHtmlEntities $che */
+        $che = app()->make(CurrencyHtmlEntities::class);
+        return view('invoices.public')
+            ->with('invoice', $request->invoice())
+            ->with('currency', $che->entity(settings('app.currency')))
+            ->with('subtotal', 0)
+            ->with('tax', 0)
+            ->with('discount', 0)
+            ->with('total', 0)
+            ->with('paid', 0)
+            ->with('balance', 0);
     }
 }
