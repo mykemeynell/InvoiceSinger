@@ -106,7 +106,7 @@ class PatternOptions implements ArrayAccess, IteratorAggregate
             self::MONTH_2 => $this->month_2,
             self::MONTH_FULL => $this->month_full,
             self::WEEK => $this->week,
-            self::INCREMENT => str_pad($this->increment, 6, 0, STR_PAD_LEFT),
+            self::INCREMENT => str_pad($this->increment, 4, 0, STR_PAD_LEFT),
         ];
     }
 
