@@ -110,6 +110,7 @@ class InvoiceController extends Controller
     {
         /** @var CurrencyHtmlEntities $che */
         $che = app()->make(CurrencyHtmlEntities::class);
+
         return view('invoices.public')
             ->with('invoice', $request->invoice())
             ->with('currency', $che->entity(settings('app.currency')))
