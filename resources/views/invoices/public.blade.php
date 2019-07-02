@@ -61,13 +61,12 @@
                 </ul>
             </div>
 
+            @if(! empty(settings('invoice.footer')))
             <div class="col s6">
-                <span class="display-block grey-text lighten-2">Invoice Description</span>
-                <p>Sed posuere consectetur est at lobortis. Donec id elit non mi porta gravida at eget metus. Nullam
-                    quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor. Duis mollis, est
-                    non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam quis risus
-                    eget urna mollis ornare vel eu leo.</p>
+                <span class="display-block grey-text lighten-2">Invoice Notes</span>
+                {!! settings('invoice.footer') !!}
             </div>
+            @endif
         </div>
 
         <div class="row">
