@@ -18,7 +18,7 @@
                                 the "Pay Online" button to get started.</p>
                         </div>
                         <div class="col s6 right-align">
-                            <a href="#!" class="waves-effect waves-light btn">Pay Online</a>
+                            <a href="#!" class="waves-effect waves-light green btn">Pay Online</a>
                         </div>
                     </div>
                 </div>
