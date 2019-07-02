@@ -19,7 +19,7 @@
             </div>
             <div class="col s12 m6 input-field right-align">
                 <!-- Dropdown Trigger -->
-                <a class="dropdown-trigger btn waves-effect waves-light margin-right-15" href="#" data-target="options-dropdown">Options</a>
+                <a class="options-dropdown-trigger btn waves-effect waves-light margin-right-15" href="#" data-target="options-dropdown">Options</a>
 
                 <!-- Dropdown Structure -->
                 <ul id='options-dropdown' class='dropdown-content'>
@@ -170,7 +170,7 @@
     <script>
         $(document).ready(function(){
             $('.modal').modal();
-            $('.dropdown-trigger').dropdown({
+            $('.options-dropdown-trigger').dropdown({
                 constrainWidth: false,
                 alignment: 'right'
             });
