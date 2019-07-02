@@ -32,7 +32,7 @@ class AppSettingsSeeder extends Seeder
             'description' => 'The provider that payments will be processed by',
         ],
         'app.logo' => [
-            'value' => '/images/logo/invoice-singer-white.png',
+            'value' => '/images/logo/dummy/dummy-company.png',
             'name' => 'Application logo',
             'description' => 'Application logo. Also used in invoices and quotes',
         ],

@@ -70,16 +70,11 @@
         props: {
             currency: String,
             taxes: Array,
-            units: Array,
-            products: {
-                type: Array,
-                default: function () {
-                    return [];
-                }
-            }
+            units: Array
         },
         data() {
             return {
+                products: [],
                 count: 0,
                 subtotal: parseFloat('0.00').toFixed(2),
                 tax: parseFloat('0.00').toFixed(2),
@@ -102,7 +97,6 @@
                 product = $.extend({count: this.count}, product);
                 this.products.push(product);
                 this.count++;
-                console.log(this.products);
 
                 // Wait for 250ms before updating the totals for that product.
                 // Something to do with a race condition. Nicer solution welcome.

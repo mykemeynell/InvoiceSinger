@@ -12,7 +12,7 @@
 
     <div class="row">
         <div class="col one-third-wide">
-            Logo
+            <img src="{{ asset(settings('app.logo')) }}" alt="Company Logo" class="brand-logo">
         </div>
         <div class="col two-thirds-wide">
             <h1 class="bold-text right-align padding-bottom-15">Invoice {{ $invoice->getInvoiceKey() }}</h1>

@@ -10219,6 +10219,10 @@ nav .nav-content .tabs .tab a.active {
   background-size: cover;
 }
 
+.page-public-viewer img.brand-logo {
+  max-height: 120px;
+}
+
 .modal {
   overflow-y: initial !important;
 }

@@ -6,6 +6,8 @@
     'show_progress' => false,
 ])
 
+@section('body_classes', 'page-public-viewer')
+
 @section('content')
     <div class="container">
         <div class="row margin-bottom-30 padding-top-15">
@@ -27,7 +29,7 @@
 
         <div class="row padding-y-30">
             <div class="col s4">
-                LOGO
+                <img src="{{ asset(settings('app.logo')) }}" alt="Company Logo" class="brand-logo">
             </div>
             <div class="col s8">
                 <h4 class="bold-text right-align">Invoice {{ $invoice->getInvoiceKey() }}</h4>
