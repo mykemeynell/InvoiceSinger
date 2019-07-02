@@ -1,7 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container margin-top-30">
+        <div class="row margin-y-30">
+            <div class="col s12">
+                <h4>Invoices</h4>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col s12">
                 <table class="responsive-table">

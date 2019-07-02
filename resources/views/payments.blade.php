@@ -1,7 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container margin-top-30">
+        <div class="row margin-y-30">
+            <div class="col s6">
+                <h4>Payments</h4>
+            </div>
+            <div class="col s6 right-align margin-top-15 margin-bottom-30">
+                <a href="#" class="waves-effect waves-dark grey lighten-3 black-text btn margin-right-15">Payment Methods</a>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col s12">
                 <table class="responsive-table">
