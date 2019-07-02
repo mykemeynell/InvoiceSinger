@@ -67,14 +67,14 @@
 
 <script>
     export default {
-        props: {
-            currency: String,
-            taxes: Array,
-            units: Array
-        },
+        props: [
+            'currency',
+            'taxes',
+            'units',
+            'products'
+        ],
         data() {
             return {
-                products: [],
                 count: 0,
                 subtotal: parseFloat('0.00').toFixed(2),
                 tax: parseFloat('0.00').toFixed(2),

@@ -2057,14 +2057,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    currency: String,
-    taxes: Array,
-    units: Array
-  },
+  props: ['currency', 'taxes', 'units', 'products'],
   data: function data() {
     return {
-      products: [],
       count: 0,
       subtotal: parseFloat('0.00').toFixed(2),
       tax: parseFloat('0.00').toFixed(2),

@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="container margin-top-30">
-        <div class="row margin-y-30">
+        <div class="row padding-y-30">
             <div class="col s12">
-                <h4>Quotes</h4>
+                <h4 class="margin-0">Quotes</h4>
             </div>
         </div>
 

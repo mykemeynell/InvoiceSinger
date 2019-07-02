@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="container margin-top-30">
-        <div class="row margin-y-30">
+        <div class="row padding-y-30">
             <div class="col s6">
-                <h4>Products</h4>
+                <h4 class="margin-0">Products</h4>
             </div>
             <div class="col s6 right-align margin-top-15 margin-bottom-30">
                 <a href="{{ route('products.families') }}" class="waves-effect waves-dark grey lighten-3 black-text btn margin-right-15">Product Families</a>

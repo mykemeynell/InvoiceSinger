@@ -41,7 +41,6 @@ $router->get('/payments', 'Payments\PaymentController@index')->name('payments');
 $router->post('/payments/{invoice_id}', 'Payments\PaymentController@handlePost')->name('payments.handleForm');
 $router->get('/payments/payment-methods', 'Payments\PaymentMethodController@index')->name('payments.methods');
 
-
 // Products
 $router->get('/products', 'Products\ProductController@index')->name('products');
 $router->get('/products/form/{product_id?}', 'Products\ProductController@form')->name('products.form');
@@ -65,6 +64,9 @@ $router->post('/products/tax-rates/delete/{tax_rate_id?}', 'Products\TaxRateCont
 
 // PDFs
 $router->get('/pdf/invoice/{invoice_id}', 'PDF\PdfController@invoice')->name('pdf.invoice');
+
+// Settings
+$router->get('/settings', 'Settings\SettingController@index')->name('settings');
 
 /*
  * Authentication routes.
