@@ -21,6 +21,21 @@ class AppSettingsSeeder extends Seeder
             'name' => 'Currency',
             'description' => 'Currency used throughout the application',
         ],
+        'app.online_payments.enabled' => [
+            'value' => false,
+            'name' => 'Online payments',
+            'description' => 'Enable in order to accept online payments for invoices',
+        ],
+        'app.online_payments.provider' => [
+            'value' => '',
+            'name' => 'Payments Provider',
+            'description' => 'The provider that payments will be processed by',
+        ],
+        'app.logo' => [
+            'value' => '',
+            'name' => '',
+            'description' => 'Application logo. Also used in invoices and quotes',
+        ],
     ];
 
     /**

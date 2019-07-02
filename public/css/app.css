@@ -10184,6 +10184,10 @@ input[type=range]::-ms-thumb {
   width: 100%;
 }
 
+nav .brand-logo img {
+  max-width: 50px;
+}
+
 nav .nav-content .tabs .tab a {
   border-bottom: 0px solid white;
   transition: border 100ms linear;

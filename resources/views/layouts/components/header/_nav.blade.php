@@ -1,7 +1,7 @@
 <nav class="nav-extended row">
     <div class="col s12">
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Invoice</a>
+            <a href="#" class="brand-logo"><img src="{{ asset('images/logo/invoice-singer-white.png')  }}" class="margin-right-15"> <span>Invoice Singer</span></a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
             <ul id="nav-mobile" class="right hide-on-med-and-down">

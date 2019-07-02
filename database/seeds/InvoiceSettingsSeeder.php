@@ -30,6 +30,11 @@ class InvoiceSettingsSeeder extends Seeder
             'name' => 'Invoice Term',
             'description' => 'The duration after which being raised, an invoice will become overdue',
         ],
+        'invoice.footer' => [
+            'value' => 'Thank you for your business.\r\nKind regards',
+            'name' => 'Footer',
+            'description' => 'Notes/additional information to be added to the end of each invoice',
+        ],
     ];
 
     /**

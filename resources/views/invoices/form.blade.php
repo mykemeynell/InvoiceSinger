@@ -24,6 +24,7 @@
                 <!-- Dropdown Structure -->
                 <ul id='options-dropdown' class='dropdown-content'>
                     <li><a href="{{ route('pdf.invoice', $invoice->getKey()) }}" target="_blank">Download as PDF</a></li>
+                    <li><a href="{{ route('invoices.showPublic', $invoice->getKey()) }}" target="_blank">View public link</a></li>
                     <li><a href="#!">Send via Email</a></li>
                     <li class="divider" tabindex="-1"></li>
                     <li><a href="#!" class="red-text darken-1">Delete</a></li>

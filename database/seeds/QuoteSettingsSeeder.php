@@ -30,6 +30,11 @@ class QuoteSettingsSeeder extends Seeder
             'name' => 'Quote Term',
             'description' => 'The duration after which being issued, an quote will expire',
         ],
+        'quote.footer' => [
+            'value' => 'Thank you for your business.\r\nKind regards',
+            'name' => 'Footer',
+            'description' => 'Notes/additional information to be added to the end of each invoice',
+        ],
     ];
 
     /**
