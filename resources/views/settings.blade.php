@@ -16,12 +16,12 @@
                 @include('settings._tabs')
             </div>
             <form id="settings-form" name="settings-form">
-                <div id="application" class="col s12">@include('settings.panels._application')</div>
-                <div id="invoices" class="col s12">@include('settings.panels._invoices')</div>
-                <div id="quotes" class="col s12">@include('settings.panels._quotes')</div>
-                <div id="email" class="col s12">@include('settings.panels._emails')</div>
-                <div id="online-payments" class="col s12">@include('settings.panels._online-payments')</div>
-                <div id="data" class="col s12">@include('settings.panels._data-management')</div>
+                <div class="col s12 padding-y-30" id="application">@include('settings.panels._application')</div>
+                <div class="col s12 padding-y-30" id="invoices">@include('settings.panels._invoices')</div>
+                <div class="col s12 padding-y-30" id="quotes">@include('settings.panels._quotes')</div>
+                <div class="col s12 padding-y-30" id="email">@include('settings.panels._emails')</div>
+                <div class="col s12 padding-y-30" id="online-payments">@include('settings.panels._online-payments')</div>
+                <div class="col s12 padding-y-30" id="data">@include('settings.panels._data-management')</div>
             </form>
         </div>
     </div>
