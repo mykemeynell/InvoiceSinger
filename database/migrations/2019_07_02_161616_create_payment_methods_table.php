@@ -22,6 +22,8 @@ class CreatePaymentMethodsTable extends Migration
         Schema::create('payment_methods', function (Blueprint $table) {
             $this->createUuidColumn($table, 'id');
             $table->string('name');
+            $table->string('slug');
+            $table->tinyInteger('protected')->default(0);
             $table->tinyInteger('enabled')->default(1);
             $table->timestamps();
         });
