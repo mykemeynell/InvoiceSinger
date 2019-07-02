@@ -33,7 +33,7 @@
             <input type="hidden" :name="totalFieldName" :value="total">
         </td>
         <td class="right-align" width="50">
-            <i class="material-icons pointer-cursor" @click="removeItem()">remove_circle_outline</i>
+            <i class="fas fa-minus-circle pointer-cursor" @click="removeItem()"></i>
         </td>
     </tr>
 </template>

@@ -60809,18 +60809,14 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("td", { staticClass: "right-align", attrs: { width: "50" } }, [
-      _c(
-        "i",
-        {
-          staticClass: "material-icons pointer-cursor",
-          on: {
-            click: function($event) {
-              return _vm.removeItem()
-            }
+      _c("i", {
+        staticClass: "fas fa-minus-circle pointer-cursor",
+        on: {
+          click: function($event) {
+            return _vm.removeItem()
           }
-        },
-        [_vm._v("remove_circle_outline")]
-      )
+        }
+      })
     ])
   ])
 }
