@@ -22,6 +22,7 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $this->createUuidColumn($table, 'id');
             $table->string('invoice');
+            $table->string('method');
             $table->float('amount', 10, 2);
             $table->date('paid_at');
             $table->text('notes')->nullable();
