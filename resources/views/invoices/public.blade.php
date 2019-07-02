@@ -26,10 +26,10 @@
         </div>
 
         <div class="row padding-y-30">
-            <div class="col s8">
+            <div class="col s4">
                 LOGO
             </div>
-            <div class="col s4">
+            <div class="col s8">
                 <h4 class="bold-text right-align">Invoice {{ $invoice->getInvoiceKey() }}</h4>
                 <span class="display-block right-align grey-text lighten-2">issued {{ $invoice->getRaisedAt()->format('jS F Y') }}</span>
                 <span class="display-block right-align grey-text lighten-2">payment due {{ $invoice->getDueAt()->format('jS F Y') }}</span>
