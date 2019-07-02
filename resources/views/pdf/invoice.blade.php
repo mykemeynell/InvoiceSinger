@@ -104,7 +104,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row padding-top-30">
             <div class="col one-half-wide"></div>
             <div class="col one-half-wide">
                 <table class="margin-left-auto">
