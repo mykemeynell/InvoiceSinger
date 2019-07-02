@@ -66,10 +66,16 @@ class InvoiceController extends Controller
      * @param \InvoiceSinger\Http\Requests\Invoice\InvoiceRequest $request
      *
      * @return \Illuminate\View\View
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function form(InvoiceRequest $request): View
     {
+        /** @var CurrencyHtmlEntities $che */
+        $che = app()->make(CurrencyHtmlEntities::class);
+
         return view('invoices.form')
+            ->with('currency', $che->entity(settings('app.currency')))
             ->with('invoice', $request->invoice());
     }
 

@@ -208,6 +208,61 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
     }
 
     /**
+     * Get all payments that have been assigned to this invoice.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function payments(): Collection
+    {
+        return $this->hasMany(app('payment.entity'), 'invoice', 'id')->get();
+    }
+
+    /**
+     * Get the amount that is outstanding on this invoice.
+     *
+     * @return float
+     */
+    public function getBalance(): float
+    {
+        return (float) $this->getTotal() - $this->getPaid();
+    }
+
+    /**
+     * Get the invoice total.
+     *
+     * @return float
+     */
+    public function getTotal(): float
+    {
+        $total = 0;
+
+        /** @var \InvoiceSinger\Storage\Entity\InvoiceProductEntity $item */
+        foreach($this->items() as $item) {
+            $total += $item->getTotal();
+        }
+
+        return (float) $total;
+    }
+
+    /**
+     * Get the amount that has been paid against this invoice.
+     *
+     * @return float
+     */
+    public function getPaid(): float
+    {
+        $paid = 0;
+
+        /** @var \InvoiceSinger\Storage\Entity\PaymentEntity $payment */
+        foreach($this->payments() as $payment)
+        {
+            $paid += $payment->getAmount();
+        }
+
+        return (float) $paid;
+    }
+
+    /**
      * Get items that have been added to this invoice.
      *
      * @return \Illuminate\Database\Eloquent\Collection

@@ -85,6 +85,34 @@ interface InvoiceEntityInterface
     public function client(): ?ClientEntityInterface;
 
     /**
+     * Get all payments that have been assigned to this invoice.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function payments(): Collection;
+
+    /**
+     * Get the amount that is outstanding on this invoice.
+     *
+     * @return float
+     */
+    public function getBalance(): float;
+
+    /**
+     * Get the invoice total.
+     *
+     * @return float
+     */
+    public function getTotal(): float;
+
+    /**
+     * Get the amount that has been paid against this invoice.
+     *
+     * @return float
+     */
+    public function getPaid(): float;
+
+    /**
      * Get items that have been added to this invoice.
      *
      * @return \Illuminate\Database\Eloquent\Collection

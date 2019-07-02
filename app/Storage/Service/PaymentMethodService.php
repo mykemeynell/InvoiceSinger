@@ -44,7 +44,7 @@ class PaymentMethodService extends Service implements PaymentMethodServiceInterf
      *
      * @return \InvoiceSinger\Storage\Entity\Contract\PaymentMethodEntityInterface|\Illuminate\Database\Eloquent\Model|null
      */
-    public function findUsingId(string $id): ?PaymentMethodEntityInterface
+    public function find(string $id): ?PaymentMethodEntityInterface
     {
         return $this->getRepository()->findUsingId($id);
     }

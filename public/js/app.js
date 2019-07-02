@@ -73178,6 +73178,7 @@ $(document).ready(function () {
   $('.datepicker').datepicker({
     format: 'dd mmmm yyyy'
   });
+  $('.timepicker').timepicker();
   var results_table = $('#product-search-table');
 
   if (results_table.length > 0) {

@@ -20,18 +20,24 @@
             </div>
             <div class="col s12 m6 input-field right-align">
                 <!-- Dropdown Trigger -->
-                <a class="options-dropdown-trigger btn waves-effect waves-light margin-right-15" href="#" data-target="options-dropdown">Options</a>
+                <a class="options-dropdown-trigger btn-flat waves-effect waves-light margin-right-15" href="#"
+                   data-target="options-dropdown">Options</a>
 
                 <!-- Dropdown Structure -->
                 <ul id='options-dropdown' class='dropdown-content'>
-                    <li><a href="{{ route('pdf.invoice', $invoice->getKey()) }}" target="_blank">Download as PDF</a></li>
-                    <li><a href="{{ route('invoices.showPublic', $invoice->getKey()) }}" target="_blank">View public link</a></li>
+                    <li><a href="{{ route('pdf.invoice', $invoice->getKey()) }}" target="_blank">Download as PDF</a>
+                    </li>
+                    <li><a href="{{ route('invoices.showPublic', $invoice->getKey()) }}" target="_blank">View public
+                            link</a></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a href="#add-payment-modal" class="modal-trigger">Enter Payment</a></li>
                     <li><a href="#!">Send via Email</a></li>
                     <li class="divider" tabindex="-1"></li>
                     <li><a href="#!" class="red-text darken-1">Delete</a></li>
                 </ul>
 
-                <button form="client-form" id="save-form-button" formmethod="POST" formaction="{{ route('invoices.handleForm', ['invoice_id' => ! is_null($invoice) ? $invoice->getKey() : null]) }}"
+                <button form="client-form" id="save-form-button" formmethod="POST"
+                        formaction="{{ route('invoices.handleForm', ['invoice_id' => ! is_null($invoice) ? $invoice->getKey() : null]) }}"
                         class="waves-light waves-effect btn">Save
                 </button>
             </div>
@@ -45,7 +51,7 @@
                     <li><h5>{{ $invoice->client()->getDisplayName() }}</h5></li>
                     @foreach($client_service->getAddressObject($invoice->client()) as $address_line)
                         @if(! empty($address_line))
-                        <li>{{ $address_line }}</li>
+                            <li>{{ $address_line }}</li>
                         @endif
                     @endforeach
                 </ul>
@@ -96,7 +102,8 @@
                             <div class="col s6 input-field">
                                 <select name="invoice[payment_method]" id="invoice-payment-method">
                                     @foreach($payment_method_service->fetch() as $payment_method)
-                                    <option value="{{ $payment_method->getKey() }}" @if($payment_method->getKey() == $invoice->getPaymentMethod()) selected="selected" @endif>{{ $payment_method->getDisplayName() }}</option>
+                                        <option value="{{ $payment_method->getKey() }}"
+                                                @if($payment_method->getKey() == $invoice->getPaymentMethod()) selected="selected" @endif>{{ $payment_method->getDisplayName() }}</option>
                                     @endforeach
                                 </select>
                                 <label for="invoice-payment-method">Payment method</label>
@@ -170,8 +177,49 @@
         </div>
     </div>
 
+    <div id="add-payment-modal" class="modal">
+        <div class="modal-content">
+            <h4>Enter Payment</h4>
+            <form class="padding-y-30" id="add-payment-form" name="add-payment-form">
+                {!! csrf_field() !!}
+                <div class="row margin-bottom-0">
+                    <div class="col s12 input-field">
+                        <select name="payment[method]" id="payment-method">
+                            @foreach($payment_method_service->fetch() as $method)
+                                <option value="{{ $method->getKey() }}">{{ $method->getDisplayName() }}</option>
+                            @endforeach
+                        </select>
+                        <label for="payment-method">Method</label>
+                    </div>
+                </div>
+                <div class="row margin-0">
+                    <div class="col s12 input-field">
+                        <span class="prefix">{!! $currency !!}</span>
+                        <input type="number" min="0" max="{{ $invoice->getBalance() }}" step="0.01" id="payment-amount" name="payment[amount]" value="{{ $invoice->getBalance() }}">
+                        <label for="payment-amount">Amount</label>
+                    </div>
+                </div>
+                <div class="row margin-0">
+                    <div class="col s6 input-field">
+                        <input type="text" class="datepicker" id="payment-date" name="payment[paid_at_hour]" value="{{ date('d F Y') }}">
+                        <label for="payment-date">Date</label>
+                    </div>
+                    <div class="col s6 input-field">
+                        <input type="text" class="timepicker" id="payment-time" name="payment[paid_at_time]" value="{{ date('h:m A') }}">
+                        <label for="payment-time">Time</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button form="add-payment-form" formaction="{{ route('payments.handleForm', $invoice->getKey()) }}"
+                    formmethod="POST" class="modal-close waves-effect waves-green btn-flat">Create
+            </button>
+        </div>
+    </div>
+
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.modal').modal();
             $('.options-dropdown-trigger').dropdown({
                 constrainWidth: false,
@@ -180,7 +228,7 @@
 
             let search_field = $('#product-search-field');
 
-            search_field.on('keyup', function(event) {
+            search_field.on('keyup', function (event) {
                 event.preventDefault();
                 let table_search = $('#product-search-table_filter input[type="search"]');
 

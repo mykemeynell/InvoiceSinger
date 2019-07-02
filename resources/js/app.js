@@ -30,6 +30,7 @@ $(document).ready(function() {
     $('.datepicker').datepicker({
         format: 'dd mmmm yyyy'
     });
+    $('.timepicker').timepicker();
 
     let results_table = $('#product-search-table');
     if(results_table.length > 0) {

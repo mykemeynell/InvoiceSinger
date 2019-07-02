@@ -28,7 +28,7 @@ interface PaymentMethodServiceInterface extends ServiceInterface
      *
      * @return \InvoiceSinger\Storage\Entity\Contract\PaymentMethodEntityInterface|\Illuminate\Database\Eloquent\Model|null
      */
-    public function findUsingId(string $id): ?PaymentMethodEntityInterface;
+    public function find(string $id): ?PaymentMethodEntityInterface;
 
     /**
      * Create a new payment method and save it to the database.

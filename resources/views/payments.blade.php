@@ -31,11 +31,11 @@
                     @php /** @var \InvoiceSinger\Storage\Entity\PaymentEntity $payment */ @endphp
                     @forelse($payments as $payment)
                     <tr>
-                        <td>{{ $payment->getPaidAt()->format('j F Y H:i:s') }}</td>
-                        <td>{{ $payment->invoice()->getRaisedAt()->format('j F Y') }}</td>
-                        <td><a href="#">{{ $payment->invoice()->getInvoiceKey() }}</a></td>
-                        <td><a href="#">{{ $payment->invoice()->client()->getDisplayName() }}</a></td>
-                        <td class="right-align">{!! $curerncy !!}{{ number_format($payment->getAmount(), 2) }}</td>
+                        <td>{{ $payment->getPaidAt()->format('d F Y h:i A') }}</td>
+                        <td>{{ $payment->invoice()->getRaisedAt()->format('d F Y') }}</td>
+                        <td><a href="{{ route('invoices.form', $payment->invoice()) }}">{{ $payment->invoice()->getInvoiceKey() }}</a></td>
+                        <td><a href="{{ route('clients.form', $payment->invoice()->client()) }}">{{ $payment->invoice()->client()->getDisplayName() }}</a></td>
+                        <td class="right-align">{!! $currency !!}{{ number_format($payment->getAmount(), 2) }}</td>
                         <td>{{ $payment->method()->getDisplayName() }}</td>
                         <td>{{ $payment->getNotes() }}</td>
                         <td class="right-align"><a class="waves-effect waves-light btn">View</a></td>
