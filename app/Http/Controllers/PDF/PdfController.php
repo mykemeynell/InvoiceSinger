@@ -3,6 +3,7 @@
 namespace InvoiceSinger\Http\Controllers\PDF;
 
 use Barryvdh\DomPDF\PDF;
+use Dompdf\Css\Stylesheet;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use InvoiceSinger\Http\Controllers\Controller;
@@ -32,8 +33,13 @@ class PdfController extends Controller
 
         /** @var \Barryvdh\DomPDF\PDF $pdf */
         $pdf = app()->make(PDF::class);
+        $pdf->getDomPDF()->setPaper('A4', 'portrait');
         $pdf->loadView('pdf.invoice', compact('invoice', 'currency', 'subtotal', 'tax', 'discount', 'total', 'paid', 'balance'));
 
-        return Response::create($pdf->output())->header('Content-type', 'application/pdf');
+        if($request->get('output', 'pdf') == 'pdf') {
+            return Response::create($pdf->output())->header('Content-type', 'application/pdf');
+        } else {
+            return view('pdf.invoice', compact('invoice', 'currency', 'subtotal', 'tax', 'discount', 'total', 'paid', 'balance'));
+        }
     }
 }

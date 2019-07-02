@@ -1,0 +1,67 @@
+body,html {
+  font-family:Arial, "sans-serif";
+  width:100%;
+  font-size:10px;
+}
+
+@import "components/_height";
+@import "components/_spacing";
+@import "components/_display";
+@import "components/_decoration";
+@import "components/_type";
+@import "components/_cursor";
+
+$widths: (
+  one-quarter: (100/4),
+  one-third: (100/3),
+  one-half: (100/2),
+  two-thirds: (100/3) * 2,
+  three-quarters: (100/4) * 3,
+  full: 100
+);
+
+@each $name, $size in $widths {
+  .#{$name}-wide {width:#{$size} + "%"!important;}
+}
+
+.row {
+  position:relative;
+  @extend .full-wide;
+  clear:both;
+}
+
+.col {
+  @extend .display-inline-block;
+  box-sizing: border-box;
+  float:left;
+}
+
+$floats: ('right', 'left', 'none');
+@each $float in $floats {
+  .float-#{$float} {float: #{$float}!important;}
+}
+
+$alignments: ('right', 'left', 'center');
+@each $alignment in $alignments {
+  .#{$alignment}-align {text-align: #{$alignment}!important;}
+}
+
+$titles: (h1, h2, h3, h4, h5, h6);
+@each $title in $titles {
+  #{$title} {@extend .margin-0;@extend .padding-0;}
+}
+
+.subtle-text {color:rgba(0,0,0,0.3);}
+
+hr {border:none;border-bottom:1px solid rgba(0,0,0,0.3);@extend .margin-y-30;}
+
+ul {
+  list-style-type: none;
+  @extend .margin-0;
+  @extend .padding-0;
+}
+
+table {
+  font-size:10px;
+  max-width:100%;
+}

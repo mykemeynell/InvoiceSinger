@@ -19,6 +19,9 @@ $directions: (
   @each $direction in $directions {
     .margin#{$direction}-#{$option} { margin#{$direction}: $size!important; }
     .padding#{$direction}-#{$option} { padding#{$direction}: $size!important; }
+
+    .margin#{$direction}--#{$option} { margin#{$direction}: -$size!important; }
+    .padding#{$direction}--#{$option} { padding#{$direction}: -$size!important; }
   }
 }
 
@@ -41,5 +44,25 @@ $directions: (
   .padding-y-#{$option} {
     padding-top:$size!important;
     padding-bottom:$size!important;
+  }
+
+  .margin-x--#{$option} {
+    margin-left:-$size!important;
+    margin-right:-$size!important;
+  }
+
+  .margin-y--#{$option} {
+    margin-top:-$size!important;
+    margin-bottom:-$size!important;
+  }
+
+  .padding-x--#{$option} {
+    padding-left:-$size!important;
+    padding-right:-$size!important;
+  }
+
+  .padding-y--#{$option} {
+    padding-top:-$size!important;
+    padding-bottom:-$size!important;
   }
 }

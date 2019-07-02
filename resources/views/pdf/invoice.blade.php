@@ -1,6 +1,6 @@
 @inject('client_service', \InvoiceSinger\Storage\Service\ClientService)
 
-@extends('layouts.app', [
+@extends('layouts.pdf', [
     'show_header' => false,
     'show_fab' => false,
     'show_progress' => false,
@@ -9,67 +9,64 @@
 @section('body_classes', 'page-pdf')
 
 @section('content')
-    <div class="wrapper">
 
-        <div class="row padding-bottom-30">
-            <div class="col s8">
-                LOGO
-            </div>
-            <div class="col s4">
-                <h4 class="bold-text right-align">Invoice {{ $invoice->getInvoiceKey() }}</h4>
-                <span class="display-block right-align grey-text lighten-2">issued {{ $invoice->getRaisedAt()->format('jS F Y') }}</span>
-                <span class="display-block right-align grey-text lighten-2">payment due {{ $invoice->getDueAt()->format('jS F Y') }}</span>
-            </div>
+    <div class="row">
+        <div class="col one-third-wide">
+            Logo
+        </div>
+        <div class="col two-thirds-wide">
+            <h1 class="bold-text right-align padding-bottom-15">Invoice {{ $invoice->getInvoiceKey() }}</h1>
+            <span class="right-align display-block subtle-text">issued {{ $invoice->getRaisedAt()->format('jS F Y') }}</span>
+            <span class="right-align display-block subtle-text">payment due {{ $invoice->getDueAt()->format('jS F Y') }}</span>
+        </div>
+    </div>
+
+    <div class="row">
+        <hr>
+    </div>
+
+    <div class="row">
+        <div class="col one-half-wide">
+            <span class="display-block subtle-text">FAO:</span>
+            <ul>
+                @foreach($client_service->getAddressObject($invoice->client(), true) as $address_line)
+                    @if(! empty($address_line))
+                        <li>{{ $address_line }}</li>
+                    @endif
+                @endforeach
+            </ul>
         </div>
 
-        <hr class="margin-y-30">
+        <div class="col one-half-wide right-align">
+            <span class="display-block subtle-text">Sent from:</span>
+            <ul>
+                @foreach($client_service->getAddressObject($invoice->client(), true) as $address_line)
+                    @if(! empty($address_line))
+                        <li>{{ $address_line }}</li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
 
-        <div class="row padding-y-30">
-            <div class="col s3">
-                <span class="display-block grey-text lighten-2">FAO:</span>
-                <ul>
-                    @foreach($client_service->getAddressObject($invoice->client(), true) as $address_line)
-                        @if(! empty($address_line))
-                            <li>{{ $address_line }}</li>
-                        @endif
-                    @endforeach
-                </ul>
-            </div>
 
-            <div class="col s3">
-                <span class="display-block grey-text lighten-2">Sent from:</span>
-                <ul>
-                    @foreach($client_service->getAddressObject($invoice->client(), true) as $address_line)
-                        @if(! empty($address_line))
-                            <li>{{ $address_line }}</li>
-                        @endif
-                    @endforeach
-                </ul>
-            </div>
-
-            <div class="col s6">
-                <span class="display-block grey-text lighten-2">Invoice Description</span>
-                <p>Sed posuere consectetur est at lobortis. Donec id elit non mi porta gravida at eget metus. Nullam
-                    quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor. Duis mollis, est
-                    non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam quis risus
-                    eget urna mollis ornare vel eu leo.</p>
-            </div>
+        <div class="row">
+            <hr>
         </div>
 
         <div class="row">
-            <div class="col s12">
+            <div class="col full-wide">
                 <table>
                     <thead>
-                        <tr>
-                            <th width="50" class="center-align">#</th>
-                            <th>Name</th>
-                            <th width="150" class="right-align">Unit Price</th>
-                            <th width="100"  class="right-align">Quantity</th>
-                            <th width="150" class="right-align">Subtotal</th>
-                            <th width="150" class="right-align">Tax</th>
-                            <th width="150" class="right-align">Discount</th>
-                            <th width="150" class="right-align">Total</th>
-                        </tr>
+                    <tr>
+                        <th width="20" class="center-align">#</th>
+                        <th>Name</th>
+                        <th width="50" class="right-align">Unit Price</th>
+                        <th width="50"  class="right-align">Quantity</th>
+                        <th width="50" class="right-align">Subtotal</th>
+                        <th width="50" class="right-align">Tax</th>
+                        <th width="50" class="right-align">Discount</th>
+                        <th width="50" class="right-align">Total</th>
+                    </tr>
                     </thead>
 
                     <tbody>
@@ -107,9 +104,10 @@
             </div>
         </div>
 
-        <div class="row padding-top-30">
-            <div class="col s4 offset-s8">
-                <table>
+        <div class="row">
+            <div class="col one-half-wide"></div>
+            <div class="col one-half-wide">
+                <table class="margin-left-auto">
                     <tbody>
                     <tr>
                         <th width="150">Subtotal</th>

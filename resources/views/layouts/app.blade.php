@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 @include('layouts.components._head')
+@push('styles')
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+@endpush
 <body class="@yield('body_classes')">
 <div id="app">
     @stack('beginning')
