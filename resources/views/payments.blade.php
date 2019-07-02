@@ -7,7 +7,7 @@
                 <h4>Payments</h4>
             </div>
             <div class="col s6 right-align margin-top-15 margin-bottom-30">
-                <a href="#" class="waves-effect waves-dark grey lighten-3 black-text btn margin-right-15">Payment Methods</a>
+                <a href="#" class="waves-effect waves-dark grey lighten-3 black-text btn">Payment Methods</a>
             </div>
         </div>
 
