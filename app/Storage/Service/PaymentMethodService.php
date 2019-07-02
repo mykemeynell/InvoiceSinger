@@ -34,7 +34,7 @@ class PaymentMethodService extends Service implements PaymentMethodServiceInterf
      */
     public function fetch(): Collection
     {
-        $this->getRepository()->builder()->get();
+        return $this->getRepository()->builder()->get();
     }
 
     /**

@@ -65,8 +65,8 @@ class PaymentMethodEntity extends Model implements PaymentMethodEntityInterface
     protected $fillable = [
         'name',
         'slug',
-        'is_protected',
-        'is_enabled',
+        'protected',
+        'enabled',
     ];
 
     /**

@@ -37,9 +37,8 @@ $router->post('/invoices/form/{invoice_id?}', 'Invoices\InvoiceController@handle
 $router->get('/invoices/public/{invoice_id?}', 'Invoices\InvoiceController@viewPublic')->name('invoices.showPublic');
 
 // Payments
-$router->get('/payments', static function () {
-    return view('payments');
-})->name('payments');
+$router->get('/payments', 'Payments\PaymentController@index')->name('payments');
+$router->get('/payments/payment-methods', 'Payments\PaymentMethodController@index')->name('payments.methods');
 
 // Products
 $router->get('/products', 'Products\ProductController@index')->name('products');

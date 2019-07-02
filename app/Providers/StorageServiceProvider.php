@@ -8,12 +8,14 @@ use InvoiceSinger\Storage\Entity\ClientEntity;
 use InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\InvoiceProductEntityInterface;
+use InvoiceSinger\Storage\Entity\Contract\PaymentMethodEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\ProductEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\ProductFamilyEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\UnitEntityInterface;
 use InvoiceSinger\Storage\Entity\InvoiceEntity;
 use InvoiceSinger\Storage\Entity\InvoiceProductEntity;
+use InvoiceSinger\Storage\Entity\PaymentMethodEntity;
 use InvoiceSinger\Storage\Entity\ProductEntity;
 use InvoiceSinger\Storage\Entity\ProductFamilyEntity;
 use InvoiceSinger\Storage\Entity\TaxRateEntity;
@@ -22,11 +24,13 @@ use InvoiceSinger\Storage\Repository\ClientRepository;
 use InvoiceSinger\Storage\Repository\Contract\ClientRepositoryInterface;
 use InvoiceSinger\Storage\Repository\Contract\InvoiceProductRepositoryInterface;
 use InvoiceSinger\Storage\Repository\Contract\InvoiceRepositoryInterface;
+use InvoiceSinger\Storage\Repository\Contract\PaymentMethodRepositoryInterface;
 use InvoiceSinger\Storage\Repository\Contract\ProductFamilyRepositoryInterface;
 use InvoiceSinger\Storage\Repository\Contract\ProductRepositoryInterface;
 use InvoiceSinger\Storage\Repository\Contract\TaxRateRepositoryInterface;
 use InvoiceSinger\Storage\Repository\InvoiceProductRepository;
 use InvoiceSinger\Storage\Repository\InvoiceRepository;
+use InvoiceSinger\Storage\Repository\PaymentMethodRepository;
 use InvoiceSinger\Storage\Repository\ProductFamilyRepository;
 use InvoiceSinger\Storage\Repository\ProductRepository;
 use InvoiceSinger\Storage\Repository\TaxRateRepository;
@@ -34,12 +38,14 @@ use InvoiceSinger\Storage\Service\ClientService;
 use InvoiceSinger\Storage\Service\Contract\ClientServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\InvoiceProductServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface;
+use InvoiceSinger\Storage\Service\Contract\PaymentMethodServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\ProductFamilyServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\ProductServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\TaxRateServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\UnitServiceInterface;
 use InvoiceSinger\Storage\Service\InvoiceProductService;
 use InvoiceSinger\Storage\Service\InvoiceService;
+use InvoiceSinger\Storage\Service\PaymentMethodService;
 use InvoiceSinger\Storage\Service\ProductFamilyService;
 use InvoiceSinger\Storage\Service\ProductService;
 use InvoiceSinger\Storage\Service\TaxRateService;
@@ -89,6 +95,10 @@ class StorageServiceProvider extends ServiceProvider
         'product.unit.entity' => [UnitEntityInterface::class],
         'product.unit.repository' => [UnitRepositoryInterface::class],
         'product.unit.service' => [UnitServiceInterface::class],
+
+        'payment.method.entity' => [PaymentMethodEntityInterface::class],
+        'payment.method.repository' => [PaymentMethodRepositoryInterface::class],
+        'payment.method.service' => [PaymentMethodServiceInterface::class],
     ];
 
     /**
@@ -118,6 +128,7 @@ class StorageServiceProvider extends ServiceProvider
         $this->app->bind('product.family.entity', ProductFamilyEntity::class);
         $this->app->bind('product.taxRate.entity', TaxRateEntity::class);
         $this->app->bind('product.unit.entity', UnitEntity::class);
+        $this->app->bind('payment.method.entity', PaymentMethodEntity::class);
     }
 
     /**
@@ -134,6 +145,7 @@ class StorageServiceProvider extends ServiceProvider
         $this->app->singleton('product.family.repository', ProductFamilyRepository::class);
         $this->app->singleton('product.taxRate.repository', TaxRateRepository::class);
         $this->app->singleton('product.unit.repository', UnitRepository::class);
+        $this->app->singleton('payment.method.repository', PaymentMethodRepository::class);
     }
 
     /**
@@ -150,6 +162,7 @@ class StorageServiceProvider extends ServiceProvider
         $this->app->singleton('product.family.service', ProductFamilyService::class);
         $this->app->singleton('product.taxRate.service', TaxRateService::class);
         $this->app->singleton('product.unit.service', UnitService::class);
+        $this->app->singleton('payment.method.service', PaymentMethodService::class);
     }
 
     /**

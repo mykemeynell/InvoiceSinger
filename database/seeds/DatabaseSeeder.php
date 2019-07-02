@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductFamilySeeder::class);
         $this->call(DefaultTaxRatesSeeder::class);
         $this->call(UnitSeeder::class);
+        $this->call(PaymentMethodSeeder::class);
     }
 }
