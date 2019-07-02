@@ -1,6 +1,7 @@
 @inject('client_service', \InvoiceSinger\Storage\Service\ClientService)
 @inject('unit_service', \InvoiceSinger\Storage\Service\UnitService)
 @inject('tax_rate_service', \InvoiceSinger\Storage\Service\TaxRateService)
+@inject('payment_method_service', \InvoiceSinger\Storage\Service\PaymentMethodService)
 
 @extends('layouts.app')
 
@@ -94,7 +95,9 @@
                             </div>
                             <div class="col s6 input-field">
                                 <select name="invoice[payment_method]" id="invoice-payment-method">
-                                    <option value="payment">Payment</option>
+                                    @foreach($payment_method_service->fetch() as $payment_method)
+                                    <option value="{{ $payment_method->getKey() }}" @if($payment_method->getKey() == $invoice->getPaymentMethod()) selected="selected" @endif>{{ $payment_method->getDisplayName() }}</option>
+                                    @endforeach
                                 </select>
                                 <label for="invoice-payment-method">Payment method</label>
                             </div>

@@ -24,7 +24,7 @@ class CreatePaymentsTable extends Migration
             $table->string('invoice');
             $table->string('method');
             $table->float('amount', 10, 2);
-            $table->date('paid_at');
+            $table->dateTime('paid_at');
             $table->text('notes')->nullable();
             $table->text('payload')->nullable();
             $table->timestamps();
