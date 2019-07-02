@@ -11,12 +11,13 @@
         <div class="row margin-bottom-30 padding-top-15">
             <div class="card grey lighten-5">
                 <div class="card-content">
-                    <div class="row margin-0">
+                    <div class="row margin-0 valign-wrapper">
                         <div class="col s6">
+                            <div class="card-title">You can pay here!</div>
                             <p>This invoice has online payments enabled - so you can clear balances even easier! Click
                                 the "Pay Online" button to get started.</p>
                         </div>
-                        <div class="col s6  right-align">
+                        <div class="col s6 right-align">
                             <a href="#!" class="waves-effect waves-light btn">Pay Online</a>
                         </div>
                     </div>
