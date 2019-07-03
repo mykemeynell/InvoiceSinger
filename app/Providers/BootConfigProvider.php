@@ -25,18 +25,22 @@ class BootConfigProvider extends ServiceProvider
      */
     public function boot(SettingServiceInterface $service)
     {
+        // Attempt to connect to the database - if an exception is thrown
+        // return false from this method and don't load the settings into
+        // config().
         try {
             DB::connection()->getPdo();
+            DB::connection()->getDatabaseName();
+        } catch(\Exception $exception) {
+            return;
+        }
 
-            if(DB::connection()->getDatabaseName()) {
-                /** @var \Illuminate\Database\Eloquent\Collection $settings */
-                $settings = $service->fetch();
+        /** @var \Illuminate\Database\Eloquent\Collection $settings */
+        $settings = $service->fetch();
 
-                /** @var \LaravelDatabaseSettings\Entity\Contract\SettingEntityInterface $setting */
-                foreach ($settings as $setting) {
-                    config()->set($setting->getKey(), $setting->getValue());
-                }
-            }
-        } catch(\Exception $exception) {}
+        /** @var \LaravelDatabaseSettings\Entity\Contract\SettingEntityInterface $setting */
+        foreach ($settings as $setting) {
+            config()->set($setting->getKey(), $setting->getValue());
+        }
     }
 }

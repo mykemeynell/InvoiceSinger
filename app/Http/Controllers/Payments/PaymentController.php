@@ -64,8 +64,7 @@ class PaymentController extends Controller
                 $request->getParameterBag()->get('paid_at_time'),
             ], ' ');
 
-            /** @var \InvoiceSinger\Storage\Entity\PaymentEntity $payment */
-            $payment = $this->getService()->create(new ParameterBag([
+            $this->getService()->create(new ParameterBag([
                 'invoice' => $request->invoice()->getKey(),
                 'method' => $request->method()->getKey(),
                 'amount' => $request->getParameterBag()->get('amount'),
@@ -80,10 +79,6 @@ class PaymentController extends Controller
 
                 case 'payments':
                     return RedirectResponse::create(route($request->referrer()->getName()));
-                    break;
-
-                default:
-                    return abort(404);
                     break;
             }
 

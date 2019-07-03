@@ -3,7 +3,7 @@
         <div class="row margin-bottom-30">
             <div class="col s12 input-field">
                 <label>
-                    <input type="checkbox" name="settings[mail.attach]" class="filled-in"  @if(settings('app.online_payments.enabled') == true) checked="checked" @endif>
+                    <input type="checkbox" name="settings[mail.attach]" class="filled-in"  @if(settings('mail.attach') == true) checked="checked" @endif>
                     <span>Attach Quote/Invoice to email</span>
                 </label>
             </div>
@@ -11,11 +11,10 @@
 
         <div class="row padding-top-30">
             <div class="col s12 input-field">
-                <select name="settings[mail.provider]" id="email-provider">
-                    <option value="none" @if(settings('mail.provider') == 'none') selected="selected" @endif>None</option>
-                    <option value="phpmail" @if(settings('mail.provider') == 'phpmail') selected="selected" @endif>PHP Mail</option>
-                    <option value="sendmail" @if(settings('mail.provider') == 'sendmail') selected="selected" @endif>Sendmail</option>
-                    <option value="smtp" @if(settings('mail.provider') == 'smtp') selected="selected" @endif>SMTP</option>
+                <select name="settings[mail.driver]" id="email-provider">
+                    <option value="none" @if(settings('mail.driver') == 'none') selected="selected" @endif>None</option>
+                    <option value="sendmail" @if(settings('mail.driver') == 'sendmail') selected="selected" @endif>Sendmail</option>
+                    <option value="smtp" @if(settings('mail.driver') == 'smtp') selected="selected" @endif>SMTP</option>
                 </select>
                 <label for="email-provider">Email Provider</label>
             </div>

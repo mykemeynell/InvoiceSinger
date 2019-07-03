@@ -23,9 +23,9 @@ class InvoiceController extends Controller
 {
     use HasService;
 
-    const SERVICE_INVOICE = 'invoices';
-    const SERVICE_INVOICE_PRODUCT = 'invoiceProducts';
-    const SERVICE_CLIENT = 'clients';
+    public const SERVICE_INVOICE = 'invoices';
+    public const SERVICE_INVOICE_PRODUCT = 'invoiceProducts';
+    public const SERVICE_CLIENT = 'clients';
 
     /**
      * InvoiceController constructor.

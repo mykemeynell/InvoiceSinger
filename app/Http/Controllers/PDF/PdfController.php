@@ -36,7 +36,7 @@ class PdfController extends Controller
         $pdf->getDomPDF()->setPaper('A4', 'portrait');
         $pdf->loadView('pdf.invoice', compact('invoice', 'currency', 'subtotal', 'tax', 'discount', 'total', 'paid', 'balance'));
 
-        if($request->get('output', 'pdf') == 'pdf') {
+        if($request->get('output', 'pdf') === 'pdf') {
             return Response::create($pdf->output())->header('Content-type', 'application/pdf');
         } else {
             return view('pdf.invoice', compact('invoice', 'currency', 'subtotal', 'tax', 'discount', 'total', 'paid', 'balance'));

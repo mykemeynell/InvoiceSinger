@@ -9,7 +9,7 @@ namespace InvoiceSinger\Support\Encryption;
  */
 class Cryptor
 {
-    const ENC_METHOD = 'AES-256-CBC';
+    public const ENC_METHOD = 'AES-256-CBC';
 
     /**
      * The encryption key to be used in algorithms.

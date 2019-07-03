@@ -192,7 +192,7 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
      */
     public function setSentAtAttribute($value): void
     {
-        if (!empty($value)) {
+        if (! is_null($value) && strlen($value) > 0)) {
             $this->attributes['sent_at'] = Carbon::createFromFormat('d F Y', $value)->format('Y-m-d');
         }
     }

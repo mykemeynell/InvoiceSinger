@@ -69,12 +69,12 @@ class SettingController extends Controller
     {
         $payload = $request->getParameterBag()->all();
 
-        if (array_key_exists('email.password', $payload) && strlen($payload['email.password']) > 0) {
+        if (array_key_exists('mail.password', $payload) && strlen($payload['mail.password']) > 0) {
             $settings = $request->getParameterBag()->all();
-            $settings['email.password'] = $this->cryptor->encrypt($request->getParameterBag()->get('email.password'));
+            $settings['mail.password'] = $this->cryptor->encrypt($request->getParameterBag()->get('mail.password'));
         }
 
-        $payload['email.attach'] = array_key_exists('email.attach', $payload);
+        $payload['mail.attach'] = array_key_exists('mail.attach', $payload);
 
         foreach ($payload as $key => $value) {
             $this->getService()->set($key, $value);

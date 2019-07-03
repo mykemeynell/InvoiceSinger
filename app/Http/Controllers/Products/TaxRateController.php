@@ -53,7 +53,7 @@ class TaxRateController extends Controller
             'amount' => 0
         ]));
 
-        $tax_rates->map(function(TaxRateEntityInterface $entity) {
+        $tax_rates->map(static function(TaxRateEntityInterface $entity) {
             $entity->multiplier = $entity->getMultiplier();
             return $entity;
         });
