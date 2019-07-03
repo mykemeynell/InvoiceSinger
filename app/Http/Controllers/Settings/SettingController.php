@@ -67,14 +67,14 @@ class SettingController extends Controller
      */
     public function handlePost(SettingRequest $request): RedirectResponse
     {
-        $payload = $request->getParameterBag();
+        $payload = $request->getParameterBag()->all();
 
-        if ($request->getParameterBag()->has('email.password') && strlen($request->getParameterBag()->get('email.password'))) {
+        if (array_key_exists('email.password', $payload) && strlen($payload['email.password']) > 0) {
             $settings = $request->getParameterBag()->all();
             $settings['email.password'] = $this->cryptor->encrypt($request->getParameterBag()->get('email.password'));
-
-            $payload = new ParameterBag($settings);
         }
+
+        $payload['email.attach'] = array_key_exists('email.attach', $payload);
 
         foreach ($payload as $key => $value) {
             $this->getService()->set($key, $value);

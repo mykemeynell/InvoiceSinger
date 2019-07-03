@@ -3,7 +3,7 @@
         <div class="row margin-bottom-30">
             <div class="col s12 input-field">
                 <label>
-                    <input type="checkbox" name="settings[email.attach]" class="filled-in"  @if(settings('app.online_payments.enabled') == true) checked="checked" @endif value="1">
+                    <input type="checkbox" name="settings[email.attach]" class="filled-in"  @if(settings('app.online_payments.enabled') == true) checked="checked" @endif>
                     <span>Attach Quote/Invoice to email</span>
                 </label>
             </div>
