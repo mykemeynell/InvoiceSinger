@@ -7,7 +7,7 @@
             </div>
         </div>
 
-        <div class="row margin-bottom-0">
+        <div class="row">
             <div class="col s12 input-field">
                 <select name="settings[invoice.term]" id="invoice-term">
                     <option value="10 days" @if(settings('invoice.term') == '10 days') selected="selected" @endif>NET 10</option>
@@ -18,5 +18,13 @@
                 <label for="invoice-pattern">Invoice Term (Net D)</label>
             </div>
         </div>
+
+        <div class="row margin-bottom-0">
+            <div class="col s12 input-field">
+                <textarea name="settings[invoice.footer]" id="invoice-footer" class="materialize-textarea"></textarea>
+                <label for="invoice-pattern">Invoice Footer</label>
+            </div>
+        </div>
+
     </div>
 </div>

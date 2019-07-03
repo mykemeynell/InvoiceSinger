@@ -31,7 +31,7 @@
                             link</a></li>
                     <li class="divider" tabindex="-1"></li>
                     <li><a href="#add-payment-modal" class="modal-trigger">Enter Payment</a></li>
-                    <li><a href="#!">Send via Email</a></li>
+                    <li><a href="#!" @if(settings()) disabled class="disabled tooltipped" data-position="left" data-tooltip="Emails must be configured in settings first" @endif>Send via Email</a></li>
                     <li class="divider" tabindex="-1"></li>
                     <li><a href="#!" class="red-text darken-1">Delete</a></li>
                 </ul>

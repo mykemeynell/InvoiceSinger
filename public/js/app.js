@@ -2057,7 +2057,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['currency', 'taxes', 'units', 'products'],
+  props: {
+    'currency': String,
+    'taxes': Array,
+    'units': Array,
+    'products': Array
+  },
   data: function data() {
     return {
       count: 0,
@@ -2125,6 +2130,10 @@ __webpack_require__.r(__webpack_exports__);
       this.products[current]['count'] = current; // Update the count value to continue from the end of the products list.
 
       this.count = +current + 1;
+    }
+
+    if (this.products.length < 1) {
+      this.addItem();
     }
 
     setTimeout(function () {
@@ -47798,7 +47807,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         var dropdownBounds = {
           left: idealXPos,
           top: idealYPos,
-          height: idealHeight,
+          // height: idealHeight,
           width: idealWidth
         };
 
@@ -73174,6 +73183,7 @@ $(document).ready(function () {
     format: 'dd mmmm yyyy'
   });
   $('.timepicker').timepicker();
+  $('.tooltipped').tooltip();
   var results_table = $('#product-search-table');
 
   if (results_table.length > 0) {

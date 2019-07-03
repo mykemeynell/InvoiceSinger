@@ -67,12 +67,12 @@
 
 <script>
     export default {
-        props: [
-            'currency',
-            'taxes',
-            'units',
-            'products'
-        ],
+        props: {
+            'currency': String,
+            'taxes': Array,
+            'units': Array,
+            'products': Array
+        },
         data() {
             return {
                 count: 0,
@@ -140,6 +140,10 @@
                 this.products[current]['count'] = current;
                 // Update the count value to continue from the end of the products list.
                 this.count = +current + 1;
+            }
+
+            if(this.products.length < 1) {
+                this.addItem();
             }
 
             setTimeout(() => {

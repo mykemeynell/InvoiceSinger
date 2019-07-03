@@ -11,6 +11,7 @@ use InvoiceSinger\Http\Requests\Product\ProductRequest;
 use InvoiceSinger\Storage\Entity\Contract\ProductEntityInterface;
 use InvoiceSinger\Storage\Service\Contract\ProductServiceInterface;
 use InvoiceSinger\Support\Concern\HasService;
+use mykemeynell\Support\CurrencyHtmlEntities;
 
 /**
  * Class ProductController.
@@ -82,7 +83,11 @@ class ProductController extends Controller
      */
     public function index(): View
     {
+        /** @var \mykemeynell\Support\CurrencyHtmlEntities $che */
+        $che = app()->make(CurrencyHtmlEntities::class);
+
         return view('products')
+            ->with('currency', $che->entity(settings('app.currency')))
             ->with('products', $this->getService()->fetch());
     }
 

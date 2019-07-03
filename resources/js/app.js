@@ -31,6 +31,7 @@ $(document).ready(function() {
         format: 'dd mmmm yyyy'
     });
     $('.timepicker').timepicker();
+    $('.tooltipped').tooltip();
 
     let results_table = $('#product-search-table');
     if(results_table.length > 0) {
