@@ -172,11 +172,12 @@ return [
         InvoiceSinger\Providers\AppServiceProvider::class,
         InvoiceSinger\Providers\AuthServiceProvider::class,
         // InvoiceSinger\Providers\BroadcastServiceProvider::class,
+        InvoiceSinger\Providers\BootConfigProvider::class,
+        InvoiceSinger\Providers\StorageServiceProvider::class,
         InvoiceSinger\Providers\EventServiceProvider::class,
         InvoiceSinger\Providers\RouteServiceProvider::class,
 
         ArchLayerUser\Provider\ArchUserServiceProvider::class,
-        InvoiceSinger\Providers\StorageServiceProvider::class,
         LaravelDatabaseSettings\Provider\LaravelDatabaseSettingsProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
     ],
