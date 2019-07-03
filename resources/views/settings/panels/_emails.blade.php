@@ -29,7 +29,7 @@
                 </div>
                 <div class="col s6 input-field">
                     <input type="text" name="settings[email.from_name]" value="{{ settings('email.from_name') }}" id="email-from_name">
-                    <label for="email-from_name">From Address</label>
+                    <label for="email-from_name">From Name</label>
                 </div>
             </div>
             <div class="row padding-top-15">

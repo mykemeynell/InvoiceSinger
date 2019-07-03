@@ -67,6 +67,7 @@ $router->get('/pdf/invoice/{invoice_id}', 'PDF\PdfController@invoice')->name('pd
 
 // Settings
 $router->get('/settings', 'Settings\SettingController@index')->name('settings');
+$router->post('/settings', 'Settings\SettingController@handlePost')->name('settings.handleForm');
 
 /*
  * Authentication routes.
