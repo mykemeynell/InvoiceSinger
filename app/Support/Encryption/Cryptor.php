@@ -2,6 +2,11 @@
 
 namespace InvoiceSinger\Support\Encryption;
 
+/**
+ * Class Cryptor
+ *
+ * @package InvoiceSinger\Support\Encryption
+ */
 class Cryptor
 {
     const ENC_METHOD = 'AES-256-CBC';
@@ -30,17 +35,15 @@ class Cryptor
     /**
      * Cryptor constructor.
      *
-     * @param string|null $secret
      * @param string|null $init_vector
      */
-    function __construct($secret = null, $init_vector = null)
+    function __construct($init_vector = null)
     {
         // If no encryption key is supplied, we can use PHP's php_uname().
-        $secret = $secret ?: $this->getDefaultSecret();
-        $init_vector = $init_vector ?: $secret . php_uname();
+        $init_vector = $init_vector ?: $this->getApplicationKey() . php_uname();
 
         // Calculate the "secret key" that is used to encrypt and decrypt values.
-        $this->key = hash('sha256', $secret);
+        $this->key = hash('sha256', $this->getApplicationKey());
         $this->init_vector = substr(hash('sha256', $init_vector), 0, 16);
     }
 
@@ -49,7 +52,7 @@ class Cryptor
      *
      * @return string
      */
-    private function getDefaultSecret(): string
+    private function getApplicationKey(): string
     {
         return env('APP_KEY', php_uname());
     }
