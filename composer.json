@@ -17,7 +17,8 @@
         "league/iso3166": "^2.1",
         "mykemeynell/archuser": "^1.0",
         "mykemeynell/html-currency-entities": "^1.0",
-        "mykemeynell/laravel-database-settings": "^1.0"
+        "mykemeynell/laravel-database-settings": "^1.0",
+        "ext-openssl": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
