@@ -18,6 +18,15 @@ class RegisterPaymentProvidersProvider extends ServiceProvider
     use BootOnly, AliasService;
 
     /**
+     * Register all aliases for this service provider.
+     *
+     * @return void
+     */
+    protected $aliases = [
+
+    ];
+
+    /**
      * Bootstrap services.
      *
      * @param \InvoiceSinger\PaymentProviders\PaymentProviderManager $manager
@@ -26,12 +35,26 @@ class RegisterPaymentProvidersProvider extends ServiceProvider
      *
      * @throws \Exception
      */
-    public function boot(PaymentProviderManager $manager)
+    public function boot()
     {
+        $this->prepare();
+
+        /** @var \InvoiceSinger\PaymentProviders\PaymentProviderManager $manager */
+        $manager = app('payment.providers.manager');
+
         foreach(config('payments.providers') as $key => $provider) {
             $manager->addProvider($key, app()->make($provider));
         }
+    }
 
+    /**
+     * Prepare provider bindings and aliases.
+     *
+     * @return void
+     */
+    protected function prepare(): void
+    {
+        $this->registerAliases();
         $this->app->singleton('payment.providers.manager', PaymentProviderManager::class);
     }
 }

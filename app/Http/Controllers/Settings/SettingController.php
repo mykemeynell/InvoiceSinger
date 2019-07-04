@@ -52,13 +52,24 @@ class SettingController extends Controller
      */
     public function index(): View
     {
-        dd(app('payment.providers.manager'));
-
         /** @var \InvoiceSinger\PaymentProviders\PaymentProviderManager $manager */
         $manager = app('payment.providers.manager');
+        $providers = $manager->getProviders()->map(static function($item, $key) {
+            $name = $item->getName();
+            $fields = collect($item->getFields())->map(static function ($item) {
+                $encrypted = $item['encrypt'] ? '[encrypted]' : '';
+                $item['name'] = 'settings' . $encrypted . '[' . $item['name'] . ']';
+                return $item;
+            });
+            return compact('name','key', 'fields');
+        });
+
+        /** @var \Illuminate\Database\Eloquent\Collection $settings */
+        $settings = settings()->fetch();
 
         return view('settings')
-            ->with('payment_providers', $manager->getProviders())
+            ->with('settings', $settings)
+            ->with('payment_providers', $providers)
             ->with('app_currency_options', app()->make(CurrencyHtmlEntities::class)->all());
     }
 

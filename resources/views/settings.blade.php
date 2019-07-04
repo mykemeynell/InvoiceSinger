@@ -21,7 +21,9 @@
                 <div class="col s12 padding-y-30" id="invoices">@include('settings.panels._invoices')</div>
                 <div class="col s12 padding-y-30" id="quotes">@include('settings.panels._quotes')</div>
                 <div class="col s12 padding-y-30" id="email">@include('settings.panels._emails')</div>
-                <div class="col s12 padding-y-30" id="online-payments">@include('settings.panels._online-payments')</div>
+                <div class="col s12 padding-y-30" id="online-payments">
+                    <payment-settings :settings="{{ $settings }}" :providers="{{ $payment_providers }}"></payment-settings>
+                </div>
                 <div class="col s12 padding-y-30" id="data">@include('settings.panels._data-management')</div>
             </form>
         </div>

@@ -2150,6 +2150,84 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/settings/PaymentSettings.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/settings/PaymentSettings.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    'settings': Array,
+    'providers': Object
+  },
+  data: function data() {
+    return {
+      'provider': this.settings['app.online_payments.provider']
+    };
+  },
+  mounted: function mounted() {
+    console.log('Mounted Payment Settings');
+  },
+  methods: {
+    updateProvider: function updateProvider() {
+      this.provider = $('#app-payment-provider').val();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/datatables.net-dt/js/dataTables.dataTables.js":
 /*!********************************************************************!*\
   !*** ./node_modules/datatables.net-dt/js/dataTables.dataTables.js ***!
@@ -47807,7 +47885,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         var dropdownBounds = {
           left: idealXPos,
           top: idealYPos,
-          // height: idealHeight,
+          height: idealHeight,
           width: idealWidth
         };
 
@@ -61006,6 +61084,128 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/settings/PaymentSettings.vue?vue&type=template&id=14f1e9f0&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/settings/PaymentSettings.vue?vue&type=template&id=14f1e9f0& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card" }, [
+    _c(
+      "div",
+      { staticClass: "card-content" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col s12 input-field" }, [
+            _c(
+              "select",
+              {
+                attrs: {
+                  type: "text",
+                  name: "settings[app.online_payments.provider]",
+                  id: "app-payment-provider"
+                },
+                on: { change: _vm.updateProvider }
+              },
+              [
+                _c("option", { attrs: { value: "" } }, [_vm._v("None")]),
+                _vm._v(" "),
+                _vm._l(_vm.providers, function(prov) {
+                  return _c("option", { domProps: { value: prov.key } }, [
+                    _vm._v(_vm._s(prov.name) + "\n                    ")
+                  ])
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "app-payment-provider" } }, [
+              _vm._v("Payment Provider")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.providers, function(prov) {
+          return prov.key === _vm.provider
+            ? _c(
+                "div",
+                _vm._l(prov.fields, function(field) {
+                  return _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col s12 input-field" }, [
+                      _c("input", {
+                        attrs: {
+                          type: "text",
+                          name: field.name,
+                          id: field.name,
+                          required: field.required === true
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: field.name } }, [
+                        _vm._v(_vm._s(field.label))
+                      ])
+                    ])
+                  ])
+                }),
+                0
+              )
+            : _vm._e()
+        })
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-title" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col s12" }, [
+          _c("span", [_vm._v("Online Payments")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row padding-bottom-30" }, [
+      _c("div", { staticClass: "col s12 input-field" }, [
+        _c("label", [
+          _c("input", {
+            staticClass: "filled-in",
+            attrs: { type: "checkbox" }
+          }),
+          _vm._v(" "),
+          _c("span", [_vm._v("Enable")])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -73153,6 +73353,7 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ProductRow_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/ProductRow.vue */ "./resources/js/components/ProductRow.vue");
 /* harmony import */ var _components_ProductTable_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/ProductTable.vue */ "./resources/js/components/ProductTable.vue");
+/* harmony import */ var _components_settings_PaymentSettings_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/settings/PaymentSettings.vue */ "./resources/js/components/settings/PaymentSettings.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -73165,8 +73366,10 @@ __webpack_require__(/*! materialize-css/dist/js/materialize */ "./node_modules/m
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
+
 Vue.component('product-row', _components_ProductRow_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
 Vue.component('product-table', _components_ProductTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
+Vue.component('payment-settings', _components_settings_PaymentSettings_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -73417,6 +73620,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductTable_vue_vue_type_template_id_037f888a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductTable_vue_vue_type_template_id_037f888a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/settings/PaymentSettings.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/settings/PaymentSettings.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PaymentSettings_vue_vue_type_template_id_14f1e9f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PaymentSettings.vue?vue&type=template&id=14f1e9f0& */ "./resources/js/components/settings/PaymentSettings.vue?vue&type=template&id=14f1e9f0&");
+/* harmony import */ var _PaymentSettings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PaymentSettings.vue?vue&type=script&lang=js& */ "./resources/js/components/settings/PaymentSettings.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PaymentSettings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PaymentSettings_vue_vue_type_template_id_14f1e9f0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PaymentSettings_vue_vue_type_template_id_14f1e9f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/settings/PaymentSettings.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/settings/PaymentSettings.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/settings/PaymentSettings.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentSettings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PaymentSettings.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/settings/PaymentSettings.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentSettings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/settings/PaymentSettings.vue?vue&type=template&id=14f1e9f0&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/settings/PaymentSettings.vue?vue&type=template&id=14f1e9f0& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentSettings_vue_vue_type_template_id_14f1e9f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PaymentSettings.vue?vue&type=template&id=14f1e9f0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/settings/PaymentSettings.vue?vue&type=template&id=14f1e9f0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentSettings_vue_vue_type_template_id_14f1e9f0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentSettings_vue_vue_type_template_id_14f1e9f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

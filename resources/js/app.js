@@ -11,8 +11,11 @@ window.Vue = require('vue');
 
 import ProductRow from './components/ProductRow.vue';
 import ProductTable from './components/ProductTable.vue';
+import PaymentSettings from './components/settings/PaymentSettings.vue';
+
 Vue.component('product-row', ProductRow);
 Vue.component('product-table', ProductTable);
+Vue.component('payment-settings', PaymentSettings);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

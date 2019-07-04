@@ -22,4 +22,20 @@ abstract class PaymentProvider
      * @return string
      */
     abstract public function getName(): string;
+
+    /**
+     * Get the fields that are required by this provider.
+     *
+     * Format:
+     *  [
+     *    'label' => '',
+     *    'type' => '',
+     *    'name' => '',
+     *    'required' => true|false,
+     *    'encrypt' => true|false,
+     *  ]
+     *
+     * @return array
+     */
+    abstract public function getFields(): array;
 }
