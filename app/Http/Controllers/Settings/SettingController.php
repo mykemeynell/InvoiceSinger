@@ -52,8 +52,13 @@ class SettingController extends Controller
      */
     public function index(): View
     {
+        dd(app('payment.providers.manager'));
+
+        /** @var \InvoiceSinger\PaymentProviders\PaymentProviderManager $manager */
+        $manager = app('payment.providers.manager');
+
         return view('settings')
-            ->with('app_currency', settings('app.currency'))
+            ->with('payment_providers', $manager->getProviders())
             ->with('app_currency_options', app()->make(CurrencyHtmlEntities::class)->all());
     }
 

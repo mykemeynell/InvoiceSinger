@@ -12,7 +12,8 @@
             <div class="col s12 input-field">
                 <select name="settings[app.currency]" id="app-currency">
                     @foreach($app_currency_options as $alpha3 => $entity)
-                        <option value="{{ $alpha3 }}" @if($app_currency == $alpha3) selected="selected" @endif>{{ $alpha3 }} ({!! $entity !!})</option>
+                        @php $currency = settings('app.currency'); @endphp
+                        <option value="{{ $alpha3 }}" @if($currency === $alpha3) selected="selected" @endif>{{ $alpha3 }} ({!! $entity !!})</option>
                     @endforeach
                 </select>
                 <label for="app-currency">Currency</label>

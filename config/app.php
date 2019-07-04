@@ -176,6 +176,7 @@ return [
         InvoiceSinger\Providers\StorageServiceProvider::class,
         InvoiceSinger\Providers\EventServiceProvider::class,
         InvoiceSinger\Providers\RouteServiceProvider::class,
+        InvoiceSinger\Providers\RegisterPaymentProvidersProvider::class,
 
         ArchLayerUser\Provider\ArchUserServiceProvider::class,
         LaravelDatabaseSettings\Provider\LaravelDatabaseSettingsProvider::class,
