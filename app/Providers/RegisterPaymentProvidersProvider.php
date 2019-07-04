@@ -29,11 +29,9 @@ class RegisterPaymentProvidersProvider extends ServiceProvider
     /**
      * Bootstrap services.
      *
-     * @param \InvoiceSinger\PaymentProviders\PaymentProviderManager $manager
-     *
      * @return void
      *
-     * @throws \Exception
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function boot()
     {

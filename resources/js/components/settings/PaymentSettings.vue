@@ -23,7 +23,6 @@
                     <select type="text"
                             name="settings[app.online_payments.provider]"
                             id="app-payment-provider" @change="updateProvider">
-                        <option value="">None</option>
                         <option v-for="prov in providers"
                                 :value="prov.key">{{ prov.name }}
                         </option>

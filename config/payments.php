@@ -20,6 +20,7 @@ return [
     */
 
     'providers' => [
+        'none' => InvoiceSinger\PaymentProviders\NullPaymentProvider::class,
         'stripe' => InvoiceSinger\PaymentProviders\Stripe\StripePaymentProvider::class,
     ],
 

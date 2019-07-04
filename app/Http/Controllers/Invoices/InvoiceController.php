@@ -30,8 +30,8 @@ class InvoiceController extends Controller
     /**
      * InvoiceController constructor.
      *
-     * @param \InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface $invoiceService
-     * @param \InvoiceSinger\Storage\Service\Contract\ClientServiceInterface $clientService
+     * @param \InvoiceSinger\Storage\Service\Contract\InvoiceServiceInterface        $invoiceService
+     * @param \InvoiceSinger\Storage\Service\Contract\ClientServiceInterface         $clientService
      * @param \InvoiceSinger\Storage\Service\Contract\InvoiceProductServiceInterface $invoiceProductService
      */
     function __construct(
@@ -40,7 +40,8 @@ class InvoiceController extends Controller
         InvoiceProductServiceInterface $invoiceProductService
     ) {
         $this->setService($invoiceService, self::SERVICE_INVOICE);
-        $this->setService($invoiceProductService, self::SERVICE_INVOICE_PRODUCT);
+        $this->setService($invoiceProductService,
+            self::SERVICE_INVOICE_PRODUCT);
         $this->setService($clientService, self::SERVICE_CLIENT);
     }
 
@@ -55,9 +56,11 @@ class InvoiceController extends Controller
     {
         return view('invoices')
             ->with('today', Carbon::today()->format('d F Y'))
-            ->with('due', Carbon::today()->add(settings('invoice.term'))->format('d F Y'))
+            ->with('due',
+                Carbon::today()->add(settings('invoice.term'))->format('d F Y'))
             ->with('clients', $this->getService(self::SERVICE_CLIENT)->fetch())
-            ->with('invoices', $this->getService(self::SERVICE_INVOICE)->fetch());
+            ->with('invoices',
+                $this->getService(self::SERVICE_INVOICE)->fetch());
     }
 
     /**
@@ -91,33 +94,55 @@ class InvoiceController extends Controller
         try {
             /** @var \InvoiceSinger\Storage\Entity\InvoiceEntity $invoice */
             if ($invoice = $request->invoice()) {
-                $this->getService(self::SERVICE_INVOICE)->update($invoice, $request->getParameterBag());
+                $this->getService(self::SERVICE_INVOICE)->update($invoice,
+                    $request->getParameterBag());
 
                 $this->getService(self::SERVICE_INVOICE_PRODUCT)->removeUsingInvoiceId($invoice->getKey());
-                foreach($request->getParameterBag()->get('products', []) as $product) {
+                foreach ($request->getParameterBag()->get('products',
+                    []) as $product) {
                     $product['invoice'] = $invoice->getKey();
                     $this->getService(self::SERVICE_INVOICE_PRODUCT)->create(new ParameterBag($product));
                 }
 
-                return RedirectResponse::create(route('invoices.form', ['invoice_id' => $invoice->getKey()]));
+                return RedirectResponse::create(route('invoices.form',
+                    ['invoice_id' => $invoice->getKey()]));
             }
 
             /** @var \InvoiceSinger\Storage\Entity\InvoiceEntity $invoice */
             $invoice = $this->getService(self::SERVICE_INVOICE)->create($request->getParameterBag());
 
-            return RedirectResponse::create(route('invoices.form', ['invoice_id' => $invoice->getKey()]));
+            return RedirectResponse::create(route('invoices.form',
+                ['invoice_id' => $invoice->getKey()]));
         } catch (\Exception $exception) {
             return abort(500,
-                sprintf("'%s' reported in '%s' on line %s", $exception->getMessage(), $exception->getFile(), $exception->getLine()));
+                sprintf("'%s' reported in '%s' on line %s",
+                    $exception->getMessage(), $exception->getFile(),
+                    $exception->getLine()));
         }
     }
 
+    /**
+     * Show the public view for an invoice.
+     *
+     * @param \InvoiceSinger\Http\Requests\Invoice\InvoiceRequest $request
+     *
+     * @return \Illuminate\View\View
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
     public function viewPublic(InvoiceRequest $request): View
     {
         /** @var CurrencyHtmlEntities $che */
         $che = app()->make(CurrencyHtmlEntities::class);
 
+        /** @var \InvoiceSinger\PaymentProviders\PaymentProviderManager $manager */
+        $manager = app('payment.providers.manager');
+        $additional_content = $manager->provider(
+            settings('app.online_payments.provider')
+        )->getFrontendAdditions();
+
         return view('invoices.public')
+            ->with('additional_content', $additional_content)
             ->with('invoice', $request->invoice())
             ->with('currency', $che->entity(settings('app.currency')))
             ->with('subtotal', 0)

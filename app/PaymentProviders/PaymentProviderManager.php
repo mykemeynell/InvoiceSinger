@@ -24,7 +24,7 @@ class PaymentProviderManager
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getProviders(): Collection
+    public function providers(): Collection
     {
         return collect($this->providers);
     }
@@ -41,8 +41,8 @@ class PaymentProviderManager
      */
     public function addProvider(string $key, PaymentProvider $provider): void
     {
-        if($this->getProviders()->has($key)) {
-            $provider = $this->getProvider($key);
+        if($this->providers()->has($key)) {
+            $provider = $this->provider($key);
             throw new Exception("Cannot add provider '{$key}' as it already exists and references '{$provider}'");
         }
 
@@ -56,8 +56,8 @@ class PaymentProviderManager
      *
      * @return \InvoiceSinger\PaymentProviders\PaymentProvider
      */
-    public function getProvider(string $key): PaymentProvider
+    public function provider(string $key): PaymentProvider
     {
-        return $this->getProviders()->get($key);
+        return $this->providers()->get($key);
     }
 }

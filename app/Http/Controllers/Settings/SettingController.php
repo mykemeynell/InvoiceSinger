@@ -4,6 +4,7 @@ namespace InvoiceSinger\Http\Controllers\Settings;
 
 use ArchLayer\Service\Contract\ServiceInterface;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Setting\SettingRequest;
@@ -54,7 +55,8 @@ class SettingController extends Controller
     {
         /** @var \InvoiceSinger\PaymentProviders\PaymentProviderManager $manager */
         $manager = app('payment.providers.manager');
-        $providers = $manager->getProviders()->map(static function($item, $key) {
+
+        $providers = $manager->providers()->map(static function($item, $key) {
             $name = $item->getName();
             $fields = collect($item->getFields())->map(static function ($item) {
                 $encrypted = $item['encrypt'] ? '[encrypted]' : '';
@@ -83,7 +85,7 @@ class SettingController extends Controller
      */
     public function handlePost(SettingRequest $request): RedirectResponse
     {
-        $payload = $request->getParameterBag()->all();
+        $payload = Arr::except($request->getParameterBag()->all(), ['encrypted']);
 
         if (array_key_exists('mail.password', $payload) && strlen($payload['mail.password']) > 0) {
             $settings = $request->getParameterBag()->all();
@@ -94,6 +96,10 @@ class SettingController extends Controller
 
         foreach ($payload as $key => $value) {
             $this->getService()->set($key, $value);
+        }
+
+        foreach ($request->getParameterBag()->get('encrypted') as $key => $value) {
+            $this->getService()->set($key, $this->cryptor->encrypt($value));
         }
 
         return RedirectResponse::create(route('settings'));

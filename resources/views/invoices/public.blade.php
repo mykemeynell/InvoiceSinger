@@ -8,8 +8,15 @@
 
 @section('body_classes', 'page-public-viewer')
 
+@push('end')
+    @if(settings('app.online_payments.enabled') == true)
+        {!! $additional_content !!}
+    @endif
+@endpush
+
 @section('content')
     <div class="container">
+        @if(settings('app.online_payments.enabled') == true)
         <div class="row margin-bottom-30 padding-top-15">
             <div class="card grey lighten-5">
                 <div class="card-content">
@@ -26,6 +33,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <div class="row padding-y-30">
             <div class="col s4">

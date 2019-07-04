@@ -2205,7 +2205,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     'settings': Array,
@@ -61120,16 +61119,12 @@ var render = function() {
                 },
                 on: { change: _vm.updateProvider }
               },
-              [
-                _c("option", { attrs: { value: "" } }, [_vm._v("None")]),
-                _vm._v(" "),
-                _vm._l(_vm.providers, function(prov) {
-                  return _c("option", { domProps: { value: prov.key } }, [
-                    _vm._v(_vm._s(prov.name) + "\n                    ")
-                  ])
-                })
-              ],
-              2
+              _vm._l(_vm.providers, function(prov) {
+                return _c("option", { domProps: { value: prov.key } }, [
+                  _vm._v(_vm._s(prov.name) + "\n                    ")
+                ])
+              }),
+              0
             ),
             _vm._v(" "),
             _c("label", { attrs: { for: "app-payment-provider" } }, [
