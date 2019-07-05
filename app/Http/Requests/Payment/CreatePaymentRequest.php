@@ -4,6 +4,7 @@ namespace InvoiceSinger\Http\Requests\Payment;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Routing\Route;
+use InvoiceSinger\Http\Requests\Concern\RequestHasInvoice;
 use InvoiceSinger\Requests\Concern\RequestHasNoRules;
 use InvoiceSinger\Requests\Concern\RequestHasParameterBag;
 use InvoiceSinger\Requests\Concern\RequestIsAuthorized;
@@ -17,25 +18,7 @@ use InvoiceSinger\Storage\Entity\Contract\PaymentMethodEntityInterface;
  */
 class CreatePaymentRequest extends FormRequest
 {
-    use RequestHasNoRules, RequestHasParameterBag, RequestIsAuthorized;
-
-    /**
-     * Retrieve the relevant invoice item for this request.
-     *
-     * @return \InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface|null
-     */
-    public function invoice(): ?InvoiceEntityInterface
-    {
-        if($id = $this->getParameterBag()->get('invoice_id')) {
-            return app('invoice.service')->find($id);
-        }
-
-        if($id = $this->route('invoice_id')) {
-            return app('invoice.service')->find($id);
-        }
-
-        return null;
-    }
+    use RequestHasNoRules, RequestHasParameterBag, RequestIsAuthorized, RequestHasInvoice;
 
     /**
      * Retrieve the relevant payment method for this request.

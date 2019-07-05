@@ -75,57 +75,6 @@ abstract class PaymentProvider
         $this->payment_service = $payment_service;
     }
 
-    /**
-     * Get the payment entity.
-     *
-     * @return \InvoiceSinger\Storage\Entity\Contract\PaymentEntityInterface|\Illuminate\Database\Eloquent\Model|null
-     */
-    final public function getPaymentEntity(): ?PaymentEntityInterface
-    {
-        return $this->payment;
-    }
-
-    /**
-     * Prepare the Payment Provider instance with data from the invoice and the
-     * current request.
-     *
-     * @param \InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface|\Illuminate\Database\Eloquent\Model $invoice
-     * @param \Illuminate\Http\Request                                                                          $request
-     */
-    public function boot(InvoiceEntityInterface $invoice, Request $request): void
-    {
-        $this->invoice = $invoice;
-        $this->request = $request;
-
-        $this->payment = $this->payment_service->create(new ParameterBag([
-            'invoice' => $invoice->getKey(),
-            'method' => $this->payment_method->getKey(),
-            'amount' => $invoice->getTotal(),
-            'paid_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'committed' => 0,
-        ]));
-    }
-
-    /**
-     * Commit the changes to the database.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @throws \Exception
-     */
-    final public function commit(Request $request): void
-    {
-        if($invoice_id = $request->get('invoice') === null) {
-            throw new \Exception("Missing invoice key");
-        }
-
-        /** @var \InvoiceSinger\Storage\Entity\PaymentEntity $payment */
-        $payment = $this->payment_service->findUsingInvoiceId($request->get('payment'));
-        $this->payment_service->update($payment, new ParameterBag([
-            'committed' => 1,
-            "invoice" => $invoice_id,
-        ]));
-    }
 
     /**
      * Handle the creation of a payment instance.
@@ -166,6 +115,58 @@ abstract class PaymentProvider
     abstract public function getFields(): array;
 
     /**
+     * Get the payment entity.
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\PaymentEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    final public function getPaymentEntity(): ?PaymentEntityInterface
+    {
+        return $this->payment;
+    }
+
+    /**
+     * Prepare the Payment Provider instance with data from the invoice and the
+     * current request.
+     *
+     * @param \InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface|\Illuminate\Database\Eloquent\Model $invoice
+     * @param \Illuminate\Http\Request                                                                          $request
+     */
+    public function boot(InvoiceEntityInterface $invoice, Request $request): void
+    {
+        $this->invoice = $invoice;
+        $this->request = $request;
+
+        $this->payment = $this->payment_service->create(new ParameterBag([
+            'invoice' => $invoice->getKey(),
+            'method' => $this->payment_method->getKey(),
+            'amount' => $invoice->getTotal(),
+            'paid_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'committed' => 0,
+        ]));
+    }
+
+    /**
+     * Commit the changes to the database.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @throws \Exception
+     */
+    final public function commit(Request $request): void
+    {
+        if($invoice_id = $request->get('invoice_id') === null) {
+            throw new \Exception("Missing invoice key");
+        }
+
+        /** @var \InvoiceSinger\Storage\Entity\PaymentEntity $payment */
+        $payment = $this->payment_service->findUsingInvoiceId($request->get('payment'));
+        $this->payment_service->update($payment, new ParameterBag([
+            'committed' => 1,
+            "invoice" => $invoice_id,
+        ]));
+    }
+
+    /**
      * Get the success URL.
      *
      * @return string
@@ -173,8 +174,8 @@ abstract class PaymentProvider
     final public function getSuccessUrl(): string
     {
         return route('payment.success', [
-            'payment' => "{$this->payment->getKey()}",
-            'invoice' => "{$this->invoice->getKey()}",
+            'payment_id' => "{$this->payment->getKey()}",
+            'invoice_id' => "{$this->invoice->getKey()}",
         ]);
     }
 
@@ -186,8 +187,34 @@ abstract class PaymentProvider
     final public function getErrorUrl(): string
     {
         return route('payment.error', [
-            'payment' => "{$this->payment->getKey()}",
-            'invoice' => "{$this->invoice->getKey()}",
+            'payment_id' => "{$this->payment->getKey()}",
+            'invoice_id' => "{$this->invoice->getKey()}",
+        ]);
+    }
+
+    /**
+     * Get the success webhook URL.
+     *
+     * @return string
+     */
+    final public function getSuccessWebhookUrl(): string
+    {
+        return route('webhook.payment.success', [
+            'payment_id' => "{$this->payment->getKey()}",
+            'invoice_id' => "{$this->invoice->getKey()}",
+        ]);
+    }
+
+    /**
+     * Get the error webhook URL.
+     *
+     * @return string
+     */
+    final public function getErrorWebhookUrl(): string
+    {
+        return route('webhook.payment.error', [
+            'payment_id' => "{$this->payment->getKey()}",
+            'invoice_id' => "{$this->invoice->getKey()}",
         ]);
     }
 }

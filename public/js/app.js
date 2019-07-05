@@ -2210,9 +2210,6 @@ __webpack_require__.r(__webpack_exports__);
     'settings': Object,
     'providers': Object
   },
-  mounted: function mounted() {
-    console.log(this.settings);
-  },
   data: function data() {
     return {
       'provider': this.settings['app.online_payments.provider']
@@ -47884,7 +47881,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         var dropdownBounds = {
           left: idealXPos,
           top: idealYPos,
-          // height: idealHeight,
+          height: idealHeight,
           width: idealWidth
         };
 

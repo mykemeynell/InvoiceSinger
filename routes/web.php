@@ -35,11 +35,17 @@ $router->get('/invoices', 'Invoices\InvoiceController@index')->name('invoices');
 $router->get('/invoices/form/{invoice_id?}', 'Invoices\InvoiceController@form')->name('invoices.form');
 $router->post('/invoices/form/{invoice_id?}', 'Invoices\InvoiceController@handlePost')->name('invoices.handleForm');
 
+// Public Invoice View
 $router->get('/invoices/public/{invoice_id?}', 'Invoices\InvoiceController@viewPublic')->name('invoices.showPublic');
 
+// Online Payments
 $router->post('/invoices/public/payment/create', 'OnlinePayments\OnlinePaymentController@handlePost')->name('payment.handleCreate');
 $router->get('/invoices/public/payment/success', 'OnlinePayments\OnlinePaymentController@showPaymentSuccess')->name('payment.success');
 $router->get('/invoices/public/payment/error', 'OnlinePayments\OnlinePaymentController@showPaymentError')->name('payment.error');
+
+// Online Payment Hook Endpoints
+$router->post('/webhook/payment/success', 'OnlinePayments\OnlinePaymentController@handleSuccessWebhook')->name('webhook.payment.success');
+$router->post('/webhook/payment/error', 'OnlinePayments\OnlinePaymentController@handleErrorWebhook')->name('webhook.payment.error');
 
 // Payments
 $router->get('/payments', 'Payments\PaymentController@index')->name('payments');

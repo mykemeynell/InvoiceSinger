@@ -50,9 +50,6 @@
             'settings': Object,
             'providers': Object
         },
-        mounted() {
-            console.log(this.settings);
-        },
         data() {
             return {
                 'provider': this.settings['app.online_payments.provider']

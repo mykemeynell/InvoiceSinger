@@ -30,11 +30,7 @@ class StripePaymentProvider extends PaymentProvider
      */
     public function handle()
     {
-        // Set your secret key: remember to change this to your live secret key in production
-        // See your keys here: https://dashboard.stripe.com/account/apikeys
-        Stripe::setApiKey(
-            $this->cryptor->decrypt(settings('stripe.secret_key'))
-        );
+        $this->prepareStripe();
 
         $session = Session::create([
             'payment_method_types' => ['card'],
@@ -51,6 +47,18 @@ class StripePaymentProvider extends PaymentProvider
         ]);
 
         $this->session_id = $session->id;
+    }
+
+    /**
+     * Prepare stripe API call.
+     *
+     * @return void
+     */
+    private function prepareStripe(): void
+    {
+        Stripe::setApiKey(
+            $this->cryptor->decrypt(settings('stripe.secret_key'))
+        );
     }
 
     /**
@@ -71,25 +79,15 @@ class StripePaymentProvider extends PaymentProvider
      */
     public function getFrontendAdditions(): string
     {
-        $lines = [
-            '<script src="https://js.stripe.com/v3/"></script>',
-            '<script>',
-            '    $(document).ready(function() {',
-            '        let stripe_token = "' . $this->cryptor->decrypt(settings('stripe.publishable_key')) . '";',
-            '        if(stripe_token.length <= 0) {',
-            '            console.error("Stripe publishable token has not been set");',
-            '        }',
-            '        let stripe = Stripe(stripe_token);',
-            '        stripe.redirectToCheckout({',
-            '            sessionId: "' . $this->session_id . '"',
-            '        }).then(function (result) {',
-            '            console.error(result.error.message);',
-            '        });',
-            '    });',
-            '</script>',
-        ];
+        $publishable_key = $this->cryptor->decrypt(
+            settings('stripe.publishable_key')
+        );
 
-        return implode("\r\n", $lines);
+        return str_replace(
+            ['{{ publishable_key }}',  '{{ session_id }}'],
+            [$publishable_key,         $this->session_id],
+            file_get_contents(realpath(__DIR__ . '/stubs/checkout.stub'))
+        );
     }
 
     /**
