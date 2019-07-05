@@ -38,6 +38,7 @@ class StripePaymentProvider extends PaymentProvider
 
         $session = Session::create([
             'payment_method_types' => ['card'],
+            'customer_email' => $this->invoice->client()->getEmailAddress(),
             'line_items' => [[
                 'name' => "{$this->invoice->getInvoiceKey()}",
                 'description' => "Invoice #{$this->invoice->getInvoiceKey()}",

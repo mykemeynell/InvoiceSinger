@@ -38,9 +38,7 @@
                 <img src="{{ asset(settings('app.logo')) }}" alt="Company Logo" class="brand-logo">
             </div>
             <div class="col s8">
-                <h4 class="bold-text right-align">Invoice {{ $invoice->getInvoiceKey() }} @if($balance <= 0)
-                        <span class="badge green white-text">Paid</span>
-                    @endif</h4>
+                <h4 class="bold-text right-align">Invoice {{ $invoice->getInvoiceKey() }}</h4>
                 <span class="display-block right-align grey-text lighten-2">issued {{ $invoice->getRaisedAt()->format('jS F Y') }}</span>
                 <span class="display-block right-align grey-text lighten-2">payment due {{ $invoice->getDueAt()->format('jS F Y') }}</span>
             </div>
