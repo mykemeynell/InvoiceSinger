@@ -44,6 +44,9 @@
         "psr-4": {
             "InvoiceSinger\\": "app/"
         },
+        "files": [
+            "app/Support/helpers.php"
+        ],
         "classmap": [
             "database/seeds",
             "database/factories"

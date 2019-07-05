@@ -4,6 +4,7 @@ namespace InvoiceSinger\Http\Controllers\Invoices;
 
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Invoice\InvoiceRequest;
@@ -135,14 +136,7 @@ class InvoiceController extends Controller
         /** @var CurrencyHtmlEntities $che */
         $che = app()->make(CurrencyHtmlEntities::class);
 
-        /** @var \InvoiceSinger\PaymentProviders\PaymentProviderManager $manager */
-        $manager = app('payment.providers.manager');
-        $additional_content = $manager->provider(
-            settings('app.online_payments.provider')
-        )->getFrontendAdditions();
-
         return view('invoices.public')
-            ->with('additional_content', $additional_content)
             ->with('invoice', $request->invoice())
             ->with('currency', $che->entity(settings('app.currency')))
             ->with('subtotal', 0)

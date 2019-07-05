@@ -10,7 +10,7 @@
             </div>
         </td>
         <td class="right-align">
-            <input type="text" class="right-align validate" :name="quantityFieldName" value="1" v-on:change="updateTotals" required="required">
+            <input type="text" class="right-align validate" :name="quantityFieldName" :value="quantity" v-on:change="updateTotals" required="required">
             <select :name="unitFieldName" required="required" class="validate">
                 <option v-for="unit in units" :value="unit.id">{{ unit.name }}</option>
             </select>
@@ -45,7 +45,7 @@
         },
         props: ['product', 'currency', 'taxes', 'units'],
         data: function () {
-            let quantity = 1;
+            let quantity = this.product.quantity ? this.product.quantity : parseFloat(1).toFixed(2);
             let price = this.product.price ? this.product.price.toFixed(2) : parseFloat(0).toFixed(2);
             let subtotal = (price * quantity).toFixed(2);
             let discount = this.product.discount ? this.product.discount.toFixed(2) : parseFloat(0).toFixed(2);

@@ -8,12 +8,6 @@
 
 @section('body_classes', 'page-public-viewer')
 
-@push('end')
-    @if(settings('app.online_payments.enabled') == true)
-        {!! $additional_content !!}
-    @endif
-@endpush
-
 @section('content')
     <div class="container">
         @if(settings('app.online_payments.enabled') == true)
@@ -27,7 +21,11 @@
                                 the "Pay Online" button to get started.</p>
                         </div>
                         <div class="col s6 right-align">
-                            <a href="#!" class="waves-effect waves-light green btn">Pay Online</a>
+                            <form id="op-form" name="op-form">
+                                {!! csrf_field() !!}
+                                <input type="hidden" name="invoice[id]" value="{{ $invoice->getKey() }}">
+                                <button form="op-form" formmethod="POST" formaction="{{ route('payment.handleCreate') }}" class="waves-effect waves-light green btn">Pay Online</button>
+                            </form>
                         </div>
                     </div>
                 </div>

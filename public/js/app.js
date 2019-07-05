@@ -1884,7 +1884,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: ['product', 'currency', 'taxes', 'units'],
   data: function data() {
-    var quantity = 1;
+    var quantity = this.product.quantity ? this.product.quantity : parseFloat(1).toFixed(2);
     var price = this.product.price ? this.product.price.toFixed(2) : parseFloat(0).toFixed(2);
     var subtotal = (price * quantity).toFixed(2);
     var discount = this.product.discount ? this.product.discount.toFixed(2) : parseFloat(0).toFixed(2);
@@ -60799,9 +60799,9 @@ var render = function() {
         attrs: {
           type: "text",
           name: _vm.quantityFieldName,
-          value: "1",
           required: "required"
         },
+        domProps: { value: _vm.quantity },
         on: { change: _vm.updateTotals }
       }),
       _vm._v(" "),

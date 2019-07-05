@@ -14,11 +14,9 @@ class NullPaymentProvider extends PaymentProvider
     /**
      * Handle the creation of a payment instance.
      *
-     * @param \InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface|\Illuminate\Database\Eloquent\Model $invoice
-     *
      * @return mixed
      */
-    public function handle(InvoiceEntityInterface $invoice)
+    public function handle()
     {
         return null;
     }

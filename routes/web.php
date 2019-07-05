@@ -34,7 +34,12 @@ $router->get('/quotes', static function () {
 $router->get('/invoices', 'Invoices\InvoiceController@index')->name('invoices');
 $router->get('/invoices/form/{invoice_id?}', 'Invoices\InvoiceController@form')->name('invoices.form');
 $router->post('/invoices/form/{invoice_id?}', 'Invoices\InvoiceController@handlePost')->name('invoices.handleForm');
+
 $router->get('/invoices/public/{invoice_id?}', 'Invoices\InvoiceController@viewPublic')->name('invoices.showPublic');
+
+$router->post('/invoices/public/payment/create', 'OnlinePayments\OnlinePaymentController@handlePost')->name('payment.handleCreate');
+$router->get('/invoices/public/payment/success', 'OnlinePayments\OnlinePaymentController@showPaymentSuccess')->name('payment.success');
+$router->get('/invoices/public/payment/error', 'OnlinePayments\OnlinePaymentController@showPaymentError')->name('payment.error');
 
 // Payments
 $router->get('/payments', 'Payments\PaymentController@index')->name('payments');

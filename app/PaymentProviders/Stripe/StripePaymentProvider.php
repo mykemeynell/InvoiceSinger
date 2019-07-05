@@ -4,6 +4,7 @@ namespace InvoiceSinger\PaymentProviders\Stripe;
 
 use InvoiceSinger\PaymentProviders\PaymentProvider;
 use InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface;
+use InvoiceSinger\Storage\Entity\InvoiceProductEntity;
 use InvoiceSinger\Support\Encryption\Cryptor;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
@@ -16,21 +17,11 @@ use Stripe\Stripe;
 class StripePaymentProvider extends PaymentProvider
 {
     /**
-     * The cryptor.
+     * The session ID.
      *
-     * @var \InvoiceSinger\Support\Encryption\Cryptor
+     * @var string
      */
-    protected $cryptor;
-
-    /**
-     * StripePaymentProvider constructor.
-     *
-     * @param \InvoiceSinger\Support\Encryption\Cryptor $cryptor
-     */
-    function __construct(Cryptor $cryptor)
-    {
-        $this->cryptor = $cryptor;
-    }
+    protected $session_id;
 
     /**
      * Handle the creation of a payment instance.
@@ -39,7 +30,7 @@ class StripePaymentProvider extends PaymentProvider
      *
      * @return mixed
      */
-    public function handle(InvoiceEntityInterface $invoice)
+    public function handle()
     {
         // Set your secret key: remember to change this to your live secret key in production
         // See your keys here: https://dashboard.stripe.com/account/apikeys
@@ -47,21 +38,20 @@ class StripePaymentProvider extends PaymentProvider
             $this->cryptor->decrypt(settings('stripe.secret_key'))
         );
 
-        // TODO: Generate line_items array for Stripe Session.
-
         $session = Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
-                'name' => 'T-shirt',
-                'description' => 'Comfortable cotton t-shirt',
-                'images' => ['https://example.com/t-shirt.png'],
-                'amount' => 500,
-                'currency' => 'usd',
+                'name' => "{$this->invoice->getInvoiceKey()}",
+                'description' => "Invoice #{$this->invoice->getInvoiceKey()}",
+                'amount' => $this->invoice->getTotal() * 100,
                 'quantity' => 1,
+                'currency' => strtolower(currency()),
             ]],
-            'success_url' => 'https://example.com/success',
-            'cancel_url' => 'https://example.com/cancel',
+            'success_url' => $this->getSuccessUrl(),
+            'cancel_url' => $this->getErrorUrl(),
         ]);
+
+        $this->session_id = $session->id;
     }
 
     /**
@@ -92,7 +82,7 @@ class StripePaymentProvider extends PaymentProvider
             '        }',
             '        let stripe = Stripe(stripe_token);',
             '        stripe.redirectToCheckout({',
-            '            sessionId: + stripe_token',
+            '            sessionId: "' . $this->session_id . '"',
             '        }).then(function (result) {',
             '            console.error(result.error.message);',
             '        });',
@@ -126,5 +116,30 @@ class StripePaymentProvider extends PaymentProvider
                 'encrypt' => true,
             ]
         ];
+    }
+
+    protected function createSession()
+    {
+        // Set your secret key: remember to change this to your live secret key in production
+        // See your keys here: https://dashboard.stripe.com/account/apikeys
+        Stripe::setApiKey(
+            $this->cryptor->decrypt(settings('stripe.secret_key'))
+        );
+
+        // TODO: Generate line_items array for Stripe Session.
+
+        $session = Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+                'name' => 'T-shirt',
+                'description' => 'Comfortable cotton t-shirt',
+                'images' => ['https://example.com/t-shirt.png'],
+                'amount' => 500,
+                'currency' => 'usd',
+                'quantity' => 1,
+            ]],
+            'success_url' => 'https://example.com/success',
+            'cancel_url' => 'https://example.com/cancel',
+        ]);
     }
 }
