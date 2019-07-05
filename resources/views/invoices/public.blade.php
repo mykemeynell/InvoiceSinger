@@ -10,7 +10,7 @@
 
 @section('content')
     <div class="container">
-        @if(settings('app.online_payments.enabled') == true)
+        @if(settings('app.online_payments.enabled') == true && $invoice->getBalance() > 0)
         <div class="row margin-bottom-30 padding-top-15">
             <div class="card grey lighten-5">
                 <div class="card-content">
@@ -38,7 +38,9 @@
                 <img src="{{ asset(settings('app.logo')) }}" alt="Company Logo" class="brand-logo">
             </div>
             <div class="col s8">
-                <h4 class="bold-text right-align">Invoice {{ $invoice->getInvoiceKey() }}</h4>
+                <h4 class="bold-text right-align">Invoice {{ $invoice->getInvoiceKey() }} @if($balance <= 0)
+                        <span class="badge green white-text">Paid</span>
+                    @endif</h4>
                 <span class="display-block right-align grey-text lighten-2">issued {{ $invoice->getRaisedAt()->format('jS F Y') }}</span>
                 <span class="display-block right-align grey-text lighten-2">payment due {{ $invoice->getDueAt()->format('jS F Y') }}</span>
             </div>
@@ -160,7 +162,9 @@
 
                     <tr>
                         <th>Balance</th>
-                        <td class="right-align">{!! $currency !!}{{ number_format($balance, 2) }}</td>
+                        <td class="right-align">
+                            {!! $currency !!}{{ number_format($balance, 2) }}
+                        </td>
                     </tr>
                     </tbody>
                 </table>

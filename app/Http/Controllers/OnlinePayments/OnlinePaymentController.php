@@ -92,10 +92,18 @@ class OnlinePaymentController extends Controller
     /**
      * Show the payment failure page.
      *
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\View\View
+     *
+     * @throws \Exception
      */
-    public function showPaymentError(): View
+    public function showPaymentError(Request $request): View
     {
+        $this->getService()->delete(
+            $this->getService()->findUsingId($request->get('payment'))
+        );
+
         return view('online-payments.failure');
     }
 }

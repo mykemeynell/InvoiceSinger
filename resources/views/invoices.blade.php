@@ -31,7 +31,7 @@
                         <td>{{ $invoice->getRaisedAt()->format('d F Y') }}</td>
                         <td>{{ $invoice->getDueAt()->format('d F Y') }}</td>
                         <td><a href="{{ route('clients.form', $invoice->client()->getKey()) }}">{{ $invoice->client()->getDisplayName() }}</a></td>
-                        <td class="right-align">&pound;0.00</td>
+                        <td class="right-align">{!! currencyEntity() !!}{{ number_format($invoice->getTotal(), 2) }}</td>
                         <td class="right-align"><a href="{{ route('invoices.form', $invoice->getKey()) }}" class="waves-effect waves-light btn">View</a></td>
                     </tr>
                     @empty
