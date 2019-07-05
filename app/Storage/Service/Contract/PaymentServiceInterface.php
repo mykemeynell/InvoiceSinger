@@ -31,6 +31,15 @@ interface PaymentServiceInterface extends ServiceInterface
     public function findUsingInvoiceId(string $id): Collection;
 
     /**
+     * Find a single payment using its ID.
+     *
+     * @param string $id
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\PaymentEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function findUsingId(string $id): ?PaymentEntityInterface;
+
+    /**
      * Create a new payment entity and save it to the database.
      *
      * @param \Symfony\Component\HttpFoundation\ParameterBag $payload

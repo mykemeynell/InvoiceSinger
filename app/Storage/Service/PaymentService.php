@@ -34,7 +34,7 @@ class PaymentService extends Service implements PaymentServiceInterface
      */
     public function fetch(): Collection
     {
-        return $this->getRepository()->builder()->get();
+        return $this->getRepository()->builder()->where('committed', 1)->get();
     }
 
     /**
@@ -47,6 +47,18 @@ class PaymentService extends Service implements PaymentServiceInterface
     public function findUsingInvoiceId(string $id): Collection
     {
         return $this->getRepository()->builder()->where('invoice', $id)->get();
+    }
+
+    /**
+     * Find a single payment using its ID.
+     *
+     * @param string $id
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\PaymentEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function findUsingId(string $id): ?PaymentEntityInterface
+    {
+        return $this->getRepository()->findUsingId($id);
     }
 
     /**

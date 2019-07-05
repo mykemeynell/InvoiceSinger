@@ -28,6 +28,18 @@ class PaymentMethodService extends Service implements PaymentMethodServiceInterf
     }
 
     /**
+     * Attempt to find a payment method using its slug.
+     *
+     * @param string $slug
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\PaymentMethodEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function findUsingSlug(string $slug): ?PaymentMethodEntityInterface
+    {
+        return $this->getRepository()->builder()->where('slug', $slug)->first();
+    }
+
+    /**
      * Fetch all payment methods from the database.
      *
      * @return \Illuminate\Database\Eloquent\Collection

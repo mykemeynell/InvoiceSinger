@@ -17,10 +17,10 @@
             </div>
             <form id="settings-form" name="settings-form">
                 {!! csrf_field() !!}
-                <div class="col s12 padding-y-30" id="application">@include('settings.panels._application')</div>
-                <div class="col s12 padding-y-30" id="invoices">@include('settings.panels._invoices')</div>
-                <div class="col s12 padding-y-30" id="quotes">@include('settings.panels._quotes')</div>
-                <div class="col s12 padding-y-30" id="email">@include('settings.panels._emails')</div>
+                <div class="col s12 padding-y-30" id="application">{{-- @include('settings.panels._application') --}}</div>
+                <div class="col s12 padding-y-30" id="invoices">{{-- @include('settings.panels._invoices') --}}</div>
+                <div class="col s12 padding-y-30" id="quotes">{{-- @include('settings.panels._quotes') --}}</div>
+                <div class="col s12 padding-y-30" id="email">{{-- @include('settings.panels._emails') --}}</div>
                 <div class="col s12 padding-y-30" id="online-payments">
                     <payment-settings :settings="{{ $settings }}" :providers="{{ $payment_providers }}"></payment-settings>
                 </div>

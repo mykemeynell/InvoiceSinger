@@ -15,14 +15,14 @@
                     <option value="30 days" @if(settings('invoice.term') == '30 days') selected="selected" @endif>NET 30</option>
                     <option value="60 days" @if(settings('invoice.term') == '60 days') selected="selected" @endif>NET 60</option>
                 </select>
-                <label for="invoice-pattern">Invoice Term (Net D)</label>
+                <label for="invoice-term">Invoice Term (Net D)</label>
             </div>
         </div>
 
         <div class="row margin-bottom-0">
             <div class="col s12 input-field">
                 <textarea name="settings[invoice.footer]" id="invoice-footer" class="materialize-textarea"></textarea>
-                <label for="invoice-pattern">Invoice Footer</label>
+                <label for="invoice-footer">Invoice Footer</label>
             </div>
         </div>
 

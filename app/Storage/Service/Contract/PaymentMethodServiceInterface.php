@@ -15,6 +15,15 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 interface PaymentMethodServiceInterface extends ServiceInterface
 {
     /**
+     * Attempt to find a payment method using its slug.
+     *
+     * @param string $slug
+     *
+     * @return \InvoiceSinger\Storage\Entity\Contract\PaymentMethodEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function findUsingSlug(string $slug): ?PaymentMethodEntityInterface;
+
+    /**
      * Fetch all payment methods from the database.
      *
      * @return \Illuminate\Database\Eloquent\Collection

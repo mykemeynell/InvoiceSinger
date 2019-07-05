@@ -2207,16 +2207,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    'settings': Array,
+    'settings': Object,
     'providers': Object
+  },
+  mounted: function mounted() {
+    console.log(this.settings);
   },
   data: function data() {
     return {
       'provider': this.settings['app.online_payments.provider']
     };
-  },
-  mounted: function mounted() {
-    console.log('Mounted Payment Settings');
   },
   methods: {
     updateProvider: function updateProvider() {
@@ -47884,7 +47884,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         var dropdownBounds = {
           left: idealXPos,
           top: idealYPos,
-          height: idealHeight,
+          // height: idealHeight,
           width: idealWidth
         };
 
@@ -61105,7 +61105,25 @@ var render = function() {
       [
         _vm._m(0),
         _vm._v(" "),
-        _vm._m(1),
+        _c("div", { staticClass: "row padding-bottom-30" }, [
+          _c("div", { staticClass: "col s12 input-field" }, [
+            _c("label", [
+              _c("input", {
+                staticClass: "filled-in",
+                attrs: {
+                  type: "checkbox",
+                  name: "settings[app.online_payments.enabled]",
+                  value: "1"
+                },
+                domProps: {
+                  checked: _vm.settings["app.online_payments.enabled"] === 1
+                }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Enable")])
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col s12 input-field" }, [
@@ -61120,9 +61138,18 @@ var render = function() {
                 on: { change: _vm.updateProvider }
               },
               _vm._l(_vm.providers, function(prov) {
-                return _c("option", { domProps: { value: prov.key } }, [
-                  _vm._v(_vm._s(prov.name) + "\n                    ")
-                ])
+                return _c(
+                  "option",
+                  {
+                    domProps: {
+                      value: prov.key,
+                      selected:
+                        _vm.settings["app.online_payments.provider"] ===
+                        prov.key
+                    }
+                  },
+                  [_vm._v(_vm._s(prov.name) + "\n                    ")]
+                )
               }),
               0
             ),
@@ -61146,6 +61173,9 @@ var render = function() {
                           name: field.name,
                           id: field.name,
                           required: field.required === true
+                        },
+                        domProps: {
+                          value: _vm.settings[field.key].length > 0 ? "***" : ""
                         }
                       }),
                       _vm._v(" "),
@@ -61173,23 +61203,6 @@ var staticRenderFns = [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col s12" }, [
           _c("span", [_vm._v("Online Payments")])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row padding-bottom-30" }, [
-      _c("div", { staticClass: "col s12 input-field" }, [
-        _c("label", [
-          _c("input", {
-            staticClass: "filled-in",
-            attrs: { type: "checkbox" }
-          }),
-          _vm._v(" "),
-          _c("span", [_vm._v("Enable")])
         ])
       ])
     ])

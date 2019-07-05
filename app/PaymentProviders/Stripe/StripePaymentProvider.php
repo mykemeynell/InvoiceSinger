@@ -26,8 +26,6 @@ class StripePaymentProvider extends PaymentProvider
     /**
      * Handle the creation of a payment instance.
      *
-     * @param \InvoiceSinger\Storage\Entity\Contract\InvoiceEntityInterface|\Illuminate\Database\Eloquent\Model $invoice
-     *
      * @return mixed
      */
     public function handle()
@@ -116,30 +114,5 @@ class StripePaymentProvider extends PaymentProvider
                 'encrypt' => true,
             ]
         ];
-    }
-
-    protected function createSession()
-    {
-        // Set your secret key: remember to change this to your live secret key in production
-        // See your keys here: https://dashboard.stripe.com/account/apikeys
-        Stripe::setApiKey(
-            $this->cryptor->decrypt(settings('stripe.secret_key'))
-        );
-
-        // TODO: Generate line_items array for Stripe Session.
-
-        $session = Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'name' => 'T-shirt',
-                'description' => 'Comfortable cotton t-shirt',
-                'images' => ['https://example.com/t-shirt.png'],
-                'amount' => 500,
-                'currency' => 'usd',
-                'quantity' => 1,
-            ]],
-            'success_url' => 'https://example.com/success',
-            'cancel_url' => 'https://example.com/cancel',
-        ]);
     }
 }

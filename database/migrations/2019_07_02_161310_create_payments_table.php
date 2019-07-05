@@ -27,6 +27,7 @@ class CreatePaymentsTable extends Migration
             $table->dateTime('paid_at');
             $table->text('notes')->nullable();
             $table->text('payload')->nullable();
+            $table->tinyInteger('committed')->default(1);
             $table->timestamps();
         });
     }

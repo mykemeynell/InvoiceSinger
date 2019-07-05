@@ -10,6 +10,7 @@ use InvoiceSinger\Http\Controllers\Controller;
 use InvoiceSinger\Http\Requests\Setting\SettingRequest;
 use InvoiceSinger\Support\Concern\HasService;
 use InvoiceSinger\Support\Encryption\Cryptor;
+use LaravelDatabaseSettings\Entity\Contract\SettingEntityInterface;
 use LaravelDatabaseSettings\Service\Contract\SettingServiceInterface;
 use mykemeynell\Support\CurrencyHtmlEntities;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -60,6 +61,7 @@ class SettingController extends Controller
             $name = $item->getName();
             $fields = collect($item->getFields())->map(static function ($item) {
                 $encrypted = $item['encrypt'] ? '[encrypted]' : '';
+                $item['key'] = $item['name'];
                 $item['name'] = 'settings' . $encrypted . '[' . $item['name'] . ']';
                 return $item;
             });
@@ -67,10 +69,13 @@ class SettingController extends Controller
         });
 
         /** @var \Illuminate\Database\Eloquent\Collection $settings */
-        $settings = settings()->fetch();
+        $settings = settings()->fetch()->reduce(function ($property, SettingEntityInterface $setting) {
+            $property[$setting->getKey()] = $setting->getValue();
+            return $property;
+        });
 
         return view('settings')
-            ->with('settings', $settings)
+            ->with('settings', collect($settings))
             ->with('payment_providers', $providers)
             ->with('app_currency_options', app()->make(CurrencyHtmlEntities::class)->all());
     }
@@ -93,14 +98,19 @@ class SettingController extends Controller
         }
 
         $payload['mail.attach'] = array_key_exists('mail.attach', $payload);
+        $payload['app.online_payments.enabled'] = array_key_exists('app.online_payments.enabled', $payload);
 
         foreach ($payload as $key => $value) {
             $this->getService()->set($key, $value);
         }
 
         foreach ($request->getParameterBag()->get('encrypted') as $key => $value) {
-            $this->getService()->set($key, $this->cryptor->encrypt($value));
+            if($value === '***') { continue; }
+            $value = $this->cryptor->encrypt($value);
+            $this->getService()->set($key, $value);
         }
+
+        settings()->fetch(true);
 
         return RedirectResponse::create(route('settings'));
     }

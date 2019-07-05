@@ -63,6 +63,7 @@ class PaymentEntity extends Model implements PaymentEntityInterface
         'paid_at',
         'notes',
         'payload',
+        'committed',
     ];
 
     /**
@@ -72,6 +73,7 @@ class PaymentEntity extends Model implements PaymentEntityInterface
      */
     protected $casts = [
         'amount' => 'float',
+        'committed' => 'bool',
     ];
 
     /**

@@ -170,7 +170,8 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
      */
     public function setRaisedAtAttribute($value): void
     {
-        $this->attributes['raised_at'] = Carbon::createFromFormat('d F Y', $value)->format('Y-m-d');
+        $this->attributes['raised_at'] = Carbon::createFromFormat('d F Y',
+            $value)->format('Y-m-d');
     }
 
     /**
@@ -182,7 +183,8 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
      */
     public function setDueAtAttribute($value): void
     {
-        $this->attributes['due_at'] = Carbon::createFromFormat('d F Y', $value)->format('Y-m-d');
+        $this->attributes['due_at'] = Carbon::createFromFormat('d F Y',
+            $value)->format('Y-m-d');
     }
 
     /**
@@ -192,8 +194,9 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
      */
     public function setSentAtAttribute($value): void
     {
-        if (! is_null($value) && strlen($value) > 0) {
-            $this->attributes['sent_at'] = Carbon::createFromFormat('d F Y', $value)->format('Y-m-d');
+        if (!is_null($value) && strlen($value) > 0) {
+            $this->attributes['sent_at'] = Carbon::createFromFormat('d F Y',
+                $value)->format('Y-m-d');
         }
     }
 
@@ -214,7 +217,11 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
      */
     public function payments(): Collection
     {
-        return $this->hasMany(app('payment.entity'), 'invoice', 'id')->get();
+        /** @var \InvoiceSinger\Storage\Entity\PaymentEntity $related */
+        $related = app('payment.entity');
+
+        return $this->hasMany($related, 'invoice', 'id')->where('committed',
+            1)->get();
     }
 
     /**
@@ -224,7 +231,7 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
      */
     public function getBalance(): float
     {
-        return (float) $this->getTotal() - $this->getPaid();
+        return (float)$this->getTotal() - $this->getPaid();
     }
 
     /**
@@ -237,11 +244,11 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
         $total = 0;
 
         /** @var \InvoiceSinger\Storage\Entity\InvoiceProductEntity $item */
-        foreach($this->items() as $item) {
+        foreach ($this->items() as $item) {
             $total += $item->getTotal();
         }
 
-        return (float) $total;
+        return (float)$total;
     }
 
     /**
@@ -254,12 +261,11 @@ class InvoiceEntity extends Model implements InvoiceEntityInterface
         $paid = 0;
 
         /** @var \InvoiceSinger\Storage\Entity\PaymentEntity $payment */
-        foreach($this->payments() as $payment)
-        {
+        foreach ($this->payments() as $payment) {
             $paid += $payment->getAmount();
         }
 
-        return (float) $paid;
+        return (float)$paid;
     }
 
     /**

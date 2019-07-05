@@ -197,7 +197,7 @@
                 <div class="row margin-0">
                     <div class="col s12 input-field">
                         <span class="prefix">{!! $currency !!}</span>
-                        <input type="number" min="0" max="{{ $invoice->getBalance() }}" step="0.01" id="payment-amount" name="payment[amount]" value="{{ $invoice->getBalance() }}">
+                        <input type="number" min="0" max="{{ $invoice->getBalance() }}" step="0.01" id="payment-amount" name="payment[amount]" value="{{ number_format($invoice->getBalance(), 2) }}">
                         <label for="payment-amount">Amount</label>
                     </div>
                 </div>
