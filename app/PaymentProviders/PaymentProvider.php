@@ -75,7 +75,6 @@ abstract class PaymentProvider
         $this->payment_service = $payment_service;
     }
 
-
     /**
      * Handle the creation of a payment instance.
      *

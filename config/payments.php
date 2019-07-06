@@ -20,7 +20,13 @@ return [
     */
 
     'providers' => [
+
+        // The NullPaymentProvider is used as the "None" provider option.
+        // Technically it isn't required, but nice to have an option to disable
+        // online payments if you dont want online payment as an option to your
+        // customers.
         'none' => InvoiceSinger\PaymentProviders\NullPaymentProvider::class,
+
         'stripe' => InvoiceSinger\PaymentProviders\Stripe\StripePaymentProvider::class,
     ],
 
