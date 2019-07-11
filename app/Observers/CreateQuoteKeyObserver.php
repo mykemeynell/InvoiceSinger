@@ -3,7 +3,7 @@
 namespace InvoiceSinger\Observers;
 
 use Illuminate\Database\Eloquent\Model;
-use InvoiceSinger\Support\Generators\Invoices\QuoteKeyGenerator;
+use InvoiceSinger\Support\Generators\Quotes\QuoteKeyGenerator;
 
 /**
  * Class CreateQuoteKeyObserver

@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\ParameterBag;
  */
 class QuoteProductService extends Service implements QuoteProductServiceInterface
 {
-    private const COL_QUOTE_ID = 'quote_id';
+    private const COL_QUOTE_ID = 'quote';
 
     /**
      * QuoteProductService constructor.
@@ -27,6 +27,19 @@ class QuoteProductService extends Service implements QuoteProductServiceInterfac
     function __construct(QuoteProductRepositoryInterface $repository)
     {
         $this->setRepository($repository);
+    }
+
+    /**
+     * Delete all quote products that have a defined quote ID.
+     *
+     * @param string $id
+     *
+     * @return bool
+     */
+    public function removeUsingQuoteId(string $id): bool
+    {
+        return $this->getRepository()->builder()->where(self::COL_QUOTE_ID,
+            $id)->forceDelete();
     }
 
     /**

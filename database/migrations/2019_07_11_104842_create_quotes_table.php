@@ -24,14 +24,14 @@ class CreateQuotesTable extends Migration
 
             $table->string('client');
             $table->string('key');
-            $table->string('status');
+            $table->string('status')->default('draft');
             $table->text('terms')->nullable();
 
-            $table->timestamp('issued_at')->nullable();
-            $table->timestamp('expires_at')->nullable();
-            $table->timestamp('sent_at')->nullable();
-            $table->timestamp('approved_at')->nullable();
-            $table->timestamp('rejected_at')->nullable();
+            $table->date('issued_at')->nullable();
+            $table->date('expires_at')->nullable();
+            $table->dateTime('sent_at')->nullable();
+            $table->dateTime('approved_at')->nullable();
+            $table->dateTime('rejected_at')->nullable();
 
             $table->timestamps();
 

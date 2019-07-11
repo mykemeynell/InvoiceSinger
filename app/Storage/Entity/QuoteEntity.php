@@ -6,7 +6,7 @@ use ArchLayer\Entity\Concern\EntityHasTimestamps;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use InvoiceSinger\Observers\CreateInvoiceKeyObserver;
+use InvoiceSinger\Observers\CreateQuoteKeyObserver;
 use InvoiceSinger\Storage\Entity\Contract\ClientEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\QuoteEntityInterface;
 use UuidColumn\Observer\UuidObserver;
@@ -78,7 +78,7 @@ class QuoteEntity extends Model implements QuoteEntityInterface
     public static function boot()
     {
         parent::boot();
-        self::observe(CreateInvoiceKeyObserver::class);
+        self::observe(CreateQuoteKeyObserver::class);
         self::observe(UuidObserver::class);
     }
 
@@ -225,5 +225,70 @@ class QuoteEntity extends Model implements QuoteEntityInterface
         }
 
         return (float)$total;
+    }
+
+    /**
+     * Set the issued_at attribute.
+     *
+     * @param $value
+     */
+    public function setIssuedAtAttribute($value): void
+    {
+        if (!is_null($value) && strlen($value) > 0) {
+            $this->attributes['issued_at'] = Carbon::createFromFormat('d F Y',
+                $value)->format('Y-m-d');
+        }
+    }
+
+    /**
+     * Set the expires_at attribute.
+     *
+     * @param $value
+     */
+    public function setExpiresAtAttribute($value): void
+    {
+        if (!is_null($value) && strlen($value) > 0) {
+            $this->attributes['expires_at'] = Carbon::createFromFormat('d F Y',
+                $value)->format('Y-m-d');
+        }
+    }
+
+    /**
+     * Set the sent_at attribute.
+     *
+     * @param $value
+     */
+    public function setSentAtAttribute($value): void
+    {
+        if (!is_null($value) && strlen($value) > 0) {
+            $this->attributes['sent_at'] = Carbon::createFromFormat('d F Y',
+                $value)->format('Y-m-d');
+        }
+    }
+
+    /**
+     * Set the approved_at attribute.
+     *
+     * @param $value
+     */
+    public function setApprovedAtAttribute($value): void
+    {
+        if (!is_null($value) && strlen($value) > 0) {
+            $this->attributes['approved_at'] = Carbon::createFromFormat('d F Y',
+                $value)->format('Y-m-d');
+        }
+    }
+
+    /**
+     * Set the rejected_at attribute.
+     *
+     * @param $value
+     */
+    public function setRejectedAtAttribute($value): void
+    {
+        if (!is_null($value) && strlen($value) > 0) {
+            $this->attributes['rejected_at'] = Carbon::createFromFormat('d F Y',
+                $value)->format('Y-m-d');
+        }
     }
 }

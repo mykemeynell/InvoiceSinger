@@ -1,6 +1,6 @@
 <?php
 
-namespace InvoiceSinger\Support\Generators\Invoices;
+namespace InvoiceSinger\Support\Generators\Quotes;
 
 use InvoiceSinger\Support\Generators\PatternOptions;
 use LaravelDatabaseSettings\Service\Contract\SettingServiceInterface;
@@ -29,8 +29,8 @@ class QuoteKeyGenerator
      */
     function __construct(SettingServiceInterface $service, PatternOptions $options)
     {
-        $options->setIncrement(settings('invoice.key'));
-        $this->key = $service->get('invoice.pattern');
+        $options->setIncrement(settings('quote.key'));
+        $this->key = $service->get('quote.pattern');
 
         foreach($options as $placeholder => $value) {
             $this->key = str_replace($placeholder, $value, $this->key);
