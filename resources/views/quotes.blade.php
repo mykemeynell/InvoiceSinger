@@ -15,8 +15,8 @@
                         <tr>
                             <th>Status</th>
                             <th>Quote</th>
-                            <th>Created</th>
-                            <th>Due</th>
+                            <th>Issued</th>
+                            <th>Expires</th>
                             <th>Client</th>
                             <th class="right-align">Amount</th>
                             <th class="right-align">Options</th>
@@ -24,15 +24,21 @@
                     </thead>
 
                     <tbody>
+                    @forelse($quotes as $quote)
                     <tr>
-                        <td>Yes</td>
-                        <td><a href="#">QUO-18-0032</a></td>
-                        <td>22/06/2019</td>
-                        <td>21/07/2019</td>
-                        <td><a href="#">info@siliconlabs.example</a></td>
-                        <td class="right-align">&pound;0.00</td>
-                        <td class="right-align"><a class="waves-effect waves-light btn">View</a></td>
+                        <td>@include('layouts.components.misc._status-badge', ['item' => $quote])</td>
+                        <td><a href="{{ route('quotes.form', $quote->getKey()) }}">{{ $quote->getQuoteKey() }}</a></td>
+                        <td>{{ $quote->getIssuedAt()->format('d F Y') }}</td>
+                        <td>{{ $quote->getExpiresAt()->format('d F Y') }}</td>
+                        <td><a href="#">{{ $quote->client()->getEmailAddress()  }}</a></td>
+                        <td class="right-align">{!! $currency !!}{{ $quote->getTotal() }}</td>
+                        <td class="right-align"><a href="{{ route('quotes.form', $quote->getKey()) }}" class="waves-effect waves-light btn">View</a></td>
                     </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="center-align">No Quotes</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
             </div>

@@ -26,9 +26,9 @@ $router->post('/clients/form/{client_id?}', 'Clients\ClientController@handlePost
 $router->post('/clients/delete/{client_id?}', 'Clients\ClientController@handleDelete')->name('clients.handleDelete');
 
 // Quotes
-$router->get('/quotes', static function () {
-    return view('quotes');
-})->name('quotes');
+$router->get('/quotes', 'Quotes\QuoteController@index')->name('quotes');
+$router->get('/quotes/form/{quote_id?}', 'Quotes\QuoteController@form')->name('quotes.form');
+$router->post('/quotes/form/{quote_id?}', 'Quotes\QuoteController@handlePost')->name('quotes.handleForm');
 
 // Invoices
 $router->get('/invoices', 'Invoices\InvoiceController@index')->name('invoices');

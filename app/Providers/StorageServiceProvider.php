@@ -12,6 +12,8 @@ use InvoiceSinger\Storage\Entity\Contract\PaymentEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\PaymentMethodEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\ProductEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\ProductFamilyEntityInterface;
+use InvoiceSinger\Storage\Entity\Contract\QuoteEntityInterface;
+use InvoiceSinger\Storage\Entity\Contract\QuoteProductEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\TaxRateEntityInterface;
 use InvoiceSinger\Storage\Entity\Contract\UnitEntityInterface;
 use InvoiceSinger\Storage\Entity\InvoiceEntity;
@@ -20,6 +22,8 @@ use InvoiceSinger\Storage\Entity\PaymentEntity;
 use InvoiceSinger\Storage\Entity\PaymentMethodEntity;
 use InvoiceSinger\Storage\Entity\ProductEntity;
 use InvoiceSinger\Storage\Entity\ProductFamilyEntity;
+use InvoiceSinger\Storage\Entity\QuoteEntity;
+use InvoiceSinger\Storage\Entity\QuoteProductEntity;
 use InvoiceSinger\Storage\Entity\TaxRateEntity;
 use InvoiceSinger\Storage\Entity\UnitEntity;
 use InvoiceSinger\Storage\Repository\ClientRepository;
@@ -30,6 +34,8 @@ use InvoiceSinger\Storage\Repository\Contract\PaymentMethodRepositoryInterface;
 use InvoiceSinger\Storage\Repository\Contract\PaymentRepositoryInterface;
 use InvoiceSinger\Storage\Repository\Contract\ProductFamilyRepositoryInterface;
 use InvoiceSinger\Storage\Repository\Contract\ProductRepositoryInterface;
+use InvoiceSinger\Storage\Repository\Contract\QuoteProductRepositoryInterface;
+use InvoiceSinger\Storage\Repository\Contract\QuoteRepositoryInterface;
 use InvoiceSinger\Storage\Repository\Contract\TaxRateRepositoryInterface;
 use InvoiceSinger\Storage\Repository\InvoiceProductRepository;
 use InvoiceSinger\Storage\Repository\InvoiceRepository;
@@ -37,6 +43,8 @@ use InvoiceSinger\Storage\Repository\PaymentMethodRepository;
 use InvoiceSinger\Storage\Repository\PaymentRepository;
 use InvoiceSinger\Storage\Repository\ProductFamilyRepository;
 use InvoiceSinger\Storage\Repository\ProductRepository;
+use InvoiceSinger\Storage\Repository\QuoteProductRepository;
+use InvoiceSinger\Storage\Repository\QuoteRepository;
 use InvoiceSinger\Storage\Repository\TaxRateRepository;
 use InvoiceSinger\Storage\Service\ClientService;
 use InvoiceSinger\Storage\Service\Contract\ClientServiceInterface;
@@ -46,6 +54,8 @@ use InvoiceSinger\Storage\Service\Contract\PaymentMethodServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\PaymentServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\ProductFamilyServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\ProductServiceInterface;
+use InvoiceSinger\Storage\Service\Contract\QuoteProductServiceInterface;
+use InvoiceSinger\Storage\Service\Contract\QuoteServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\TaxRateServiceInterface;
 use InvoiceSinger\Storage\Service\Contract\UnitServiceInterface;
 use InvoiceSinger\Storage\Service\InvoiceProductService;
@@ -54,6 +64,8 @@ use InvoiceSinger\Storage\Service\PaymentMethodService;
 use InvoiceSinger\Storage\Service\PaymentService;
 use InvoiceSinger\Storage\Service\ProductFamilyService;
 use InvoiceSinger\Storage\Service\ProductService;
+use InvoiceSinger\Storage\Service\QuoteProductService;
+use InvoiceSinger\Storage\Service\QuoteService;
 use InvoiceSinger\Storage\Service\TaxRateService;
 use InvoiceSinger\Storage\Service\UnitService;
 use InvoiceSinger\Storage\Repository\Contract\UnitRepositoryInterface;
@@ -109,6 +121,14 @@ class StorageServiceProvider extends ServiceProvider
         'payment.entity' => [PaymentEntityInterface::class],
         'payment.repository' => [PaymentRepositoryInterface::class],
         'payment.service' => [PaymentServiceInterface::class],
+
+        'quote.entity' => [QuoteEntityInterface::class],
+        'quote.repository' => [QuoteRepositoryInterface::class],
+        'quote.service' => [QuoteServiceInterface::class],
+
+        'quote.product.entity' => [QuoteProductEntityInterface::class],
+        'quote.product.repository' => [QuoteProductRepositoryInterface::class],
+        'quote.product.service' => [QuoteProductServiceInterface::class],
     ];
 
     /**
@@ -140,6 +160,8 @@ class StorageServiceProvider extends ServiceProvider
         $this->app->bind('product.unit.entity', UnitEntity::class);
         $this->app->bind('payment.method.entity', PaymentMethodEntity::class);
         $this->app->bind('payment.entity', PaymentEntity::class);
+        $this->app->bind('quote.entity', QuoteEntity::class);
+        $this->app->bind('quote.product.entity', QuoteProductEntity::class);
     }
 
     /**
@@ -158,6 +180,8 @@ class StorageServiceProvider extends ServiceProvider
         $this->app->singleton('product.unit.repository', UnitRepository::class);
         $this->app->singleton('payment.method.repository', PaymentMethodRepository::class);
         $this->app->singleton('payment.repository', PaymentRepository::class);
+        $this->app->singleton('quote.repository', QuoteRepository::class);
+        $this->app->singleton('quote.product.repository', QuoteProductRepository::class);
     }
 
     /**
@@ -176,6 +200,8 @@ class StorageServiceProvider extends ServiceProvider
         $this->app->singleton('product.unit.service', UnitService::class);
         $this->app->singleton('payment.method.service', PaymentMethodService::class);
         $this->app->singleton('payment.service', PaymentService::class);
+        $this->app->singleton('quote.service', QuoteService::class);
+        $this->app->singleton('quote.product.service', QuoteProductService::class);
     }
 
     /**
